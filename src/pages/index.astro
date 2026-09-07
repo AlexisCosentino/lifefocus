@@ -1,114 +1,451 @@
 ---
+import { Image, Picture } from "astro:assets";
+
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { awardImages, homeImages } from "../data/homeImages";
+
+const pageTitle = "Life Focus — Photographe de mariage et de famille dans la Drôme";
+const pageDescription =
+  "Life Focus, photographie de mariage et de famille par Alexis Cosentino à Romans-sur-Isère, dans la Drôme.";
+
+const prototypeImage = homeImages.hero;
 ---
 
 <BaseLayout
-  title="Life Focus — Design test"
-  description="Page temporaire de test visuel pour la fondation éditoriale Life Focus."
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl="https://lifefocus.fr/"
 >
-  <section class="design-test page-shell" aria-labelledby="design-test-title">
-    <div class="design-test__intro">
-      <p class="editorial-label">Design test</p>
-      <h1 id="design-test-title">Une fondation éditoriale pour laisser respirer les images.</h1>
-      <p class="design-test__lead">
-        Cette page provisoire vérifie le rythme, les espacements, la typographie et les
-        éléments de structure avant la création de la page d'accueil définitive.
-      </p>
-    </div>
-
-    <hr class="design-test__divider" />
-
-    <div class="design-test__meta">
-      <p class="editorial-label">Romans-sur-Isère</p>
-      <p>Photographie de mariage et de famille</p>
-    </div>
-
-    <figure class="design-test__image" aria-label="Emplacement réservé à une photographie">
-      <span>Image placeholder</span>
+  <section class="prototype-hero page-shell" aria-labelledby="home-title">
+    <figure class="media media--wide">
+      <Picture
+        class="media__image"
+        src={prototypeImage.src}
+        alt={prototypeImage.alt}
+        widths={[720, 1080, 1440, 1732]}
+        sizes="(min-width: 90rem) 1296px, calc(100vw - (2 * var(--page-padding)))"
+        formats={["avif", "webp"]}
+        loading="eager"
+        decoding="sync"
+        fetchpriority="high"
+      />
     </figure>
 
-    <div class="design-test__body">
+    <div class="hero-identity">
+      <div>
+        <p class="editorial-label">PHOTOGRAPHE DE MARIAGE</p>
+        <h1 id="home-title">Drôme · Valence · Romans-sur-Isère</h1>
+      </div>
       <p>
-        Le système visuel repose sur peu d'éléments : une serif expressive pour les grands
-        moments éditoriaux, une sans-serif sobre pour la lecture, des lignes fines et de
-        grands espaces pour tenir la composition.
+        Une photographie sensible, directe et attentive aux moments qui construisent une
+        histoire familiale.
       </p>
-      <a class="editorial-link" href="/contact/">Lien éditorial</a>
     </div>
+  </section>
+
+  <section class="manifesto page-shell" aria-labelledby="manifesto-title">
+    <h2 id="manifesto-title">
+      LES PHOTOS QUE J'AIME<br />
+      NE SONT PAS FORCÉMENT<br />
+      LES PLUS PARFAITES.
+    </h2>
+    <p>
+      Ce sont souvent celles où quelqu'un rit trop fort, où une main cherche une autre, où
+      personne ne pense à l'appareil.
+    </p>
+  </section>
+
+  <section class="chapter chapter--marriage page-shell" aria-labelledby="marriage-title">
+    <div class="chapter__heading">
+      <p class="editorial-label">01 / MARIAGE</p>
+      <h2 id="marriage-title">Être là, sans prendre toute la place.</h2>
+    </div>
+
+    <div class="marriage-grid">
+      <figure class="media media--landscape marriage-grid__main">
+        <Picture
+          class="media__image"
+          src={prototypeImage.src}
+          alt=""
+          widths={[640, 960, 1280, 1732]}
+          sizes="(min-width: 72rem) 58vw, calc(100vw - (2 * var(--page-padding)))"
+          formats={["avif", "webp"]}
+          loading="lazy"
+        />
+      </figure>
+
+      <div class="marriage-grid__side">
+        <figure class="media media--portrait">
+          <Picture
+            class="media__image"
+            src={prototypeImage.src}
+            alt=""
+            widths={[360, 540, 720, 960]}
+            sizes="(min-width: 72rem) 24vw, 62vw"
+            formats={["avif", "webp"]}
+            loading="lazy"
+          />
+        </figure>
+        <p>
+          Je vous guide quand vous en avez besoin. Pour le reste, je préfère vous laisser
+          vivre votre journée.
+        </p>
+        <a class="editorial-link" href="/mariage/">DÉCOUVRIR LE MARIAGE →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter chapter--family page-shell" aria-labelledby="family-title">
+    <div class="family-grid">
+      <div class="family-grid__copy">
+        <p class="editorial-label">02 / FAMILLE</p>
+        <h2 id="family-title">Un chapitre pour ce qui change vite.</h2>
+        <p>Une composition provisoire pour poser le rythme du futur univers famille.</p>
+        <ul class="family-list" aria-label="Univers photographiques famille">
+          <li>GROSSESSE</li>
+          <li>NAISSANCE</li>
+          <li>FAMILLE</li>
+        </ul>
+        <a class="editorial-link" href="/famille/">DÉCOUVRIR LA FAMILLE →</a>
+      </div>
+
+      <figure class="media media--portrait family-grid__portrait">
+        <Picture
+          class="media__image"
+          src={prototypeImage.src}
+          alt=""
+          widths={[420, 640, 840, 1080]}
+          sizes="(min-width: 72rem) 33vw, calc(100vw - (2 * var(--page-padding)))"
+          formats={["avif", "webp"]}
+          loading="lazy"
+        />
+      </figure>
+
+      <figure class="media media--landscape family-grid__landscape">
+        <Picture
+          class="media__image"
+          src={prototypeImage.src}
+          alt=""
+          widths={[520, 720, 960, 1280]}
+          sizes="(min-width: 72rem) 34vw, calc(100vw - (2 * var(--page-padding)))"
+          formats={["avif", "webp"]}
+          loading="lazy"
+        />
+      </figure>
+    </div>
+  </section>
+
+  <section class="about page-shell" aria-labelledby="about-title">
+    <figure class="media media--portrait about__image">
+      <Picture
+        class="media__image"
+        src={prototypeImage.src}
+        alt=""
+        widths={[420, 640, 840, 1080]}
+        sizes="(min-width: 72rem) 32vw, calc(100vw - (2 * var(--page-padding)))"
+        formats={["avif", "webp"]}
+        loading="lazy"
+      />
+    </figure>
+
+    <div class="about__copy">
+      <p class="editorial-label">03 / À PROPOS</p>
+      <h2 id="about-title">ALEXIS COSENTINO</h2>
+      <p>
+        Un espace court pour présenter Alexis, son regard et sa manière d'accompagner,
+        sans écrire la biographie finale à ce stade.
+      </p>
+      <a class="editorial-link" href="/a-propos/">EN SAVOIR PLUS →</a>
+    </div>
+  </section>
+
+  <section class="trust page-shell" aria-labelledby="trust-title">
+    <div class="trust__intro">
+      <p class="editorial-label">04 / CONFIANCE</p>
+      <h2 id="trust-title">Une archive simple pour les distinctions.</h2>
+    </div>
+
+    <ol class="awards" aria-label="Wedding Awards Mariages.net">
+      {
+        awardImages.map((award) => (
+          <li>
+            <span>{award.year}</span>
+            <Image src={award.src} alt={award.alt} width={112} loading="lazy" />
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="contact page-shell" aria-labelledby="contact-title">
+    <h2 id="contact-title">
+      VOTRE HISTOIRE<br />
+      COMMENCE ICI.
+    </h2>
+    <a class="editorial-link" href="/contact/">ÉCRIVEZ-MOI →</a>
   </section>
 </BaseLayout>
 
 <style>
-  .design-test {
-    padding-block: var(--space-lg) var(--space-xl);
+  .prototype-hero {
+    padding-block: var(--space-xs) var(--space-lg);
   }
 
-  .design-test__intro {
-    display: grid;
-    gap: var(--space-sm);
-    max-width: 72rem;
-  }
-
-  .design-test h1 {
-    max-width: 11ch;
-    font-family: var(--font-editorial);
-    font-size: var(--text-display);
-    font-weight: 400;
-    letter-spacing: 0;
-    line-height: 0.9;
-  }
-
-  .design-test__lead {
-    max-width: var(--reading-max);
-    color: var(--color-muted);
-    font-size: var(--text-lead);
-    line-height: 1.45;
-  }
-
-  .design-test__divider {
-    width: 100%;
-    height: 1px;
-    margin-block: var(--space-lg);
-    border: 0;
+  .media {
+    overflow: hidden;
     background: var(--color-line);
   }
 
-  .design-test__meta {
-    display: grid;
-    gap: 0.4rem;
-    max-width: var(--reading-max);
-    margin-bottom: var(--space-md);
-    color: var(--color-muted);
-    font-size: var(--text-sm);
+  .media--landscape {
+    aspect-ratio: 3 / 2;
   }
 
-  .design-test__image {
+  .media--wide {
+    aspect-ratio: 16 / 9;
+  }
+
+  .media--portrait {
+    aspect-ratio: 4 / 5;
+  }
+
+  .media__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-identity {
     display: grid;
-    min-height: clamp(22rem, 58vw, 46rem);
-    place-items: center;
-    background: #dedbd3;
+    gap: var(--space-xs);
+    margin-top: var(--space-sm);
+  }
+
+  .hero-identity h1 {
+    margin-top: 0.45rem;
+    font-family: var(--font-editorial);
+    font-size: clamp(2.55rem, 1.65rem + 3.2vw, 5.4rem);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 0.98;
+  }
+
+  .hero-identity p:not(.editorial-label),
+  .manifesto p,
+  .marriage-grid__side p,
+  .family-grid__copy p,
+  .about__copy p {
+    max-width: var(--reading-max);
+    color: var(--color-muted);
+  }
+
+  .manifesto {
+    display: grid;
+    gap: var(--space-sm);
+    padding-block: var(--space-lg);
+    border-top: 1px solid var(--color-line);
+  }
+
+  .manifesto h2,
+  .chapter__heading h2,
+  .family-grid__copy h2,
+  .about__copy h2,
+  .trust__intro h2,
+  .contact h2 {
+    font-family: var(--font-editorial);
+    font-size: clamp(2.4rem, 1.55rem + 3.3vw, 5.8rem);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 0.96;
+  }
+
+  .manifesto h2 {
+    max-width: 16ch;
+  }
+
+  .chapter,
+  .about,
+  .trust,
+  .contact {
+    padding-block: var(--space-lg);
+  }
+
+  .chapter__heading {
+    display: grid;
+    gap: 1.15rem;
+    max-width: 48rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .marriage-grid {
+    display: grid;
+    gap: var(--space-sm);
+  }
+
+  .marriage-grid__side,
+  .family-grid__copy,
+  .about__copy,
+  .trust__intro,
+  .contact {
+    display: grid;
+    gap: var(--space-sm);
+    align-content: start;
+  }
+
+  .family-grid {
+    display: grid;
+    gap: var(--space-sm);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-line);
+  }
+
+  .family-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem 1.35rem;
+    margin: 0;
+    padding: 0;
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 1.3;
+    list-style: none;
+  }
+
+  .about {
+    display: grid;
+    gap: var(--space-sm);
+    border-top: 1px solid var(--color-line);
+  }
+
+  .trust {
+    border-top: 1px solid var(--color-line);
+  }
+
+  .awards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-sm) 1.25rem;
+    margin: var(--space-md) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .awards li {
+    display: grid;
+    gap: 0.65rem;
+    align-content: start;
+    justify-items: start;
+  }
+
+  .awards span {
     color: var(--color-muted);
     font-size: var(--text-xs);
     font-weight: 500;
     letter-spacing: 0.08em;
-    line-height: 1.2;
-    text-transform: uppercase;
+    line-height: 1.3;
   }
 
-  .design-test__body {
-    display: grid;
-    gap: var(--space-sm);
-    max-width: var(--reading-max);
-    margin-top: var(--space-md);
+  .awards :global(img) {
+    width: clamp(4.75rem, 18vw, 7rem);
+    height: auto;
   }
 
-  .design-test__body p {
-    font-size: var(--text-body);
+  .contact {
+    border-top: 1px solid var(--color-line);
   }
 
-  @media (min-width: 56rem) {
-    .design-test__body {
-      margin-left: auto;
+  @media (max-width: 42rem) {
+    .prototype-hero {
+      padding-top: 0;
+    }
+
+    .media--wide {
+      aspect-ratio: 3 / 2;
+    }
+
+    .marriage-grid__side .media--portrait,
+    .about__image {
+      width: min(82vw, 24rem);
+    }
+
+    .family-grid__landscape {
+      margin-top: var(--space-xs);
+    }
+  }
+
+  @media (min-width: 48rem) {
+    .awards {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 72rem) {
+    .hero-identity,
+    .manifesto,
+    .about,
+    .trust {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+      align-items: start;
+    }
+
+    .hero-identity p:not(.editorial-label),
+    .manifesto p {
+      justify-self: end;
+      padding-top: 0.3rem;
+    }
+
+    .marriage-grid {
+      grid-template-columns: minmax(0, 1.45fr) minmax(20rem, 0.75fr);
+      align-items: end;
+    }
+
+    .marriage-grid__side {
+      padding-bottom: var(--space-xs);
+    }
+
+    .marriage-grid__side .media--portrait {
+      width: min(100%, 25rem);
+    }
+
+    .family-grid {
+      grid-template-columns: minmax(18rem, 0.72fr) minmax(0, 0.72fr) minmax(0, 1fr);
+      align-items: end;
+    }
+
+    .family-grid__copy {
+      padding-bottom: var(--space-sm);
+    }
+
+    .family-grid__portrait {
+      align-self: start;
+    }
+
+    .family-grid__landscape {
+      margin-bottom: var(--space-md);
+    }
+
+    .about__image {
+      width: min(100%, 34rem);
+      justify-self: center;
+    }
+
+    .about__copy {
+      max-width: var(--reading-max);
+      padding-top: var(--space-md);
+    }
+
+    .awards {
+      grid-column: 1 / -1;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .contact {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+    }
+
+    .contact h2,
+    .contact a {
+      grid-column: 2;
     }
   }
 </style>

@@ -7,11 +7,15 @@ import Header from "../components/Header.astro";
 interface Props {
   title?: string;
   description?: string;
+  canonicalUrl?: string;
+  ogImage?: string;
 }
 
 const {
   title = "Life Focus",
   description = "Photographe de mariage et de famille à Romans-sur-Isère, dans la Drôme.",
+  canonicalUrl,
+  ogImage,
 } = Astro.props;
 ---
 
@@ -22,6 +26,13 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta property="og:locale" content="fr_FR" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
