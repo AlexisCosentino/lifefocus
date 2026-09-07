@@ -4,8 +4,10 @@
   --color-muted: #64635f;
   --color-line: #d8d5cd;
   --color-white: #ffffff;
+  --color-dark: #1d1d1b;
+  --color-surface-soft: #ebe8e1;
 
-  --font-editorial: "Instrument Serif", Georgia, serif;
+  --font-editorial: "Newsreader", Georgia, serif;
   --font-interface: "Inter", Arial, sans-serif;
 
   --text-xs: clamp(0.7rem, 0.67rem + 0.12vw, 0.78rem);
@@ -74,6 +76,10 @@ svg,
 video {
   display: block;
   max-width: 100%;
+}
+
+img {
+  height: auto;
 }
 
 button,
@@ -173,7 +179,15 @@ a:active {
 }
 
 .site-identity {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
   white-space: nowrap;
+}
+
+.site-identity__logo {
+  width: clamp(6.9rem, 9vw, 8.8rem);
+  height: auto;
 }
 
 .site-nav {
@@ -256,10 +270,8 @@ a:active {
 }
 
 .site-footer__brand {
-  font-family: var(--font-editorial);
-  font-size: var(--text-lead);
-  font-weight: 400;
-  line-height: 1;
+  width: clamp(6.9rem, 9vw, 8.8rem);
+  height: auto;
 }
 
 .site-footer__content {

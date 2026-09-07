@@ -3,6 +3,7 @@ import type { ImageMetadata } from "astro";
 import alexis from "../assets/images/home/alexis.jpg";
 import breathing from "../assets/images/home/breathing.jpg";
 import familyMain from "../assets/images/home/family-main.jpg";
+import familySecondary from "../assets/images/home/family-secondary.jpg";
 import hero from "../assets/images/home/hero.jpg";
 import weddingMain from "../assets/images/home/wedding-main.png";
 import weddingSecondary from "../assets/images/home/wedding-secondary.jpg";
@@ -28,6 +29,10 @@ export const homeImages = {
     src: hero,
     alt: "Couple de mariés dans un paysage de campagne, près d'une voiture ancienne.",
   },
+  heroSecondary: {
+    src: weddingSecondary,
+    alt: "Portrait vertical d'un couple de mariés dans un champ.",
+  },
   weddingMain: {
     src: weddingMain,
     alt: "Portrait lumineux d'un couple de mariés au coucher du soleil.",
@@ -41,6 +46,18 @@ export const homeImages = {
     alt: "Portrait naturel dans un champ de lavande.",
   },
   familyMain: {
+    src: familyMain,
+    alt: "Famille assise dehors, réunie dans un moment simple et naturel.",
+  },
+  familyGrossesse: {
+    src: weddingSecondary,
+    alt: "Portrait vertical dans un champ de fleurs rouges.",
+  },
+  familyNaissance: {
+    src: weddingSecondary,
+    alt: "Portrait vertical dans un champ de fleurs rouges.",
+  },
+  familyFamille: {
     src: familyMain,
     alt: "Famille assise dehors, réunie dans un moment simple et naturel.",
   },

@@ -1,6 +1,17 @@
+---
+import { Image } from "astro:assets";
+import logoBlack from "../assets/brand/logo_life_focus_black.png";
+---
+
 <footer class="site-footer">
   <div class="site-footer__inner page-shell">
-    <p class="site-footer__brand">LIFE FOCUS</p>
+    <Image
+      class="site-footer__brand"
+      src={logoBlack}
+      alt="Life Focus"
+      width={150}
+      loading="lazy"
+    />
 
     <div class="site-footer__content">
       <p class="site-footer__meta">

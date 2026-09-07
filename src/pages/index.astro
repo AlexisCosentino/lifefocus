@@ -7,8 +7,6 @@ import { awardImages, homeImages } from "../data/homeImages";
 const pageTitle = "Life Focus — Photographe de mariage et de famille dans la Drôme";
 const pageDescription =
   "Life Focus, photographie de mariage et de famille par Alexis Cosentino à Romans-sur-Isère, dans la Drôme.";
-
-const prototypeImage = homeImages.hero;
 ---
 
 <BaseLayout
@@ -16,316 +14,563 @@ const prototypeImage = homeImages.hero;
   description={pageDescription}
   canonicalUrl="https://lifefocus.fr/"
 >
-  <section class="prototype-hero page-shell" aria-labelledby="home-title">
-    <figure class="media media--wide">
-      <Picture
-        class="media__image"
-        src={prototypeImage.src}
-        alt={prototypeImage.alt}
-        widths={[720, 1080, 1440, 1732]}
-        sizes="(min-width: 90rem) 1296px, calc(100vw - (2 * var(--page-padding)))"
-        formats={["avif", "webp"]}
-        loading="eager"
-        decoding="sync"
-        fetchpriority="high"
-      />
-    </figure>
-
-    <div class="hero-identity">
-      <div>
-        <p class="editorial-label">PHOTOGRAPHE DE MARIAGE</p>
-        <h1 id="home-title">Drôme · Valence · Romans-sur-Isère</h1>
-      </div>
-      <p>
-        Une photographie sensible, directe et attentive aux moments qui construisent une
-        histoire familiale.
-      </p>
-    </div>
-  </section>
-
-  <section class="manifesto page-shell" aria-labelledby="manifesto-title">
-    <h2 id="manifesto-title">
-      LES PHOTOS QUE J'AIME<br />
-      NE SONT PAS FORCÉMENT<br />
-      LES PLUS PARFAITES.
-    </h2>
-    <p>
-      Ce sont souvent celles où quelqu'un rit trop fort, où une main cherche une autre, où
-      personne ne pense à l'appareil.
-    </p>
-  </section>
-
-  <section class="chapter chapter--marriage page-shell" aria-labelledby="marriage-title">
-    <div class="chapter__heading">
-      <p class="editorial-label">01 / MARIAGE</p>
-      <h2 id="marriage-title">Être là, sans prendre toute la place.</h2>
-    </div>
-
-    <div class="marriage-grid">
-      <figure class="media media--landscape marriage-grid__main">
-        <Picture
-          class="media__image"
-          src={prototypeImage.src}
-          alt=""
-          widths={[640, 960, 1280, 1732]}
-          sizes="(min-width: 72rem) 58vw, calc(100vw - (2 * var(--page-padding)))"
-          formats={["avif", "webp"]}
-          loading="lazy"
-        />
-      </figure>
-
-      <div class="marriage-grid__side">
-        <figure class="media media--portrait">
+  <div class="home-page">
+    <section class="hero" aria-labelledby="home-title">
+      <div class="hero__composition">
+        <figure class="media hero__image">
           <Picture
             class="media__image"
-            src={prototypeImage.src}
-            alt=""
+            src={homeImages.hero.src}
+            alt={homeImages.hero.alt}
+            widths={[720, 1080, 1440, 1732]}
+            sizes="(min-width: 90rem) 92vw, calc(100vw - (2 * var(--page-padding)))"
+            formats={["avif", "webp"]}
+            loading="eager"
+            decoding="sync"
+            fetchpriority="high"
+          />
+        </figure>
+
+        <figure class="media hero__portrait">
+          <Picture
+            class="media__image"
+            src={homeImages.heroSecondary.src}
+            alt={homeImages.heroSecondary.alt}
+            widths={[420, 640, 840, 1080]}
+            sizes="(min-width: 72rem) 24vw, 58vw"
+            formats={["avif", "webp"]}
+            loading="eager"
+          />
+        </figure>
+
+        <div class="hero__panel">
+          <h1 id="home-title">
+            Photographe<br />
+            de mariage
+          </h1>
+          <p class="hero__location">Drôme · Valence · Romans-sur-Isère</p>
+          <p>
+            Des images vivantes, naturelles, et une présence à vos côtés du début à la fin.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="manifesto page-shell" aria-labelledby="manifesto-title">
+      <div class="manifesto__composition">
+        <h2 id="manifesto-title">
+          Les images que l'on garde ne sont pas toujours celles que l'on avait prévues.
+        </h2>
+
+        <figure class="media manifesto__image">
+          <Picture
+            class="media__image"
+            src={homeImages.breathing.src}
+            alt={homeImages.breathing.alt}
             widths={[360, 540, 720, 960]}
-            sizes="(min-width: 72rem) 24vw, 62vw"
+            sizes="(min-width: 72rem) 22vw, 70vw"
             formats={["avif", "webp"]}
             loading="lazy"
           />
         </figure>
+      </div>
+    </section>
+
+    <section class="marriage page-shell" aria-labelledby="marriage-title">
+      <div class="marriage__intro">
+        <p class="editorial-label">01 / MARIAGE</p>
+        <h2 id="marriage-title">
+          Être là, sans prendre toute la place.
+        </h2>
+      </div>
+
+      <div class="marriage__images">
+        <figure class="media marriage__main">
+          <Picture
+            class="media__image"
+            src={homeImages.weddingMain.src}
+            alt={homeImages.weddingMain.alt}
+            widths={[640, 960, 1280, 1773]}
+            sizes="(min-width: 72rem) 64vw, calc(100vw - (2 * var(--page-padding)))"
+            formats={["avif", "webp"]}
+            loading="lazy"
+          />
+        </figure>
+
+        <figure class="media marriage__portrait">
+          <Picture
+            class="media__image"
+            src={homeImages.weddingSecondary.src}
+            alt={homeImages.weddingSecondary.alt}
+            widths={[420, 640, 840, 1080]}
+            sizes="(min-width: 72rem) 28vw, 72vw"
+            formats={["avif", "webp"]}
+            loading="lazy"
+          />
+        </figure>
+      </div>
+
+      <div class="marriage__copy">
         <p>
-          Je vous guide quand vous en avez besoin. Pour le reste, je préfère vous laisser
-          vivre votre journée.
+          Je vous guide quand vous en avez besoin. Le reste du temps, je préfère vous
+          laisser vivre votre journée.
         </p>
         <a class="editorial-link" href="/mariage/">DÉCOUVRIR LE MARIAGE →</a>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="chapter chapter--family page-shell" aria-labelledby="family-title">
-    <div class="family-grid">
-      <div class="family-grid__copy">
-        <p class="editorial-label">02 / FAMILLE</p>
-        <h2 id="family-title">Un chapitre pour ce qui change vite.</h2>
-        <p>Une composition provisoire pour poser le rythme du futur univers famille.</p>
-        <ul class="family-list" aria-label="Univers photographiques famille">
-          <li>GROSSESSE</li>
-          <li>NAISSANCE</li>
-          <li>FAMILLE</li>
-        </ul>
-        <a class="editorial-link" href="/famille/">DÉCOUVRIR LA FAMILLE →</a>
+    <section class="family" aria-labelledby="family-title">
+      <div class="family__inner page-shell">
+        <div class="family__words">
+          <p class="editorial-label">02 / FAMILLE</p>
+          <h2 id="family-title">
+            Trois moments,<br />
+            une même attention.
+          </h2>
+        </div>
+
+        <div class="family__visuals" aria-label="Univers photographiques famille">
+          <div class="family-item family-item--grossesse">
+            <a class="family-label" href="/grossesse/">Grossesse</a>
+            <figure class="family-media media">
+              <Picture
+                class="media__image"
+                src={homeImages.familyGrossesse.src}
+                alt={homeImages.familyGrossesse.alt}
+                widths={[360, 540, 720, 960]}
+                sizes="(min-width: 72rem) 19vw, 72vw"
+                formats={["avif", "webp"]}
+                loading="lazy"
+              />
+            </figure>
+          </div>
+
+          <div class="family-item family-item--naissance">
+            <a class="family-label" href="/naissance/">Naissance</a>
+            <figure class="family-media media">
+              <Picture
+                class="media__image"
+                src={homeImages.familyNaissance.src}
+                alt={homeImages.familyNaissance.alt}
+                widths={[360, 540, 720, 960]}
+                sizes="(min-width: 72rem) 22vw, 72vw"
+                formats={["avif", "webp"]}
+                loading="lazy"
+              />
+            </figure>
+          </div>
+
+          <div class="family-item family-item--famille">
+            <a class="family-label" href="/famille/">Famille</a>
+            <figure class="family-media media">
+              <Picture
+                class="media__image"
+                src={homeImages.familyFamille.src}
+                alt={homeImages.familyFamille.alt}
+                widths={[320, 480, 640, 840]}
+                sizes="(min-width: 72rem) 22vw, 52vw"
+                formats={["avif", "webp"]}
+                loading="lazy"
+              />
+            </figure>
+          </div>
+        </div>
+
+        <div class="family__copy">
+          <p>Les images que l'on regarde différemment quelques années plus tard.</p>
+          <a class="editorial-link" href="/famille/">DÉCOUVRIR LA FAMILLE →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" aria-labelledby="about-title">
+      <div class="about__inner page-shell">
+        <figure class="media about__image">
+          <Picture
+            class="media__image"
+            src={homeImages.alexis.src}
+            alt={homeImages.alexis.alt}
+            widths={[420, 640, 840, 1100]}
+            sizes="(min-width: 72rem) 32vw, calc(100vw - (2 * var(--page-padding)))"
+            formats={["avif", "webp"]}
+            loading="lazy"
+          />
+        </figure>
+
+        <div class="about__copy">
+          <p class="editorial-label">03 / À PROPOS</p>
+          <h2 id="about-title">Alexis Cosentino</h2>
+          <p>Je photographie les gens comme j'aimerais qu'on photographie les miens.</p>
+          <a class="editorial-link" href="/a-propos/">EN SAVOIR PLUS →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust page-shell" aria-labelledby="trust-title">
+      <div class="trust__heading">
+        <p class="editorial-label">04 / CONFIANCE</p>
+        <h2 id="trust-title">
+          Depuis 2020,<br />
+          chaque année.
+        </h2>
       </div>
 
-      <figure class="media media--portrait family-grid__portrait">
-        <Picture
-          class="media__image"
-          src={prototypeImage.src}
-          alt=""
-          widths={[420, 640, 840, 1080]}
-          sizes="(min-width: 72rem) 33vw, calc(100vw - (2 * var(--page-padding)))"
-          formats={["avif", "webp"]}
-          loading="lazy"
-        />
-      </figure>
+      <div class="trust__copy">
+        <p class="trust__source">Wedding Awards — Mariages.net</p>
+        <p>Une reconnaissance qui vient avant tout des couples que j'ai accompagnés.</p>
+      </div>
 
-      <figure class="media media--landscape family-grid__landscape">
-        <Picture
-          class="media__image"
-          src={prototypeImage.src}
-          alt=""
-          widths={[520, 720, 960, 1280]}
-          sizes="(min-width: 72rem) 34vw, calc(100vw - (2 * var(--page-padding)))"
-          formats={["avif", "webp"]}
-          loading="lazy"
-        />
-      </figure>
-    </div>
-  </section>
+      <ol class="awards" aria-label="Wedding Awards Mariages.net">
+        {
+          awardImages.map((award) => (
+            <li>
+              <span>{award.year}</span>
+              <Image src={award.src} alt={award.alt} width={112} loading="lazy" />
+            </li>
+          ))
+        }
+      </ol>
+    </section>
 
-  <section class="about page-shell" aria-labelledby="about-title">
-    <figure class="media media--portrait about__image">
-      <Picture
-        class="media__image"
-        src={prototypeImage.src}
-        alt=""
-        widths={[420, 640, 840, 1080]}
-        sizes="(min-width: 72rem) 32vw, calc(100vw - (2 * var(--page-padding)))"
-        formats={["avif", "webp"]}
-        loading="lazy"
-      />
-    </figure>
-
-    <div class="about__copy">
-      <p class="editorial-label">03 / À PROPOS</p>
-      <h2 id="about-title">ALEXIS COSENTINO</h2>
-      <p>
-        Un espace court pour présenter Alexis, son regard et sa manière d'accompagner,
-        sans écrire la biographie finale à ce stade.
-      </p>
-      <a class="editorial-link" href="/a-propos/">EN SAVOIR PLUS →</a>
-    </div>
-  </section>
-
-  <section class="trust page-shell" aria-labelledby="trust-title">
-    <div class="trust__intro">
-      <p class="editorial-label">04 / CONFIANCE</p>
-      <h2 id="trust-title">Une archive simple pour les distinctions.</h2>
-    </div>
-
-    <ol class="awards" aria-label="Wedding Awards Mariages.net">
-      {
-        awardImages.map((award) => (
-          <li>
-            <span>{award.year}</span>
-            <Image src={award.src} alt={award.alt} width={112} loading="lazy" />
-          </li>
-        ))
-      }
-    </ol>
-  </section>
-
-  <section class="contact page-shell" aria-labelledby="contact-title">
-    <h2 id="contact-title">
-      VOTRE HISTOIRE<br />
-      COMMENCE ICI.
-    </h2>
-    <a class="editorial-link" href="/contact/">ÉCRIVEZ-MOI →</a>
-  </section>
+    <section class="contact page-shell" aria-labelledby="contact-title">
+      <h2 id="contact-title">
+        Votre histoire<br />
+        commence ici.
+      </h2>
+      <a class="editorial-link" href="/contact/">ÉCRIVEZ-MOI →</a>
+    </section>
+  </div>
 </BaseLayout>
 
 <style>
-  .prototype-hero {
-    padding-block: var(--space-xs) var(--space-lg);
+  .home-page {
+    --surface-dark: var(--color-dark);
+    --editorial-narrow: 72rem;
   }
 
   .media {
-    overflow: hidden;
     background: var(--color-line);
-  }
-
-  .media--landscape {
-    aspect-ratio: 3 / 2;
-  }
-
-  .media--wide {
-    aspect-ratio: 16 / 9;
-  }
-
-  .media--portrait {
-    aspect-ratio: 4 / 5;
   }
 
   .media__image {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
   }
 
-  .hero-identity {
+  .media :global(img) {
+    width: 100%;
+    height: auto;
+  }
+
+  .hero {
+    margin-bottom: clamp(4rem, 6vw, 7rem);
+    padding-top: clamp(0.5rem, 1.5vw, 1.25rem);
+  }
+
+  .hero__composition {
+    position: relative;
+    width: min(92vw, 1680px);
+    margin-inline: auto;
     display: grid;
-    gap: var(--space-xs);
-    margin-top: var(--space-sm);
+    align-items: end;
+    isolation: isolate;
+    min-width: 0;
   }
 
-  .hero-identity h1 {
-    margin-top: 0.45rem;
+  .hero__image {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero__portrait {
+    position: relative;
+    z-index: 2;
+    width: min(56vw, 21rem);
+    margin-top: -2.75rem;
+    margin-left: auto;
+  }
+
+  .hero__panel {
+    position: relative;
+    z-index: 3;
+    display: grid;
+    gap: 0.85rem;
+    width: min(100%, 40rem);
+    margin-top: clamp(-4.05rem, -10vw, -2.15rem);
+    margin-left: auto;
+    padding: clamp(1.35rem, 2.35vw, 2.5rem);
+    background: var(--color-surface-soft);
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+
+  .hero h1 {
     font-family: var(--font-editorial);
-    font-size: clamp(2.55rem, 1.65rem + 3.2vw, 5.4rem);
+    font-size: clamp(2.5rem, 1.55rem + 3.1vw, 4.75rem);
     font-weight: 400;
     letter-spacing: 0;
-    line-height: 0.98;
+    line-height: 0.94;
+    overflow-wrap: break-word;
   }
 
-  .hero-identity p:not(.editorial-label),
+  .hero__location {
+    color: var(--color-text);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    line-height: 1.35;
+  }
+
+  .hero__panel p:not(.editorial-label):not(.hero__location),
   .manifesto p,
-  .marriage-grid__side p,
-  .family-grid__copy p,
-  .about__copy p {
+  .marriage__copy p,
+  .family__copy p,
+  .trust__copy p {
     max-width: var(--reading-max);
     color: var(--color-muted);
+    overflow-wrap: break-word;
   }
 
-  .manifesto {
-    display: grid;
-    gap: var(--space-sm);
-    padding-block: var(--space-lg);
-    border-top: 1px solid var(--color-line);
-  }
-
-  .manifesto h2,
-  .chapter__heading h2,
-  .family-grid__copy h2,
-  .about__copy h2,
-  .trust__intro h2,
-  .contact h2 {
-    font-family: var(--font-editorial);
-    font-size: clamp(2.4rem, 1.55rem + 3.3vw, 5.8rem);
-    font-weight: 400;
-    letter-spacing: 0;
-    line-height: 0.96;
-  }
-
-  .manifesto h2 {
-    max-width: 16ch;
-  }
-
-  .chapter,
-  .about,
+  .manifesto,
+  .marriage,
   .trust,
   .contact {
     padding-block: var(--space-lg);
   }
 
-  .chapter__heading {
-    display: grid;
-    gap: 1.15rem;
-    max-width: 48rem;
-    margin-bottom: var(--space-md);
+  .manifesto {
+    max-width: var(--editorial-narrow);
+    padding-block: 0 var(--space-md);
   }
 
-  .marriage-grid {
+  .manifesto__composition {
     display: grid;
     gap: var(--space-sm);
+    align-items: center;
+    isolation: isolate;
+    min-width: 0;
   }
 
-  .marriage-grid__side,
-  .family-grid__copy,
-  .about__copy,
-  .trust__intro,
-  .contact {
+  .manifesto h2,
+  .marriage h2,
+  .family h2,
+  .about h2,
+  .trust h2,
+  .contact h2 {
+    font-family: var(--font-editorial);
+    font-size: clamp(2.25rem, 1.5rem + 2.8vw, 4.8rem);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1;
+  }
+
+  .manifesto h2 {
+    z-index: 1;
+    max-width: 20ch;
+    font-size: clamp(2rem, 1.35rem + 2vw, 3.5rem);
+    text-wrap: balance;
+    overflow-wrap: break-word;
+  }
+
+  .manifesto p {
+    max-width: 24rem;
+    font-size: var(--text-body);
+    line-height: 1.65;
+  }
+
+  .manifesto__image {
+    width: min(70vw, 21rem);
+    justify-self: end;
+  }
+
+  .marriage {
+    max-width: var(--editorial-narrow);
+    display: grid;
+    gap: var(--space-sm);
+    isolation: isolate;
+    min-width: 0;
+  }
+
+  .marriage__intro {
+    position: relative;
+    z-index: 3;
+    display: grid;
+    gap: var(--space-xs);
+    min-width: 0;
+  }
+
+  .marriage h2 {
+    max-width: 12ch;
+    font-size: clamp(2.2rem, 1.45rem + 2.4vw, 4.4rem);
+    line-height: 0.98;
+    overflow-wrap: break-word;
+  }
+
+  .marriage__images {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    align-items: end;
+    isolation: isolate;
+    min-width: 0;
+  }
+
+  .marriage__main {
+    width: 100%;
+  }
+
+  .marriage__portrait {
+    position: relative;
+    z-index: 2;
+    width: min(70vw, 24rem);
+    margin-top: calc(var(--space-md) * -1);
+    margin-left: auto;
+  }
+
+  .marriage__copy {
+    position: relative;
+    z-index: 3;
     display: grid;
     gap: var(--space-sm);
     align-content: start;
+    min-width: 0;
+    overflow-wrap: break-word;
   }
 
-  .family-grid {
+  .family {
+    margin-block: var(--space-lg);
+    padding-block: clamp(4.5rem, 7vw, 6.5rem);
+    background: var(--color-surface-soft);
+  }
+
+  .family__inner {
+    display: grid;
+    gap: var(--space-md) var(--space-sm);
+    align-items: end;
+    isolation: isolate;
+    min-width: 0;
+  }
+
+  .family__words {
+    position: relative;
+    z-index: 4;
+    display: grid;
+    gap: var(--space-xs);
+    min-width: 0;
+  }
+
+  .family h2 {
+    max-width: 13ch;
+    font-size: clamp(2.1rem, 1.4rem + 2.15vw, 4.2rem);
+    line-height: 1;
+    overflow-wrap: break-word;
+  }
+
+  .family__visuals {
     display: grid;
     gap: var(--space-sm);
-    padding-top: var(--space-md);
-    border-top: 1px solid var(--color-line);
+    align-items: start;
+    min-width: 0;
   }
 
-  .family-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.7rem 1.35rem;
-    margin: 0;
-    padding: 0;
+  .family-item {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 0.7rem;
+    min-width: 0;
+  }
+
+  .family-label {
+    position: relative;
+    z-index: 2;
+    width: fit-content;
+    color: var(--color-text);
+    font-family: var(--font-editorial);
+    font-size: clamp(1.65rem, 1.2rem + 1.8vw, 3rem);
+    line-height: 1;
+    text-decoration: none;
+    overflow-wrap: break-word;
+  }
+
+  .family-media {
+    width: 100%;
+  }
+
+  .family-item--famille {
+    width: min(62vw, 18rem);
+    margin-left: auto;
+  }
+
+  .family__copy {
+    position: relative;
+    z-index: 4;
+    display: grid;
+    gap: var(--space-sm);
+    align-content: end;
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+
+  .about {
+    margin-block: var(--space-lg);
+    padding-block: var(--space-lg);
+    background: var(--surface-dark);
+    color: var(--color-background);
+  }
+
+  .about__inner {
+    display: grid;
+    gap: var(--space-sm);
+    align-items: center;
+  }
+
+  .about__image {
+    width: 100%;
+  }
+
+  .about__copy {
+    display: grid;
+    gap: var(--space-sm);
+  }
+
+  .about .editorial-label,
+  .about__copy p {
+    color: color-mix(in srgb, var(--color-background) 76%, var(--color-white));
+  }
+
+  .about .editorial-link {
+    color: var(--color-background);
+  }
+
+  .about h2 {
+    font-size: clamp(2.2rem, 1.55rem + 2.4vw, 4rem);
+  }
+
+  .trust {
+    display: grid;
+    gap: var(--space-sm);
+  }
+
+  .trust__heading {
+    display: grid;
+    gap: var(--space-xs);
+  }
+
+  .trust__source {
+    color: var(--color-text);
     font-size: var(--text-xs);
     font-weight: 500;
     letter-spacing: 0.08em;
     line-height: 1.3;
-    list-style: none;
-  }
-
-  .about {
-    display: grid;
-    gap: var(--space-sm);
-    border-top: 1px solid var(--color-line);
-  }
-
-  .trust {
-    border-top: 1px solid var(--color-line);
+    text-transform: uppercase;
   }
 
   .awards {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-sm) 1.25rem;
-    margin: var(--space-md) 0 0;
+    margin: var(--space-sm) 0 0;
     padding: 0;
     list-style: none;
   }
@@ -351,25 +596,59 @@ const prototypeImage = homeImages.hero;
   }
 
   .contact {
-    border-top: 1px solid var(--color-line);
+    display: grid;
+    gap: var(--space-sm);
+    min-height: clamp(20rem, 34vw, 32rem);
+    align-content: center;
+  }
+
+  .contact h2 {
+    font-size: clamp(3rem, 1.8rem + 4.8vw, 5.8rem);
   }
 
   @media (max-width: 42rem) {
-    .prototype-hero {
-      padding-top: 0;
+    .hero {
+      padding-top: 0.35rem;
+      margin-bottom: var(--space-md);
     }
 
-    .media--wide {
-      aspect-ratio: 3 / 2;
+    .hero__composition {
+      width: calc(100% - (var(--page-padding) * 2));
     }
 
-    .marriage-grid__side .media--portrait,
-    .about__image {
-      width: min(82vw, 24rem);
+    .hero__portrait {
+      width: min(48vw, 14rem);
+      margin-top: -2rem;
+      margin-right: var(--space-xs);
     }
 
-    .family-grid__landscape {
-      margin-top: var(--space-xs);
+    .hero__panel {
+      width: calc(100% - var(--space-xs));
+      margin-top: clamp(-3.65rem, -10vw, -1.8rem);
+      margin-left: auto;
+    }
+
+    .family__visuals {
+      gap: var(--space-sm);
+    }
+
+    .family-item--grossesse {
+      width: min(72vw, 18rem);
+    }
+
+    .family-item--naissance {
+      width: min(100%, 30rem);
+      margin-top: calc(var(--space-sm) * -0.4);
+      margin-left: auto;
+    }
+
+    .family-item--famille {
+      width: min(68vw, 20rem);
+      margin-top: calc(var(--space-sm) * -0.3);
+    }
+
+    .marriage__portrait {
+      margin-right: var(--space-xs);
     }
   }
 
@@ -380,48 +659,166 @@ const prototypeImage = homeImages.hero;
   }
 
   @media (min-width: 72rem) {
-    .hero-identity,
-    .manifesto,
-    .about,
-    .trust {
-      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
-      align-items: start;
+    .hero {
+      padding-top: clamp(0.75rem, 1.6vw, 1.5rem);
     }
 
-    .hero-identity p:not(.editorial-label),
-    .manifesto p {
-      justify-self: end;
-      padding-top: 0.3rem;
+    .hero__composition {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
     }
 
-    .marriage-grid {
-      grid-template-columns: minmax(0, 1.45fr) minmax(20rem, 0.75fr);
+    .hero__image {
+      grid-column: 1 / 10;
+      grid-row: 1;
+      align-self: start;
+      width: 100%;
+    }
+
+    .hero__portrait {
+      grid-column: 9 / 13;
+      grid-row: 1;
+      align-self: center;
+      width: 100%;
+      margin: clamp(3rem, 8vw, 6.5rem) 0 0 calc(var(--space-md) * -0.35);
+    }
+
+    .hero__panel {
+      grid-column: 2 / 7;
+      grid-row: 2;
+      align-self: start;
+      margin-top: clamp(-9.75rem, -10vw, -7rem);
+      margin-bottom: 0;
+      margin-right: 0;
+      margin-left: 0;
+    }
+
+    .manifesto__composition {
+      grid-template-columns: minmax(0, 1.2fr) minmax(14rem, 0.55fr);
+    }
+
+    .manifesto h2 {
+      grid-column: 1;
+      grid-row: auto;
+      align-self: center;
+      max-width: none;
+    }
+
+    .manifesto__image {
+      grid-column: 2;
+      grid-row: auto;
+      align-self: center;
+      width: 100%;
+    }
+
+    .marriage {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
       align-items: end;
+      row-gap: 0;
     }
 
-    .marriage-grid__side {
+    .marriage__intro {
+      grid-column: 1 / 5;
+      grid-row: 1;
+      align-self: start;
+      padding-top: var(--space-xs);
+    }
+
+    .marriage__images {
+      grid-column: 5 / 13;
+      grid-row: 1 / 3;
+      grid-template-columns: repeat(10, minmax(0, 1fr));
+    }
+
+    .marriage__main {
+      grid-column: 1 / 9;
+      grid-row: 1;
+    }
+
+    .marriage__portrait {
+      grid-column: 8 / 11;
+      grid-row: 1;
+      width: 100%;
+      margin: 0 0 calc(var(--space-md) * -0.45) calc(var(--space-sm) * -0.6);
+    }
+
+    .marriage__copy {
+      grid-column: 1 / 5;
+      grid-row: 2;
       padding-bottom: var(--space-xs);
     }
 
-    .marriage-grid__side .media--portrait {
-      width: min(100%, 25rem);
+    .family__inner {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      max-width: var(--editorial-narrow);
+      row-gap: var(--space-sm);
     }
 
-    .family-grid {
-      grid-template-columns: minmax(18rem, 0.72fr) minmax(0, 0.72fr) minmax(0, 1fr);
-      align-items: end;
-    }
-
-    .family-grid__copy {
-      padding-bottom: var(--space-sm);
-    }
-
-    .family-grid__portrait {
+    .family__words {
+      grid-column: 1 / 5;
+      grid-row: 1;
       align-self: start;
     }
 
-    .family-grid__landscape {
-      margin-bottom: var(--space-md);
+    .family__visuals {
+      grid-column: 5 / 13;
+      grid-row: 1 / 3;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      align-items: start;
+      row-gap: 0;
+      padding-left: clamp(1rem, 2vw, 2rem);
+      width: 100%;
+    }
+
+    .family-item--grossesse {
+      grid-column: 4 / 8;
+      grid-row: 1;
+      align-self: start;
+      width: 100%;
+      margin: 0;
+      z-index: 3;
+    }
+
+    .family-item--grossesse .family-media {
+      width: 100%;
+    }
+
+    .family-item--naissance {
+      grid-column: 8 / 12;
+      grid-row: 1;
+      align-self: start;
+      width: 100%;
+      margin: clamp(5.5rem, 8vw, 8rem) 0 0;
+      padding-top: 0;
+      z-index: 4;
+    }
+
+    .family-item--naissance .family-media {
+      width: 100%;
+      margin-left: 0;
+    }
+
+    .family-item--famille {
+      grid-column: 1 / 9;
+      grid-row: 1;
+      width: 100%;
+      margin: clamp(11.5rem, 17vw, 16rem) 0 0;
+      z-index: 2;
+    }
+
+    .family-item--famille .family-media {
+      width: 100%;
+      margin-left: 0;
+    }
+
+    .family__copy {
+      grid-column: 1 / 5;
+      grid-row: 2;
+      align-self: end;
+      padding-bottom: var(--space-xs);
+    }
+
+    .about__inner {
+      grid-template-columns: minmax(0, 0.82fr) minmax(0, 1fr);
     }
 
     .about__image {
@@ -431,7 +828,16 @@ const prototypeImage = homeImages.hero;
 
     .about__copy {
       max-width: var(--reading-max);
-      padding-top: var(--space-md);
+    }
+
+    .trust {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+      align-items: end;
+    }
+
+    .trust__copy {
+      align-self: end;
+      padding-bottom: 0.4rem;
     }
 
     .awards {
@@ -440,7 +846,7 @@ const prototypeImage = homeImages.hero;
     }
 
     .contact {
-      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 0.65fr) minmax(0, 1fr);
     }
 
     .contact h2,

@@ -1,4 +1,7 @@
 ---
+import { Image } from "astro:assets";
+import logoBlack from "../assets/brand/logo_life_focus_black.png";
+
 const navItems = [
   { label: "MARIAGE", href: "/mariage/" },
   { label: "FAMILLE", href: "/famille/" },
@@ -9,7 +12,16 @@ const navItems = [
 
 <header class="site-header">
   <div class="site-header__inner page-shell">
-    <a class="site-identity" href="/" aria-label="Life Focus, accueil">LIFE FOCUS</a>
+    <a class="site-identity" href="/" aria-label="Life Focus, accueil">
+      <Image
+        class="site-identity__logo"
+        src={logoBlack}
+        alt="Life Focus"
+        width={150}
+        loading="eager"
+        decoding="sync"
+      />
+    </a>
 
     <nav class="site-nav" aria-label="Navigation principale">
       {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
