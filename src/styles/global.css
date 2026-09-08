@@ -195,7 +195,7 @@ a:active {
 .site-nav {
   display: none;
   align-items: center;
-  gap: clamp(1.25rem, 3vw, 3rem);
+  gap: clamp(1.05rem, 2.2vw, 2.5rem);
 }
 
 .site-nav a,
@@ -208,6 +208,15 @@ a:active {
 .site-nav__summary:hover,
 .site-footer a:hover {
   color: var(--color-muted);
+}
+
+.site-nav a.site-nav__utility {
+  margin-left: clamp(0.35rem, 1vw, 1rem);
+  color: var(--color-muted);
+}
+
+.site-nav a.site-nav__utility:hover {
+  color: var(--color-text);
 }
 
 .site-nav__group {
@@ -283,6 +292,10 @@ a:active {
   letter-spacing: 0.06em;
   text-decoration: none;
   text-transform: uppercase;
+}
+
+.site-menu__panel a.site-menu__utility {
+  color: var(--color-muted);
 }
 
 .site-menu__group {

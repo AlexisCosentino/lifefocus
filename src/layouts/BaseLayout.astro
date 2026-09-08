@@ -9,6 +9,8 @@ interface Props {
   description?: string;
   canonicalUrl?: string;
   ogImage?: string;
+  ogType?: "website" | "article";
+  structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
 }
 
 const {
@@ -16,6 +18,8 @@ const {
   description = "Photographe de mariage et de famille à Romans-sur-Isère, dans la Drôme.",
   canonicalUrl,
   ogImage,
+  ogType = "website",
+  structuredData,
 } = Astro.props;
 ---
 
@@ -27,7 +31,7 @@ const {
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
@@ -45,6 +49,14 @@ const {
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Newsreader:opsz,wght@6..72,400&display=swap"
     />
+    {
+      structuredData && (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify(structuredData)}
+        />
+      )
+    }
     <title>{title}</title>
   </head>
   <body>

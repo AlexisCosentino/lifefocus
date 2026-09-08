@@ -9,9 +9,15 @@ const familyItems = [
 ];
 
 const secondaryNavItems = [
+  { label: "CONSEILS", href: "/conseils/" },
   { label: "À PROPOS", href: "/a-propos/" },
   { label: "CONTACT", href: "/contact/" },
 ];
+
+const clientArea = {
+  label: "ESPACE CLIENTS \u2197",
+  href: "https://alexis-cosentino.lumys.photo/",
+};
 ---
 
 <header class="site-header">
@@ -36,6 +42,14 @@ const secondaryNavItems = [
         </div>
       </details>
       {secondaryNavItems.map((item) => <a href={item.href}>{item.label}</a>)}
+      <a
+        class="site-nav__utility"
+        href={clientArea.href}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {clientArea.label}
+      </a>
     </nav>
 
     <details class="site-menu">
@@ -49,6 +63,14 @@ const secondaryNavItems = [
           </div>
         </details>
         {secondaryNavItems.map((item) => <a href={item.href}>{item.label}</a>)}
+        <a
+          class="site-menu__utility"
+          href={clientArea.href}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {clientArea.label}
+        </a>
       </nav>
     </details>
   </div>
