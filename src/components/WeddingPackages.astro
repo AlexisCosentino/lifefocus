@@ -1,0 +1,48 @@
+---
+const packages = [
+  {
+    duration: "3 HEURES",
+    text: "Une présence courte pour une cérémonie civile, un engagement intime ou un moment essentiel de la journée.",
+  },
+  {
+    duration: "6 HEURES",
+    text: "Une couverture plus complète pour suivre les préparatifs, la cérémonie et les premiers instants avec vos proches.",
+  },
+  {
+    duration: "8 HEURES",
+    text: "Un rythme confortable pour raconter la journée avec plus d'air, des moments calmes aux temps forts.",
+  },
+  {
+    duration: "JOURNÉE",
+    text: "Une présence pensée pour accompagner l'histoire du début à la fin, sans multiplier les interventions.",
+  },
+];
+---
+
+<section class="wedding-packages page-shell" aria-labelledby="packages-title">
+  <div class="wedding-packages__intro">
+    <p class="editorial-label">08 / LES FORMULES</p>
+    <h2 id="packages-title">Une présence adaptée au rythme de votre journée.</h2>
+  </div>
+
+  <div class="wedding-packages__body">
+    <div class="wedding-packages__base">
+      <p class="wedding-packages__eyebrow">Dans toutes les formules</p>
+      <p>
+        Un accompagnement avant le mariage, la prise de vue le jour J, le tri des images et une galerie en ligne.
+        Les détails précis seront ajustés avec Alexis.
+      </p>
+    </div>
+
+    <ol class="wedding-packages__list">
+      {
+        packages.map((item) => (
+          <li>
+            <h3>{item.duration}</h3>
+            <p>{item.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

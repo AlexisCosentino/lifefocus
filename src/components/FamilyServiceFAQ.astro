@@ -1,0 +1,82 @@
+---
+import type { FamilyServiceFaq } from "../data/familyServices";
+
+interface Props {
+  items: FamilyServiceFaq[];
+}
+
+const { items } = Astro.props;
+---
+
+<section class="family-service-faq page-shell" aria-labelledby="family-faq-title">
+  <div class="family-service-faq__intro">
+    <p class="editorial-label">05 / QUESTIONS</p>
+    <h2 id="family-faq-title">Avant de réserver.</h2>
+  </div>
+
+  <div class="family-service-faq__items">
+    {
+      items.map((item) => (
+        <details>
+          <summary>{item.question}</summary>
+          <p>{item.answer}</p>
+        </details>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .family-service-faq {
+    display: grid;
+    gap: var(--space-md);
+    max-width: 76rem;
+    padding-block: var(--space-lg);
+  }
+
+  .family-service-faq__intro {
+    display: grid;
+    gap: var(--space-xs);
+  }
+
+  .family-service-faq h2 {
+    max-width: 12ch;
+    font-family: var(--font-editorial);
+    font-size: clamp(2.45rem, 1.55rem + 3vw, 5rem);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 0.98;
+  }
+
+  .family-service-faq__items {
+    display: grid;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .family-service-faq details {
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .family-service-faq summary {
+    cursor: pointer;
+    padding-block: 1.25rem;
+    color: var(--color-text);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  .family-service-faq p {
+    max-width: var(--reading-max);
+    padding-bottom: 1.25rem;
+    color: var(--color-muted);
+  }
+
+  @media (min-width: 72rem) {
+    .family-service-faq {
+      grid-template-columns: minmax(0, 0.48fr) minmax(0, 1fr);
+      gap: clamp(3rem, 7vw, 7rem);
+      align-items: start;
+    }
+  }
+</style>

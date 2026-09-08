@@ -1,0 +1,124 @@
+---
+import { Picture } from "astro:assets";
+
+import type { FamilyServicePageData } from "../data/familyServices";
+import FamilyServiceFAQ from "./FamilyServiceFAQ.astro";
+import FamilyServiceGallery from "./FamilyServiceGallery.astro";
+import FamilyServiceHero from "./FamilyServiceHero.astro";
+import FamilyServiceLinks from "./FamilyServiceLinks.astro";
+import FamilyServicePricing from "./FamilyServicePricing.astro";
+
+interface Props {
+  service: FamilyServicePageData;
+}
+
+const { service } = Astro.props;
+---
+
+<div class="family-service-page">
+  <FamilyServiceHero
+    eyebrow={service.hero.eyebrow}
+    title={service.hero.title}
+    text={service.hero.text}
+    image={service.hero.image}
+  />
+
+  <section class="family-service-approach page-shell" aria-labelledby="family-approach-title">
+    <div class="family-service-approach__text">
+      <p class="editorial-label">{service.approach.label}</p>
+      <h2 id="family-approach-title">{service.approach.title}</h2>
+      <p>{service.approach.text}</p>
+    </div>
+
+    <figure class="family-service-approach__image">
+      <Picture
+        src={service.approach.image.src}
+        alt={service.approach.image.alt}
+        widths={[540, 720, 960, 1280]}
+        sizes="(min-width: 72rem) 38vw, calc(100vw - (2 * var(--page-padding)))"
+        formats={["avif", "webp"]}
+        loading="lazy"
+      />
+    </figure>
+  </section>
+
+  <FamilyServicePricing package={service.package} />
+  <FamilyServiceGallery images={service.gallery} />
+  <FamilyServiceLinks links={service.links} />
+  <FamilyServiceFAQ items={service.faq} />
+
+  <section class="family-service-contact page-shell" aria-labelledby="family-contact-title">
+    <h2 id="family-contact-title">Votre histoire commence ici.</h2>
+    <a class="editorial-link" href="/contact/">ÉCRIVEZ-MOI →</a>
+  </section>
+</div>
+
+<style>
+  .family-service-page :global(figure) {
+    margin: 0;
+  }
+
+  .family-service-page :global(img) {
+    width: 100%;
+    height: auto;
+  }
+
+  .family-service-approach {
+    display: grid;
+    gap: var(--space-md);
+    align-items: end;
+    max-width: 76rem;
+    padding-block: var(--space-lg);
+  }
+
+  .family-service-approach__text {
+    display: grid;
+    gap: var(--space-xs);
+    min-width: 0;
+  }
+
+  .family-service-approach h2,
+  .family-service-contact h2 {
+    max-width: 12ch;
+    font-family: var(--font-editorial);
+    font-size: clamp(2.45rem, 1.55rem + 3vw, 5rem);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 0.98;
+  }
+
+  .family-service-approach p:not(.editorial-label) {
+    max-width: var(--reading-max);
+    color: var(--color-muted);
+  }
+
+  .family-service-approach__image {
+    width: 100%;
+    background: var(--color-line);
+  }
+
+  .family-service-contact {
+    display: grid;
+    gap: var(--space-sm);
+    align-content: center;
+    max-width: 76rem;
+    min-height: clamp(14rem, 22vw, 20rem);
+    padding-block: var(--space-lg);
+  }
+
+  @media (min-width: 72rem) {
+    .family-service-approach {
+      grid-template-columns: minmax(0, 0.82fr) minmax(0, 1fr);
+      gap: clamp(3rem, 7vw, 7rem);
+    }
+
+    .family-service-contact {
+      grid-template-columns: minmax(0, 0.55fr) minmax(0, 1fr);
+    }
+
+    .family-service-contact h2,
+    .family-service-contact a {
+      grid-column: 2;
+    }
+  }
+</style>

@@ -2,9 +2,13 @@
 import { Image } from "astro:assets";
 import logoBlack from "../assets/brand/logo_life_focus_black.png";
 
-const navItems = [
-  { label: "MARIAGE", href: "/mariage/" },
+const familyItems = [
+  { label: "GROSSESSE", href: "/grossesse/" },
+  { label: "NAISSANCE", href: "/naissance/" },
   { label: "FAMILLE", href: "/famille/" },
+];
+
+const secondaryNavItems = [
   { label: "À PROPOS", href: "/a-propos/" },
   { label: "CONTACT", href: "/contact/" },
 ];
@@ -24,13 +28,27 @@ const navItems = [
     </a>
 
     <nav class="site-nav" aria-label="Navigation principale">
-      {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+      <a href="/mariage/">MARIAGE</a>
+      <details class="site-nav__group">
+        <summary class="site-nav__summary">FAMILLE</summary>
+        <div class="site-nav__submenu">
+          {familyItems.map((item) => <a href={item.href}>{item.label}</a>)}
+        </div>
+      </details>
+      {secondaryNavItems.map((item) => <a href={item.href}>{item.label}</a>)}
     </nav>
 
     <details class="site-menu">
       <summary class="site-menu__summary">MENU</summary>
       <nav class="site-menu__panel" aria-label="Navigation mobile">
-        {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+        <a href="/mariage/">MARIAGE</a>
+        <details class="site-menu__group">
+          <summary>FAMILLE</summary>
+          <div>
+            {familyItems.map((item) => <a href={item.href}>{item.label}</a>)}
+          </div>
+        </details>
+        {secondaryNavItems.map((item) => <a href={item.href}>{item.label}</a>)}
       </nav>
     </details>
   </div>

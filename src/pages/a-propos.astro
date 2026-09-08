@@ -1,0 +1,339 @@
+---
+import { Picture } from "astro:assets";
+
+import alexisCool from "../assets/Alexis_cool.jpg";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { homeImages } from "../data/homeImages";
+
+const pageTitle = "À propos d'Alexis Cosentino | Photographe dans la Drôme | Life Focus";
+const pageDescription =
+  "Découvrez Alexis Cosentino, photographe à Romans-sur-Isère en Drôme, son approche sensible de la photographie de mariage et de famille, son expérience et sa manière d'accompagner ses clients.";
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl="https://lifefocus.fr/a-propos/"
+>
+  <article class="about-page">
+    <section class="about-hero page-shell" aria-labelledby="about-title">
+      <div class="about-hero__text">
+        <p class="editorial-label">À PROPOS</p>
+        <h1 id="about-title">Alexis Cosentino</h1>
+        <p>
+          Photographe à Romans-sur-Isère, sensible aux gens, aux liens et à ce que les images
+          deviennent avec le temps.
+        </p>
+      </div>
+
+      <figure class="about-hero__portrait">
+        <Picture
+          src={homeImages.alexis.src}
+          alt={homeImages.alexis.alt}
+          widths={[420, 640, 840, 1100, 1400]}
+          sizes="(min-width: 72rem) 38vw, calc(100vw - (2 * var(--page-padding)))"
+          formats={["avif", "webp"]}
+          loading="eager"
+          decoding="sync"
+          fetchpriority="high"
+        />
+      </figure>
+    </section>
+
+    <section class="about-intro page-shell" aria-labelledby="identity-title">
+      <div class="about-intro__copy">
+        <p class="editorial-label">01 / IDENTITÉ</p>
+        <h2 id="identity-title">Derrière Life Focus, il y a une personne.</h2>
+        <p>
+          Je vis et travaille à Romans-sur-Isère, dans la Drôme. Avec Life Focus, je photographie
+          les mariages, les grossesses, les naissances et les familles avec la même idée simple:
+          une image doit garder quelque chose de vivant, pas seulement montrer que tout était bien
+          placé.
+        </p>
+        <div class="about-intro__links" aria-label="Services Life Focus">
+          <a class="editorial-link" href="/mariage/">MARIAGE →</a>
+          <a class="editorial-link" href="/grossesse/">GROSSESSE →</a>
+          <a class="editorial-link" href="/naissance/">NAISSANCE →</a>
+          <a class="editorial-link" href="/famille/">FAMILLE →</a>
+        </div>
+      </div>
+
+      <figure class="about-intro__image">
+        <Picture
+          src={alexisCool}
+          alt="Alexis Cosentino dans un moment personnel, en lumière colorée."
+          widths={[420, 640, 840, 1100]}
+          sizes="(min-width: 72rem) 30vw, calc(100vw - (2 * var(--page-padding)))"
+          formats={["avif", "webp"]}
+          loading="lazy"
+        />
+      </figure>
+    </section>
+
+    <section class="about-experience page-shell" aria-labelledby="experience-title">
+      <div class="about-experience__text">
+        <p class="editorial-label">02 / EXPÉRIENCE</p>
+        <h2 id="experience-title">L'expérience, pour mieux se faire oublier.</h2>
+        <p>
+          Avec les années, on apprend à lire le rythme d'une journée, à sentir quand il faut guider
+          et quand il vaut mieux disparaître un peu. Cette expérience sert surtout à vous rassurer:
+          anticiper les moments importants, absorber les imprévus, et garder une présence calme.
+        </p>
+      </div>
+
+      <figure class="about-experience__image">
+        <Picture
+          src={homeImages.weddingMain.src}
+          alt={homeImages.weddingMain.alt}
+          widths={[540, 720, 960, 1280, 1600]}
+          sizes="(min-width: 72rem) 44vw, calc(100vw - (2 * var(--page-padding)))"
+          formats={["avif", "webp"]}
+          loading="lazy"
+        />
+      </figure>
+    </section>
+
+    <section class="about-sensitivity" aria-labelledby="sensitivity-title">
+      <div class="about-sensitivity__inner page-shell">
+        <div class="about-sensitivity__copy">
+          <p class="editorial-label">03 / REGARD</p>
+          <h2 id="sensitivity-title">Ce qui m'intéresse dans une image, c'est ce qu'elle garde.</h2>
+          <p>
+            Les petits gestes, les liens, la lumière qui tombe juste, les moments imparfaits qui
+            deviennent précieux plus tard. Je cherche moins à fabriquer une scène qu'à observer ce
+            qui existe déjà entre les personnes.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-guidance page-shell" aria-labelledby="guidance-title">
+      <div class="about-guidance__text">
+        <p class="editorial-label">04 / PRÉSENCE</p>
+        <h2 id="guidance-title">Je vous guide quand vous en avez besoin. Pour le reste, je vous laisse vivre.</h2>
+        <p>
+          L'accompagnement commence avant les photos: répondre aux questions, comprendre le timing,
+          préparer les moments qui peuvent l'être. Le jour venu, je donne des indications simples
+          quand elles aident, surtout si vous n'êtes pas à l'aise devant l'appareil. Et quand le
+          moment doit rester spontané, je prends du recul.
+        </p>
+      </div>
+
+      <figure class="about-guidance__image">
+        <Picture
+          src={homeImages.familyMain.src}
+          alt={homeImages.familyMain.alt}
+          widths={[540, 720, 960, 1280, 1600]}
+          sizes="(min-width: 72rem) 42vw, calc(100vw - (2 * var(--page-padding)))"
+          formats={["avif", "webp"]}
+          loading="lazy"
+        />
+      </figure>
+    </section>
+
+    <section class="about-trust page-shell" aria-labelledby="trust-title">
+      <p class="editorial-label">05 / CONFIANCE</p>
+      <h2 id="trust-title">Des années de mariages, de familles et de confiance.</h2>
+      <p>
+        Life Focus a reçu des Wedding Awards Mariages.net chaque année depuis 2020. Ce repère reste
+        secondaire: ce qui compte vraiment, c'est la manière dont les personnes se sentent accompagnées
+        avant, pendant et après les images.
+      </p>
+    </section>
+
+    <section class="about-contact page-shell" aria-labelledby="contact-title">
+      <h2 id="contact-title">Vous connaissez maintenant un peu mieux celui qui sera derrière l'appareil.</h2>
+      <a class="editorial-link" href="/contact/">PARLEZ-MOI DE VOUS →</a>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .about-page :global(figure) {
+    margin: 0;
+    background: var(--color-line);
+  }
+
+  .about-page :global(img) {
+    width: 100%;
+    height: auto;
+  }
+
+  .about-hero,
+  .about-intro,
+  .about-experience,
+  .about-guidance {
+    display: grid;
+    gap: var(--space-md);
+    align-items: end;
+    max-width: 82rem;
+    padding-block: var(--space-lg);
+  }
+
+  .about-hero {
+    padding-top: clamp(1rem, 2vw, 2rem);
+  }
+
+  .about-hero__text,
+  .about-intro__copy,
+  .about-experience__text,
+  .about-guidance__text,
+  .about-sensitivity__copy,
+  .about-trust {
+    display: grid;
+    gap: var(--space-xs);
+    min-width: 0;
+  }
+
+  .about-hero h1,
+  .about-intro h2,
+  .about-experience h2,
+  .about-sensitivity h2,
+  .about-guidance h2,
+  .about-trust h2,
+  .about-contact h2 {
+    font-family: var(--font-editorial);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 0.98;
+  }
+
+  .about-hero h1 {
+    font-size: clamp(3.4rem, 1.9rem + 5vw, 6.8rem);
+  }
+
+  .about-intro h2,
+  .about-experience h2,
+  .about-sensitivity h2,
+  .about-guidance h2,
+  .about-trust h2,
+  .about-contact h2 {
+    max-width: 13ch;
+    font-size: clamp(2.45rem, 1.55rem + 3vw, 5rem);
+  }
+
+  .about-hero p:not(.editorial-label),
+  .about-intro p,
+  .about-experience p,
+  .about-sensitivity p,
+  .about-guidance p,
+  .about-trust p {
+    max-width: var(--reading-max);
+    color: var(--color-muted);
+  }
+
+  .about-hero__portrait,
+  .about-intro__image,
+  .about-experience__image,
+  .about-guidance__image {
+    width: 100%;
+  }
+
+  .about-intro__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem 1.6rem;
+    margin-top: var(--space-xs);
+  }
+
+  .about-sensitivity {
+    margin-block: var(--space-lg);
+    color: var(--color-background);
+  }
+
+  .about-sensitivity__inner {
+    width: min(calc(100% - (var(--page-padding) * 1.5)), 82rem);
+    margin-right: var(--page-padding);
+    margin-left: auto;
+    padding-block: clamp(4rem, 7vw, 6.5rem);
+    background: var(--color-dark);
+  }
+
+  .about-sensitivity .editorial-label,
+  .about-sensitivity p {
+    color: color-mix(in srgb, var(--color-background) 76%, var(--color-white));
+  }
+
+  .about-trust {
+    max-width: 76rem;
+    padding-block: var(--space-lg);
+    border-top: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .about-contact {
+    display: grid;
+    gap: var(--space-sm);
+    align-content: center;
+    max-width: 82rem;
+    min-height: clamp(14rem, 22vw, 20rem);
+    padding-block: var(--space-lg);
+  }
+
+  @media (min-width: 72rem) {
+    .about-hero {
+      grid-template-columns: minmax(0, 0.7fr) minmax(0, 0.62fr);
+      gap: clamp(3rem, 7vw, 8rem);
+    }
+
+    .about-hero__text {
+      padding-bottom: clamp(2rem, 5vw, 5rem);
+    }
+
+    .about-intro {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.55fr);
+      gap: clamp(3rem, 7vw, 7rem);
+      align-items: center;
+    }
+
+    .about-intro__image {
+      width: min(100%, 28rem);
+      justify-self: end;
+    }
+
+    .about-experience {
+      grid-template-columns: minmax(0, 0.62fr) minmax(0, 1fr);
+      gap: clamp(3rem, 7vw, 7rem);
+    }
+
+    .about-guidance {
+      grid-template-columns: minmax(0, 0.78fr) minmax(0, 0.9fr);
+      gap: clamp(3rem, 7vw, 7rem);
+      align-items: center;
+    }
+
+    .about-guidance__text {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .about-guidance__image {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .about-trust {
+      grid-template-columns: minmax(0, 0.35fr) minmax(0, 0.65fr);
+      gap: clamp(3rem, 7vw, 7rem);
+      align-items: start;
+    }
+
+    .about-trust .editorial-label {
+      grid-column: 1;
+    }
+
+    .about-trust h2,
+    .about-trust p {
+      grid-column: 2;
+    }
+
+    .about-contact {
+      grid-template-columns: minmax(0, 0.45fr) minmax(0, 1fr);
+    }
+
+    .about-contact h2,
+    .about-contact a {
+      grid-column: 2;
+    }
+  }
+</style>

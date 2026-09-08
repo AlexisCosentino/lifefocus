@@ -1,0 +1,31 @@
+---
+import type { FamilyServiceLink } from "../data/familyServices";
+
+interface Props {
+  links: FamilyServiceLink[];
+}
+
+const { links } = Astro.props;
+---
+
+<section class="family-service-links page-shell" aria-labelledby="family-links-title">
+  <p class="editorial-label" id="family-links-title">04 / AUTRES SÉANCES</p>
+  <nav aria-label="Autres séances famille">
+    {links.map((link) => <a class="editorial-link" href={link.href}>{link.label}</a>)}
+  </nav>
+</section>
+
+<style>
+  .family-service-links {
+    display: grid;
+    gap: var(--space-sm);
+    max-width: 76rem;
+    padding-block: var(--space-md);
+  }
+
+  .family-service-links nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+  }
+</style>

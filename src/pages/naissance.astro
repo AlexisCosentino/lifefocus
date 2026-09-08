@@ -1,0 +1,15 @@
+---
+import FamilyServicePage from "../components/FamilyServicePage.astro";
+import { familyServices } from "../data/familyServices";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const service = familyServices.naissance;
+---
+
+<BaseLayout
+  title={service.title}
+  description={service.description}
+  canonicalUrl={service.canonicalUrl}
+>
+  <FamilyServicePage service={service} />
+</BaseLayout>

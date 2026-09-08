@@ -1,0 +1,386 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import logoBlack from "../assets/brand/logo_life_focus_black.png";
+
+const pageTitle = "Contact | Life Focus - Photographe à Romans-sur-Isère";
+const pageDescription =
+  "Contactez Life Focus pour votre mariage, séance grossesse, naissance ou famille à Romans-sur-Isère, Valence et dans la Drôme.";
+
+const mapQuery = encodeURIComponent(
+  "36 TER Rue André Chénier, 26100 Romans-sur-Isère, France",
+);
+const mapsLink = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
+const mapsEmbed = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl="https://lifefocus.fr/contact/"
+>
+  <article class="contact-page">
+    <section class="contact-hero page-shell" aria-labelledby="contact-title">
+      <p class="editorial-label">CONTACT</p>
+      <h1 id="contact-title">Parlez-moi de votre projet.</h1>
+      <p>
+        Un mariage, une grossesse, une naissance, une séance famille... racontez-moi ce que vous
+        imaginez.
+      </p>
+    </section>
+
+    <section class="contact-main page-shell" aria-labelledby="contact-form-title">
+      <form class="contact-form" action="/api/contact.php" method="post">
+        <div class="contact-status" hidden data-status-message="success" role="status">
+          Merci, votre message a bien été envoyé. Je vous répondrai personnellement dès que possible.
+        </div>
+        <div class="contact-status contact-status--error" hidden data-status-message="error" role="alert">
+          Le message n'a pas pu être envoyé. Vous pouvez aussi me joindre directement par téléphone ou email.
+        </div>
+
+        <div class="contact-form__intro">
+          <h2 id="contact-form-title">Votre demande</h2>
+        </div>
+
+        <div class="contact-form__field">
+          <label for="name">Nom et prénom *</label>
+          <input id="name" name="name" type="text" autocomplete="name" maxlength="120" required />
+        </div>
+
+        <div class="contact-form__field">
+          <label for="email">Email *</label>
+          <input id="email" name="email" type="email" autocomplete="email" maxlength="160" required />
+        </div>
+
+        <div class="contact-form__field">
+          <label for="phone">Téléphone *</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="40" required />
+        </div>
+
+        <div class="contact-form__field">
+          <label for="session_type">Type de séance *</label>
+          <select id="session_type" name="session_type" required>
+            <option value="" disabled selected>Choisir une séance</option>
+            <option value="mariage">Mariage</option>
+            <option value="grossesse">Grossesse</option>
+            <option value="naissance">Naissance</option>
+            <option value="famille">Famille</option>
+            <option value="autre">Autre</option>
+          </select>
+        </div>
+
+        <div class="contact-form__field">
+          <label for="event_date">Date de la séance / événement</label>
+          <input id="event_date" name="event_date" type="date" />
+        </div>
+
+        <div class="contact-form__field">
+          <label for="location">Lieu</label>
+          <input id="location" name="location" type="text" maxlength="160" />
+        </div>
+
+        <div class="contact-form__field contact-form__field--full">
+          <label for="message">Message *</label>
+          <textarea id="message" name="message" rows="7" maxlength="4000" required></textarea>
+        </div>
+
+        <div class="contact-form__trap" aria-hidden="true">
+          <label for="website">Site web</label>
+          <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <button class="contact-form__submit editorial-link" type="submit">ENVOYER MA DEMANDE →</button>
+        <p class="contact-form__privacy">
+          Les informations envoyées via ce formulaire sont uniquement utilisées pour répondre à votre demande.
+        </p>
+      </form>
+
+      <aside class="contact-details" aria-labelledby="contact-details-title">
+        <h2 class="contact-details__title" id="contact-details-title">Life Focus</h2>
+        <Image
+          class="contact-details__logo"
+          src={logoBlack}
+          alt="Life Focus"
+          width={180}
+          loading="lazy"
+        />
+        <p>Photographe à Romans-sur-Isère</p>
+
+        <div class="contact-details__item">
+          <span>Téléphone</span>
+          <a href="tel:+33698900917">06 98 90 09 17</a>
+          <a class="editorial-link" href="tel:+33698900917">APPELER →</a>
+        </div>
+
+        <div class="contact-details__item">
+          <span>Email</span>
+          <a href="mailto:contact@lifefocus.fr">contact@lifefocus.fr</a>
+          <a class="editorial-link" href="mailto:contact@lifefocus.fr">ÉCRIRE →</a>
+        </div>
+      </aside>
+    </section>
+
+    <section class="contact-location page-shell" aria-labelledby="location-title">
+      <div class="contact-location__text">
+        <p class="editorial-label">LIEU</p>
+        <h2 id="location-title">Romans-sur-Isère</h2>
+        <address>
+          36 TER Rue André Chénier<br />
+          26100 Romans-sur-Isère<br />
+          Drôme, France
+        </address>
+        <a class="editorial-link" href={mapsLink} target="_blank" rel="noreferrer">
+          OUVRIR DANS GOOGLE MAPS →
+        </a>
+      </div>
+
+      <div class="contact-location__map">
+        <iframe
+          src={mapsEmbed}
+          title="Carte Google Maps de Life Focus à Romans-sur-Isère"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </section>
+  </article>
+
+  <script is:inline>
+    const status = new URLSearchParams(window.location.search).get("status");
+    if (status === "success" || status === "error") {
+      document
+        .querySelector(`[data-status-message="${status}"]`)
+        ?.removeAttribute("hidden");
+    }
+  </script>
+</BaseLayout>
+
+<style>
+  .contact-page {
+    overflow-x: clip;
+  }
+
+  .contact-hero {
+    display: grid;
+    gap: var(--space-xs);
+    max-width: 82rem;
+    padding-block: clamp(1rem, 2vw, 2rem) var(--space-lg);
+  }
+
+  .contact-hero h1,
+  .contact-main h2,
+  .contact-location h2 {
+    font-family: var(--font-editorial);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 0.98;
+  }
+
+  .contact-hero h1 {
+    max-width: 11ch;
+    font-size: clamp(3.2rem, 1.75rem + 4.8vw, 6.6rem);
+  }
+
+  .contact-hero p:not(.editorial-label),
+  .contact-details p,
+  .contact-location address {
+    max-width: var(--reading-max);
+    color: var(--color-muted);
+  }
+
+  .contact-main {
+    display: grid;
+    gap: var(--space-md);
+    align-items: start;
+    max-width: 82rem;
+    padding-block: var(--space-lg);
+  }
+
+  .contact-form,
+  .contact-details,
+  .contact-location__text {
+    display: grid;
+    gap: var(--space-sm);
+    min-width: 0;
+  }
+
+  .contact-form__intro,
+  .contact-details {
+    align-content: start;
+  }
+
+  .contact-main h2,
+  .contact-location h2 {
+    max-width: 12ch;
+    font-size: clamp(2.35rem, 1.5rem + 2.6vw, 4.6rem);
+  }
+
+  .contact-status {
+    padding-block: 0 1rem;
+    color: var(--color-text);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .contact-status--error {
+    color: var(--color-muted);
+  }
+
+  .contact-form__field {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .contact-form label,
+  .contact-details__item span {
+    color: var(--color-muted);
+    font-size: clamp(0.78rem, 0.74rem + 0.14vw, 0.9rem);
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .contact-form input,
+  .contact-form select,
+  .contact-form textarea {
+    width: 100%;
+    min-width: 0;
+    border: 0;
+    border-bottom: 1px solid var(--color-line);
+    border-radius: 0;
+    padding: 0 0 0.75rem;
+    background: transparent;
+    color: var(--color-text);
+    font-family: var(--font-interface);
+    font-size: clamp(1.03rem, 0.98rem + 0.18vw, 1.16rem);
+    line-height: 1.45;
+  }
+
+  .contact-form select {
+    cursor: pointer;
+  }
+
+  .contact-form textarea {
+    resize: vertical;
+  }
+
+  .contact-form input:focus,
+  .contact-form select:focus,
+  .contact-form textarea:focus {
+    outline: 2px solid var(--color-text);
+    outline-offset: 0.25rem;
+  }
+
+  .contact-form__trap {
+    position: absolute;
+    left: -100vw;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .contact-form__submit {
+    width: fit-content;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    cursor: pointer;
+  }
+
+  .contact-form__privacy {
+    max-width: var(--reading-max);
+    color: var(--color-muted);
+    font-size: var(--text-sm);
+    line-height: 1.55;
+  }
+
+  .contact-form__privacy a {
+    color: var(--color-text);
+    text-decoration-thickness: 0.06em;
+    text-underline-offset: 0.18em;
+  }
+
+  .contact-details {
+    padding-top: var(--space-xs);
+  }
+
+  .contact-details__title {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+
+  .contact-details__logo {
+    width: clamp(9rem, 18vw, 11.25rem);
+    height: auto;
+  }
+
+  .contact-details__item {
+    display: grid;
+    gap: 0.55rem;
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--color-line);
+  }
+
+  .contact-details__item > a:not(.editorial-link) {
+    color: var(--color-text);
+    font-size: var(--text-lead);
+    line-height: 1.2;
+    text-decoration: none;
+  }
+
+  .contact-location {
+    display: grid;
+    gap: var(--space-md);
+    align-items: start;
+    max-width: 82rem;
+    padding-block: var(--space-lg);
+    border-top: 1px solid var(--color-line);
+  }
+
+  .contact-location address {
+    font-style: normal;
+  }
+
+  .contact-location__map {
+    width: 100%;
+    background: var(--color-line);
+  }
+
+  .contact-location__map iframe {
+    display: block;
+    width: 100%;
+    min-height: clamp(20rem, 42vw, 34rem);
+    border: 0;
+  }
+
+  @media (min-width: 48rem) {
+    .contact-form {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-sm);
+    }
+
+    .contact-form__intro,
+    .contact-form__field--full,
+    .contact-status,
+    .contact-form__submit,
+    .contact-form__privacy {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (min-width: 72rem) {
+    .contact-main {
+      grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.38fr);
+      gap: clamp(3rem, 7vw, 7rem);
+    }
+
+    .contact-location {
+      grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
+      gap: clamp(3rem, 7vw, 7rem);
+    }
+  }
+</style>

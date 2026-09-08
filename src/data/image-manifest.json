@@ -1,0 +1,395 @@
+{
+  "imageRoot": "src/images",
+  "rules": {
+    "fileNaming": "Use lowercase filenames with hyphens, no spaces, no accents, no uppercase.",
+    "fixedSlots": "Each fixed slot must use the orientation documented for that slot.",
+    "galleries": "Gallery files use numeric filenames and must be sorted in natural numeric order.",
+    "ratioPolicy": "Original image ratios must never be altered destructively by the site."
+  },
+  "allowedGalleryExtensions": [".jpg", ".jpeg", ".png", ".webp", ".avif"],
+  "pages": {
+    "home": {
+      "folder": "src/images/home",
+      "images": [
+        {
+          "key": "hero-main",
+          "filename": "hero-main.jpg",
+          "orientation": "horizontal",
+          "required": true,
+          "usage": "Photographie principale horizontale du hero de la homepage."
+        },
+        {
+          "key": "hero-secondary",
+          "filename": "hero-secondary.jpg",
+          "orientation": "vertical",
+          "required": true,
+          "usage": "Photographie secondaire verticale du hero de la homepage."
+        },
+        {
+          "key": "intro",
+          "filename": "intro.jpg",
+          "orientation": "horizontal",
+          "required": true,
+          "usage": "Image editoriale compacte sous le hero."
+        },
+        {
+          "key": "wedding-main",
+          "filename": "wedding-main.jpg",
+          "orientation": "horizontal",
+          "required": true,
+          "usage": "Photographie horizontale principale de la section Mariage."
+        },
+        {
+          "key": "wedding-secondary",
+          "filename": "wedding-secondary.jpg",
+          "orientation": "vertical",
+          "required": true,
+          "usage": "Photographie verticale secondaire de la section Mariage."
+        },
+        {
+          "key": "family-pregnancy",
+          "filename": "family-pregnancy.jpg",
+          "orientation": "vertical",
+          "required": true,
+          "usage": "Photographie Grossesse dans la section Famille de la homepage."
+        },
+        {
+          "key": "family-birth",
+          "filename": "family-birth.jpg",
+          "orientation": "vertical",
+          "required": true,
+          "usage": "Photographie Naissance dans la section Famille de la homepage."
+        },
+        {
+          "key": "family-family",
+          "filename": "family-family.jpg",
+          "orientation": "horizontal",
+          "required": true,
+          "usage": "Photographie Famille horizontale dans la section Famille de la homepage."
+        },
+        {
+          "key": "alexis",
+          "filename": "alexis.jpg",
+          "orientation": "vertical",
+          "required": true,
+          "usage": "Portrait d'Alexis dans la section A propos de la homepage."
+        }
+      ],
+      "notes": "Les awards et les avis Mariages.net ne sont pas des slots photographiques de remplacement."
+    },
+    "mariage": {
+      "folder": "src/images/mariage",
+      "images": [
+        {
+          "key": "hero-main",
+          "filename": "hero-main.jpg",
+          "orientation": "horizontal",
+          "required": true,
+          "usage": "Photographie principale horizontale du hero Mariage."
+        },
+        {
+          "key": "hero-secondary",
+          "filename": "hero-secondary.jpg",
+          "orientation": "vertical",
+          "required": true,
+          "usage": "Photographie secondaire verticale du hero Mariage."
+        },
+        {
+          "key": "approach-main",
+          "filename": "approach-main.jpg",
+          "orientation": "horizontal",
+          "required": true,
+          "usage": "Photographie horizontale de la section Approche Mariage."
+        },
+        {
+          "key": "preparation-1",
+          "filename": "preparation-1.jpg",
+          "orientation": "horizontal",
+          "required": true,
+          "usage": "Image 1 du chapitre Preparatifs."
+        },
+        {
+          "key": "preparation-2",
+          "filename": "preparation-2.jpg",
+          "orientation": "vertical",
+          "required": true,
+          "usage": "Image 2 du chapitre Preparatifs."
+        },
+        {
+          "key": "preparation-3",
+          "filename": "preparation-3.jpg",
+          "orientation": "horizontal",
+          "required": true,
+          "usage": "Image 3 du chapitre Preparatifs."
+        },
+        {
+          "key": "preparation-4",
+          "filename": "preparation-4.jpg",
+          "orientation": "vertical",
+          "required": true,
+          "usage": "Image 4 du chapitre Preparatifs."
+        },
+        {
+          "key": "ceremony-1",
+          "filename": "ceremony-1.jpg",
+          "orientation": "horizontal",
+          "required": true,
+          "usage": "Image 1 du chapitre Ceremonie."
+        },
+        {
+          "key": "ceremony-2",
+          "filename": "ceremony-2.jpg",
+          "orientation": "vertical",
+          "required": true,
+          "usage": "Image 2 du chapitre Ceremonie."
+        },
+        {
+          "key": "ceremony-3",
+          "filename": "ceremony-3.jpg",
+          "orientation": "horizontal",
+          "required": true,
+          "usage": "Image 3 du chapitre Ceremonie."
+        },
+        {
+          "key": "ceremony-4",
+          "filename": "ceremony-4.jpg",
+          "orientation": "vertical",
+          "required": true,
+          "usage": "Image 4 du chapitre Ceremonie."
+        },
+        {
+          "key": "couple-1",
+          "filename": "couple-1.jpg",
+          "orientation": "horizontal",
+          "required": true,
+          "usage": "Image 1 du chapitre Couple."
+        },
+        {
+          "key": "couple-2",
+          "filename": "couple-2.jpg",
+          "orientation": "vertical",
+          "required": true,
+          "usage": "Image 2 du chapitre Couple."
+        },
+        {
+          "key": "couple-3",
+          "filename": "couple-3.jpg",
+          "orientation": "horizontal",
+          "required": true,
+          "usage": "Image 3 du chapitre Couple."
+        },
+        {
+          "key": "couple-4",
+          "filename": "couple-4.jpg",
+          "orientation": "vertical",
+          "required": true,
+          "usage": "Image 4 du chapitre Couple."
+        },
+        {
+          "key": "guests-1",
+          "filename": "guests-1.jpg",
+          "orientation": "horizontal",
+          "required": true,
+          "usage": "Image 1 du chapitre Invites."
+        },
+        {
+          "key": "guests-2",
+          "filename": "guests-2.jpg",
+          "orientation": "horizontal",
+          "required": true,
+          "usage": "Image 2 du chapitre Invites."
+        },
+        {
+          "key": "guests-3",
+          "filename": "guests-3.jpg",
+          "orientation": "vertical",
+          "required": true,
+          "usage": "Image 3 du chapitre Invites."
+        },
+        {
+          "key": "guests-4",
+          "filename": "guests-4.jpg",
+          "orientation": "vertical",
+          "required": true,
+          "usage": "Image 4 du chapitre Invites."
+        },
+        {
+          "key": "party-1",
+          "filename": "party-1.jpg",
+          "orientation": "horizontal",
+          "required": true,
+          "usage": "Image 1 du chapitre Soiree."
+        },
+        {
+          "key": "party-2",
+          "filename": "party-2.jpg",
+          "orientation": "vertical",
+          "required": true,
+          "usage": "Image 2 du chapitre Soiree."
+        },
+        {
+          "key": "party-3",
+          "filename": "party-3.jpg",
+          "orientation": "horizontal",
+          "required": true,
+          "usage": "Image 3 du chapitre Soiree."
+        },
+        {
+          "key": "party-4",
+          "filename": "party-4.jpg",
+          "orientation": "vertical",
+          "required": true,
+          "usage": "Image 4 du chapitre Soiree."
+        },
+        {
+          "key": "gallery",
+          "type": "gallery",
+          "folder": "src/images/mariage/gallery",
+          "ordering": "natural-numeric",
+          "allowedExtensions": [".jpg", ".jpeg", ".png", ".webp", ".avif"],
+          "orientation": "free",
+          "required": true,
+          "usage": "Galerie Mariage. Les fichiers doivent etre nommes 1.jpg, 2.jpg, 3.jpg, etc."
+        }
+      ],
+      "notes": "La page Mariage actuelle n'utilise pas d'image dans la section Accompagnement."
+    },
+    "grossesse": {
+      "folder": "src/images/grossesse",
+      "images": [
+        {
+          "key": "hero-main",
+          "filename": "hero-main.jpg",
+          "orientation": "vertical",
+          "required": true,
+          "usage": "Photographie principale du hero Grossesse."
+        },
+        {
+          "key": "approach-main",
+          "filename": "approach-main.jpg",
+          "orientation": "horizontal",
+          "required": true,
+          "usage": "Photographie de la section Approche Grossesse."
+        },
+        {
+          "key": "gallery",
+          "type": "gallery",
+          "folder": "src/images/grossesse/gallery",
+          "ordering": "natural-numeric",
+          "allowedExtensions": [".jpg", ".jpeg", ".png", ".webp", ".avif"],
+          "orientation": "free",
+          "required": true,
+          "usage": "Galerie Grossesse. Les fichiers doivent etre nommes 1.jpg, 2.jpg, 3.jpg, etc."
+        }
+      ]
+    },
+    "naissance": {
+      "folder": "src/images/naissance",
+      "images": [
+        {
+          "key": "hero-main",
+          "filename": "hero-main.jpg",
+          "orientation": "horizontal",
+          "required": true,
+          "usage": "Photographie principale du hero Naissance."
+        },
+        {
+          "key": "approach-main",
+          "filename": "approach-main.jpg",
+          "orientation": "horizontal",
+          "required": true,
+          "usage": "Photographie de la section Approche Naissance."
+        },
+        {
+          "key": "gallery",
+          "type": "gallery",
+          "folder": "src/images/naissance/gallery",
+          "ordering": "natural-numeric",
+          "allowedExtensions": [".jpg", ".jpeg", ".png", ".webp", ".avif"],
+          "orientation": "free",
+          "required": true,
+          "usage": "Galerie Naissance. Les fichiers doivent etre nommes 1.jpg, 2.jpg, 3.jpg, etc."
+        }
+      ]
+    },
+    "famille": {
+      "folder": "src/images/famille",
+      "images": [
+        {
+          "key": "hero-main",
+          "filename": "hero-main.jpg",
+          "orientation": "horizontal",
+          "required": true,
+          "usage": "Photographie principale du hero Famille."
+        },
+        {
+          "key": "approach-main",
+          "filename": "approach-main.jpg",
+          "orientation": "horizontal",
+          "required": true,
+          "usage": "Photographie de la section Approche Famille."
+        },
+        {
+          "key": "gallery",
+          "type": "gallery",
+          "folder": "src/images/famille/gallery",
+          "ordering": "natural-numeric",
+          "allowedExtensions": [".jpg", ".jpeg", ".png", ".webp", ".avif"],
+          "orientation": "free",
+          "required": true,
+          "usage": "Galerie Famille. Les fichiers doivent etre nommes 1.jpg, 2.jpg, 3.jpg, etc."
+        }
+      ]
+    },
+    "a-propos": {
+      "folder": "src/images/a-propos",
+      "images": [
+        {
+          "key": "alexis-main",
+          "filename": "alexis-main.jpg",
+          "orientation": "vertical",
+          "required": true,
+          "usage": "Portrait principal d'Alexis en ouverture de la page A propos."
+        },
+        {
+          "key": "alexis-secondary",
+          "filename": "alexis-secondary.jpg",
+          "orientation": "vertical",
+          "required": true,
+          "usage": "Image personnelle secondaire d'Alexis dans l'introduction."
+        },
+        {
+          "key": "experience",
+          "filename": "experience.jpg",
+          "orientation": "horizontal",
+          "required": true,
+          "usage": "Photographie horizontale de la section Experience."
+        },
+        {
+          "key": "guidance",
+          "filename": "guidance.jpg",
+          "orientation": "horizontal",
+          "required": true,
+          "usage": "Photographie horizontale de la section Accompagnement."
+        }
+      ]
+    },
+    "contact": {
+      "folder": null,
+      "images": [],
+      "notes": "La page Contact actuelle n'attend aucune photographie. Le logo et la carte ne sont pas des slots photographiques."
+    }
+  },
+  "folderStructure": [
+    "src/images/home",
+    "src/images/mariage",
+    "src/images/mariage/gallery",
+    "src/images/grossesse",
+    "src/images/grossesse/gallery",
+    "src/images/naissance",
+    "src/images/naissance/gallery",
+    "src/images/famille",
+    "src/images/famille/gallery",
+    "src/images/a-propos"
+  ]
+}

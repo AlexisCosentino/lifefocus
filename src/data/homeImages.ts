@@ -49,6 +49,10 @@ export const homeImages = {
     src: familyMain,
     alt: "Famille assise dehors, réunie dans un moment simple et naturel.",
   },
+  familySecondary: {
+    src: familySecondary,
+    alt: "Moment de famille simple et naturel en extérieur.",
+  },
   familyGrossesse: {
     src: weddingSecondary,
     alt: "Portrait vertical dans un champ de fleurs rouges.",

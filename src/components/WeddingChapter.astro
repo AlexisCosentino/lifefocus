@@ -1,0 +1,45 @@
+---
+import { Picture } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface ChapterImage {
+  src: ImageMetadata;
+  alt: string;
+}
+
+interface Props {
+  number: string;
+  label: string;
+  title: string;
+  text: string;
+  pattern: "a" | "b" | "c";
+  images: [ChapterImage, ChapterImage, ChapterImage, ChapterImage];
+}
+
+const { number, label, title, text, pattern, images } = Astro.props;
+---
+
+<section class:list={["wedding-chapter", `wedding-chapter--${pattern}`]} aria-labelledby={`chapter-${number}`}>
+  <div class="wedding-chapter__text">
+    <p class="editorial-label">{number} / {label}</p>
+    <h2 id={`chapter-${number}`}>{title}</h2>
+    <p>{text}</p>
+  </div>
+
+  <div class="wedding-chapter__images" aria-label={`Images ${label.toLowerCase()}`}>
+    {
+      images.map((image, index) => (
+        <figure class:list={["wedding-chapter__image", `wedding-chapter__image--${index + 1}`]}>
+          <Picture
+            src={image.src}
+            alt={image.alt}
+            widths={[360, 540, 720, 960, 1280]}
+            sizes="(min-width: 72rem) 34vw, calc(100vw - (2 * var(--page-padding)))"
+            formats={["avif", "webp"]}
+            loading="lazy"
+          />
+        </figure>
+      ))
+    }
+  </div>
+</section>

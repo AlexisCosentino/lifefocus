@@ -1,0 +1,121 @@
+---
+import { Picture } from "astro:assets";
+import type { FamilyServiceImage } from "../data/familyServices";
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  text: string;
+  image: FamilyServiceImage;
+}
+
+const { eyebrow, title, text, image } = Astro.props;
+---
+
+<section class="family-service-hero page-shell" aria-labelledby="family-service-title">
+  <div class="family-service-hero__text">
+    <p class="editorial-label">{eyebrow}</p>
+    <h1 id="family-service-title">{title}</h1>
+    <p>{text}</p>
+    <div class="family-service-hero__price" aria-label="Tarif">
+      <p>1 HEURE</p>
+      <strong>250 €</strong>
+      <span>Sans limite de photos livrées</span>
+    </div>
+  </div>
+
+  <figure class="family-service-hero__image">
+    <Picture
+      src={image.src}
+      alt={image.alt}
+      widths={[540, 720, 960, 1280, 1600]}
+      sizes="(min-width: 72rem) 52vw, calc(100vw - (2 * var(--page-padding)))"
+      formats={["avif", "webp"]}
+      loading="eager"
+      decoding="sync"
+      fetchpriority="high"
+    />
+  </figure>
+</section>
+
+<style>
+  .family-service-hero {
+    display: grid;
+    gap: var(--space-md);
+    align-items: end;
+    max-width: 100rem;
+    padding-block: clamp(1rem, 2vw, 2rem) var(--space-lg);
+  }
+
+  .family-service-hero__text {
+    display: grid;
+    gap: var(--space-xs);
+    min-width: 0;
+  }
+
+  .family-service-hero h1 {
+    max-width: 11ch;
+    font-family: var(--font-editorial);
+    font-size: clamp(3.1rem, 1.65rem + 5vw, 7rem);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 0.96;
+  }
+
+  .family-service-hero__text > p:not(.editorial-label) {
+    max-width: var(--reading-max);
+    color: var(--color-muted);
+  }
+
+  .family-service-hero__price {
+    display: grid;
+    gap: 0.25rem;
+    margin-top: var(--space-sm);
+    padding-top: var(--space-xs);
+    border-top: 1px solid var(--color-line);
+  }
+
+  .family-service-hero__price p,
+  .family-service-hero__price span {
+    color: var(--color-muted);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 1.35;
+    text-transform: uppercase;
+  }
+
+  .family-service-hero__price strong {
+    font-family: var(--font-editorial);
+    font-size: clamp(3rem, 1.8rem + 4vw, 5.8rem);
+    font-weight: 400;
+    line-height: 0.95;
+  }
+
+  .family-service-hero__image {
+    width: 100%;
+    margin: 0;
+    background: var(--color-line);
+  }
+
+  .family-service-hero__image :global(img) {
+    width: 100%;
+    height: auto;
+  }
+
+  @media (min-width: 72rem) {
+    .family-service-hero {
+      grid-template-columns: minmax(0, 0.55fr) minmax(0, 1fr);
+      gap: clamp(3rem, 7vw, 8rem);
+    }
+
+    .family-service-hero__text {
+      padding-bottom: clamp(2rem, 5vw, 5rem);
+    }
+
+    .family-service-hero__image {
+      width: min(58vw, 58rem);
+      justify-self: end;
+    }
+  }
+</style>

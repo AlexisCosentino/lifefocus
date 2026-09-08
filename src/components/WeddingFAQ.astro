@@ -1,0 +1,72 @@
+---
+const questions = [
+  {
+    question: "Combien de temps faut-il prévoir pour les photos de couple ?",
+    answer:
+      "Le temps exact dépend de votre journée et du lieu. L'idée est de garder un moment simple, sans transformer le mariage en longue séance photo.",
+  },
+  {
+    question: "Est-ce que vous guidez les couples pendant la séance ?",
+    answer:
+      "Oui, quand c'est utile. Le reste du temps, l'approche reste naturelle pour garder des gestes, des regards et une présence vraie.",
+  },
+  {
+    question: "Photographiez-vous les préparatifs ?",
+    answer:
+      "Oui, selon la formule choisie et l'organisation de la journée. Les préparatifs peuvent apporter une part très personnelle au reportage.",
+  },
+  {
+    question: "Est-ce possible de faire des photos de groupes ?",
+    answer:
+      "Oui. Elles sont préparées simplement en amont pour rester efficaces et ne pas prendre trop de place dans le déroulé.",
+  },
+  {
+    question: "Vous déplacez-vous hors de la Drôme ?",
+    answer:
+      "Oui, selon les dates et les conditions du projet. Les modalités de déplacement seront confirmées directement lors de l'échange.",
+  },
+  {
+    question: "Quand recevons-nous les photos ?",
+    answer:
+      "Le délai final dépend de la saison et du volume d'images. Il sera précisé avec Alexis avant la réservation.",
+  },
+  {
+    question: "Les photos sont-elles retouchées ?",
+    answer:
+      "Les images livrées sont triées et travaillées dans une cohérence de rendu. L'objectif reste naturel, intemporel et fidèle à l'atmosphère.",
+  },
+  {
+    question: "Comment réserver une date ?",
+    answer:
+      "Le plus simple est d'écrire via la page contact avec la date, le lieu et les premiers éléments connus de votre journée.",
+  },
+  {
+    question: "Proposez-vous des albums ?",
+    answer:
+      "Cette option peut être discutée selon vos envies. Les supports définitifs seront détaillés directement avec Alexis.",
+  },
+  {
+    question: "Travaillez-vous seul le jour du mariage ?",
+    answer:
+      "L'organisation dépend du format du mariage et de ce qu'il faut couvrir. Ce point sera clarifié avant validation de la formule.",
+  },
+];
+---
+
+<section class="wedding-faq page-shell" aria-labelledby="faq-title">
+  <div class="wedding-faq__intro">
+    <p class="editorial-label">10 / QUESTIONS</p>
+    <h2 id="faq-title">Avant de réserver.</h2>
+  </div>
+
+  <div class="wedding-faq__items">
+    {
+      questions.map((item) => (
+        <details>
+          <summary>{item.question}</summary>
+          <p>{item.answer}</p>
+        </details>
+      ))
+    }
+  </div>
+</section>

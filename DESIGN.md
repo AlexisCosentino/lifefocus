@@ -208,14 +208,17 @@ Les labels de categories Famille ne doivent jamais etre places sur les photograp
 
 ## 8. Navigation et logo
 
-Le header doit rester discret mais lisible :
+Le header doit donner une presence claire a la marque sans rendre la navigation dominante :
 
 - logo officiel Life Focus noir sur fond clair ;
-- navigation a droite : MARIAGE, FAMILLE, A PROPOS, CONTACT ;
+- logo plus fort que les liens de navigation ;
+- navigation a droite retenue : MARIAGE, FAMILLE, A PROPOS, CONTACT ;
 - une seule ligne en desktop ;
-- menu simple en mobile ;
+- composition desktop alignee visuellement avec la grille principale / hero ;
+- menu compact en mobile ;
 - pas de bouton CTA massif ;
-- pas de sticky behavior sans raison d'usage.
+- pas de sticky behavior sans raison d'usage ;
+- pas de bordure, d'ombre ou d'effet decoratif.
 
 Le logo officiel doit remplacer l'identite de marque tapee lorsque l'asset fonctionne proprement. Preserver ses proportions et ne pas l'utiliser comme decoration repetee.
 
@@ -298,7 +301,9 @@ Utiliser exactement trois photographies, avec une image dominante et deux images
 
 ### A propos
 
-La section sombre pleine largeur est approuvee.
+La section sombre A propos est approuvee.
+
+Elle peut etre traitee comme une grande interruption sombre pleine largeur, ou comme un large panneau editorial charbon contenu, pose sur l'arriere-plan ivoire avec de l'espace autour. Le point important est le contraste sombre fort et maitrise, pas necessairement une largeur viewport complete.
 
 Conserver :
 
@@ -313,6 +318,8 @@ Le portrait conserve son ratio source. Ne pas rendre "Alexis Cosentino" inutilem
 
 Les Wedding Awards Mariages.net officiels peuvent etre affiches.
 
+La composition de confiance approuvee associe les distinctions officielles et des preuves de reputation reelles, comme les avis Mariages.net. Sur desktop, awards et retours humains peuvent etre presentes cote a cote dans une mise en page editoriale retenue.
+
 Regles :
 
 - ne jamais les redessiner ;
@@ -320,7 +327,8 @@ Regles :
 - ne pas les recadrer ;
 - ne pas ajouter d'ombre ;
 - ne pas les enfermer dans des cartes ;
-- ne pas inventer d'annee, avis, note ou citation.
+- ne pas inventer d'annee, avis, note ou citation ;
+- ne jamais afficher de faux avis ou de donnees de reputation non verifiees.
 
 Texte approuve :
 
@@ -335,6 +343,35 @@ Conserver le concept final :
 - `ECRIVEZ-MOI ->`
 
 La conclusion doit rester forte sans devenir une affiche.
+
+### Footer
+
+Le footer doit agir comme une signature de marque calme, pas comme une nouvelle section promotionnelle.
+
+Utiliser :
+
+- logo officiel Life Focus a une taille clairement lisible ;
+- information pratique minimale ;
+- "Photographe de mariage" ;
+- "Romans-sur-Isere - Drome" ;
+- Instagram ;
+- Contact ;
+- Mentions legales.
+
+Le footer doit conserver une typographie retenue, avec un espace genereux mais controle.
+
+Ne pas ajouter :
+
+- fond colore arbitraire ;
+- newsletter ;
+- icones sociales ;
+- cartes ;
+- grandes promesses marketing ;
+- decoration graphique.
+
+### Homepage reference
+
+La homepage approuvee est la reference visuelle principale pour les futures pages services. Les nouvelles pages doivent heriter de sa typographie, de sa logique d'espacement, de son traitement des images, de son asymetrie, de son interface monochrome et de son contraste clair/sombre controle, sans copier mecaniquement ses sections.
 
 ## 10. Responsive
 
