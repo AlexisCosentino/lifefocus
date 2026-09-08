@@ -215,21 +215,54 @@ const pageDescription =
         </h2>
       </div>
 
-      <div class="trust__copy">
-        <p class="trust__source">Wedding Awards — Mariages.net</p>
-        <p>Une reconnaissance qui vient avant tout des couples que j'ai accompagnés.</p>
-      </div>
+      <div class="trust__proof">
+        <div class="trust__awards">
+          <ol class="awards" aria-label="Wedding Awards Mariages.net">
+            {
+              awardImages.map((award) => (
+                <li>
+                  <span>{award.year}</span>
+                  <Image src={award.src} alt={award.alt} width={112} loading="lazy" />
+                </li>
+              ))
+            }
+          </ol>
 
-      <ol class="awards" aria-label="Wedding Awards Mariages.net">
-        {
-          awardImages.map((award) => (
-            <li>
-              <span>{award.year}</span>
-              <Image src={award.src} alt={award.alt} width={112} loading="lazy" />
-            </li>
-          ))
-        }
-      </ol>
+          <div class="trust__copy">
+            <p class="trust__source">Wedding Awards — Mariages.net</p>
+            <p>Une reconnaissance qui vient avant tout des couples que j'ai accompagnés.</p>
+          </div>
+        </div>
+
+        <aside class="trust__reviews" aria-label="Avis Mariages.net">
+          <script
+            is:inline
+            src="https://cdn1.mariages.net/js/wp-widget.js?symfnw-FR48-1-20260907-006-0_www_m_"
+          ></script>
+          <div id="wp-widget-reviews">
+            <div id="wp-widget-preview">
+              Lire
+              <a
+                href="https://www.mariages.net/photo-mariage/life-focus-photographe--e180967/avis"
+                rel="nofollow"
+              >
+                nos avis
+              </a>
+              à&nbsp;
+              <a href="https://www.mariages.net" rel="nofollow">
+                <img
+                  src="https://cdn1.mariages.net/assets/img/logos/gen_logoHeader.svg"
+                  height="20"
+                  alt="Mariages.net"
+                />
+              </a>
+            </div>
+          </div>
+          <script is:inline>
+            wpShowReviews(180967, "white");
+          </script>
+        </aside>
+      </div>
     </section>
 
     <section class="contact page-shell" aria-labelledby="contact-title">
@@ -513,9 +546,8 @@ const pageDescription =
   }
 
   .about {
-    margin-block: var(--space-lg);
-    padding-block: var(--space-lg);
-    background: var(--surface-dark);
+    margin-block: clamp(5rem, 8vw, 8rem);
+    padding-block: 0;
     color: var(--color-background);
   }
 
@@ -523,6 +555,11 @@ const pageDescription =
     display: grid;
     gap: var(--space-sm);
     align-items: center;
+    width: min(calc(100% - (var(--page-padding) * 1.5)), 82rem);
+    margin-right: var(--page-padding);
+    margin-left: auto;
+    padding-block: clamp(3.5rem, 6vw, 5.5rem);
+    background: var(--surface-dark);
   }
 
   .about__image {
@@ -550,6 +587,7 @@ const pageDescription =
   .trust {
     display: grid;
     gap: var(--space-sm);
+    padding-block: clamp(4rem, 6vw, 6rem);
   }
 
   .trust__heading {
@@ -566,11 +604,60 @@ const pageDescription =
     text-transform: uppercase;
   }
 
+  .trust__proof {
+    display: grid;
+    gap: var(--space-md);
+    align-items: start;
+    margin-top: var(--space-sm);
+  }
+
+  .trust__awards {
+    display: grid;
+    gap: var(--space-sm);
+    min-width: 0;
+  }
+
+  .trust__reviews {
+    min-width: 0;
+    padding-top: 0.35rem;
+  }
+
+  #wp-widget-reviews {
+    width: 100%;
+    max-width: 34rem;
+    min-height: 12rem;
+    color: var(--color-text);
+    font-family: var(--font-interface);
+    font-size: var(--text-sm);
+  }
+
+  #wp-widget-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    align-items: center;
+    color: var(--color-muted);
+    line-height: 1.5;
+  }
+
+  #wp-widget-preview a {
+    color: var(--color-text);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+  }
+
+  #wp-widget-preview img {
+    display: inline-block;
+    width: auto;
+    height: 1.25rem;
+    vertical-align: middle;
+  }
+
   .awards {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-sm) 1.25rem;
-    margin: var(--space-sm) 0 0;
+    margin: 0;
     padding: 0;
     list-style: none;
   }
@@ -598,7 +685,8 @@ const pageDescription =
   .contact {
     display: grid;
     gap: var(--space-sm);
-    min-height: clamp(20rem, 34vw, 32rem);
+    min-height: clamp(15rem, 24vw, 22rem);
+    padding-block: clamp(3.5rem, 5vw, 5.5rem);
     align-content: center;
   }
 
@@ -822,7 +910,7 @@ const pageDescription =
     }
 
     .about__image {
-      width: min(100%, 34rem);
+      width: min(100%, 28rem);
       justify-self: center;
     }
 
@@ -831,18 +919,47 @@ const pageDescription =
     }
 
     .trust {
-      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
-      align-items: end;
+      grid-template-columns: minmax(0, 0.72fr) minmax(18rem, 0.58fr);
+      gap: var(--space-sm) clamp(3rem, 6vw, 6rem);
+      align-items: stretch;
+    }
+
+    .trust__heading {
+      grid-column: 1;
+      grid-row: 1;
+      max-width: 42rem;
     }
 
     .trust__copy {
-      align-self: end;
-      padding-bottom: 0.4rem;
+      max-width: 28rem;
+      padding-bottom: 0;
+    }
+
+    .trust__proof {
+      display: contents;
+    }
+
+    .trust__awards {
+      grid-column: 1;
+      grid-row: 2;
+      align-self: start;
     }
 
     .awards {
-      grid-column: 1 / -1;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .trust__reviews {
+      grid-column: 2;
+      grid-row: 1 / 3;
+      align-self: stretch;
+      justify-self: stretch;
+      padding-top: 0;
+    }
+
+    #wp-widget-reviews {
+      max-width: none;
+      min-height: 100%;
     }
 
     .contact {
