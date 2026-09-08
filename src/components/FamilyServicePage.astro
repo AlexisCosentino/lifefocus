@@ -21,6 +21,7 @@ const { service } = Astro.props;
     title={service.hero.title}
     text={service.hero.text}
     image={service.hero.image}
+    secondaryImage={service.hero.secondaryImage}
   />
 
   <section class="family-service-approach page-shell" aria-labelledby="family-approach-title">
@@ -81,7 +82,7 @@ const { service } = Astro.props;
   .family-service-contact h2 {
     max-width: 12ch;
     font-family: var(--font-editorial);
-    font-size: clamp(2.45rem, 1.55rem + 3vw, 5rem);
+    font-size: clamp(2.25rem, 1.45rem + 2.45vw, 4.25rem);
     font-weight: 400;
     letter-spacing: 0;
     line-height: 0.98;
@@ -102,8 +103,8 @@ const { service } = Astro.props;
     gap: var(--space-sm);
     align-content: center;
     max-width: 76rem;
-    min-height: clamp(14rem, 22vw, 20rem);
-    padding-block: var(--space-lg);
+    min-height: clamp(12rem, 18vw, 17rem);
+    padding-block: clamp(4rem, 6vw, 6rem);
   }
 
   @media (min-width: 72rem) {

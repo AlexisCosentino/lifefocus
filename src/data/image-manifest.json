@@ -260,9 +260,16 @@
         {
           "key": "hero-main",
           "filename": "hero-main.jpg",
+          "orientation": "horizontal",
+          "required": true,
+          "usage": "Photographie horizontale principale du hero Grossesse."
+        },
+        {
+          "key": "hero-secondary",
+          "filename": "hero-secondary.jpg",
           "orientation": "vertical",
           "required": true,
-          "usage": "Photographie principale du hero Grossesse."
+          "usage": "Photographie verticale secondaire du hero Grossesse."
         },
         {
           "key": "approach-main",
@@ -291,7 +298,14 @@
           "filename": "hero-main.jpg",
           "orientation": "horizontal",
           "required": true,
-          "usage": "Photographie principale du hero Naissance."
+          "usage": "Photographie horizontale principale du hero Naissance."
+        },
+        {
+          "key": "hero-secondary",
+          "filename": "hero-secondary.jpg",
+          "orientation": "vertical",
+          "required": true,
+          "usage": "Photographie verticale secondaire du hero Naissance."
         },
         {
           "key": "approach-main",
@@ -320,7 +334,14 @@
           "filename": "hero-main.jpg",
           "orientation": "horizontal",
           "required": true,
-          "usage": "Photographie principale du hero Famille."
+          "usage": "Photographie horizontale principale du hero Famille."
+        },
+        {
+          "key": "hero-secondary",
+          "filename": "hero-secondary.jpg",
+          "orientation": "vertical",
+          "required": true,
+          "usage": "Photographie verticale secondaire du hero Famille."
         },
         {
           "key": "approach-main",

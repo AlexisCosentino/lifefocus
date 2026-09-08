@@ -7,12 +7,39 @@ interface Props {
   title: string;
   text: string;
   image: FamilyServiceImage;
+  secondaryImage: FamilyServiceImage;
 }
 
-const { eyebrow, title, text, image } = Astro.props;
+const { eyebrow, title, text, image, secondaryImage } = Astro.props;
 ---
 
-<section class="family-service-hero page-shell" aria-labelledby="family-service-title">
+<section class="family-service-hero" aria-labelledby="family-service-title">
+  <div class="family-service-hero__visuals">
+    <figure class="family-service-hero__image family-service-hero__image--main">
+      <Picture
+        src={image.src}
+        alt={image.alt}
+        widths={[540, 720, 960, 1280, 1600]}
+        sizes="(min-width: 72rem) 58vw, calc(100vw - (2 * var(--page-padding)))"
+        formats={["avif", "webp"]}
+        loading="eager"
+        decoding="sync"
+        fetchpriority="high"
+      />
+    </figure>
+
+    <figure class="family-service-hero__image family-service-hero__image--secondary">
+      <Picture
+        src={secondaryImage.src}
+        alt={secondaryImage.alt}
+        widths={[360, 540, 720, 960]}
+        sizes="(min-width: 72rem) 20vw, 48vw"
+        formats={["avif", "webp"]}
+        loading="eager"
+      />
+    </figure>
+  </div>
+
   <div class="family-service-hero__text">
     <p class="editorial-label">{eyebrow}</p>
     <h1 id="family-service-title">{title}</h1>
@@ -23,43 +50,73 @@ const { eyebrow, title, text, image } = Astro.props;
       <span>Sans limite de photos livrées</span>
     </div>
   </div>
-
-  <figure class="family-service-hero__image">
-    <Picture
-      src={image.src}
-      alt={image.alt}
-      widths={[540, 720, 960, 1280, 1600]}
-      sizes="(min-width: 72rem) 52vw, calc(100vw - (2 * var(--page-padding)))"
-      formats={["avif", "webp"]}
-      loading="eager"
-      decoding="sync"
-      fetchpriority="high"
-    />
-  </figure>
 </section>
 
 <style>
   .family-service-hero {
     display: grid;
-    gap: var(--space-md);
-    align-items: end;
-    max-width: 100rem;
-    padding-block: clamp(1rem, 2vw, 2rem) var(--space-lg);
-  }
-
-  .family-service-hero__text {
-    display: grid;
-    gap: var(--space-xs);
+    align-items: start;
+    width: min(92vw, 82rem);
+    margin-inline: auto;
+    padding-block: clamp(0.75rem, 1.8vw, 1.5rem) clamp(4.5rem, 7vw, 6.5rem);
+    isolation: isolate;
     min-width: 0;
   }
 
+  .family-service-hero__visuals {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    align-items: end;
+    isolation: isolate;
+    min-width: 0;
+  }
+
+  .family-service-hero__image {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    background: var(--color-line);
+  }
+
+  .family-service-hero__image--main {
+    z-index: 1;
+  }
+
+  .family-service-hero__image--secondary {
+    z-index: 2;
+    width: min(48vw, 15rem);
+    margin-top: calc(var(--space-sm) * -1);
+    margin-left: auto;
+  }
+
+  .family-service-hero__image :global(img) {
+    width: 100%;
+    height: auto;
+  }
+
+  .family-service-hero__text {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    gap: 0.85rem;
+    width: min(100%, 37rem);
+    margin-top: clamp(-3.4rem, -8vw, -1.8rem);
+    margin-left: auto;
+    padding: clamp(1.35rem, 2.35vw, 2.35rem);
+    background: var(--color-surface-soft);
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+
   .family-service-hero h1 {
-    max-width: 11ch;
+    max-width: 12ch;
     font-family: var(--font-editorial);
-    font-size: clamp(3.1rem, 1.65rem + 5vw, 7rem);
+    font-size: clamp(2.55rem, 1.55rem + 3.15vw, 4.85rem);
     font-weight: 400;
     letter-spacing: 0;
-    line-height: 0.96;
+    line-height: 0.94;
+    overflow-wrap: break-word;
   }
 
   .family-service-hero__text > p:not(.editorial-label) {
@@ -70,7 +127,7 @@ const { eyebrow, title, text, image } = Astro.props;
   .family-service-hero__price {
     display: grid;
     gap: 0.25rem;
-    margin-top: var(--space-sm);
+    margin-top: 0.45rem;
     padding-top: var(--space-xs);
     border-top: 1px solid var(--color-line);
   }
@@ -87,35 +144,46 @@ const { eyebrow, title, text, image } = Astro.props;
 
   .family-service-hero__price strong {
     font-family: var(--font-editorial);
-    font-size: clamp(3rem, 1.8rem + 4vw, 5.8rem);
+    font-size: clamp(2.5rem, 1.55rem + 3vw, 4.4rem);
     font-weight: 400;
     line-height: 0.95;
   }
 
-  .family-service-hero__image {
-    width: 100%;
-    margin: 0;
-    background: var(--color-line);
-  }
-
-  .family-service-hero__image :global(img) {
-    width: 100%;
-    height: auto;
-  }
-
   @media (min-width: 72rem) {
     .family-service-hero {
-      grid-template-columns: minmax(0, 0.55fr) minmax(0, 1fr);
-      gap: clamp(3rem, 7vw, 8rem);
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      padding-bottom: clamp(5.5rem, 8vw, 7.5rem);
+    }
+
+    .family-service-hero__visuals {
+      grid-column: 4 / 13;
+      grid-row: 1;
+      grid-template-columns: repeat(10, minmax(0, 1fr));
+      align-items: start;
+      justify-self: end;
+      width: min(64vw, 54rem);
+    }
+
+    .family-service-hero__image--main {
+      grid-column: 1 / 9;
+      grid-row: 1;
+    }
+
+    .family-service-hero__image--secondary {
+      grid-column: 8 / 11;
+      grid-row: 1;
+      align-self: start;
+      width: 100%;
+      margin: clamp(3rem, 5.5vw, 4.75rem) 0 0 calc(var(--space-sm) * -0.55);
     }
 
     .family-service-hero__text {
-      padding-bottom: clamp(2rem, 5vw, 5rem);
-    }
-
-    .family-service-hero__image {
-      width: min(58vw, 58rem);
-      justify-self: end;
+      grid-column: 1 / 6;
+      grid-row: 1;
+      align-self: start;
+      margin-top: clamp(2rem, 4.5vw, 3.75rem);
+      margin-right: 0;
+      margin-left: 0;
     }
   }
 </style>

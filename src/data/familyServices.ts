@@ -36,6 +36,7 @@ export interface FamilyServicePageData {
     title: string;
     text: string;
     image: FamilyServiceImage;
+    secondaryImage: FamilyServiceImage;
   };
   approach: {
     label: string;
@@ -91,7 +92,8 @@ export const familyServices = {
       title: "Photographe grossesse dans la Drôme",
       text:
         "Une séance simple et naturelle pour garder une trace de cette période, seule, en couple ou en famille.",
-      image: image(homeImages.weddingSecondary.src, "Portrait de grossesse naturel en extérieur.", "portrait"),
+      image: image(homeImages.breathing.src, "Portrait naturel dans une lumière douce.", "wide"),
+      secondaryImage: image(homeImages.weddingSecondary.src, "Portrait de grossesse naturel en extérieur.", "portrait"),
     },
     approach: {
       label: "01 / APPROCHE",
@@ -166,6 +168,7 @@ export const familyServices = {
       text:
         "Des images des premiers jours, à votre rythme, sans transformer ce moment en séance figée.",
       image: image(homeImages.familySecondary.src, "Moment naturel autour d'une jeune famille.", "wide"),
+      secondaryImage: image(homeImages.weddingSecondary.src, "Portrait vertical dans un champ fleuri.", "portrait"),
     },
     approach: {
       label: "01 / APPROCHE",
@@ -240,6 +243,7 @@ export const familyServices = {
       text:
         "Des images vivantes de votre famille, sans demander aux enfants de rester immobiles pour la photo.",
       image: image(homeImages.familyMain.src, "Famille photographiée dehors dans un moment vivant.", "wide"),
+      secondaryImage: image(homeImages.weddingSecondary.src, "Portrait vertical dans un champ fleuri.", "portrait"),
     },
     approach: {
       label: "01 / APPROCHE",
