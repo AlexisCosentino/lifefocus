@@ -1,21 +1,14 @@
 ---
-import { Image } from "astro:assets";
-import logoBlack from "../assets/brand/logo_life_focus_black.png";
+import logoLifeFocus from "../assets/brand/LIFE FOCUS logo.svg?url";
 
 const familyItems = [
-  { label: "GROSSESSE", href: "/grossesse/" },
-  { label: "NAISSANCE", href: "/naissance/" },
-  { label: "FAMILLE", href: "/famille/" },
-];
-
-const secondaryNavItems = [
-  { label: "CONSEILS", href: "/conseils/" },
-  { label: "À PROPOS", href: "/a-propos/" },
-  { label: "CONTACT", href: "/contact/" },
+  { number: "01", label: "Grossesse", href: "/grossesse/" },
+  { number: "02", label: "Naissance", href: "/naissance/" },
+  { number: "03", label: "Famille", href: "/famille/" },
 ];
 
 const clientArea = {
-  label: "ESPACE CLIENTS \u2197",
+  label: "Espace client \u2197",
   href: "https://alexis-cosentino.lumys.photo/",
 };
 ---
@@ -23,25 +16,33 @@ const clientArea = {
 <header class="site-header">
   <div class="site-header__inner page-shell">
     <a class="site-identity" href="/" aria-label="Life Focus, accueil">
-      <Image
+      <img
         class="site-identity__logo"
-        src={logoBlack}
+        src={logoLifeFocus}
         alt="Life Focus"
-        width={150}
+        width="1672"
+        height="941"
         loading="eager"
         decoding="sync"
       />
     </a>
 
     <nav class="site-nav" aria-label="Navigation principale">
-      <a href="/mariage/">MARIAGE</a>
+      <a href="/mariage/">Mariage</a>
       <details class="site-nav__group">
-        <summary class="site-nav__summary">FAMILLE</summary>
-        <div class="site-nav__submenu">
-          {familyItems.map((item) => <a href={item.href}>{item.label}</a>)}
+        <summary class="site-nav__summary">Famille</summary>
+        <div class="site-nav__panel" aria-label="Choisir une séance famille">
+          {familyItems.map((item) => (
+            <a class="site-nav__panel-link" href={item.href}>
+              <span>{item.number}</span>
+              <strong>{item.label}</strong>
+            </a>
+          ))}
         </div>
       </details>
-      {secondaryNavItems.map((item) => <a href={item.href}>{item.label}</a>)}
+      <a href="/a-propos/">À propos</a>
+      <a href="/conseils/">Conseils</a>
+      <a href="/contact/">Contact</a>
       <a
         class="site-nav__utility"
         href={clientArea.href}
@@ -53,16 +54,23 @@ const clientArea = {
     </nav>
 
     <details class="site-menu">
-      <summary class="site-menu__summary">MENU</summary>
+      <summary class="site-menu__summary">Menu</summary>
       <nav class="site-menu__panel" aria-label="Navigation mobile">
-        <a href="/mariage/">MARIAGE</a>
+        <a href="/mariage/">Mariage</a>
         <details class="site-menu__group">
-          <summary>FAMILLE</summary>
-          <div>
-            {familyItems.map((item) => <a href={item.href}>{item.label}</a>)}
+          <summary>Famille</summary>
+          <div class="site-menu__family">
+            {familyItems.map((item) => (
+              <a href={item.href}>
+                <span>{item.number}</span>
+                <strong>{item.label}</strong>
+              </a>
+            ))}
           </div>
         </details>
-        {secondaryNavItems.map((item) => <a href={item.href}>{item.label}</a>)}
+        <a href="/a-propos/">À propos</a>
+        <a href="/conseils/">Conseils</a>
+        <a href="/contact/">Contact</a>
         <a
           class="site-menu__utility"
           href={clientArea.href}

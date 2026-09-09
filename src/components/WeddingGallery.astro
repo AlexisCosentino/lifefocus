@@ -1,6 +1,7 @@
 ---
-import { Picture } from "astro:assets";
 import type { ImageMetadata } from "astro";
+
+import EditorialGallery from "./EditorialGallery.astro";
 
 interface GalleryImage {
   src: ImageMetadata;
@@ -15,26 +16,9 @@ interface Props {
 const { images } = Astro.props;
 ---
 
-<section class="wedding-gallery" aria-labelledby="gallery-title">
-  <div class="wedding-gallery__intro page-shell">
-    <p class="editorial-label">09 / GALERIE</p>
-    <h2 id="gallery-title">Quelques fragments pour sentir le rythme.</h2>
-  </div>
-
-  <div class="wedding-gallery__grid">
-    {
-      images.map((image, index) => (
-        <figure class:list={["wedding-gallery__item", `wedding-gallery__item--${image.size}`]}>
-          <Picture
-            src={image.src}
-            alt={image.alt}
-            widths={[320, 480, 640, 840, 1080, 1280]}
-            sizes="(min-width: 72rem) 31vw, calc(100vw - (2 * var(--page-padding)))"
-            formats={["avif", "webp"]}
-            loading={index < 2 ? "eager" : "lazy"}
-          />
-        </figure>
-      ))
-    }
-  </div>
-</section>
+<EditorialGallery
+  eyebrow="09 / GALERIE"
+  title="Quelques fragments pour sentir le rythme."
+  titleId="gallery-title"
+  images={images}
+/>

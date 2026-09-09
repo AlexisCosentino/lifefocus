@@ -13,20 +13,27 @@ interface Props {
   title: string;
   text: string;
   pattern: "a" | "b" | "c";
-  images: [ChapterImage, ChapterImage, ChapterImage, ChapterImage];
+  images: readonly ChapterImage[];
 }
 
 const { number, label, title, text, pattern, images } = Astro.props;
+const imageCount = images.length;
 ---
 
-<section class:list={["wedding-chapter", `wedding-chapter--${pattern}`]} aria-labelledby={`chapter-${number}`}>
+<section
+  class:list={["wedding-chapter", `wedding-chapter--${pattern}`, `wedding-chapter--${imageCount}`]}
+  aria-labelledby={`chapter-${number}`}
+>
   <div class="wedding-chapter__text">
     <p class="editorial-label">{number} / {label}</p>
     <h2 id={`chapter-${number}`}>{title}</h2>
     <p>{text}</p>
   </div>
 
-  <div class="wedding-chapter__images" aria-label={`Images ${label.toLowerCase()}`}>
+  <div
+    class:list={["wedding-chapter__images", `wedding-chapter__images--${imageCount}`]}
+    aria-label={`Images ${label.toLowerCase()}`}
+  >
     {
       images.map((image, index) => (
         <figure class:list={["wedding-chapter__image", `wedding-chapter__image--${index + 1}`]}>

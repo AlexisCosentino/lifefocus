@@ -7,6 +7,8 @@ import { awardImages, homeImages } from "../data/homeImages";
 const pageTitle = "Life Focus — Photographe de mariage et de famille dans la Drôme";
 const pageDescription =
   "Life Focus, photographie de mariage et de famille par Alexis Cosentino à Romans-sur-Isère, dans la Drôme.";
+const mariagesNetReviewsUrl =
+  "https://www.mariages.net/photo-mariage/life-focus-photographe--e180967/avis";
 ---
 
 <BaseLayout
@@ -132,47 +134,53 @@ const pageDescription =
         <div class="family__visuals" aria-label="Univers photographiques famille">
           <div class="family-item family-item--grossesse">
             <a class="family-label" href="/grossesse/">Grossesse</a>
-            <figure class="family-media media">
-              <Picture
-                class="media__image"
-                src={homeImages.familyGrossesse.src}
-                alt={homeImages.familyGrossesse.alt}
-                widths={[360, 540, 720, 960]}
-                sizes="(min-width: 72rem) 19vw, 72vw"
-                formats={["avif", "webp"]}
-                loading="lazy"
-              />
-            </figure>
+            <a class="family-media-link" href="/grossesse/" aria-label="Découvrir la séance grossesse">
+              <figure class="family-media media">
+                <Picture
+                  class="media__image"
+                  src={homeImages.familyGrossesse.src}
+                  alt={homeImages.familyGrossesse.alt}
+                  widths={[360, 540, 720, 960]}
+                  sizes="(min-width: 72rem) 19vw, 72vw"
+                  formats={["avif", "webp"]}
+                  loading="lazy"
+                />
+              </figure>
+            </a>
           </div>
 
           <div class="family-item family-item--naissance">
             <a class="family-label" href="/naissance/">Naissance</a>
-            <figure class="family-media media">
-              <Picture
-                class="media__image"
-                src={homeImages.familyNaissance.src}
-                alt={homeImages.familyNaissance.alt}
-                widths={[360, 540, 720, 960]}
-                sizes="(min-width: 72rem) 22vw, 72vw"
-                formats={["avif", "webp"]}
-                loading="lazy"
-              />
-            </figure>
+            <a class="family-media-link" href="/naissance/" aria-label="Découvrir la séance naissance">
+              <figure class="family-media media">
+                <Picture
+                  class="media__image"
+                  src={homeImages.familyNaissance.src}
+                  alt={homeImages.familyNaissance.alt}
+                  widths={[360, 540, 720, 960]}
+                  sizes="(min-width: 72rem) 22vw, 72vw"
+                  formats={["avif", "webp"]}
+                  loading="lazy"
+                />
+              </figure>
+            </a>
           </div>
 
           <div class="family-item family-item--famille">
             <a class="family-label" href="/famille/">Famille</a>
-            <figure class="family-media media">
-              <Picture
-                class="media__image"
-                src={homeImages.familyFamille.src}
-                alt={homeImages.familyFamille.alt}
-                widths={[320, 480, 640, 840]}
-                sizes="(min-width: 72rem) 22vw, 52vw"
-                formats={["avif", "webp"]}
-                loading="lazy"
-              />
-            </figure>
+            <a class="family-media-link" href="/famille/" aria-label="Découvrir la séance famille">
+              <figure class="family-media media">
+                <Picture
+                  class="media__image"
+                  src={homeImages.familyFamille.src}
+                  alt={homeImages.familyFamille.alt}
+                  widths={[320, 480, 640, 840]}
+                  sizes="(min-width: 72rem) 22vw, 52vw"
+                  formats={["avif", "webp"]}
+                  loading="lazy"
+                />
+              </figure>
+            </a>
           </div>
         </div>
 
@@ -222,7 +230,14 @@ const pageDescription =
               awardImages.map((award) => (
                 <li>
                   <span>{award.year}</span>
-                  <Image src={award.src} alt={award.alt} width={112} loading="lazy" />
+                  <a
+                    href={mariagesNetReviewsUrl}
+                    target="_blank"
+                    rel="nofollow noopener noreferrer"
+                    aria-label={`${award.alt} Voir les avis Mariages.net.`}
+                  >
+                    <Image src={award.src} alt={award.alt} width={112} loading="lazy" />
+                  </a>
                 </li>
               ))
             }
@@ -243,7 +258,7 @@ const pageDescription =
             <div id="wp-widget-preview">
               Lire
               <a
-                href="https://www.mariages.net/photo-mariage/life-focus-photographe--e180967/avis"
+                href={mariagesNetReviewsUrl}
                 rel="nofollow"
               >
                 nos avis
@@ -530,6 +545,12 @@ const pageDescription =
     width: 100%;
   }
 
+  .family-media-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+
   .family-item--famille {
     width: min(62vw, 18rem);
     margin-left: auto;
@@ -680,6 +701,12 @@ const pageDescription =
   .awards :global(img) {
     width: clamp(4.75rem, 18vw, 7rem);
     height: auto;
+  }
+
+  .awards a {
+    display: inline-block;
+    width: fit-content;
+    text-decoration: none;
   }
 
   .contact {

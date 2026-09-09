@@ -14,6 +14,8 @@ import award2022 from "../assets/mariages.net/photographe mariage award 2022.jpg
 import award2023 from "../assets/mariages.net/photographe mariage award 2023.jpg";
 import award2024 from "../assets/mariages.net/photographe mariage award 2024.jpg";
 import award2025 from "../assets/mariages.net/photographe mariage award 2025.jpg";
+import award2026 from "../assets/mariages.net/photographe mariage award 2026.jpg";
+import recommendationMariagesNet from "../assets/mariages.net/recommandation mariages-net.png";
 
 export interface HomeImage {
   src: ImageMetadata;
@@ -101,5 +103,15 @@ export const awardImages = [
     year: "2025",
     src: award2025,
     alt: "Wedding Award Mariages.net 2025 reçu par Life Focus.",
+  },
+  {
+    year: "2026",
+    src: award2026,
+    alt: "Wedding Award Mariages.net 2026 reçu par Life Focus.",
+  },
+  {
+    year: "Recommandé",
+    src: recommendationMariagesNet,
+    alt: "Recommandation Mariages.net reçue par Life Focus.",
   },
 ] satisfies AwardImage[];

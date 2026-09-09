@@ -21,7 +21,7 @@ const chapterImageSet = [
 
 const chapters = [
   {
-    number: "03",
+    number: "02",
     label: "PRÉPARATIFS",
     title: "Le calme avant l'arrivée des autres.",
     text: "Les détails, les gestes simples, les proches qui passent. Une partie discrète du reportage, souvent très personnelle.",
@@ -29,7 +29,7 @@ const chapters = [
     images: chapterImageSet,
   },
   {
-    number: "04",
+    number: "03",
     label: "CÉRÉMONIE",
     title: "Rester attentif à ce qui se joue vraiment.",
     text: "Les regards, les mains, les silences et les réactions. Je photographie ce qui existe déjà, sans interrompre le moment.",
@@ -37,15 +37,15 @@ const chapters = [
     images: [homeImages.weddingMain, homeImages.heroSecondary, homeImages.hero, homeImages.weddingSecondary],
   },
   {
-    number: "05",
+    number: "04",
     label: "COUPLE",
     title: "Quelques minutes pour souffler ensemble.",
     text: "Je vous guide juste assez pour que les images restent naturelles, avec une vraie place pour votre manière d'être.",
     pattern: "c",
-    images: [homeImages.hero, homeImages.weddingSecondary, homeImages.weddingMain, homeImages.heroSecondary],
+    images: [homeImages.hero],
   },
   {
-    number: "06",
+    number: "05",
     label: "INVITES",
     title: "Les personnes qui donnent du relief à l'histoire.",
     text: "Un rire, une accolade, un regard depuis une table. Les invités racontent souvent le mariage autant que les moments attendus.",
@@ -53,12 +53,12 @@ const chapters = [
     images: [homeImages.weddingMain, homeImages.hero, homeImages.heroSecondary, homeImages.weddingSecondary],
   },
   {
-    number: "07",
+    number: "06",
     label: "SOIREE",
     title: "Quand la journée devient plus libre.",
     text: "La lumière baisse, les corps se rapprochent, les gestes changent. La soirée apporte une énergie différente au reportage.",
     pattern: "b",
-    images: [homeImages.hero, homeImages.weddingSecondary, homeImages.weddingMain, homeImages.heroSecondary],
+    images: [homeImages.hero, homeImages.weddingMain],
   },
 ] as const;
 
@@ -166,7 +166,7 @@ const galleryImages = [
     <section class="wedding-support" aria-labelledby="support-title">
       <div class="wedding-support__inner page-shell">
         <div class="wedding-support__intro">
-          <p class="editorial-label">08 / MON ACCOMPAGNEMENT</p>
+          <p class="editorial-label">07 / MON ACCOMPAGNEMENT</p>
           <h2 id="support-title">Garder le fil sans prendre toute la place.</h2>
         </div>
 
@@ -245,7 +245,6 @@ const galleryImages = [
   .wedding-page :global(.wedding-chapter h2),
   .wedding-support h2,
   .wedding-page :global(.wedding-packages h2),
-  .wedding-page :global(.wedding-gallery h2),
   .wedding-page :global(.wedding-faq h2),
   .wedding-contact h2 {
     font-family: var(--font-editorial);
@@ -298,7 +297,7 @@ const galleryImages = [
     gap: var(--space-md);
     align-items: end;
     max-width: var(--service-narrow);
-    padding-block: var(--space-lg);
+    padding-block: clamp(3.75rem, 6vw, 5.5rem);
   }
 
   .wedding-approach__text {
@@ -321,7 +320,7 @@ const galleryImages = [
     gap: var(--space-md);
     max-width: var(--service-narrow);
     margin-inline: auto;
-    padding: var(--space-lg) var(--page-padding);
+    padding: clamp(3.75rem, 6vw, 5.5rem) var(--page-padding);
   }
 
   .wedding-page :global(.wedding-chapter__text) {
@@ -364,6 +363,10 @@ const galleryImages = [
 
   .wedding-page :global(.wedding-chapter__image--4) {
     margin-left: auto;
+  }
+
+  .wedding-page :global(.wedding-chapter__images--2 .wedding-chapter__image--2) {
+    margin-top: calc(var(--space-sm) * -0.35);
   }
 
   .wedding-support {
@@ -409,7 +412,6 @@ const galleryImages = [
   }
 
   .wedding-support h3,
-  .wedding-page :global(.wedding-packages h3),
   .wedding-page :global(.wedding-packages__eyebrow) {
     font-size: var(--text-xs);
     font-weight: 500;
@@ -425,40 +427,109 @@ const galleryImages = [
     padding-block: var(--space-lg);
   }
 
-  .wedding-page :global(.wedding-gallery) {
-    width: 100%;
-    padding-block: var(--space-lg);
-  }
-
   .wedding-page :global(.wedding-packages__intro),
-  .wedding-page :global(.wedding-gallery__intro),
   .wedding-page :global(.wedding-faq__intro) {
     display: grid;
     gap: var(--space-xs);
     margin-bottom: var(--space-md);
   }
 
+  .wedding-page :global(.wedding-packages__intro) {
+    gap: var(--space-md);
+  }
+
+  .wedding-page :global(.wedding-packages__heading) {
+    display: grid;
+    gap: var(--space-xs);
+    min-width: 0;
+  }
+
   .wedding-page :global(.wedding-packages h2),
-  .wedding-page :global(.wedding-gallery h2),
   .wedding-page :global(.wedding-faq h2),
   .wedding-contact h2 {
     max-width: 13ch;
     font-size: clamp(2.45rem, 1.55rem + 3vw, 5rem);
   }
 
-  .wedding-page :global(.wedding-packages__body) {
+  .wedding-page :global(.wedding-packages__included-section),
+  .wedding-page :global(.wedding-packages__formulas) {
     display: grid;
     gap: var(--space-md);
   }
 
+  .wedding-page :global(.wedding-packages__included-section) {
+    margin-bottom: clamp(var(--space-md), 6vw, var(--space-lg));
+  }
+
+  .wedding-page :global(.wedding-packages__formulas) {
+    gap: var(--space-sm);
+  }
+
   .wedding-page :global(.wedding-packages__base) {
     display: grid;
-    gap: 0.75rem;
+    gap: 1rem;
     max-width: var(--reading-max);
   }
 
   .wedding-page :global(.wedding-packages__eyebrow) {
     color: var(--color-text);
+  }
+
+  .wedding-page :global(.wedding-packages__included) {
+    counter-reset: included;
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .wedding-page :global(.wedding-packages__included li) {
+    counter-increment: included;
+    display: grid;
+    grid-template-columns: clamp(2.8rem, 7vw, 4.4rem) minmax(0, 1fr);
+    gap: clamp(1rem, 2.5vw, 1.8rem);
+    align-items: start;
+    max-width: none;
+    padding-block: clamp(1.15rem, 2.2vw, 1.65rem);
+    border-bottom: 1px solid var(--color-line);
+    color: var(--color-muted);
+    font-size: clamp(0.98rem, 0.94rem + 0.16vw, 1.08rem);
+    line-height: 1.65;
+  }
+
+  .wedding-page :global(.wedding-packages__included li::before) {
+    content: counter(included, decimal-leading-zero);
+    color: var(--color-text);
+    font-family: var(--font-editorial);
+    font-size: clamp(1.45rem, 1.1rem + 1vw, 2rem);
+    line-height: 1;
+  }
+
+  .wedding-page :global(.wedding-packages__included-image) {
+    width: min(100%, 40rem);
+    margin: 0;
+  }
+
+  .wedding-page :global(.wedding-packages__keepsake) {
+    display: grid;
+    gap: 0.55rem;
+    max-width: 24rem;
+    margin-top: 1.25rem;
+  }
+
+  .wedding-page :global(.wedding-packages__keepsake p:first-child) {
+    color: var(--color-text);
+    font-family: var(--font-editorial);
+    font-size: clamp(1.85rem, 1.45rem + 1.1vw, 2.65rem);
+    line-height: 1;
+  }
+
+  .wedding-page :global(.wedding-packages__keepsake p:last-child) {
+    color: var(--color-muted);
+    font-size: var(--text-sm);
+    line-height: 1.65;
   }
 
   .wedding-page :global(.wedding-packages__list) {
@@ -472,34 +543,156 @@ const galleryImages = [
 
   .wedding-page :global(.wedding-packages__list li) {
     display: grid;
-    gap: 0.75rem;
-    padding-block: 1.3rem;
+    gap: clamp(0.9rem, 2vw, 1.45rem);
+    padding-block: clamp(1.35rem, 2.4vw, 2.15rem);
     border-bottom: 1px solid var(--color-line);
   }
 
-  .wedding-page :global(.wedding-gallery__grid) {
+  .wedding-page :global(.wedding-packages__duration) {
+    color: var(--color-text);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .wedding-page :global(.wedding-packages h3) {
+    font-family: var(--font-body);
+    font-size: clamp(1.2rem, 1.02rem + 0.45vw, 1.55rem);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+  }
+
+  .wedding-page :global(.wedding-packages__details) {
+    display: grid;
+    gap: 0.45rem;
+    min-width: 0;
+  }
+
+  .wedding-page :global(.wedding-packages__details p) {
+    font-size: clamp(0.96rem, 0.93rem + 0.12vw, 1.04rem);
+    line-height: 1.55;
+  }
+
+  .wedding-page :global(.wedding-packages__price) {
+    display: grid;
+    gap: 0.4rem;
+    align-content: start;
+    min-width: 0;
+  }
+
+  .wedding-page :global(.wedding-packages__price p) {
+    max-width: 20rem;
+    color: var(--color-muted);
+    font-size: var(--text-xs);
+    line-height: 1.5;
+  }
+
+  .wedding-page :global(.wedding-packages__price p:first-child) {
+    color: var(--color-text);
+    font-family: var(--font-editorial);
+    font-size: clamp(2.05rem, 1.55rem + 1.25vw, 3.15rem);
+    line-height: 0.95;
+    white-space: nowrap;
+  }
+
+  .wedding-page :global(.wedding-packages__addon) {
     display: grid;
     gap: var(--space-sm);
-    align-items: start;
-    width: min(94vw, 104rem);
-    margin-inline: auto;
-    padding-inline: var(--page-padding);
+    margin-top: clamp(3rem, 6vw, 5.5rem);
+    padding-block: clamp(2rem, 4vw, 3.5rem);
+    border-top: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
   }
 
-  .wedding-page :global(.wedding-gallery__item) {
-    width: 100%;
+  .wedding-page :global(.wedding-packages__addon-heading) {
+    display: grid;
+    gap: var(--space-xs);
+    min-width: 0;
   }
 
-  .wedding-page :global(.wedding-gallery__item--vertical) {
-    width: min(76vw, 24rem);
+  .wedding-page :global(.wedding-packages__addon h3) {
+    max-width: 13ch;
+    font-family: var(--font-editorial);
+    font-size: clamp(2rem, 1.35rem + 2.15vw, 3.75rem);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 0.98;
+    text-transform: none;
   }
 
-  .wedding-page :global(.wedding-gallery__item--small) {
-    width: min(70vw, 22rem);
+  .wedding-page :global(.wedding-packages__addon-content),
+  .wedding-page :global(.wedding-packages__addon-types),
+  .wedding-page :global(.wedding-packages__addon-details) {
+    display: grid;
+    gap: var(--space-sm);
+    min-width: 0;
   }
 
-  .wedding-page :global(.wedding-gallery__item:nth-child(even)) {
-    margin-left: auto;
+  .wedding-page :global(.wedding-packages__addon-types section) {
+    display: grid;
+    gap: 0.75rem;
+    align-content: start;
+  }
+
+  .wedding-page :global(.wedding-packages__addon h4) {
+    font-family: var(--font-editorial);
+    font-size: clamp(1.65rem, 1.25rem + 1.15vw, 2.55rem);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1;
+  }
+
+  .wedding-page :global(.wedding-packages__addon-types p) {
+    max-width: 32rem;
+    color: var(--color-muted);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+  }
+
+  .wedding-page :global(.wedding-packages__addon-note) {
+    color: var(--color-text);
+    font-size: clamp(1rem, 0.95rem + 0.18vw, 1.12rem);
+    font-weight: 500;
+    line-height: 1.45;
+  }
+
+  .wedding-page :global(.wedding-packages__addon-details ul) {
+    display: grid;
+    gap: 0.8rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .wedding-page :global(.wedding-packages__addon-details li) {
+    position: relative;
+    padding-left: 1.35rem;
+    color: var(--color-muted);
+    font-size: var(--text-sm);
+    line-height: 1.5;
+  }
+
+  .wedding-page :global(.wedding-packages__addon-details li::before) {
+    position: absolute;
+    top: 0.74em;
+    left: 0;
+    width: 0.45rem;
+    height: 1px;
+    background: currentColor;
+    content: "";
+  }
+
+  .wedding-page :global(.wedding-packages__addon-price) {
+    width: fit-content;
+    color: var(--color-text);
+    font-family: var(--font-editorial);
+    font-size: clamp(2.25rem, 1.45rem + 2.25vw, 4rem);
+    line-height: 0.95;
+    white-space: nowrap;
   }
 
   .wedding-page :global(.wedding-faq__items) {
@@ -537,8 +730,13 @@ const galleryImages = [
     }
 
     .wedding-page :global(.wedding-packages__list li) {
-      grid-template-columns: minmax(8rem, 0.35fr) minmax(0, 1fr);
-      gap: var(--space-sm);
+      grid-template-columns: minmax(5.5rem, 0.28fr) minmax(0, 1fr) minmax(9.5rem, 0.4fr);
+      gap: clamp(1.5rem, 3vw, var(--space-sm));
+      align-items: start;
+    }
+
+    .wedding-page :global(.wedding-packages__addon-types) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
@@ -570,7 +768,8 @@ const galleryImages = [
       grid-row: 1;
       align-self: start;
       width: 100%;
-      margin: clamp(3rem, 5.5vw, 4.75rem) 0 0 calc(var(--space-sm) * -0.55);
+      margin: 0 0 0 calc(var(--space-sm) * -0.55);
+      transform: translateY(clamp(-4rem, -5vw, -2.75rem));
     }
 
     .wedding-hero__text {
@@ -615,6 +814,12 @@ const galleryImages = [
       z-index: 1;
     }
 
+    .wedding-page :global(.wedding-chapter__images--1 .wedding-chapter__image--1) {
+      grid-column: 1 / 13;
+      grid-row: 1;
+      width: 100%;
+    }
+
     .wedding-page :global(.wedding-chapter__image--2) {
       grid-column: 8 / 13;
       grid-row: 1;
@@ -639,6 +844,17 @@ const galleryImages = [
       margin: calc(var(--space-lg) * -0.1) 0 0;
     }
 
+    .wedding-page :global(.wedding-chapter__images--2 .wedding-chapter__image--1) {
+      grid-column: 1 / 9;
+      grid-row: 1 / 3;
+    }
+
+    .wedding-page :global(.wedding-chapter__images--2 .wedding-chapter__image--2) {
+      grid-column: 8 / 13;
+      grid-row: 1 / 3;
+      margin: clamp(3rem, 4.5vw, 4.5rem) 0 0 calc(var(--space-sm) * -0.25);
+    }
+
     .wedding-page :global(.wedding-chapter--b .wedding-chapter__text) {
       grid-column: 8 / 13;
     }
@@ -656,36 +872,51 @@ const galleryImages = [
       grid-column: 6 / 13;
     }
 
-    .wedding-page :global(.wedding-packages__body) {
+    .wedding-page :global(.wedding-packages__intro) {
+      margin-bottom: clamp(4rem, 7vw, 7rem);
+    }
+
+    .wedding-page :global(.wedding-packages__included-section) {
+      grid-template-columns: minmax(0, 0.48fr) minmax(0, 0.52fr);
+      gap: clamp(3rem, 6vw, 6rem);
+      align-items: start;
+      margin-bottom: clamp(4.5rem, 7vw, 6.5rem);
+    }
+
+    .wedding-page :global(.wedding-packages__visual) {
+      display: grid;
+      justify-items: center;
+      padding-top: clamp(0.25rem, 1.6vw, 1rem);
+    }
+
+    .wedding-page :global(.wedding-packages__included-image) {
+      width: min(100%, 39rem);
+    }
+
+    .wedding-page :global(.wedding-packages__addon) {
       grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
+      gap: clamp(3rem, 6vw, 6rem);
+    }
+
+    .wedding-page :global(.wedding-packages__addon-content) {
+      align-self: start;
+    }
+
+    .wedding-page :global(.wedding-packages__addon-details) {
+      grid-template-columns: minmax(0, 1fr) minmax(7rem, 0.24fr);
+      gap: var(--space-sm);
       align-items: start;
     }
 
-    .wedding-page :global(.wedding-gallery__grid) {
-      grid-template-columns: repeat(12, minmax(0, 1fr));
-      gap: clamp(1.25rem, 2vw, 2rem);
+    .wedding-page :global(.wedding-packages__addon-note),
+    .wedding-page :global(.wedding-packages__addon-details ul) {
+      grid-column: 1;
     }
 
-    .wedding-page :global(.wedding-gallery__item--wide) {
-      grid-column: span 7;
-    }
-
-    .wedding-page :global(.wedding-gallery__item--vertical) {
-      grid-column: span 4;
-      width: 100%;
-    }
-
-    .wedding-page :global(.wedding-gallery__item--small) {
-      grid-column: span 3;
-      width: 100%;
-    }
-
-    .wedding-page :global(.wedding-gallery__item:nth-child(6n + 2)) {
-      margin-top: var(--space-md);
-    }
-
-    .wedding-page :global(.wedding-gallery__item:nth-child(6n + 5)) {
-      margin-top: calc(var(--space-md) * -0.35);
+    .wedding-page :global(.wedding-packages__addon-price) {
+      grid-column: 2;
+      grid-row: 1 / 3;
+      justify-self: end;
     }
 
     .wedding-page :global(.wedding-faq) {

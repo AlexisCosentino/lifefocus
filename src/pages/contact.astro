@@ -1,7 +1,6 @@
 ---
-import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import logoBlack from "../assets/brand/logo_life_focus_black.png";
+import logoLifeFocus from "../assets/brand/LIFE FOCUS logo.svg?url";
 
 const pageTitle = "Contact | Life Focus - Photographe à Romans-sur-Isère";
 const pageDescription =
@@ -97,11 +96,12 @@ const mapsEmbed = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
 
       <aside class="contact-details" aria-labelledby="contact-details-title">
         <h2 class="contact-details__title" id="contact-details-title">Life Focus</h2>
-        <Image
+        <img
           class="contact-details__logo"
-          src={logoBlack}
+          src={logoLifeFocus}
           alt="Life Focus"
-          width={180}
+          width="1672"
+          height="941"
           loading="lazy"
         />
         <p>Photographe à Romans-sur-Isère</p>

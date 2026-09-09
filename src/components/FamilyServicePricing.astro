@@ -6,37 +6,85 @@ interface Props {
 }
 
 const { package: combinedPackage } = Astro.props;
+
+const included = [
+  "Séance photo de 45 min à 1 h, selon le rythme du moment.",
+  "Toutes les photos livrées sont traitées et retouchées naturellement.",
+  "Pack photo HD au format numérique, sans limite de photos.",
+  "Déplacement jusqu'à 30 km autour de Valence.",
+  "Livraison des photos numériques sous 1 semaine maximum.",
+];
+
+const formulas = [
+  {
+    duration: "01 H",
+    name: "Séance photo",
+    context: "Portrait solo, couple, grossesse, naissance ou famille, en intérieur ou en extérieur.",
+    price: "250 €",
+    details: ["Photos livrées sans limite de nombre.", "Moment guidé simplement, sans mise en scène lourde."],
+  },
+  ...(combinedPackage
+    ? [
+        {
+          duration: "02 SÉANCES",
+          name: combinedPackage.title,
+          context: combinedPackage.text,
+          price: combinedPackage.price,
+          details: ["Une continuité entre l'attente et les premiers jours.", "Deux séances d'1 h."],
+          href: combinedPackage.href,
+          linkLabel: combinedPackage.linkLabel,
+        },
+      ]
+    : []),
+];
 ---
 
 <section class="family-service-pricing page-shell" aria-labelledby="family-pricing-title">
   <div class="family-service-pricing__intro">
     <p class="editorial-label">02 / TARIF</p>
-    <h2 id="family-pricing-title">Une formule claire.</h2>
+    <h2 id="family-pricing-title">Une formule simple, sans limite de photos.</h2>
   </div>
 
-  <div class="family-service-pricing__list">
-    <section class="family-service-pricing__item">
-      <div>
-        <p>1 HEURE</p>
-        <strong>250 €</strong>
-      </div>
-      <span>Sans limite de photos livrées</span>
+  <div class="family-service-pricing__content">
+    <section class="family-service-pricing__included" aria-labelledby="family-included-title">
+      <p id="family-included-title" class="family-service-pricing__eyebrow">Inclus dans chaque séance</p>
+      <ul>
+        {
+          included.map((item) => (
+            <li>{item}</li>
+          ))
+        }
+      </ul>
     </section>
 
-    {
-      combinedPackage && (
-        <section class="family-service-pricing__item family-service-pricing__item--package">
-          <div>
-            <p>{combinedPackage.title}</p>
-            <strong>{combinedPackage.price}</strong>
-          </div>
-          <span>{combinedPackage.text}</span>
-          {combinedPackage.href && combinedPackage.linkLabel && (
-            <a class="editorial-link" href={combinedPackage.href}>{combinedPackage.linkLabel}</a>
-          )}
-        </section>
-      )
-    }
+    <section class="family-service-pricing__formulas" aria-labelledby="family-formulas-title">
+      <p id="family-formulas-title" class="family-service-pricing__eyebrow">Choisir sa formule</p>
+
+      <ol>
+        {
+          formulas.map((item) => (
+            <li>
+              <p class="family-service-pricing__duration">{item.duration}</p>
+
+              <div class="family-service-pricing__details">
+                <h3>{item.name}</h3>
+                <p>{item.context}</p>
+              </div>
+
+              <div class="family-service-pricing__price">
+                <p>{item.price}</p>
+                {item.details.map((detail) => (
+                  <p>{detail}</p>
+                ))}
+                {"href" in item && item.href && item.linkLabel && (
+                  <a class="editorial-link" href={item.href}>{item.linkLabel}</a>
+                )}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
   </div>
 </section>
 
@@ -44,7 +92,7 @@ const { package: combinedPackage } = Astro.props;
   .family-service-pricing {
     display: grid;
     gap: var(--space-md);
-    max-width: 76rem;
+    max-width: 82rem;
     padding-block: var(--space-lg);
   }
 
@@ -54,7 +102,7 @@ const { package: combinedPackage } = Astro.props;
   }
 
   .family-service-pricing h2 {
-    max-width: 11ch;
+    max-width: 12ch;
     font-family: var(--font-editorial);
     font-size: clamp(2.45rem, 1.55rem + 3vw, 5rem);
     font-weight: 400;
@@ -62,26 +110,16 @@ const { package: combinedPackage } = Astro.props;
     line-height: 0.98;
   }
 
-  .family-service-pricing__list {
+  .family-service-pricing__content,
+  .family-service-pricing__included,
+  .family-service-pricing__formulas {
     display: grid;
-    gap: 0;
-    border-top: 1px solid var(--color-line);
+    gap: var(--space-sm);
+    min-width: 0;
   }
 
-  .family-service-pricing__item {
-    display: grid;
-    gap: var(--space-xs);
-    padding-block: clamp(1.6rem, 3vw, 2.4rem);
-    border-bottom: 1px solid var(--color-line);
-  }
-
-  .family-service-pricing__item div {
-    display: grid;
-    gap: 0.35rem;
-  }
-
-  .family-service-pricing__item p,
-  .family-service-pricing__item span {
+  .family-service-pricing__eyebrow,
+  .family-service-pricing__duration {
     color: var(--color-muted);
     font-size: var(--text-xs);
     font-weight: 500;
@@ -90,24 +128,92 @@ const { package: combinedPackage } = Astro.props;
     text-transform: uppercase;
   }
 
-  .family-service-pricing__item span {
-    max-width: var(--reading-max);
-    text-transform: none;
-    letter-spacing: 0;
-    font-size: var(--text-sm);
-    font-weight: 400;
+  .family-service-pricing__included {
+    align-content: start;
+    padding-block: clamp(1.35rem, 2.5vw, 2rem);
+    border-top: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
   }
 
-  .family-service-pricing__item strong {
+  .family-service-pricing__included ul {
+    display: grid;
+    gap: 0.9rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .family-service-pricing__included li {
+    position: relative;
+    padding-left: 1.35rem;
+    color: var(--color-text);
+    font-size: var(--text-sm);
+    line-height: 1.5;
+  }
+
+  .family-service-pricing__included li::before {
+    position: absolute;
+    top: 0.74em;
+    left: 0;
+    width: 0.45rem;
+    height: 1px;
+    background: currentColor;
+    content: "";
+  }
+
+  .family-service-pricing__formulas ol {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--color-line);
+    list-style: none;
+  }
+
+  .family-service-pricing__formulas li {
+    display: grid;
+    gap: var(--space-xs);
+    padding-block: clamp(1.6rem, 3vw, 2.35rem);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .family-service-pricing__details {
+    display: grid;
+    gap: 0.65rem;
+  }
+
+  .family-service-pricing__details h3 {
     font-family: var(--font-editorial);
-    font-size: clamp(3.2rem, 1.8rem + 4vw, 5.8rem);
+    font-size: clamp(2rem, 1.3rem + 2.2vw, 3.5rem);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 0.98;
+  }
+
+  .family-service-pricing__details p,
+  .family-service-pricing__price p:not(:first-child) {
+    color: var(--color-muted);
+    font-size: var(--text-sm);
+    line-height: 1.5;
+  }
+
+  .family-service-pricing__price {
+    display: grid;
+    gap: 0.55rem;
+    align-content: start;
+  }
+
+  .family-service-pricing__price p:first-child {
+    font-family: var(--font-editorial);
+    font-size: clamp(2.55rem, 1.7rem + 2.8vw, 4.4rem);
     font-weight: 400;
     line-height: 0.95;
+    white-space: nowrap;
   }
 
-  .family-service-pricing__item .editorial-link {
+  .family-service-pricing__price .editorial-link {
     width: fit-content;
-    margin-top: 0.5rem;
+    margin-top: 0.3rem;
   }
 
   @media (min-width: 72rem) {
@@ -115,8 +221,14 @@ const { package: combinedPackage } = Astro.props;
       grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
     }
 
-    .family-service-pricing__list {
+    .family-service-pricing__content {
       align-self: start;
+    }
+
+    .family-service-pricing__formulas li {
+      grid-template-columns: minmax(4.5rem, 0.22fr) minmax(0, 1fr) minmax(9rem, 0.45fr);
+      gap: clamp(1.25rem, 3vw, 3rem);
+      align-items: start;
     }
   }
 </style>

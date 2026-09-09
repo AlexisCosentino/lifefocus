@@ -1,6 +1,7 @@
 ---
-import { Picture } from "astro:assets";
 import type { FamilyServiceImage } from "../data/familyServices";
+
+import EditorialGallery from "./EditorialGallery.astro";
 
 interface Props {
   images: FamilyServiceImage[];
@@ -9,110 +10,9 @@ interface Props {
 const { images } = Astro.props;
 ---
 
-<section class="family-service-gallery" aria-labelledby="family-gallery-title">
-  <div class="family-service-gallery__intro page-shell">
-    <p class="editorial-label">03 / GALERIE</p>
-    <h2 id="family-gallery-title">Une première respiration visuelle.</h2>
-  </div>
-
-  <div class="family-service-gallery__grid">
-    {
-      images.map((image, index) => (
-        <figure class:list={["family-service-gallery__item", `family-service-gallery__item--${image.size ?? "small"}`]}>
-          <Picture
-            src={image.src}
-            alt={image.alt}
-            widths={[320, 480, 640, 840, 1080, 1280]}
-            sizes="(min-width: 72rem) 31vw, calc(100vw - (2 * var(--page-padding)))"
-            formats={["avif", "webp"]}
-            loading={index < 2 ? "eager" : "lazy"}
-          />
-        </figure>
-      ))
-    }
-  </div>
-</section>
-
-<style>
-  .family-service-gallery {
-    width: 100%;
-    padding-block: var(--space-lg);
-  }
-
-  .family-service-gallery__intro {
-    display: grid;
-    gap: var(--space-xs);
-    max-width: 76rem;
-    margin-bottom: var(--space-md);
-  }
-
-  .family-service-gallery h2 {
-    max-width: 12ch;
-    font-family: var(--font-editorial);
-    font-size: clamp(2.45rem, 1.55rem + 3vw, 5rem);
-    font-weight: 400;
-    letter-spacing: 0;
-    line-height: 0.98;
-  }
-
-  .family-service-gallery__grid {
-    display: grid;
-    gap: var(--space-sm);
-    align-items: start;
-    width: min(94vw, 104rem);
-    margin-inline: auto;
-    padding-inline: var(--page-padding);
-  }
-
-  .family-service-gallery__item {
-    width: 100%;
-    margin: 0;
-    background: var(--color-line);
-  }
-
-  .family-service-gallery__item :global(img) {
-    width: 100%;
-    height: auto;
-  }
-
-  .family-service-gallery__item--portrait {
-    width: min(76vw, 24rem);
-  }
-
-  .family-service-gallery__item--small {
-    width: min(70vw, 22rem);
-  }
-
-  .family-service-gallery__item:nth-child(even) {
-    margin-left: auto;
-  }
-
-  @media (min-width: 72rem) {
-    .family-service-gallery__grid {
-      grid-template-columns: repeat(12, minmax(0, 1fr));
-      gap: clamp(1.25rem, 2vw, 2rem);
-    }
-
-    .family-service-gallery__item--wide {
-      grid-column: span 7;
-    }
-
-    .family-service-gallery__item--portrait {
-      grid-column: span 4;
-      width: 100%;
-    }
-
-    .family-service-gallery__item--small {
-      grid-column: span 3;
-      width: 100%;
-    }
-
-    .family-service-gallery__item:nth-child(6n + 2) {
-      margin-top: var(--space-md);
-    }
-
-    .family-service-gallery__item:nth-child(6n + 5) {
-      margin-top: calc(var(--space-md) * -0.35);
-    }
-  }
-</style>
+<EditorialGallery
+  eyebrow="03 / GALERIE"
+  title="Une première respiration visuelle."
+  titleId="family-gallery-title"
+  images={images}
+/>

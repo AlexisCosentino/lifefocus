@@ -1,48 +1,168 @@
 ---
+import { Picture } from "astro:assets";
+
+import { homeImages } from "../data/homeImages";
+
+const included = [
+  "Toutes les photos livrées en haute définition, traitées et retouchées naturellement.",
+  "Galerie en ligne privée pour les mariés et leurs invités.",
+  "Livraison sous 2 semaines maximum.",
+  "Coffret personnalisé offert avec le reportage.",
+  "Accompagnement avant le mariage.",
+];
+
 const packages = [
   {
-    duration: "3 HEURES",
-    text: "Une présence courte pour une cérémonie civile, un engagement intime ou un moment essentiel de la journée.",
+    duration: "03 H",
+    name: "Cérémonie",
+    context: "Pour une cérémonie civile, un engagement intime ou un moment essentiel.",
+    travel: "Déplacement jusqu’à 50 km autour de Valence.",
+    price: "950 €",
+    details: ["250 € / heure supplémentaire."],
   },
   {
-    duration: "6 HEURES",
-    text: "Une couverture plus complète pour suivre les préparatifs, la cérémonie et les premiers instants avec vos proches.",
+    duration: "06 H",
+    name: "L'Essentiel",
+    context: "Des préparatifs du mariage jusqu’au vin d’honneur.",
+    travel: "Déplacement jusqu’à 50 km autour de Valence.",
+    price: "1 600 €",
+    details: ["200 € / heure supplémentaire."],
   },
   {
-    duration: "8 HEURES",
-    text: "Un rythme confortable pour raconter la journée avec plus d'air, des moments calmes aux temps forts.",
+    duration: "09 H",
+    name: "La Journée",
+    context: "Une couverture plus ample pour raconter la journée avec plus de respiration.",
+    travel: "Déplacement jusqu’à 100 km autour de Valence.",
+    price: "2 100 €",
+    details: [],
   },
   {
-    duration: "JOURNÉE",
-    text: "Une présence pensée pour accompagner l'histoire du début à la fin, sans multiplier les interventions.",
+    duration: "12 H",
+    name: "L'Intégrale",
+    context: "Une présence complète pour accompagner l’histoire du début à la fin.",
+    travel: "Déplacement jusqu’à 100 km autour de Valence.",
+    price: "2 500 €",
+    details: [],
   },
+];
+
+const addOns = [
+  {
+    title: "Séance Engagement",
+    text:
+      "Un moment à deux avant le mariage, en tenue simple, pour prendre le temps de se rencontrer et d'apprivoiser l'appareil avant le jour J.",
+  },
+  {
+    title: "Séance Trash The Dress",
+    text:
+      "Une séance après le mariage, plus libre et plus décalée, quand la robe peut sortir du cadre sans la pression de la journée.",
+  },
+];
+
+const addOnIncluded = [
+  "Séance photo d'1 h en extérieur.",
+  "Toutes les photos livrées, traitées et retouchées naturellement.",
+  "Pack photo HD au format numérique, sans limite de photos.",
+  "Déplacement jusqu'à 30 km autour de Valence.",
+  "Livraison des photos numériques sous 1 semaine maximum.",
 ];
 ---
 
 <section class="wedding-packages page-shell" aria-labelledby="packages-title">
   <div class="wedding-packages__intro">
     <p class="editorial-label">08 / LES FORMULES</p>
-    <h2 id="packages-title">Une présence adaptée au rythme de votre journée.</h2>
+    <h2 id="packages-title">Des formules pensées<br />selon le temps de présence.</h2>
   </div>
 
-  <div class="wedding-packages__body">
-    <div class="wedding-packages__base">
-      <p class="wedding-packages__eyebrow">Dans toutes les formules</p>
-      <p>
-        Un accompagnement avant le mariage, la prise de vue le jour J, le tri des images et une galerie en ligne.
-        Les détails précis seront ajustés avec Alexis.
-      </p>
+  <div class="wedding-packages__included-section">
+    <div class="wedding-packages__visual">
+      <figure class="wedding-packages__included-image">
+        <Picture
+          src={homeImages.weddingMain.src}
+          alt={homeImages.weddingMain.alt}
+          widths={[480, 720, 960, 1280, 1773]}
+          sizes="(min-width: 72rem) 34vw, calc(100vw - (2 * var(--page-padding)))"
+          formats={["avif", "webp"]}
+          loading="lazy"
+        />
+      </figure>
+
+      <div class="wedding-packages__keepsake">
+        <p>Un reportage qui reste.</p>
+        <p>Chaque mariage est livré avec son coffret personnalisé, pensé comme un véritable objet souvenir.</p>
+      </div>
     </div>
+
+    <div class="wedding-packages__base">
+      <p class="wedding-packages__eyebrow">Inclus dans chaque reportage</p>
+      <ul class="wedding-packages__included">
+        {
+          included.map((item) => (
+            <li>{item}</li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+
+  <div class="wedding-packages__formulas" aria-labelledby="formulas-title">
+    <p id="formulas-title" class="wedding-packages__eyebrow">Choisir son temps de présence</p>
 
     <ol class="wedding-packages__list">
       {
         packages.map((item) => (
           <li>
-            <h3>{item.duration}</h3>
-            <p>{item.text}</p>
+            <p class="wedding-packages__duration">{item.duration}</p>
+
+            <div class="wedding-packages__details">
+              <h3>{item.name}</h3>
+              <p>{item.context}</p>
+            </div>
+
+            <div class="wedding-packages__price">
+              <p>{item.price}</p>
+              <p>{item.travel}</p>
+              {
+                item.details.map((detail) => (
+                  <p>{detail}</p>
+                ))
+              }
+            </div>
           </li>
         ))
       }
     </ol>
   </div>
+
+  <aside class="wedding-packages__addon" aria-labelledby="addon-title">
+    <div class="wedding-packages__addon-heading">
+      <p class="wedding-packages__eyebrow">En supplément</p>
+      <h3 id="addon-title">Avant ou après le mariage, prolonger l'histoire.</h3>
+    </div>
+
+    <div class="wedding-packages__addon-content">
+      <div class="wedding-packages__addon-types">
+        {
+          addOns.map((item) => (
+            <section>
+              <h4>{item.title}</h4>
+              <p>{item.text}</p>
+            </section>
+          ))
+        }
+      </div>
+
+      <div class="wedding-packages__addon-details">
+        <p class="wedding-packages__addon-note">Photos livrées sans limite de nombre.</p>
+        <ul>
+          {
+            addOnIncluded.map((item) => (
+              <li>{item}</li>
+            ))
+          }
+        </ul>
+        <p class="wedding-packages__addon-price">250 €</p>
+      </div>
+    </div>
+  </aside>
 </section>

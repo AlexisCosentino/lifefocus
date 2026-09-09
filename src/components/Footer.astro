@@ -1,26 +1,47 @@
 ---
-import { Image } from "astro:assets";
-import logoBlack from "../assets/brand/logo_life_focus_black.png";
+import logoLifeFocus from "../assets/brand/LIFE FOCUS logo.svg?url";
+
+const socialLinks = [
+  {
+    label: "Instagram",
+    mark: "IG",
+    href: "https://www.instagram.com/life_focus_mariage/",
+  },
+  {
+    label: "Facebook",
+    mark: "FB",
+    href: "https://www.facebook.com/LifeFocusPhotographeValence/",
+  },
+  {
+    label: "Mariages.net",
+    mark: "MN",
+    href: "https://www.mariages.net/photo-mariage/life-focus-photographe--e180967/avis",
+  },
+];
 ---
 
 <footer class="site-footer">
   <div class="site-footer__inner page-shell">
-    <Image
-      class="site-footer__brand"
-      src={logoBlack}
-      alt="Life Focus"
-      width={150}
-      loading="lazy"
-    />
+    <div class="site-footer__signature">
+      <img
+        class="site-footer__brand"
+        src={logoLifeFocus}
+        alt="Life Focus"
+        width="1672"
+        height="941"
+        loading="lazy"
+      />
+      <p>Photographe de mariage</p>
+    </div>
 
     <div class="site-footer__content">
       <div class="site-footer__meta">
-        <p>Photographe de mariage</p>
-        <p>Romans-sur-Isère · Drôme</p>
+        <p>Romans-sur-Isère</p>
+        <p>Drôme · France</p>
+        <p>SIRET 83827982600013</p>
       </div>
 
       <nav class="site-footer__links" aria-label="Liens de pied de page">
-        <a href="https://www.instagram.com/" rel="noreferrer">Instagram</a>
         <a href="/conseils/">Conseils</a>
         <a href="/contact/">Contact</a>
         <a
@@ -30,7 +51,15 @@ import logoBlack from "../assets/brand/logo_life_focus_black.png";
         >
           Espace clients &#8599;
         </a>
-        <a href="/mentions-legales/">Mentions légales</a>
+      </nav>
+
+      <nav class="site-footer__socials" aria-label="Réseaux sociaux">
+        {socialLinks.map((item) => (
+          <a href={item.href} target="_blank" rel="noopener noreferrer">
+            <span aria-hidden="true">{item.mark}</span>
+            <strong>{item.label}</strong>
+          </a>
+        ))}
       </nav>
     </div>
   </div>

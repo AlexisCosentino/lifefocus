@@ -1,13 +1,15 @@
 ---
-import { Picture } from "astro:assets";
+import { Image, Picture } from "astro:assets";
 
 import alexisCool from "../assets/Alexis_cool.jpg";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { homeImages } from "../data/homeImages";
+import { awardImages, homeImages } from "../data/homeImages";
 
 const pageTitle = "À propos d'Alexis Cosentino | Photographe dans la Drôme | Life Focus";
 const pageDescription =
   "Découvrez Alexis Cosentino, photographe à Romans-sur-Isère en Drôme, son approche sensible de la photographie de mariage et de famille, son expérience et sa manière d'accompagner ses clients.";
+const mariagesNetReviewsUrl =
+  "https://www.mariages.net/photo-mariage/life-focus-photographe--e180967/avis";
 ---
 
 <BaseLayout
@@ -132,13 +134,36 @@ const pageDescription =
     </section>
 
     <section class="about-trust page-shell" aria-labelledby="trust-title">
-      <p class="editorial-label">05 / CONFIANCE</p>
-      <h2 id="trust-title">Des années de mariages, de familles et de confiance.</h2>
-      <p>
-        Life Focus a reçu des Wedding Awards Mariages.net chaque année depuis 2020. Ce repère reste
-        secondaire: ce qui compte vraiment, c'est la manière dont les personnes se sentent accompagnées
-        avant, pendant et après les images.
-      </p>
+      <div class="about-trust__copy">
+        <p class="editorial-label">05 / CONFIANCE</p>
+        <h2 id="trust-title">Des années de mariages, de familles et de confiance.</h2>
+      </div>
+
+      <div class="about-trust__proof">
+        <ol class="about-awards" aria-label="Wedding Awards et recommandation Mariages.net">
+          {
+            awardImages.map((award) => (
+              <li>
+                <span>{award.year}</span>
+                <a
+                  href={mariagesNetReviewsUrl}
+                  target="_blank"
+                  rel="nofollow noopener noreferrer"
+                  aria-label={`${award.alt} Voir les avis Mariages.net.`}
+                >
+                  <Image src={award.src} alt={award.alt} width={112} loading="lazy" />
+                </a>
+              </li>
+            ))
+          }
+        </ol>
+
+        <p class="about-trust__text">
+          Life Focus a reçu des Wedding Awards Mariages.net chaque année depuis 2020. Ce repère reste
+          secondaire: ce qui compte vraiment, c'est la manière dont les personnes se sentent accompagnées
+          avant, pendant et après les images.
+        </p>
+      </div>
     </section>
 
     <section class="about-contact page-shell" aria-labelledby="contact-title">
@@ -179,7 +204,7 @@ const pageDescription =
   .about-experience__text,
   .about-guidance__text,
   .about-sensitivity__copy,
-  .about-trust {
+  .about-trust__copy {
     display: grid;
     gap: var(--space-xs);
     min-width: 0;
@@ -217,7 +242,8 @@ const pageDescription =
   .about-experience p,
   .about-sensitivity p,
   .about-guidance p,
-  .about-trust p {
+  .about-trust p,
+  .about-trust__text {
     max-width: var(--reading-max);
     color: var(--color-muted);
   }
@@ -255,10 +281,54 @@ const pageDescription =
   }
 
   .about-trust {
+    display: grid;
+    gap: var(--space-md);
     max-width: 76rem;
     padding-block: var(--space-lg);
     border-top: 1px solid var(--color-line);
     border-bottom: 1px solid var(--color-line);
+  }
+
+  .about-trust__proof {
+    display: grid;
+    gap: var(--space-sm);
+    min-width: 0;
+  }
+
+  .about-awards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-sm) 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .about-awards li {
+    display: grid;
+    gap: 0.65rem;
+    align-content: start;
+    justify-items: start;
+  }
+
+  .about-awards span {
+    color: var(--color-muted);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .about-awards a {
+    display: inline-block;
+    width: fit-content;
+    text-decoration: none;
+  }
+
+  .about-awards :global(img) {
+    width: clamp(4.75rem, 18vw, 7rem);
+    height: auto;
   }
 
   .about-contact {
@@ -314,17 +384,28 @@ const pageDescription =
 
     .about-trust {
       grid-template-columns: minmax(0, 0.35fr) minmax(0, 0.65fr);
-      gap: clamp(3rem, 7vw, 7rem);
+      gap: var(--space-sm) clamp(3rem, 7vw, 7rem);
       align-items: start;
     }
 
-    .about-trust .editorial-label {
+    .about-trust__copy {
       grid-column: 1;
+      display: grid;
+      gap: var(--space-xs);
     }
 
-    .about-trust h2,
-    .about-trust p {
+    .about-awards {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .about-trust__proof {
       grid-column: 2;
+      grid-row: 1;
+      align-self: start;
+    }
+
+    .about-trust__text {
+      max-width: 34rem;
     }
 
     .about-contact {
