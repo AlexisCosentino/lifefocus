@@ -1,12 +1,12 @@
 import type { ImageMetadata } from "astro";
 
-import alexis from "../assets/images/home/alexis.jpg";
-import breathing from "../assets/images/home/breathing.jpg";
-import familyMain from "../assets/images/home/family-main.jpg";
-import familySecondary from "../assets/images/home/family-secondary.jpg";
-import hero from "../assets/images/home/hero.jpg";
-import weddingMain from "../assets/images/home/wedding-main.png";
-import weddingSecondary from "../assets/images/home/wedding-secondary.jpg";
+import alexis from "../images/home/alexis.jpg";
+import breathing from "../images/home/family-pregnancy.jpg";
+import familyMain from "../images/home/family-family.jpg";
+import familySecondary from "../images/home/family-birth.jpg";
+import hero from "../images/home/hero-main.jpg";
+import weddingMain from "../images/home/wedding-main.jpg";
+import weddingSecondary from "../images/home/wedding-secondary.jpg";
 
 import award2020 from "../assets/mariages.net/photographe mariage award 2020.jpg";
 import award2021 from "../assets/mariages.net/photographe mariage award 2021.jpg";

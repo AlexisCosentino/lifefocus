@@ -57,7 +57,7 @@ const galleryImages = service.gallery.map((image, index) => ({
   </section>
 
   <FamilyServicePricing package={service.package} pricing={service.pricing} />
-  <FamilyServiceGallery images={galleryImages} />
+  <FamilyServiceGallery images={galleryImages} galleryFolder={`src/images/${serviceSlug}/gallery`} />
   <FamilyServiceLinks links={service.links} />
   <FamilyServiceFAQ items={service.faq} />
 

@@ -5,9 +5,10 @@ import EditorialGallery from "./EditorialGallery.astro";
 
 interface Props {
   images: FamilyServiceImage[];
+  galleryFolder?: string;
 }
 
-const { images } = Astro.props;
+const { images, galleryFolder } = Astro.props;
 ---
 
 <EditorialGallery
@@ -15,4 +16,5 @@ const { images } = Astro.props;
   title="Une première respiration visuelle."
   titleId="family-gallery-title"
   images={images}
+  galleryFolder={galleryFolder}
 />

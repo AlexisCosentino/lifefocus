@@ -13,6 +13,19 @@ export interface AdviceArticle {
 
 export const adviceArticles = [
   {
+    title: "Les plus beaux domaines de mariage dans la Drôme",
+    description:
+      "Une sélection personnelle de domaines de mariage dans la Drôme, vue par un photographe habitué aux mariages autour de Valence, Romans-sur-Isère et en Drôme provençale.",
+    slug: "plus-beaux-domaines-mariage-drome",
+    publishedAt: new Date("2026-09-10"),
+    category: "Mariage",
+    excerpt:
+      "Chartrognière, Sarson, Balmes le Château, Chanteperdrix ou Maison Claudie : quelques lieux de mariage que j'aime photographier dans la Drôme.",
+    featuredImage: "weddingMain",
+    featuredImageAlt: "Domaine de mariage dans la Drôme photographié pendant une journée de mariage.",
+    draft: false,
+  },
+  {
     title: "Les 10 questions à poser à votre photographe avant de signer",
     description:
       "Style, reportage, nombre de photos, tarifs, réservation : voici 10 questions essentielles à poser à votre photographe de mariage avant de signer.",

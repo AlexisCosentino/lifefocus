@@ -27,10 +27,11 @@
         },
         {
           "key": "intro",
-          "filename": "intro.jpg",
+          "filename": "intro.mp4",
+          "type": "video",
           "orientation": "horizontal",
           "required": true,
-          "usage": "Image editoriale compacte sous le hero."
+          "usage": "Video de presentation compacte sous le hero."
         },
         {
           "key": "wedding-main",

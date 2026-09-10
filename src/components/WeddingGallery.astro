@@ -11,9 +11,10 @@ interface GalleryImage {
 
 interface Props {
   images: GalleryImage[];
+  galleryFolder?: string;
 }
 
-const { images } = Astro.props;
+const { images, galleryFolder } = Astro.props;
 ---
 
 <EditorialGallery
@@ -21,4 +22,5 @@ const { images } = Astro.props;
   title="Quelques fragments pour sentir le rythme."
   titleId="gallery-title"
   images={images}
+  galleryFolder={galleryFolder}
 />

@@ -4,6 +4,7 @@ import { Image } from "astro:assets";
 import ImageSlot from "../components/ImageSlot.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { awardImages } from "../data/homeImages";
+import introVideo from "../images/home/intro.mp4";
 
 const pageTitle = "Photographe mariage Drôme, Valence & Romans | Life Focus";
 const pageDescription =
@@ -61,8 +62,17 @@ const mariagesNetReviewsUrl =
           il y a une rencontre.
         </h2>
 
-        <figure class="media manifesto__image">
-          <ImageSlot path="src/images/home/intro.jpg" orientation="horizontal" />
+        <figure class="media manifesto__video">
+          <video
+            src={introVideo}
+            autoplay
+            muted
+            loop
+            playsinline
+            controls
+            preload="metadata"
+            aria-label="Vidéo de présentation Life Focus"
+          ></video>
         </figure>
       </div>
     </section>
@@ -334,13 +344,13 @@ const mariagesNetReviewsUrl =
   }
 
   .manifesto {
-    max-width: var(--editorial-narrow);
-    padding-block: 0 var(--space-md);
+    max-width: min(100%, 88rem);
+    padding-block: clamp(1.5rem, 3vw, var(--space-sm)) var(--space-md);
   }
 
   .manifesto__composition {
     display: grid;
-    gap: var(--space-sm);
+    gap: clamp(var(--space-sm), 5vw, var(--space-lg));
     align-items: center;
     isolation: isolate;
     min-width: 0;
@@ -373,9 +383,18 @@ const mariagesNetReviewsUrl =
     line-height: 1.65;
   }
 
-  .manifesto__image {
-    width: min(70vw, 21rem);
-    justify-self: end;
+  .manifesto__video {
+    width: 100%;
+    max-width: 46rem;
+    justify-self: stretch;
+    background: var(--color-line);
+  }
+
+  .manifesto__video video {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: var(--color-line);
   }
 
   .marriage {
@@ -755,7 +774,7 @@ const mariagesNetReviewsUrl =
     }
 
     .manifesto__composition {
-      grid-template-columns: minmax(0, 1.2fr) minmax(14rem, 0.55fr);
+      grid-template-columns: minmax(18rem, 0.58fr) minmax(0, 1fr);
     }
 
     .manifesto h2 {
@@ -765,11 +784,13 @@ const mariagesNetReviewsUrl =
       max-width: none;
     }
 
-    .manifesto__image {
+    .manifesto__video {
       grid-column: 2;
       grid-row: auto;
       align-self: center;
       width: 100%;
+      max-width: 54rem;
+      justify-self: end;
     }
 
     .marriage {

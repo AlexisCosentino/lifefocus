@@ -1,4 +1,5 @@
 ---
+import { Picture } from "astro:assets";
 import type { ImageMetadata } from "astro";
 
 import ImageSlot from "./ImageSlot.astro";
@@ -16,11 +17,42 @@ interface Props {
   title: string;
   titleId: string;
   images: EditorialGalleryImage[];
+  galleryFolder?: string;
 }
 
-const { eyebrow, title, titleId, images } = Astro.props;
+const { eyebrow, title, titleId, images, galleryFolder } = Astro.props;
 
 const normalizeSize = (size: EditorialGalleryImage["size"]) => (size === "vertical" ? "portrait" : size ?? "small");
+
+const imageModules = import.meta.glob<{ default: ImageMetadata }>("/src/images/**/*.{jpg,jpeg,png,webp,avif,JPG,JPEG,PNG,WEBP,AVIF}", {
+  eager: true,
+});
+
+const normalizedFolder = galleryFolder?.replace(/^\/?/, "/").replace(/\/$/, "");
+const folderImages = normalizedFolder
+  ? Object.entries(imageModules)
+      .filter(([path]) => path.startsWith(`${normalizedFolder}/`))
+      .sort(([pathA], [pathB]) => pathA.localeCompare(pathB, "fr", { numeric: true, sensitivity: "base" }))
+      .map(([path, module], index) => ({
+        resolvedSrc: module.default,
+        alt: `${title} - image ${index + 1}`,
+        slotPath: path.slice(1),
+      }))
+  : [];
+
+const galleryImages = folderImages.length > 0 ? folderImages : images;
+
+const getOrientation = (image: Pick<EditorialGalleryImage, "size" | "slotOrientation"> & { src?: ImageMetadata }) => {
+  if (image.slotOrientation) {
+    return image.slotOrientation;
+  }
+
+  if (image.src && image.src.height > image.src.width) {
+    return "vertical";
+  }
+
+  return normalizeSize(image.size) === "portrait" ? "vertical" : "horizontal";
+};
 ---
 
 <section class="editorial-gallery" aria-labelledby={titleId}>
@@ -31,12 +63,24 @@ const normalizeSize = (size: EditorialGalleryImage["size"]) => (size === "vertic
 
   <div class="editorial-gallery__grid">
     {
-      images.map((image, index) => (
+      galleryImages.map((image, index) => (
         <figure class:list={["editorial-gallery__item", `editorial-gallery__item--${normalizeSize(image.size)}`]}>
-          <ImageSlot
-            path={image.slotPath ?? `src/images/gallery/${String(index + 1).padStart(2, "0")}.jpg`}
-            orientation={image.slotOrientation ?? (normalizeSize(image.size) === "portrait" ? "vertical" : "horizontal")}
-          />
+          {"resolvedSrc" in image ? (
+            <Picture
+              src={image.resolvedSrc}
+              alt={image.alt}
+              widths={[360, 520, 720, 960, 1280]}
+              sizes="(min-width: 100rem) 18vw, (min-width: 64rem) 23vw, (min-width: 42rem) 46vw, calc(100vw - (2 * var(--page-padding)))"
+              formats={["avif", "webp"]}
+              quality={88}
+              loading="lazy"
+            />
+          ) : (
+            <ImageSlot
+              path={image.slotPath ?? `src/images/gallery/${String(index + 1).padStart(2, "0")}.jpg`}
+              orientation={getOrientation(image)}
+            />
+          )}
         </figure>
       ))
     }
@@ -67,8 +111,8 @@ const normalizeSize = (size: EditorialGalleryImage["size"]) => (size === "vertic
   }
 
   .editorial-gallery__grid {
-    width: min(96vw, 104rem);
-    margin-inline: auto;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
     padding-inline: var(--page-padding);
     column-gap: clamp(1rem, 1.45vw, 1.75rem);
     columns: 1;

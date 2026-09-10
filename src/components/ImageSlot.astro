@@ -19,7 +19,7 @@ const {
   sizes = "(min-width: 90rem) 70vw, (min-width: 64rem) 62vw, calc(100vw - (2 * var(--page-padding)))",
   quality = 88,
 } = Astro.props;
-const imageModules = import.meta.glob<{ default: ImageMetadata }>("/src/images/**/*.{jpg,jpeg,png,webp,avif}", {
+const imageModules = import.meta.glob<{ default: ImageMetadata }>("/src/images/**/*.{jpg,jpeg,png,webp,avif,JPG,JPEG,PNG,WEBP,AVIF}", {
   eager: true,
 });
 const image = imageModules[`/${path}`]?.default;

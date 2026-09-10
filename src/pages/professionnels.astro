@@ -4,9 +4,9 @@ import ImageSlot from "../components/ImageSlot.astro";
 import { homeImages } from "../data/homeImages";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const pageTitle = "Professionnels du mariage en Drôme | Life Focus";
+const pageTitle = "Professionnels du mariage & collaborations | Life Focus";
 const pageDescription =
-  "Life Focus collabore avec domaines, wedding planners et professionnels du mariage en Drôme, Ardèche et autour de Valence. Photographe de mariage depuis 2018.";
+  "Photographe de mariage basé à Romans-sur-Isère, je collabore avec domaines, wedding planners, vidéastes et prestataires en Drôme, Valence et Provence.";
 
 const professionalImages = [
   {
@@ -123,9 +123,8 @@ const structuredData = {
           </p>
           <p>
             Un mariage est un travail collectif. Domaines, wedding planners, vidéastes, traiteurs,
-            fleuristes, décorateurs : chacun tient une place dans la journée. Life Focus accorde
-            autant d'importance à la qualité des images qu'à la fluidité des échanges avec les
-            équipes présentes.
+            fleuristes, décorateurs : chacun joue un rôle dans le rythme de la journée. Je tiens
+            autant à la qualité des images qu'à la fluidité des échanges avec les équipes présentes.
           </p>
         </div>
       </div>
@@ -161,14 +160,15 @@ const structuredData = {
 
       <div class="professionals-collab__copy">
         <p>
-          Sur une journée de mariage, je cherche à travailler avec calme et précision. Respecter le
-          planning, comprendre l'organisation, communiquer simplement avec les autres prestataires
-          et rester autonome fait partie du reportage autant que la photographie elle-même.
+          Sur une journée de mariage, je cherche à travailler avec calme, précision et simplicité.
+          Respecter le planning, comprendre l'organisation, communiquer clairement avec les autres
+          prestataires et rester autonome fait partie du reportage autant que la photographie
+          elle-même.
         </p>
         <p>
-          Cette manière de travailler permet de garder une présence discrète auprès des mariés, tout
-          en restant disponible pour les wedding planners, les vidéastes, les domaines, les DJ ou les
-          équipes de réception lorsque le rythme de la journée le demande.
+          Cette manière de travailler me permet de rester discret auprès des mariés tout en étant
+          disponible pour les wedding planners, vidéastes, domaines, DJ et équipes de réception
+          lorsque le rythme de la journée le demande.
         </p>
         <div class="professionals-collab__links">
           <a class="editorial-link" href="/mariage/">Découvrir le reportage mariage →</a>
@@ -186,15 +186,15 @@ const structuredData = {
 
         <div class="professionals-copy">
           <p>
-            Lors d'un mariage, les images ne racontent pas seulement les mariés. Elles gardent aussi
-            le lieu, la décoration, les tables, les compositions florales, les détails et l'ambiance
+            Lors d'un mariage, les images ne racontent pas seulement les mariés. Elles montrent aussi
+            le lieu, la décoration, les compositions florales, les tables, les détails et l'ambiance
             imaginée par les professionnels présents.
           </p>
           <p>
-            Lorsque les conditions le permettent et dans le respect des mariés, certaines
+            Lorsque les conditions le permettent et avec l'accord des mariés, certaines
             photographies peuvent être mises à disposition des prestataires pour leur communication.
-            Un crédit <span>Life Focus</span> ou <span>Alexis - Life Focus</span> est simplement
-            apprécié lors de leur utilisation.
+            Un crédit <span>Life Focus — Alexis Cosentino</span> est simplement apprécié lors de leur
+            utilisation.
           </p>
         </div>
       </div>
@@ -217,10 +217,10 @@ const structuredData = {
         <p class="editorial-label">03 / EXPÉRIENCE</p>
         <h2 id="experience-title">Depuis 2018</h2>
         <p>
-          Depuis 2018, Alexis photographie des mariages dans des lieux et des configurations très
-          différentes, autour de Romans-sur-Isère, Valence, dans la Drôme, l'Ardèche et les régions
-          voisines. Cette expérience de terrain aide à anticiper le rythme d'une journée et à trouver
-          naturellement sa place au milieu des équipes.
+          Depuis 2018, je photographie des mariages dans des lieux et des configurations très
+          différentes, autour de Romans-sur-Isère, Valence, dans la Drôme, l'Ardèche et en Provence.
+          Cette expérience de terrain m'aide à anticiper le rythme d'une journée, à comprendre les
+          contraintes de chaque métier et à trouver naturellement ma place au milieu des équipes.
         </p>
       </div>
     </section>
@@ -230,6 +230,7 @@ const structuredData = {
       title="Lieux, décors, matières et ambiances."
       titleId="professionals-gallery-title"
       images={professionalImages}
+      galleryFolder="src/images/professionnels/gallery"
     />
 
     <section class="professionals-contact page-shell" aria-labelledby="professionals-contact-title">
@@ -295,7 +296,8 @@ const structuredData = {
   }
 
   .professionals-copy {
-    width: min(100%, 30rem);
+    width: min(100%, 28rem);
+    max-width: 100%;
   }
 
   .professionals-hero h1,
@@ -427,18 +429,22 @@ const structuredData = {
       grid-column: 1 / 5;
       grid-row: 1;
       align-self: start;
-      margin-top: clamp(2rem, 4.5vw, 3.75rem);
+      margin-top: clamp(2.4rem, 4.8vw, 4rem);
     }
 
     .professionals-title-surface--hero {
-      width: min(calc(100% + clamp(4rem, 7vw, 6rem)), 42rem);
+      width: min(calc(100% + clamp(0.75rem, 2vw, 1.5rem)), 34rem);
+    }
+
+    .professionals-hero .professionals-copy {
+      width: min(100%, 20rem);
     }
 
     .professionals-hero__visuals {
       grid-column: 6 / 13;
       grid-row: 1;
       grid-template-columns: repeat(10, minmax(0, 1fr));
-      width: min(58vw, 50rem);
+      width: min(56vw, 48rem);
       justify-self: end;
     }
 
