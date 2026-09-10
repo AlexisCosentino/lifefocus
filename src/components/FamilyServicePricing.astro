@@ -1,11 +1,12 @@
 ---
-import type { FamilyServicePackage } from "../data/familyServices";
+import type { FamilyServicePackage, FamilyServicePricingTexts } from "../data/familyServices";
 
 interface Props {
   package?: FamilyServicePackage;
+  pricing?: FamilyServicePricingTexts;
 }
 
-const { package: combinedPackage } = Astro.props;
+const { package: combinedPackage, pricing } = Astro.props;
 
 const included = [
   "Séance photo de 45 min à 1 h, selon le rythme du moment.",
@@ -19,9 +20,14 @@ const formulas = [
   {
     duration: "01 H",
     name: "Séance photo",
-    context: "Portrait solo, couple, grossesse, naissance ou famille, en intérieur ou en extérieur.",
+    context:
+      pricing?.formula.context ??
+      "Portrait solo, couple, grossesse, naissance ou famille, en intérieur ou en extérieur.",
     price: "250 €",
-    details: ["Photos livrées sans limite de nombre.", "Moment guidé simplement, sans mise en scène lourde."],
+    details: pricing?.formula.details ?? [
+      "Photos livrées sans limite de nombre.",
+      "Moment guidé simplement, sans mise en scène lourde.",
+    ],
   },
   ...(combinedPackage
     ? [
@@ -30,7 +36,10 @@ const formulas = [
           name: combinedPackage.title,
           context: combinedPackage.text,
           price: combinedPackage.price,
-          details: ["Une continuité entre l'attente et les premiers jours.", "Deux séances d'1 h."],
+          details: pricing?.combined?.details ?? [
+            "Une continuité entre l'attente et les premiers jours.",
+            "Deux séances d'1 h.",
+          ],
           href: combinedPackage.href,
           linkLabel: combinedPackage.linkLabel,
         },
@@ -50,7 +59,7 @@ const formulas = [
       <p id="family-included-title" class="family-service-pricing__eyebrow">Inclus dans chaque séance</p>
       <ul>
         {
-          included.map((item) => (
+          (pricing?.included ?? included).map((item) => (
             <li>{item}</li>
           ))
         }

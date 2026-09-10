@@ -162,28 +162,7 @@
           "filename": "couple-1.jpg",
           "orientation": "horizontal",
           "required": true,
-          "usage": "Image 1 du chapitre Couple."
-        },
-        {
-          "key": "couple-2",
-          "filename": "couple-2.jpg",
-          "orientation": "vertical",
-          "required": true,
-          "usage": "Image 2 du chapitre Couple."
-        },
-        {
-          "key": "couple-3",
-          "filename": "couple-3.jpg",
-          "orientation": "horizontal",
-          "required": true,
-          "usage": "Image 3 du chapitre Couple."
-        },
-        {
-          "key": "couple-4",
-          "filename": "couple-4.jpg",
-          "orientation": "vertical",
-          "required": true,
-          "usage": "Image 4 du chapitre Couple."
+          "usage": "Image horizontale unique du chapitre Couple."
         },
         {
           "key": "guests-1",
@@ -223,23 +202,16 @@
         {
           "key": "party-2",
           "filename": "party-2.jpg",
-          "orientation": "vertical",
-          "required": true,
-          "usage": "Image 2 du chapitre Soiree."
-        },
-        {
-          "key": "party-3",
-          "filename": "party-3.jpg",
           "orientation": "horizontal",
           "required": true,
-          "usage": "Image 3 du chapitre Soiree."
+          "usage": "Image 2 horizontale du chapitre Soiree."
         },
         {
-          "key": "party-4",
-          "filename": "party-4.jpg",
-          "orientation": "vertical",
+          "key": "package-included",
+          "filename": "package-included.jpg",
+          "orientation": "horizontal",
           "required": true,
-          "usage": "Image 4 du chapitre Soiree."
+          "usage": "Photographie horizontale du pack photo inclus dans les formules Mariage."
         },
         {
           "key": "gallery",
@@ -249,10 +221,10 @@
           "allowedExtensions": [".jpg", ".jpeg", ".png", ".webp", ".avif"],
           "orientation": "free",
           "required": true,
-          "usage": "Galerie Mariage. Les fichiers doivent etre nommes 1.jpg, 2.jpg, 3.jpg, etc."
+          "usage": "Galerie Mariage. Les fichiers doivent etre nommes 01.jpg, 02.jpg, 03.jpg, etc."
         }
       ],
-      "notes": "La page Mariage actuelle n'utilise pas d'image dans la section Accompagnement."
+      "notes": "La page Mariage utilise une image Couple, deux images Soiree horizontales et une galerie numerique extensible."
     },
     "grossesse": {
       "folder": "src/images/grossesse",
@@ -399,6 +371,69 @@
       "folder": null,
       "images": [],
       "notes": "La page Contact actuelle n'attend aucune photographie. Le logo et la carte ne sont pas des slots photographiques."
+    },
+    "conseils": {
+      "folder": "src/images/conseils",
+      "images": [
+        {
+          "key": "article-cover",
+          "type": "article-cover",
+          "filenamePattern": "{slug}.jpg",
+          "orientation": "horizontal",
+          "required": true,
+          "usage": "Image de couverture d'un article Conseil. Le nom du fichier reprend le slug de l'article."
+        }
+      ]
+    },
+    "professionnels": {
+      "folder": "src/images/professionnels",
+      "images": [
+        {
+          "key": "hero-main",
+          "filename": "hero-main.jpg",
+          "orientation": "horizontal",
+          "required": true,
+          "usage": "Grande photographie d'ouverture pour la page Professionnels."
+        },
+        {
+          "key": "hero-secondary",
+          "filename": "hero-secondary.jpg",
+          "orientation": "vertical",
+          "required": true,
+          "usage": "Photographie verticale secondaire pour le chevauchement du hero Professionnels."
+        },
+        {
+          "key": "details-main",
+          "filename": "details-main.jpg",
+          "orientation": "horizontal",
+          "required": true,
+          "usage": "Photographie principale de lieu, decoration, table ou ambiance."
+        },
+        {
+          "key": "details-secondary",
+          "filename": "details-secondary.jpg",
+          "orientation": "vertical",
+          "required": true,
+          "usage": "Photographie verticale de details, fleurs ou ambiance."
+        },
+        {
+          "key": "details-tertiary",
+          "filename": "details-tertiary.jpg",
+          "orientation": "horizontal",
+          "required": true,
+          "usage": "Photographie secondaire horizontale de details ou decor."
+        },
+        {
+          "key": "gallery",
+          "type": "gallery",
+          "folder": "src/images/professionnels/gallery",
+          "ordering": "natural-numeric",
+          "allowedExtensions": [".jpg", ".jpeg", ".png", ".webp", ".avif"],
+          "orientation": "free",
+          "required": true,
+          "usage": "Galerie Professionnels. Les fichiers doivent etre nommes 01.jpg, 02.jpg, 03.jpg, etc."
+        }
+      ]
     }
   },
   "folderStructure": [
@@ -411,6 +446,9 @@
     "src/images/naissance/gallery",
     "src/images/famille",
     "src/images/famille/gallery",
-    "src/images/a-propos"
+    "src/images/a-propos",
+    "src/images/conseils",
+    "src/images/professionnels",
+    "src/images/professionnels/gallery"
   ]
 }

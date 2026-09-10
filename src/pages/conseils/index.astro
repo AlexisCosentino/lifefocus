@@ -1,8 +1,6 @@
 ---
-import { Picture } from "astro:assets";
-
+import ImageSlot from "../../components/ImageSlot.astro";
 import { adviceArticles } from "../../data/conseilsArticles";
-import { homeImages } from "../../data/homeImages";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 const articles = adviceArticles
@@ -11,14 +9,6 @@ const articles = adviceArticles
     (a, b) =>
       b.publishedAt.getTime() - a.publishedAt.getTime(),
   );
-
-const imageMap = {
-  hero: homeImages.hero,
-  weddingMain: homeImages.weddingMain,
-  weddingSecondary: homeImages.weddingSecondary,
-  breathing: homeImages.breathing,
-  familyMain: homeImages.familyMain,
-} as const;
 
 const pageTitle = "Conseils mariage et photographie | Life Focus";
 const pageDescription =
@@ -42,11 +32,7 @@ const pageDescription =
 
     <div class="advice-list" aria-label="Articles publiés">
       {
-        articles.map((article, index) => {
-          const image =
-            imageMap[article.featuredImage as keyof typeof imageMap] ?? homeImages.weddingMain;
-
-          return (
+        articles.map((article, index) => (
             <article class="advice-item">
               <div class="advice-item__meta">
                 <span>{String(index + 1).padStart(2, "0")}</span>
@@ -64,18 +50,10 @@ const pageDescription =
               </div>
 
               <figure class="advice-item__image">
-                <Picture
-                  src={image.src}
-                  alt={article.featuredImageAlt ?? image.alt}
-                  widths={[420, 640, 840, 1080]}
-                  sizes="(min-width: 72rem) 28vw, calc(100vw - (2 * var(--page-padding)))"
-                  formats={["avif", "webp"]}
-                  loading={index === 0 ? "eager" : "lazy"}
-                />
+                <ImageSlot path={`src/images/conseils/${article.slug}.jpg`} orientation="horizontal" />
               </figure>
             </article>
-          );
-        })
+          ))
       }
     </div>
 

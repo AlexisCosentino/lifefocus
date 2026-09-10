@@ -1,6 +1,6 @@
 ---
-import { Picture } from "astro:assets";
 import type { FamilyServiceImage } from "../data/familyServices";
+import ImageSlot from "./ImageSlot.astro";
 
 interface Props {
   eyebrow: string;
@@ -16,26 +16,22 @@ const { eyebrow, title, text, image, secondaryImage } = Astro.props;
 <section class="family-service-hero" aria-labelledby="family-service-title">
   <div class="family-service-hero__visuals">
     <figure class="family-service-hero__image family-service-hero__image--main">
-      <Picture
-        src={image.src}
-        alt={image.alt}
-        widths={[540, 720, 960, 1280, 1600]}
-        sizes="(min-width: 72rem) 58vw, calc(100vw - (2 * var(--page-padding)))"
-        formats={["avif", "webp"]}
+      <ImageSlot
+        path={image.slotPath ?? "src/images/service/hero-main.jpg"}
+        orientation={image.slotOrientation ?? "horizontal"}
         loading="eager"
-        decoding="sync"
-        fetchpriority="high"
+        quality={92}
+        sizes="(min-width: 72rem) 58vw, calc(100vw - (2 * var(--page-padding)))"
       />
     </figure>
 
     <figure class="family-service-hero__image family-service-hero__image--secondary">
-      <Picture
-        src={secondaryImage.src}
-        alt={secondaryImage.alt}
-        widths={[360, 540, 720, 960]}
-        sizes="(min-width: 72rem) 20vw, 48vw"
-        formats={["avif", "webp"]}
+      <ImageSlot
+        path={secondaryImage.slotPath ?? "src/images/service/hero-secondary.jpg"}
+        orientation={secondaryImage.slotOrientation ?? "vertical"}
         loading="eager"
+        quality={92}
+        sizes="(min-width: 72rem) 20vw, 48vw"
       />
     </figure>
   </div>

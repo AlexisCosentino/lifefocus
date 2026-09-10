@@ -1,18 +1,27 @@
 ---
-import { Picture } from "astro:assets";
-
 import type { FamilyServicePageData } from "../data/familyServices";
 import FamilyServiceFAQ from "./FamilyServiceFAQ.astro";
 import FamilyServiceGallery from "./FamilyServiceGallery.astro";
 import FamilyServiceHero from "./FamilyServiceHero.astro";
 import FamilyServiceLinks from "./FamilyServiceLinks.astro";
 import FamilyServicePricing from "./FamilyServicePricing.astro";
+import ImageSlot from "./ImageSlot.astro";
 
 interface Props {
   service: FamilyServicePageData;
 }
 
 const { service } = Astro.props;
+const serviceSlugs = {
+  Grossesse: "grossesse",
+  Naissance: "naissance",
+  Famille: "famille",
+} as const;
+const serviceSlug = serviceSlugs[service.label as keyof typeof serviceSlugs] ?? "service";
+const galleryImages = service.gallery.map((image, index) => ({
+  ...image,
+  slotPath: image.slotPath ?? `src/images/${serviceSlug}/gallery/${String(index + 1).padStart(2, "0")}.jpg`,
+}));
 ---
 
 <div class="family-service-page">
@@ -20,8 +29,16 @@ const { service } = Astro.props;
     eyebrow={service.hero.eyebrow}
     title={service.hero.title}
     text={service.hero.text}
-    image={service.hero.image}
-    secondaryImage={service.hero.secondaryImage}
+    image={{
+      ...service.hero.image,
+      slotPath: service.hero.image.slotPath ?? `src/images/${serviceSlug}/hero-main.jpg`,
+      slotOrientation: service.hero.image.slotOrientation ?? "horizontal",
+    }}
+    secondaryImage={{
+      ...service.hero.secondaryImage,
+      slotPath: service.hero.secondaryImage.slotPath ?? `src/images/${serviceSlug}/hero-secondary.jpg`,
+      slotOrientation: service.hero.secondaryImage.slotOrientation ?? "vertical",
+    }}
   />
 
   <section class="family-service-approach page-shell" aria-labelledby="family-approach-title">
@@ -32,19 +49,15 @@ const { service } = Astro.props;
     </div>
 
     <figure class="family-service-approach__image">
-      <Picture
-        src={service.approach.image.src}
-        alt={service.approach.image.alt}
-        widths={[540, 720, 960, 1280]}
-        sizes="(min-width: 72rem) 38vw, calc(100vw - (2 * var(--page-padding)))"
-        formats={["avif", "webp"]}
-        loading="lazy"
+      <ImageSlot
+        path={service.approach.image.slotPath ?? `src/images/${serviceSlug}/approach-main.jpg`}
+        orientation={service.approach.image.slotOrientation ?? "horizontal"}
       />
     </figure>
   </section>
 
-  <FamilyServicePricing package={service.package} />
-  <FamilyServiceGallery images={service.gallery} />
+  <FamilyServicePricing package={service.package} pricing={service.pricing} />
+  <FamilyServiceGallery images={galleryImages} />
   <FamilyServiceLinks links={service.links} />
   <FamilyServiceFAQ items={service.faq} />
 

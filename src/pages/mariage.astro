@@ -1,6 +1,5 @@
 ---
-import { Picture } from "astro:assets";
-
+import ImageSlot from "../components/ImageSlot.astro";
 import WeddingChapter from "../components/WeddingChapter.astro";
 import WeddingFAQ from "../components/WeddingFAQ.astro";
 import WeddingGallery from "../components/WeddingGallery.astro";
@@ -12,11 +11,21 @@ const pageTitle = "Photographe mariage Drôme, Valence & Provence | Life Focus";
 const pageDescription =
   "Photographe de mariage à Valence, Romans-sur-Isère, dans la Drôme et en Provence. Reportage naturel et spontané pour raconter votre journée sans la figer.";
 
+const weddingImage = (
+  image: typeof homeImages[keyof typeof homeImages],
+  slotPath: string,
+  slotOrientation: "horizontal" | "vertical" = "horizontal",
+) => ({
+  ...image,
+  slotPath,
+  slotOrientation,
+});
+
 const chapterImageSet = [
-  homeImages.hero,
-  homeImages.weddingSecondary,
-  homeImages.weddingMain,
-  homeImages.heroSecondary,
+  weddingImage(homeImages.hero, "src/images/mariage/preparation-1.jpg"),
+  weddingImage(homeImages.weddingSecondary, "src/images/mariage/preparation-2.jpg", "vertical"),
+  weddingImage(homeImages.weddingMain, "src/images/mariage/preparation-3.jpg"),
+  weddingImage(homeImages.heroSecondary, "src/images/mariage/preparation-4.jpg", "vertical"),
 ] as const;
 
 const chapters = [
@@ -34,7 +43,12 @@ const chapters = [
     title: "Rester attentif à ce qui se joue vraiment.",
     text: "Les regards, les mains qui se cherchent, les réactions de vos proches, les silences. Pendant la cérémonie, je reste attentif à tout ce qui raconte votre histoire sans jamais prendre la place du moment.",
     pattern: "b",
-    images: [homeImages.weddingMain, homeImages.heroSecondary, homeImages.hero, homeImages.weddingSecondary],
+    images: [
+      weddingImage(homeImages.weddingMain, "src/images/mariage/ceremony-1.jpg"),
+      weddingImage(homeImages.heroSecondary, "src/images/mariage/ceremony-2.jpg", "vertical"),
+      weddingImage(homeImages.hero, "src/images/mariage/ceremony-3.jpg"),
+      weddingImage(homeImages.weddingSecondary, "src/images/mariage/ceremony-4.jpg", "vertical"),
+    ],
   },
   {
     number: "04",
@@ -42,7 +56,7 @@ const chapters = [
     title: "Quelques minutes pour souffler ensemble.",
     text: "Pas besoin de disparaître une heure de votre mariage pour avoir de belles photos de couple. Quelques minutes suffisent souvent. Je vous guide juste assez pour créer des images naturelles tout en vous laissant profiter l’un de l’autre.",
     pattern: "c",
-    images: [homeImages.hero],
+    images: [weddingImage(homeImages.hero, "src/images/mariage/couple-1.jpg")],
   },
   {
     number: "05",
@@ -50,7 +64,12 @@ const chapters = [
     title: "Les personnes qui donnent du relief à l'histoire.",
     text: "Un rire au cocktail, une discussion à l’écart, un regard pendant la cérémonie. Vos invités font partie intégrante du reportage et donnent à vos photos tout ce qui rend cette journée vraiment personnelle.",
     pattern: "a",
-    images: [homeImages.weddingMain, homeImages.hero, homeImages.heroSecondary, homeImages.weddingSecondary],
+    images: [
+      weddingImage(homeImages.weddingMain, "src/images/mariage/guests-1.jpg"),
+      weddingImage(homeImages.hero, "src/images/mariage/guests-2.jpg"),
+      weddingImage(homeImages.heroSecondary, "src/images/mariage/guests-3.jpg", "vertical"),
+      weddingImage(homeImages.weddingSecondary, "src/images/mariage/guests-4.jpg", "vertical"),
+    ],
   },
   {
     number: "06",
@@ -58,11 +77,14 @@ const chapters = [
     title: "Quand la journée devient plus libre.",
     text: "La lumière baisse, les discours laissent place à la fête et les gestes deviennent plus spontanés. Je continue à raconter votre mariage avec la même attention, jusque dans son énergie la plus libre.",
     pattern: "b",
-    images: [homeImages.hero, homeImages.weddingMain],
+    images: [
+      weddingImage(homeImages.hero, "src/images/mariage/party-1.jpg"),
+      weddingImage(homeImages.weddingMain, "src/images/mariage/party-2.jpg"),
+    ],
   },
 ] as const;
 
-const galleryImages = [
+const galleryImageFallbacks = [
   { ...homeImages.hero, size: "wide" },
   { ...homeImages.weddingSecondary, size: "vertical" },
   { ...homeImages.weddingMain, size: "small" },
@@ -82,6 +104,12 @@ const galleryImages = [
   { ...homeImages.weddingSecondary, size: "vertical" },
   { ...homeImages.hero, size: "small" },
 ] as const;
+
+const galleryImages = galleryImageFallbacks.map((image, index) => ({
+  ...image,
+  slotPath: `src/images/mariage/gallery/${String(index + 1).padStart(2, "0")}.jpg`,
+  slotOrientation: image.size === "vertical" ? "vertical" : "horizontal",
+}));
 ---
 
 <BaseLayout
@@ -94,26 +122,22 @@ const galleryImages = [
       <div class="wedding-hero__inner">
         <div class="wedding-hero__images" aria-label="Reportage photo de mariage">
           <figure class="wedding-hero__main">
-            <Picture
-              src={homeImages.hero.src}
-              alt={homeImages.hero.alt}
-              widths={[720, 1080, 1440, 1732]}
-              sizes="(min-width: 72rem) 58vw, calc(100vw - (2 * var(--page-padding)))"
-              formats={["avif", "webp"]}
+            <ImageSlot
+              path="src/images/mariage/hero-main.jpg"
+              orientation="horizontal"
               loading="eager"
-              decoding="sync"
-              fetchpriority="high"
+              quality={92}
+              sizes="(min-width: 72rem) 58vw, calc(100vw - (2 * var(--page-padding)))"
             />
           </figure>
 
           <figure class="wedding-hero__secondary">
-            <Picture
-              src={homeImages.weddingSecondary.src}
-              alt={homeImages.weddingSecondary.alt}
-              widths={[360, 540, 720, 960]}
-              sizes="(min-width: 72rem) 20vw, 46vw"
-              formats={["avif", "webp"]}
+            <ImageSlot
+              path="src/images/mariage/hero-secondary.jpg"
+              orientation="vertical"
               loading="eager"
+              quality={92}
+              sizes="(min-width: 72rem) 20vw, 46vw"
             />
           </figure>
         </div>
@@ -140,14 +164,7 @@ const galleryImages = [
       </div>
 
       <figure class="wedding-approach__image">
-        <Picture
-          src={homeImages.weddingMain.src}
-          alt={homeImages.weddingMain.alt}
-          widths={[540, 720, 960, 1280, 1773]}
-          sizes="(min-width: 72rem) 39vw, calc(100vw - (2 * var(--page-padding)))"
-          formats={["avif", "webp"]}
-          loading="lazy"
-        />
+        <ImageSlot path="src/images/mariage/approach-main.jpg" orientation="horizontal" />
       </figure>
     </section>
 

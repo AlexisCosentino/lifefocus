@@ -1,7 +1,5 @@
 ---
-import { Picture } from "astro:assets";
-
-import { homeImages } from "../data/homeImages";
+import ImageSlot from "./ImageSlot.astro";
 
 const included = [
   "Toutes les photographies sélectionnées, triées et retouchées individuellement en haute définition.",
@@ -77,14 +75,7 @@ const addOnIncluded = [
   <div class="wedding-packages__included-section">
     <div class="wedding-packages__visual">
       <figure class="wedding-packages__included-image">
-        <Picture
-          src={homeImages.weddingMain.src}
-          alt={homeImages.weddingMain.alt}
-          widths={[480, 720, 960, 1280, 1773]}
-          sizes="(min-width: 72rem) 34vw, calc(100vw - (2 * var(--page-padding)))"
-          formats={["avif", "webp"]}
-          loading="lazy"
-        />
+        <ImageSlot path="src/images/mariage/package-included.jpg" orientation="horizontal" />
       </figure>
 
       <div class="wedding-packages__keepsake">

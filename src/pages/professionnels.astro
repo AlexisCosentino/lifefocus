@@ -1,0 +1,513 @@
+---
+import EditorialGallery from "../components/EditorialGallery.astro";
+import ImageSlot from "../components/ImageSlot.astro";
+import { homeImages } from "../data/homeImages";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const pageTitle = "Professionnels du mariage en Drôme | Life Focus";
+const pageDescription =
+  "Life Focus collabore avec domaines, wedding planners et professionnels du mariage en Drôme, Ardèche et autour de Valence. Photographe de mariage depuis 2018.";
+
+const professionalImages = [
+  {
+    ...homeImages.weddingMain,
+    size: "wide",
+    slotPath: "src/images/professionnels/gallery/01.jpg",
+    slotOrientation: "horizontal",
+  },
+  {
+    ...homeImages.weddingSecondary,
+    size: "vertical",
+    slotPath: "src/images/professionnels/gallery/02.jpg",
+    slotOrientation: "vertical",
+  },
+  {
+    ...homeImages.hero,
+    size: "small",
+    slotPath: "src/images/professionnels/gallery/03.jpg",
+    slotOrientation: "horizontal",
+  },
+  {
+    ...homeImages.heroSecondary,
+    size: "vertical",
+    slotPath: "src/images/professionnels/gallery/04.jpg",
+    slotOrientation: "vertical",
+  },
+  {
+    ...homeImages.weddingMain,
+    size: "wide",
+    slotPath: "src/images/professionnels/gallery/05.jpg",
+    slotOrientation: "horizontal",
+  },
+  {
+    ...homeImages.heroSecondary,
+    size: "vertical",
+    slotPath: "src/images/professionnels/gallery/06.jpg",
+    slotOrientation: "vertical",
+  },
+  {
+    ...homeImages.hero,
+    size: "small",
+    slotPath: "src/images/professionnels/gallery/07.jpg",
+    slotOrientation: "horizontal",
+  },
+  {
+    ...homeImages.weddingSecondary,
+    size: "vertical",
+    slotPath: "src/images/professionnels/gallery/08.jpg",
+    slotOrientation: "vertical",
+  },
+  {
+    ...homeImages.weddingMain,
+    size: "wide",
+    slotPath: "src/images/professionnels/gallery/09.jpg",
+    slotOrientation: "horizontal",
+  },
+  {
+    ...homeImages.hero,
+    size: "small",
+    slotPath: "src/images/professionnels/gallery/10.jpg",
+    slotOrientation: "horizontal",
+  },
+  {
+    ...homeImages.heroSecondary,
+    size: "vertical",
+    slotPath: "src/images/professionnels/gallery/11.jpg",
+    slotOrientation: "vertical",
+  },
+  {
+    ...homeImages.weddingSecondary,
+    size: "small",
+    slotPath: "src/images/professionnels/gallery/12.jpg",
+    slotOrientation: "horizontal",
+  },
+] as const;
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Accueil",
+      item: "https://lifefocus.fr/",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Professionnels",
+      item: "https://lifefocus.fr/professionnels/",
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl="https://lifefocus.fr/professionnels/"
+  structuredData={structuredData}
+>
+  <article class="professionals-page">
+    <section class="professionals-hero page-shell" aria-labelledby="professionals-title">
+      <div class="professionals-hero__text">
+        <div class="professionals-title-surface professionals-title-surface--hero">
+          <p class="editorial-label">PROFESSIONNELS DU MARIAGE</p>
+          <h1 id="professionals-title">Professionnels du mariage</h1>
+        </div>
+
+        <div class="professionals-copy">
+          <p class="professionals-hero__lead">
+            Créer de belles images, mais aussi de belles collaborations.
+          </p>
+          <p>
+            Un mariage est un travail collectif. Domaines, wedding planners, vidéastes, traiteurs,
+            fleuristes, décorateurs : chacun tient une place dans la journée. Life Focus accorde
+            autant d'importance à la qualité des images qu'à la fluidité des échanges avec les
+            équipes présentes.
+          </p>
+        </div>
+      </div>
+
+      <div class="professionals-hero__visuals" aria-label="Collaboration avec les professionnels du mariage">
+        <figure class="professionals-hero__image professionals-hero__image--main">
+          <ImageSlot
+            path="src/images/professionnels/hero-main.jpg"
+            orientation="horizontal"
+            loading="eager"
+            quality={92}
+            sizes="(min-width: 72rem) 52vw, calc(100vw - (2 * var(--page-padding)))"
+          />
+        </figure>
+
+        <figure class="professionals-hero__image professionals-hero__image--secondary">
+          <ImageSlot
+            path="src/images/professionnels/hero-secondary.jpg"
+            orientation="vertical"
+            loading="eager"
+            quality={92}
+            sizes="(min-width: 72rem) 18vw, 44vw"
+          />
+        </figure>
+      </div>
+    </section>
+
+    <section class="professionals-collab page-shell" aria-labelledby="collaboration-title">
+      <div class="professionals-collab__intro">
+        <p class="editorial-label">01 / COLLABORATION</p>
+        <h2 id="collaboration-title">Une présence simple, fiable et naturelle.</h2>
+      </div>
+
+      <div class="professionals-collab__copy">
+        <p>
+          Sur une journée de mariage, je cherche à travailler avec calme et précision. Respecter le
+          planning, comprendre l'organisation, communiquer simplement avec les autres prestataires
+          et rester autonome fait partie du reportage autant que la photographie elle-même.
+        </p>
+        <p>
+          Cette manière de travailler permet de garder une présence discrète auprès des mariés, tout
+          en restant disponible pour les wedding planners, les vidéastes, les domaines, les DJ ou les
+          équipes de réception lorsque le rythme de la journée le demande.
+        </p>
+        <div class="professionals-collab__links">
+          <a class="editorial-link" href="/mariage/">Découvrir le reportage mariage →</a>
+          <a class="editorial-link" href="/a-propos/">En savoir plus sur Alexis →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="professionals-value page-shell" aria-labelledby="value-title">
+      <div class="professionals-value__text">
+        <div class="professionals-title-surface professionals-title-surface--value">
+          <p class="editorial-label">02 / VOTRE TRAVAIL</p>
+          <h2 id="value-title">Photographier aussi ce que vous avez construit.</h2>
+        </div>
+
+        <div class="professionals-copy">
+          <p>
+            Lors d'un mariage, les images ne racontent pas seulement les mariés. Elles gardent aussi
+            le lieu, la décoration, les tables, les compositions florales, les détails et l'ambiance
+            imaginée par les professionnels présents.
+          </p>
+          <p>
+            Lorsque les conditions le permettent et dans le respect des mariés, certaines
+            photographies peuvent être mises à disposition des prestataires pour leur communication.
+            Un crédit <span>Life Focus</span> ou <span>Alexis - Life Focus</span> est simplement
+            apprécié lors de leur utilisation.
+          </p>
+        </div>
+      </div>
+
+      <div class="professionals-value__images" aria-label="Images attendues pour les professionnels">
+        <figure class="professionals-value__image professionals-value__image--main">
+          <ImageSlot path="src/images/professionnels/details-main.jpg" orientation="horizontal" />
+        </figure>
+        <figure class="professionals-value__image professionals-value__image--secondary">
+          <ImageSlot path="src/images/professionnels/details-secondary.jpg" orientation="vertical" />
+        </figure>
+        <figure class="professionals-value__image professionals-value__image--small">
+          <ImageSlot path="src/images/professionnels/details-tertiary.jpg" orientation="horizontal" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="professionals-experience" aria-labelledby="experience-title">
+      <div class="professionals-experience__inner page-shell">
+        <p class="editorial-label">03 / EXPÉRIENCE</p>
+        <h2 id="experience-title">Depuis 2018</h2>
+        <p>
+          Depuis 2018, Alexis photographie des mariages dans des lieux et des configurations très
+          différentes, autour de Romans-sur-Isère, Valence, dans la Drôme, l'Ardèche et les régions
+          voisines. Cette expérience de terrain aide à anticiper le rythme d'une journée et à trouver
+          naturellement sa place au milieu des équipes.
+        </p>
+      </div>
+    </section>
+
+    <EditorialGallery
+      eyebrow="04 / GALERIE"
+      title="Lieux, décors, matières et ambiances."
+      titleId="professionals-gallery-title"
+      images={professionalImages}
+    />
+
+    <section class="professionals-contact page-shell" aria-labelledby="professionals-contact-title">
+      <div class="professionals-contact__intro">
+        <p class="editorial-label">05 / COLLABORONS</p>
+        <h2 id="professionals-contact-title">Travaillons ensemble</h2>
+      </div>
+
+      <div class="professionals-contact__copy">
+        <p>
+          Si vous êtes domaine de réception, wedding planner, vidéaste, traiteur, fleuriste ou
+          professionnel du mariage et que nos univers peuvent se compléter, je serai heureux
+          d'échanger avec vous.
+        </p>
+        <div class="professionals-contact__links">
+          <a class="editorial-link" href="/contact/">Me contacter →</a>
+          <a class="editorial-link" href="/mariage/">Découvrir mon travail →</a>
+        </div>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .professionals-page {
+    overflow-x: clip;
+  }
+
+  .professionals-hero,
+  .professionals-collab,
+  .professionals-value,
+  .professionals-contact {
+    display: grid;
+    gap: var(--space-md);
+    max-width: 82rem;
+    padding-block: var(--space-lg);
+  }
+
+  .professionals-hero {
+    padding-top: clamp(0.75rem, 1.8vw, 1.5rem);
+    isolation: isolate;
+  }
+
+  .professionals-hero__text,
+  .professionals-collab__intro,
+  .professionals-collab__copy,
+  .professionals-value__text,
+  .professionals-copy,
+  .professionals-contact__intro,
+  .professionals-contact__copy {
+    display: grid;
+    gap: var(--space-xs);
+    min-width: 0;
+  }
+
+  .professionals-title-surface {
+    position: relative;
+    z-index: 3;
+    width: min(100%, 40rem);
+    padding: clamp(1.25rem, 2.25vw, 2.35rem);
+    background: var(--color-surface-soft);
+    overflow-wrap: break-word;
+  }
+
+  .professionals-copy {
+    width: min(100%, 30rem);
+  }
+
+  .professionals-hero h1,
+  .professionals-collab h2,
+  .professionals-value h2,
+  .professionals-experience h2,
+  .professionals-contact h2 {
+    font-family: var(--font-editorial);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 0.98;
+  }
+
+  .professionals-hero h1 {
+    max-width: 14ch;
+    font-size: clamp(2.85rem, 1.6rem + 3.55vw, 5rem);
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  .professionals-collab h2,
+  .professionals-value h2,
+  .professionals-experience h2,
+  .professionals-contact h2 {
+    max-width: 13ch;
+    font-size: clamp(2.35rem, 1.5rem + 2.75vw, 4.65rem);
+  }
+
+  .professionals-hero p:not(.editorial-label),
+  .professionals-collab p,
+  .professionals-value p,
+  .professionals-experience p,
+  .professionals-contact p {
+    max-width: var(--reading-max);
+    color: var(--color-muted);
+  }
+
+  .professionals-hero__lead {
+    color: var(--color-text);
+    font-size: var(--text-lead);
+    line-height: 1.35;
+  }
+
+  .professionals-hero__visuals,
+  .professionals-value__images {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    align-items: start;
+    isolation: isolate;
+    min-width: 0;
+  }
+
+  .professionals-hero__image,
+  .professionals-value__image {
+    position: relative;
+    margin: 0;
+    background: var(--color-line);
+  }
+
+  .professionals-hero__image--main,
+  .professionals-value__image--main {
+    z-index: 1;
+  }
+
+  .professionals-hero__image--secondary {
+    z-index: 2;
+    width: min(44vw, 14rem);
+    margin-top: calc(var(--space-sm) * -0.85);
+    margin-left: auto;
+  }
+
+  .professionals-collab {
+    border-top: 1px solid var(--color-line);
+  }
+
+  .professionals-collab__links,
+  .professionals-contact__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem 1.6rem;
+    margin-top: var(--space-xs);
+  }
+
+  .professionals-value {
+    align-items: center;
+    isolation: isolate;
+  }
+
+  .professionals-value__text span {
+    color: var(--color-text);
+  }
+
+  .professionals-experience {
+    margin-block: var(--space-lg);
+    color: var(--color-background);
+  }
+
+  .professionals-experience__inner {
+    display: grid;
+    gap: var(--space-xs);
+    width: min(calc(100% - (var(--page-padding) * 1.5)), 82rem);
+    margin-right: var(--page-padding);
+    margin-left: auto;
+    padding-block: clamp(4rem, 7vw, 6.5rem);
+    background: var(--color-dark);
+  }
+
+  .professionals-experience .editorial-label,
+  .professionals-experience p {
+    color: color-mix(in srgb, var(--color-background) 76%, var(--color-white));
+  }
+
+  .professionals-contact {
+    min-height: clamp(14rem, 22vw, 20rem);
+    align-content: center;
+    border-top: 1px solid var(--color-line);
+  }
+
+  @media (min-width: 72rem) {
+    .professionals-hero {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: clamp(2.25rem, 4.5vw, 4.5rem);
+      padding-bottom: clamp(5.5rem, 8vw, 7.5rem);
+    }
+
+    .professionals-hero__text {
+      z-index: 2;
+      grid-column: 1 / 5;
+      grid-row: 1;
+      align-self: start;
+      margin-top: clamp(2rem, 4.5vw, 3.75rem);
+    }
+
+    .professionals-title-surface--hero {
+      width: min(calc(100% + clamp(4rem, 7vw, 6rem)), 42rem);
+    }
+
+    .professionals-hero__visuals {
+      grid-column: 6 / 13;
+      grid-row: 1;
+      grid-template-columns: repeat(10, minmax(0, 1fr));
+      width: min(58vw, 50rem);
+      justify-self: end;
+    }
+
+    .professionals-hero__image--main {
+      grid-column: 1 / 9;
+      grid-row: 1;
+    }
+
+    .professionals-hero__image--secondary {
+      grid-column: 8 / 11;
+      grid-row: 1;
+      width: 100%;
+      margin: 0 0 0 calc(var(--space-sm) * -0.55);
+      transform: translateY(clamp(-3.5rem, -4.5vw, -2.35rem));
+    }
+
+    .professionals-collab {
+      grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
+      gap: clamp(3rem, 7vw, 7rem);
+      align-items: start;
+    }
+
+    .professionals-value {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: clamp(2.25rem, 4.5vw, 4.5rem);
+    }
+
+    .professionals-value__text {
+      z-index: 2;
+      grid-column: 1 / 5;
+      grid-row: 1;
+      align-self: start;
+      padding-top: clamp(1rem, 3vw, 3rem);
+    }
+
+    .professionals-title-surface--value {
+      width: min(calc(100% + clamp(1.5rem, 3vw, 2.5rem)), 34rem);
+    }
+
+    .professionals-value__images {
+      grid-column: 6 / 13;
+      grid-row: 1;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 0;
+    }
+
+    .professionals-value__image--main {
+      grid-column: 1 / 9;
+      grid-row: 1 / 3;
+    }
+
+    .professionals-value__image--secondary {
+      grid-column: 8 / 13;
+      grid-row: 1;
+      z-index: 2;
+      margin: clamp(2.5rem, 5vw, 4.5rem) 0 0 calc(var(--space-sm) * -0.45);
+    }
+
+    .professionals-value__image--small {
+      grid-column: 2 / 7;
+      grid-row: 2;
+      z-index: 3;
+      margin-top: calc(var(--space-md) * -0.5);
+    }
+
+    .professionals-contact {
+      grid-template-columns: minmax(0, 0.45fr) minmax(0, 1fr);
+      gap: clamp(3rem, 7vw, 7rem);
+      align-items: start;
+    }
+  }
+</style>

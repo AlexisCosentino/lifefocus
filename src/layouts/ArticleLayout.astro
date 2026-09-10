@@ -1,7 +1,5 @@
 ---
-import { Picture } from "astro:assets";
-
-import { homeImages } from "../data/homeImages";
+import ImageSlot from "../components/ImageSlot.astro";
 import BaseLayout from "./BaseLayout.astro";
 
 interface ArticleData {
@@ -19,19 +17,6 @@ interface ArticleData {
 const { article } = Astro.props as {
   article: ArticleData;
 };
-
-const imageMap = {
-  hero: homeImages.hero,
-  heroSecondary: homeImages.heroSecondary,
-  weddingMain: homeImages.weddingMain,
-  weddingSecondary: homeImages.weddingSecondary,
-  breathing: homeImages.breathing,
-  familyMain: homeImages.familyMain,
-  alexis: homeImages.alexis,
-} as const;
-
-const featuredImage =
-  imageMap[article.featuredImage as keyof typeof imageMap] ?? homeImages.weddingMain;
 
 const canonicalUrl = `https://lifefocus.fr/conseils/${article.slug}/`;
 const publishedAt = article.publishedAt.toISOString();
@@ -113,16 +98,7 @@ const structuredData = [
       </div>
 
       <figure class="article-hero__image">
-        <Picture
-          src={featuredImage.src}
-          alt={article.featuredImageAlt ?? featuredImage.alt}
-          widths={[640, 960, 1280, 1773]}
-          sizes="(min-width: 72rem) 72vw, calc(100vw - (2 * var(--page-padding)))"
-          formats={["avif", "webp"]}
-          loading="eager"
-          decoding="sync"
-          fetchpriority="high"
-        />
+        <ImageSlot path={`src/images/conseils/${article.slug}.jpg`} orientation="horizontal" />
       </figure>
     </header>
 

@@ -29,11 +29,11 @@ Chaque galerie utilise un dossier `gallery`.
 
 Les fichiers doivent etre nommes avec des nombres :
 
-- `1.jpg`
-- `2.jpg`
-- `3.jpg`
+- `01.jpg`
+- `02.jpg`
+- `03.jpg`
 - `10.jpg`
 
-L'ordre attendu est un tri naturel numerique : `1.jpg`, `2.jpg`, `3.jpg`, `10.jpg`, et non `1.jpg`, `10.jpg`, `2.jpg`.
+L'ordre attendu est un tri naturel numerique : `01.jpg`, `02.jpg`, `03.jpg`, `10.jpg`, et non `01.jpg`, `10.jpg`, `02.jpg`.
 
 Les photos de galerie peuvent etre horizontales ou verticales. Leur ratio original doit etre conserve.

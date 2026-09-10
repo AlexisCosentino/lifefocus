@@ -1,8 +1,9 @@
 ---
-import { Image, Picture } from "astro:assets";
+import { Image } from "astro:assets";
 
+import ImageSlot from "../components/ImageSlot.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { awardImages, homeImages } from "../data/homeImages";
+import { awardImages } from "../data/homeImages";
 
 const pageTitle = "Photographe mariage Drôme, Valence & Romans | Life Focus";
 const pageDescription =
@@ -20,28 +21,22 @@ const mariagesNetReviewsUrl =
     <section class="hero" aria-labelledby="home-title">
       <div class="hero__composition">
         <figure class="media hero__image">
-          <Picture
-            class="media__image"
-            src={homeImages.hero.src}
-            alt={homeImages.hero.alt}
-            widths={[720, 1080, 1440, 1732]}
-            sizes="(min-width: 90rem) 92vw, calc(100vw - (2 * var(--page-padding)))"
-            formats={["avif", "webp"]}
+          <ImageSlot
+            path="src/images/home/hero-main.jpg"
+            orientation="horizontal"
             loading="eager"
-            decoding="sync"
-            fetchpriority="high"
+            quality={92}
+            sizes="(min-width: 90rem) 69vw, (min-width: 72rem) 69vw, calc(100vw - (2 * var(--page-padding)))"
           />
         </figure>
 
         <figure class="media hero__portrait">
-          <Picture
-            class="media__image"
-            src={homeImages.heroSecondary.src}
-            alt={homeImages.heroSecondary.alt}
-            widths={[420, 640, 840, 1080]}
-            sizes="(min-width: 72rem) 24vw, 58vw"
-            formats={["avif", "webp"]}
+          <ImageSlot
+            path="src/images/home/hero-secondary.jpg"
+            orientation="vertical"
             loading="eager"
+            quality={92}
+            sizes="(min-width: 72rem) 24vw, 58vw"
           />
         </figure>
 
@@ -67,15 +62,7 @@ const mariagesNetReviewsUrl =
         </h2>
 
         <figure class="media manifesto__image">
-          <Picture
-            class="media__image"
-            src={homeImages.breathing.src}
-            alt={homeImages.breathing.alt}
-            widths={[360, 540, 720, 960]}
-            sizes="(min-width: 72rem) 22vw, 70vw"
-            formats={["avif", "webp"]}
-            loading="lazy"
-          />
+          <ImageSlot path="src/images/home/intro.jpg" orientation="horizontal" />
         </figure>
       </div>
     </section>
@@ -92,27 +79,11 @@ const mariagesNetReviewsUrl =
 
       <div class="marriage__images">
         <figure class="media marriage__main">
-          <Picture
-            class="media__image"
-            src={homeImages.weddingMain.src}
-            alt={homeImages.weddingMain.alt}
-            widths={[640, 960, 1280, 1773]}
-            sizes="(min-width: 72rem) 64vw, calc(100vw - (2 * var(--page-padding)))"
-            formats={["avif", "webp"]}
-            loading="lazy"
-          />
+          <ImageSlot path="src/images/home/wedding-main.jpg" orientation="horizontal" />
         </figure>
 
         <figure class="media marriage__portrait">
-          <Picture
-            class="media__image"
-            src={homeImages.weddingSecondary.src}
-            alt={homeImages.weddingSecondary.alt}
-            widths={[420, 640, 840, 1080]}
-            sizes="(min-width: 72rem) 28vw, 72vw"
-            formats={["avif", "webp"]}
-            loading="lazy"
-          />
+          <ImageSlot path="src/images/home/wedding-secondary.jpg" orientation="vertical" />
         </figure>
       </div>
 
@@ -141,15 +112,7 @@ const mariagesNetReviewsUrl =
             <a class="family-label" href="/grossesse/">Grossesse</a>
             <a class="family-media-link" href="/grossesse/" aria-label="Découvrir la séance grossesse">
               <figure class="family-media media">
-                <Picture
-                  class="media__image"
-                  src={homeImages.familyGrossesse.src}
-                  alt={homeImages.familyGrossesse.alt}
-                  widths={[360, 540, 720, 960]}
-                  sizes="(min-width: 72rem) 19vw, 72vw"
-                  formats={["avif", "webp"]}
-                  loading="lazy"
-                />
+                <ImageSlot path="src/images/home/family-pregnancy.jpg" orientation="vertical" />
               </figure>
             </a>
           </div>
@@ -158,15 +121,7 @@ const mariagesNetReviewsUrl =
             <a class="family-label" href="/naissance/">Naissance</a>
             <a class="family-media-link" href="/naissance/" aria-label="Découvrir la séance naissance">
               <figure class="family-media media">
-                <Picture
-                  class="media__image"
-                  src={homeImages.familyNaissance.src}
-                  alt={homeImages.familyNaissance.alt}
-                  widths={[360, 540, 720, 960]}
-                  sizes="(min-width: 72rem) 22vw, 72vw"
-                  formats={["avif", "webp"]}
-                  loading="lazy"
-                />
+                <ImageSlot path="src/images/home/family-birth.jpg" orientation="vertical" />
               </figure>
             </a>
           </div>
@@ -175,15 +130,7 @@ const mariagesNetReviewsUrl =
             <a class="family-label" href="/famille/">Famille</a>
             <a class="family-media-link" href="/famille/" aria-label="Découvrir la séance famille">
               <figure class="family-media media">
-                <Picture
-                  class="media__image"
-                  src={homeImages.familyFamille.src}
-                  alt={homeImages.familyFamille.alt}
-                  widths={[320, 480, 640, 840]}
-                  sizes="(min-width: 72rem) 22vw, 52vw"
-                  formats={["avif", "webp"]}
-                  loading="lazy"
-                />
+                <ImageSlot path="src/images/home/family-family.jpg" orientation="horizontal" />
               </figure>
             </a>
           </div>
@@ -202,15 +149,7 @@ const mariagesNetReviewsUrl =
     <section class="about" aria-labelledby="about-title">
       <div class="about__inner page-shell">
         <figure class="media about__image">
-          <Picture
-            class="media__image"
-            src={homeImages.alexis.src}
-            alt={homeImages.alexis.alt}
-            widths={[420, 640, 840, 1100]}
-            sizes="(min-width: 72rem) 32vw, calc(100vw - (2 * var(--page-padding)))"
-            formats={["avif", "webp"]}
-            loading="lazy"
-          />
+          <ImageSlot path="src/images/home/alexis.jpg" orientation="vertical" />
         </figure>
 
         <div class="about__copy">
