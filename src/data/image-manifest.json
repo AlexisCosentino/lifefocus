@@ -431,8 +431,8 @@
           "ordering": "natural-numeric",
           "allowedExtensions": [".jpg", ".jpeg", ".png", ".webp", ".avif"],
           "orientation": "free",
-          "required": true,
-          "usage": "Galerie Professionnels. Les fichiers doivent etre nommes 01.jpg, 02.jpg, 03.jpg, etc."
+          "required": false,
+          "usage": "Galerie Professionnels optionnelle. Si le dossier existe, les fichiers doivent etre nommes 01.jpg, 02.jpg, 03.jpg, etc."
         }
       ]
     }

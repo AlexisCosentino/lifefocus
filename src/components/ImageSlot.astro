@@ -17,16 +17,15 @@ const {
   label = "Photo attendue",
   loading = "lazy",
   sizes = "(min-width: 90rem) 70vw, (min-width: 64rem) 62vw, calc(100vw - (2 * var(--page-padding)))",
-  quality = 88,
+  quality = 82,
 } = Astro.props;
 const imageModules = import.meta.glob<{ default: ImageMetadata }>("/src/images/**/*.{jpg,jpeg,png,webp,avif,JPG,JPEG,PNG,WEBP,AVIF}", {
   eager: true,
 });
 const image = imageModules[`/${path}`]?.default;
-const widths =
-  orientation === "vertical"
-    ? [420, 640, 840, 1080, 1400, 1800]
-    : [720, 960, 1280, 1600, 2000, 2400, 2800, 3200];
+const isHeroCandidate = orientation === "horizontal" && (loading === "eager" || quality >= 90);
+const widths = orientation === "vertical" ? [480, 720, 960, 1200] : isHeroCandidate ? [960, 1280, 1600, 1920, 2400] : [640, 960, 1280, 1600];
+const pictureQuality = isHeroCandidate ? Math.min(quality, 86) : Math.min(quality, 82);
 ---
 
 {
@@ -36,8 +35,9 @@ const widths =
       alt={label}
       widths={widths}
       sizes={sizes}
-      formats={["avif", "webp"]}
-      quality={quality}
+      formats={["avif"]}
+      fallbackFormat="webp"
+      quality={pictureQuality}
       loading={loading}
     />
   ) : (

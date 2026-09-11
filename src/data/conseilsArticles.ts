@@ -1,5 +1,6 @@
 export interface AdviceArticle {
   title: string;
+  seoTitle?: string;
   description: string;
   slug: string;
   publishedAt: Date;
@@ -15,7 +16,7 @@ export const adviceArticles = [
   {
     title: "Les plus beaux domaines de mariage dans la Drôme",
     description:
-      "Une sélection personnelle de domaines de mariage dans la Drôme, vue par un photographe habitué aux mariages autour de Valence, Romans-sur-Isère et en Drôme provençale.",
+      "Domaines, châteaux et lieux de mariage dans la Drôme : ma sélection de photographe autour de Valence et Romans-sur-Isère.",
     slug: "plus-beaux-domaines-mariage-drome",
     publishedAt: new Date("2026-09-10"),
     category: "Mariage",
@@ -27,6 +28,7 @@ export const adviceArticles = [
   },
   {
     title: "Les 10 questions à poser à votre photographe avant de signer",
+    seoTitle: "10 questions à poser à son photographe mariage | Life Focus",
     description:
       "Style, reportage, nombre de photos, tarifs, réservation : voici 10 questions essentielles à poser à votre photographe de mariage avant de signer.",
     slug: "10-questions-a-poser-a-votre-photographe-avant-de-signer",

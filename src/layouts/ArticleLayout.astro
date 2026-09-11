@@ -1,9 +1,12 @@
 ---
 import ImageSlot from "../components/ImageSlot.astro";
 import BaseLayout from "./BaseLayout.astro";
+import { getImage } from "astro:assets";
+import type { ImageMetadata } from "astro";
 
 interface ArticleData {
   title: string;
+  seoTitle?: string;
   description: string;
   slug: string;
   publishedAt: Date;
@@ -18,9 +21,25 @@ const { article } = Astro.props as {
   article: ArticleData;
 };
 
-const canonicalUrl = `https://lifefocus.fr/conseils/${article.slug}/`;
+const canonicalUrl = `https://www.lifefocus.fr/conseils/${article.slug}/`;
 const publishedAt = article.publishedAt.toISOString();
 const updatedAt = (article.updatedAt ?? article.publishedAt).toISOString();
+const articleImages = import.meta.glob<{ default: ImageMetadata }>(
+  "../images/conseils/*.{jpg,jpeg,png,webp,avif}",
+  { eager: true },
+);
+const articleImage = articleImages[`../images/conseils/${article.slug}.jpg`]?.default;
+const articleSocialImage = articleImage
+  ? await getImage({
+      src: articleImage,
+      width: 1200,
+      format: "jpg",
+      quality: 82,
+    })
+  : undefined;
+const articleSocialImageUrl = articleSocialImage
+  ? new URL(articleSocialImage.src, "https://www.lifefocus.fr").toString()
+  : undefined;
 
 const structuredData = [
   {
@@ -37,12 +56,13 @@ const structuredData = [
     publisher: {
       "@type": "Organization",
       name: "Life Focus",
-      url: "https://lifefocus.fr/",
+      url: "https://www.lifefocus.fr/",
     },
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": canonicalUrl,
     },
+    ...(articleSocialImageUrl ? { image: articleSocialImageUrl } : {}),
   },
   {
     "@context": "https://schema.org",
@@ -52,13 +72,13 @@ const structuredData = [
         "@type": "ListItem",
         position: 1,
         name: "Accueil",
-        item: "https://lifefocus.fr/",
+        item: "https://www.lifefocus.fr/",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Conseils",
-        item: "https://lifefocus.fr/conseils/",
+        item: "https://www.lifefocus.fr/conseils/",
       },
       {
         "@type": "ListItem",
@@ -72,9 +92,10 @@ const structuredData = [
 ---
 
 <BaseLayout
-  title={`${article.title} | Life Focus`}
+  title={article.seoTitle ?? `${article.title} | Life Focus`}
   description={article.description}
   canonicalUrl={canonicalUrl}
+  ogImage={articleSocialImageUrl}
   ogType="article"
   structuredData={structuredData}
 >

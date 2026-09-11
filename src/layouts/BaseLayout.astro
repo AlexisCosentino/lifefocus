@@ -1,8 +1,11 @@
 ---
 import "../styles/global.css";
 
+import { getImage } from "astro:assets";
+
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
+import defaultOgImage from "../images/home/hero-main.jpg";
 
 interface Props {
   title?: string;
@@ -21,6 +24,31 @@ const {
   ogType = "website",
   structuredData,
 } = Astro.props;
+
+const siteUrl = Astro.site ?? new URL("https://www.lifefocus.fr");
+
+const absoluteUrl = (value: string) => {
+  const url = new URL(value, siteUrl);
+
+  if (url.hostname === "lifefocus.fr") {
+    url.hostname = "www.lifefocus.fr";
+  }
+
+  if (url.protocol === "http:") {
+    url.protocol = "https:";
+  }
+
+  return url.toString();
+};
+
+const pageUrl = absoluteUrl(canonicalUrl ?? Astro.url.pathname);
+const defaultSocialImage = await getImage({
+  src: defaultOgImage,
+  width: 1200,
+  format: "jpg",
+  quality: 82,
+});
+const socialImageUrl = absoluteUrl(ogImage ?? defaultSocialImage.src);
 ---
 
 <!doctype html>
@@ -30,13 +58,18 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
-    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+    <link rel="canonical" href={pageUrl} />
     <meta property="og:type" content={ogType} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
-    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:site_name" content="Life Focus" />
+    <meta property="og:image" content={socialImageUrl} />
     <meta property="og:locale" content="fr_FR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageUrl} />
     <link rel="icon" href="/favicon.ico?v=3" sizes="any" />
     <link rel="icon" type="image/png" href="/favicon-32.png?v=3" sizes="32x32" />
     <link rel="icon" type="image/png" href="/icon-192.png?v=3" sizes="192x192" />
