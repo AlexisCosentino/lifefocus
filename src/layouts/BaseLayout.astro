@@ -13,6 +13,7 @@ interface Props {
   canonicalUrl?: string;
   ogImage?: string;
   ogType?: "website" | "article";
+  robots?: string;
   structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
 }
 
@@ -22,6 +23,7 @@ const {
   canonicalUrl,
   ogImage,
   ogType = "website",
+  robots,
   structuredData,
 } = Astro.props;
 
@@ -58,6 +60,7 @@ const socialImageUrl = absoluteUrl(ogImage ?? defaultSocialImage.src);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
+    {robots && <meta name="robots" content={robots} />}
     <link rel="canonical" href={pageUrl} />
     <meta property="og:type" content={ogType} />
     <meta property="og:title" content={title} />

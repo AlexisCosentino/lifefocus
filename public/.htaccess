@@ -1,0 +1,30 @@
+# Life Focus - OVH / Apache redirects for the Astro migration.
+
+ErrorDocument 404 /404.html
+DirectoryIndex index.html index.php
+
+<IfModule mod_negotiation.c>
+  Options -MultiViews
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Removed legacy services: return a real 410 instead of redirecting to home.
+  RewriteRule ^(?:immobilier|voyage|register)/?$ - [G,L]
+
+  # Legacy Symfony/front-controller URLs.
+  RewriteRule ^index\.php/?$ https://www.lifefocus.fr/ [R=301,L]
+  RewriteRule ^index\.php/mariage/?$ https://www.lifefocus.fr/mariage/ [R=301,L]
+
+  # Validated SEO redirects from the former public site.
+  RewriteRule ^mariage$ https://www.lifefocus.fr/mariage/ [R=301,L]
+  RewriteRule ^portrait/?$ https://www.lifefocus.fr/famille/ [R=301,L]
+  RewriteRule ^contact$ https://www.lifefocus.fr/contact/ [R=301,L]
+  RewriteRule ^entreprise/?$ https://www.lifefocus.fr/professionnels/ [R=301,L]
+
+  # Canonical domain: force HTTPS + www without touching the path.
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP_HOST} !^www\.lifefocus\.fr$ [NC]
+  RewriteRule ^ https://www.lifefocus.fr%{REQUEST_URI} [R=301,L]
+</IfModule>
