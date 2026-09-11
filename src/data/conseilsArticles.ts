@@ -14,6 +14,20 @@ export interface AdviceArticle {
 
 export const adviceArticles = [
   {
+    title: "Organiser son mariage dans la Drôme : conseils de photographe",
+    seoTitle: "Mariage dans la Drôme : conseils de photographe | Life Focus",
+    description:
+      "Conseils de photographe pour organiser un mariage dans la Drôme : lieu, lumière, planning, ambiance et choix des prestataires autour de Valence.",
+    slug: "conseils-mariage-drome",
+    publishedAt: new Date("2026-09-11"),
+    category: "Mariage",
+    excerpt:
+      "Lieu, lumière, rythme de la journée, ambiance et choix des prestataires : mes conseils pour préparer un mariage dans la Drôme.",
+    featuredImage: "weddingMain",
+    featuredImageAlt: "Mariage dans la Drôme photographié dans une lumière naturelle.",
+    draft: false,
+  },
+  {
     title: "Les plus beaux domaines de mariage dans la Drôme",
     description:
       "Domaines, châteaux et lieux de mariage dans la Drôme : ma sélection de photographe autour de Valence et Romans-sur-Isère.",

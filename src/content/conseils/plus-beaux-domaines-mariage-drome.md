@@ -218,6 +218,8 @@ Mais tout ce qui va s'y passer.
 
 Je photographie des mariages à Romans-sur-Isère, Valence, dans toute la Drôme et bien au-delà depuis plusieurs années.
 
+Si vous êtes encore au début de l'organisation, j'ai aussi regroupé mes [conseils pour préparer un mariage dans la Drôme](/conseils/conseils-mariage-drome/), avec quelques repères sur le lieu, la lumière, le rythme de la journée et le choix des prestataires.
+
 Mon approche est avant tout celle du reportage : beaucoup de moments pris sur le vif, les gens que vous aimez, les gestes que vous n'avez pas vus et, lorsque la lumière devient belle, quelques minutes à deux pour créer des images plus sensibles.
 
 Si vous préparez votre mariage dans l'un de ces domaines, ou ailleurs dans la Drôme, vous pouvez découvrir mon approche, mes reportages et mes formules sur la page [Photographe de mariage dans la Drôme](/mariage/).

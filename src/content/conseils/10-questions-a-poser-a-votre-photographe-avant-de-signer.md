@@ -103,3 +103,5 @@ Les avis clients permettent souvent de comprendre ce que les images seules ne mo
 Choisir un photographe de mariage, ce n'est pas seulement aimer un portfolio. C'est comprendre comment il travaille, ce qui est inclus, comment vous serez guidés, comment les images seront livrées, et si vous vous sentez en confiance avec la personne qui va partager une partie importante de votre journée.
 
 Vous pouvez continuer avec la page [photographe mariage Life Focus](/mariage/) ou [m'écrire pour poser vos questions](/contact/).
+
+Si votre mariage a lieu dans la région, vous pouvez aussi lire mes [conseils pour organiser un mariage dans la Drôme](/conseils/conseils-mariage-drome/).
