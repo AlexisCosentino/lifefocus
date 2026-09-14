@@ -30,11 +30,13 @@ const mapsEmbed = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
 
     <section class="contact-main page-shell" aria-labelledby="contact-form-title">
       <form class="contact-form" action="/api/contact.php" method="post">
-        <div class="contact-status" hidden data-status-message="success" role="status">
-          Merci, votre message a bien été envoyé. Je vous répondrai personnellement dès que possible.
+        <div class="contact-status contact-status--success" hidden data-status-message="success" role="status">
+          <p class="contact-status__title">Merci, votre message est bien arrivé.</p>
+          <p>Je reviendrai vers vous rapidement pour échanger autour de votre projet.</p>
         </div>
         <div class="contact-status contact-status--error" hidden data-status-message="error" role="alert">
-          Le message n'a pas pu être envoyé. Vous pouvez aussi me joindre directement par téléphone ou email.
+          <p class="contact-status__title">Le message n'a pas pu être envoyé.</p>
+          <p>Vous pouvez aussi me joindre directement par téléphone ou email.</p>
         </div>
 
         <div class="contact-form__intro">
@@ -216,9 +218,27 @@ const mapsEmbed = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
   }
 
   .contact-status {
-    padding-block: 0 1rem;
+    display: grid;
+    gap: 0.45rem;
+    padding: var(--space-xs) clamp(1rem, 2vw, 1.5rem);
     color: var(--color-text);
+    background: var(--color-surface-soft);
     border-bottom: 1px solid var(--color-line);
+  }
+
+  .contact-status[hidden] {
+    display: none;
+  }
+
+  .contact-status__title {
+    font-family: var(--font-editorial);
+    font-size: clamp(1.7rem, 1.25rem + 1.25vw, 2.6rem);
+    line-height: 1;
+  }
+
+  .contact-status p {
+    margin: 0;
+    max-width: var(--reading-max);
   }
 
   .contact-status--error {
