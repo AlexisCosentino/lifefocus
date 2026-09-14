@@ -22,6 +22,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Cache Astro generated assets
+        uses: actions/cache@v4
+        with:
+          path: |
+            .astro
+            node_modules/.astro
+          key: astro-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-${{ hashFiles('astro.config.mjs') }}
+          restore-keys: |
+            astro-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-
+
       - name: Build Astro site
         run: npm run build
 
@@ -32,7 +42,7 @@ jobs:
           username: ${{ secrets.OVH_SFTP_USER }}
           password: ${{ secrets.OVH_SFTP_PASSWORD }}
           port: ${{ secrets.OVH_SFTP_PORT }}
-          source: dist/{*,.*}
+          source: dist/
           target: /home/lifefoi/lifefocus-astro
           strip_components: 1
           rm: false
