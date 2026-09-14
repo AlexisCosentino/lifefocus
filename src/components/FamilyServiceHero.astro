@@ -22,6 +22,7 @@ const { eyebrow, title, text, image, secondaryImage } = Astro.props;
         loading="eager"
         quality={92}
         sizes="(min-width: 72rem) 58vw, calc(100vw - (2 * var(--page-padding)))"
+        label={image.alt ?? ""}
       />
     </figure>
 
@@ -32,6 +33,7 @@ const { eyebrow, title, text, image, secondaryImage } = Astro.props;
         loading="eager"
         quality={92}
         sizes="(min-width: 72rem) 20vw, 48vw"
+        label={secondaryImage.alt ?? ""}
       />
     </figure>
   </div>

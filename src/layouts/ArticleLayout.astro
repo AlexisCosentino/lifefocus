@@ -119,7 +119,11 @@ const structuredData = [
       </div>
 
       <figure class="article-hero__image">
-        <ImageSlot path={`src/images/conseils/${article.slug}.jpg`} orientation="horizontal" />
+        <ImageSlot
+          path={`src/images/conseils/${article.slug}.jpg`}
+          orientation="horizontal"
+          label={article.featuredImageAlt ?? "Illustration de l’article de conseils de mariage."}
+        />
       </figure>
     </header>
 

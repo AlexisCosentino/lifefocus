@@ -14,11 +14,12 @@ interface Props {
 const {
   path,
   orientation = "horizontal",
-  label = "Photo attendue",
+  label = "",
   loading = "lazy",
   sizes = "(min-width: 90rem) 70vw, (min-width: 64rem) 62vw, calc(100vw - (2 * var(--page-padding)))",
   quality = 82,
 } = Astro.props;
+const safeLabel = label.trim();
 const imageModules = import.meta.glob<{ default: ImageMetadata }>("/src/images/**/*.{jpg,jpeg,png,webp,avif,JPG,JPEG,PNG,WEBP,AVIF}", {
   eager: true,
 });
@@ -32,7 +33,7 @@ const pictureQuality = isHeroCandidate ? Math.min(quality, 86) : Math.min(qualit
   image ? (
     <Picture
       src={image}
-      alt={label}
+      alt={safeLabel}
       widths={widths}
       sizes={sizes}
       formats={["avif"]}
@@ -44,9 +45,9 @@ const pictureQuality = isHeroCandidate ? Math.min(quality, 86) : Math.min(qualit
     <div
       class:list={["image-slot", `image-slot--${orientation}`]}
       role="img"
-      aria-label={`${label} : ${path}`}
+      aria-label={safeLabel ? `${safeLabel} : ${path}` : path}
     >
-      <span>{label}</span>
+      <span>{safeLabel || "Image non disponible"}</span>
       <code>{path}</code>
     </div>
   )

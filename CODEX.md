@@ -149,3 +149,67 @@ En cas de doute :
 3. simplicité technique ;
 4. performance ;
 5. maintenabilité.
+
+---
+
+## État de production (septembre 2026)
+
+**Site en production depuis : 14 septembre 2026**
+
+**URL canonical définitif : https://www.lifefocus.fr**
+
+### Validations en production
+
+✅ **Build Astro** — compilation OK, zéro erreurs  
+✅ **Responsive** — testé et validé (mobile, tablette, desktop, grand écran)  
+✅ **Images** — AVIF/WebP opérationnelles, lazy-loading fonctionnel  
+✅ **Vidéo** — homepage `intro.mp4` optimisée et opérationnelle  
+✅ **Formulaire** — PHP contact.php testé et déployé sur OVH  
+✅ **Sitemap** — sitemap.xml généré et soumis Search Console  
+✅ **Robots.txt** — configuré et opérationnel  
+✅ **Metadata** — canonical, Open Graph, Twitter Cards, JSON-LD vérifiés  
+✅ **Redirections** — anciennes URLs migrées (301 pour équivalents, 410 pour supprimés)  
+✅ **Search Console** — configurée, sitemap soumis, indexation surveillée  
+✅ **Performance** — Lighthouse mobile (environnement propre) :
+  - SEO : 100
+  - CLS : 0
+  - TBT : 0 ms
+  - **Ne pas lancer d'optimisations globales sans problème mesuré**
+
+### Stabilité et changements futurs
+
+**Le site est stable et fonctionnel en production.**
+
+Pour les prochaines interventions :
+
+1. **Ne pas refactoriser ou "optimiser" préventivement.**  
+   Toute modification doit être ciblée et résoudre un problème spécifique mesuré.
+
+2. **Préserver absolument :**
+   - Design et direction artistique (consulter `DESIGN.md`)
+   - Structure des URLs (SEO critique)
+   - Performance et Core Web Vitals actuels
+   - Comportement utilisateur existant
+   - Conformité SEO et canonical
+
+3. **Avant toute modification :**
+   - Mesurer le problème (Lighthouse, Core Web Vitals, Analytics)
+   - Consulter `SEO.md` et `DESIGN.md`
+   - Tester sur responsive
+   - Valider l'impact SEO si changement URL/meta
+   - Vérifier en production ou staging identique
+
+4. **Modifications autorisées sans caution :**
+   - Contenu textuel (article, description)
+   - Images (remplacement version, alt text)
+   - Formulaire (champs, validation)
+   - Liens internes (tant que URLs inchangées)
+   - Données (conseilsArticles.ts, familyServices.ts)
+
+5. **Modifications critiques (consultation obligatoire) :**
+   - Changement structure d'URL
+   - Modification meta/title/description SEO
+   - Suppression/création page
+   - Performance refactor
+   - JavaScript client nouveau
+   - CSS restructuration

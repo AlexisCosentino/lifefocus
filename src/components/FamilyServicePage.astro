@@ -52,6 +52,7 @@ const galleryImages = service.gallery.map((image, index) => ({
       <ImageSlot
         path={service.approach.image.slotPath ?? `src/images/${serviceSlug}/approach-main.jpg`}
         orientation={service.approach.image.slotOrientation ?? "horizontal"}
+        label={service.approach.image.alt ?? ""}
       />
     </figure>
   </section>

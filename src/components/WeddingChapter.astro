@@ -43,6 +43,7 @@ const imageCount = images.length;
           <ImageSlot
             path={image.slotPath ?? `src/images/mariage/${label.toLowerCase()}-${index + 1}.jpg`}
             orientation={image.slotOrientation ?? "horizontal"}
+            label={image.alt ?? ""}
           />
         </figure>
       ))

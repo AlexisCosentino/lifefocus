@@ -33,9 +33,9 @@ const folderImages = normalizedFolder
   ? Object.entries(imageModules)
       .filter(([path]) => path.startsWith(`${normalizedFolder}/`))
       .sort(([pathA], [pathB]) => pathA.localeCompare(pathB, "fr", { numeric: true, sensitivity: "base" }))
-      .map(([path, module], index) => ({
+      .map(([path, module]) => ({
         resolvedSrc: module.default,
-        alt: `${title} - image ${index + 1}`,
+        alt: "",
         slotPath: path.slice(1),
       }))
   : [];
@@ -68,7 +68,7 @@ const getOrientation = (image: Pick<EditorialGalleryImage, "size" | "slotOrienta
           {"resolvedSrc" in image ? (
             <Picture
               src={image.resolvedSrc}
-              alt={image.alt}
+              alt={image.alt ?? ""}
               widths={[480, 768, 1080, 1440]}
               sizes="(min-width: 100rem) 18vw, (min-width: 64rem) 23vw, (min-width: 42rem) 46vw, calc(100vw - (2 * var(--page-padding)))"
               formats={["avif"]}
@@ -80,6 +80,7 @@ const getOrientation = (image: Pick<EditorialGalleryImage, "size" | "slotOrienta
             <ImageSlot
               path={image.slotPath ?? `src/images/gallery/${String(index + 1).padStart(2, "0")}.jpg`}
               orientation={getOrientation(image)}
+              label={image.alt ?? ""}
             />
           )}
         </figure>

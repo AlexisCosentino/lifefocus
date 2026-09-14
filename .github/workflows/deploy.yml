@@ -1,0 +1,39 @@
+name: Deploy to OVH SFTP
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Astro site
+        run: npm run build
+
+      - name: Upload dist to OVH via SFTP
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.OVH_SFTP_HOST }}
+          username: ${{ secrets.OVH_SFTP_USER }}
+          password: ${{ secrets.OVH_SFTP_PASSWORD }}
+          port: ${{ secrets.OVH_SFTP_PORT }}
+          source: dist/{*,.*}
+          target: /home/lifefoi/lifefocus-astro
+          strip_components: 1
+          rm: false
+          overwrite: true

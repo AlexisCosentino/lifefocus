@@ -57,11 +57,11 @@ export const homeImages = {
   },
   familyGrossesse: {
     src: weddingSecondary,
-    alt: "Portrait vertical dans un champ de fleurs rouges.",
+    alt: "Femme enceinte en extérieur lors d’une séance photo grossesse.",
   },
   familyNaissance: {
     src: weddingSecondary,
-    alt: "Portrait vertical dans un champ de fleurs rouges.",
+    alt: "Nouveau-né et parents dans un moment calme de naissance.",
   },
   familyFamille: {
     src: familyMain,
