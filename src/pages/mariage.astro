@@ -5,6 +5,7 @@ import WeddingFAQ from "../components/WeddingFAQ.astro";
 import WeddingGallery from "../components/WeddingGallery.astro";
 import WeddingPackages from "../components/WeddingPackages.astro";
 import { homeImages } from "../data/homeImages";
+import { weddingFaq } from "../data/weddingFaq";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const pageTitle = "Photographe mariage Drôme, Valence & Provence | Life Focus";
@@ -110,12 +111,26 @@ const galleryImages = galleryImageFallbacks.map((image, index) => ({
   slotPath: `src/images/mariage/gallery/${String(index + 1).padStart(2, "0")}.jpg`,
   slotOrientation: image.size === "vertical" ? "vertical" : "horizontal",
 }));
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: weddingFaq.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+};
 ---
 
 <BaseLayout
   title={pageTitle}
   description={pageDescription}
   canonicalUrl="https://www.lifefocus.fr/mariage/"
+  structuredData={structuredData}
 >
   <div class="wedding-page">
     <section class="wedding-hero" aria-labelledby="wedding-title">

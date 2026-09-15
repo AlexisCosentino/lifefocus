@@ -161,7 +161,7 @@ export const familyServices = {
       {
         question: "Quand faire une séance photo grossesse ?",
         answer:
-          "Le moment idéal se situe généralement lorsque le ventre est bien visible tout en restant confortable pour vous. Nous choisissons surtout la période en fonction de votre grossesse, de vos envies et du type de photos que vous souhaitez réaliser.",
+          "Le moment idéal se situe généralement autour du 6e mois de grossesse, lorsque le ventre est bien visible tout en restant confortable pour vous. Nous ajustons surtout la période en fonction de votre grossesse, de vos envies et du type de photos que vous souhaitez réaliser.",
       },
       {
         question: "Combien de temps dure une séance grossesse ?",
@@ -186,7 +186,7 @@ export const familyServices = {
       {
         question: "Comment s’habiller pour une séance grossesse ?",
         answer:
-          "Choisissez avant tout des vêtements dans lesquels vous vous sentez bien. Nous pouvons échanger avant la séance sur les tenues, les matières et les couleurs afin qu’elles correspondent au lieu et à l’ambiance recherchée.",
+          "Choisissez avant tout des vêtements dans lesquels vous vous sentez vous-même. Les couleurs claires et les tenues sans motif fonctionnent souvent très bien, car elles gardent l’image douce et intemporelle. Nous pouvons aussi échanger avant la séance sur les matières et les couleurs selon le lieu choisi.",
       },
       {
         question: "Où se déroule la séance photo grossesse ?",
@@ -196,7 +196,7 @@ export const familyServices = {
       {
         question: "Combien de photos sont livrées ?",
         answer:
-          "Je ne fixe pas de nombre maximum. Après le tri et la retouche, je vous livre toutes les photographies sélectionnées qui apportent quelque chose à l’histoire de votre séance.",
+          "Je ne fixe pas de nombre maximum. En général, une séance grossesse permet de livrer environ 30 à 50 photographies sélectionnées et retouchées, selon le rythme de la séance et les images qui apportent quelque chose à votre histoire.",
       },
       {
         question: "Quand faut-il réserver sa séance grossesse ?",
@@ -268,7 +268,7 @@ export const familyServices = {
       {
         question: "Quand faire une séance photo naissance ?",
         answer:
-          "Il n’existe pas un seul moment obligatoire. La séance peut être réalisée dans les premiers jours ou un peu plus tard selon votre récupération, le rythme de votre bébé et les images que vous souhaitez garder. Nous choisissons ensemble le moment qui vous convient.",
+          "Il n’existe pas un seul moment obligatoire. J’aime généralement réaliser la séance après les 15 premiers jours, lorsque chacun commence à trouver un peu son rythme. Nous choisissons ensemble le moment qui vous convient selon votre récupération, le rythme de votre bébé et les images que vous souhaitez garder.",
       },
       {
         question: "Combien de temps dure une séance naissance ?",
@@ -303,7 +303,7 @@ export const familyServices = {
       {
         question: "Combien de photos sont livrées ?",
         answer:
-          "Je ne fixe pas de nombre maximum. Après le tri et la retouche, je vous livre toutes les photographies sélectionnées qui apportent quelque chose à l’histoire de votre séance.",
+          "Je ne fixe pas de nombre maximum. En général, une séance naissance permet de livrer environ 30 à 50 photographies sélectionnées et retouchées, selon le rythme de votre bébé et les images qui apportent quelque chose à l’histoire de votre séance.",
       },
       {
         question: "Quand réserver une séance naissance ?",
