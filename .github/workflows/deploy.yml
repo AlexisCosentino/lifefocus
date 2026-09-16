@@ -33,7 +33,43 @@ jobs:
             astro-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-
 
       - name: Build Astro site
+        env:
+          TURNSTILE_SITE_KEY: ${{ secrets.TURNSTILE_SITE_KEY }}
         run: npm run build
+
+      - name: Create private contact config
+        env:
+          TURNSTILE_SECRET_KEY: ${{ secrets.TURNSTILE_SECRET_KEY }}
+        run: |
+          mkdir -p .deploy-private
+          node <<'NODE'
+          const fs = require("node:fs");
+          const secret = process.env.TURNSTILE_SECRET_KEY;
+
+          if (!secret) {
+            throw new Error("TURNSTILE_SECRET_KEY GitHub secret is missing");
+          }
+
+          const escapedSecret = secret.replace(/\\/g, "\\\\").replace(/'/g, "\\'");
+          fs.writeFileSync(
+            ".deploy-private/lifefocus-contact-config.php",
+            `<?php\nreturn [\n    'TURNSTILE_SECRET_KEY' => '${escapedSecret}',\n];\n`,
+            { mode: 0o600 },
+          );
+          NODE
+
+      - name: Upload private contact config to OVH via SFTP
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.OVH_SFTP_HOST }}
+          username: ${{ secrets.OVH_SFTP_USER }}
+          password: ${{ secrets.OVH_SFTP_PASSWORD }}
+          port: ${{ secrets.OVH_SFTP_PORT }}
+          source: .deploy-private/lifefocus-contact-config.php
+          target: /home/lifefoi
+          strip_components: 1
+          rm: false
+          overwrite: true
 
       - name: Upload dist to OVH via SFTP
         uses: appleboy/scp-action@v1

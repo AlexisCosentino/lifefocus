@@ -11,6 +11,7 @@ const mapQuery = encodeURIComponent(
 );
 const mapsLink = "https://maps.app.goo.gl/SjgE8WsEJZYKRPMW6";
 const mapsEmbed = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
+const turnstileSiteKey = import.meta.env.TURNSTILE_SITE_KEY ?? "";
 ---
 
 <BaseLayout
@@ -90,6 +91,17 @@ const mapsEmbed = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
           <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
         </div>
 
+        {
+          turnstileSiteKey && (
+            <div
+              class="contact-form__turnstile cf-turnstile"
+              data-sitekey={turnstileSiteKey}
+              data-appearance="interaction-only"
+              data-theme="light"
+            />
+          )
+        }
+
         <button class="contact-form__submit editorial-link" type="submit">ENVOYER MA DEMANDE →</button>
         <p class="contact-form__privacy">
           Les informations envoyées via ce formulaire sont uniquement utilisées pour répondre à votre demande.
@@ -155,6 +167,7 @@ const mapsEmbed = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
         ?.removeAttribute("hidden");
     }
   </script>
+  {turnstileSiteKey && <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
 </BaseLayout>
 
 <style>
@@ -299,6 +312,10 @@ const mapsEmbed = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
     overflow: hidden;
   }
 
+  .contact-form__turnstile {
+    min-height: 0;
+  }
+
   .contact-form__submit {
     width: fit-content;
     border-top: 0;
@@ -386,6 +403,7 @@ const mapsEmbed = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
     .contact-form__intro,
     .contact-form__field--full,
     .contact-status,
+    .contact-form__turnstile,
     .contact-form__submit,
     .contact-form__privacy {
       grid-column: 1 / -1;
