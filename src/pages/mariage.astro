@@ -143,6 +143,7 @@ const structuredData = {
               loading="eager"
               quality={92}
               sizes="(min-width: 72rem) 58vw, calc(100vw - (2 * var(--page-padding)))"
+              label="Couple de mariés photographié pendant un reportage naturel."
             />
           </figure>
 
@@ -153,6 +154,7 @@ const structuredData = {
               loading="eager"
               quality={92}
               sizes="(min-width: 72rem) 20vw, 46vw"
+              label="Portrait vertical de mariés en extérieur."
             />
           </figure>
         </div>
@@ -162,11 +164,6 @@ const structuredData = {
           <h1 id="wedding-title">Photographe de mariage dans la Drôme et en Provence.</h1>
           <p>
             Basé à Romans-sur-Isère, près de Valence, je photographie les mariages avec une approche naturelle et spontanée, sans transformer votre journée en séance photo.
-          </p>
-          <p class="wedding-hero__context">
-            Vous préparez votre mariage près de Romans ? J'ai aussi réuni quelques <a
-              href="/conseils/photographe-mariage-romans-sur-isere/">conseils pour se marier à Romans-sur-Isère</a
-            >.
           </p>
         </div>
       </div>
@@ -231,6 +228,24 @@ const structuredData = {
 
     <WeddingPackages />
     <WeddingGallery images={galleryImages} galleryFolder="src/images/mariage/gallery" />
+
+    <section class="wedding-local-guides page-shell" aria-labelledby="local-guides-title">
+      <p class="editorial-label">REPÈRES LOCAUX</p>
+      <h2 id="local-guides-title">Préparer le lieu, simplement.</h2>
+      <p>
+        Vous préparez votre mariage autour de Valence ou de Romans-sur-Isère ? J'ai également
+        rassemblé quelques lieux et conseils issus de mon expérience dans ces deux secteurs.
+      </p>
+      <div class="wedding-local-guides__links">
+        <a class="editorial-link" href="/conseils/photographe-mariage-romans-sur-isere/"
+          >CONSEILS MARIAGE À ROMANS-SUR-ISÈRE →</a
+        >
+        <a class="editorial-link" href="/conseils/photographe-mariage-valence/"
+          >CONSEILS MARIAGE À VALENCE →</a
+        >
+      </div>
+    </section>
+
     <WeddingFAQ />
 
     <section class="wedding-contact page-shell" aria-labelledby="wedding-contact-title">
@@ -300,21 +315,6 @@ const structuredData = {
     font-size: clamp(2.55rem, 1.55rem + 3.15vw, 4.85rem);
     text-wrap: balance;
     overflow-wrap: break-word;
-  }
-
-  .wedding-hero__context {
-    color: var(--color-muted);
-    font-size: var(--text-sm);
-  }
-
-  .wedding-hero__context a {
-    color: var(--color-text);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.18em;
-  }
-
-  .wedding-hero__context a:hover {
-    color: var(--color-muted);
   }
 
   .wedding-hero p:not(.editorial-label),
@@ -479,9 +479,37 @@ const structuredData = {
 
   .wedding-page :global(.wedding-packages),
   .wedding-page :global(.wedding-faq),
+  .wedding-local-guides,
   .wedding-contact {
     max-width: var(--service-narrow);
     padding-block: var(--space-lg);
+  }
+
+  .wedding-local-guides {
+    display: grid;
+    gap: var(--space-xs);
+    border-top: 1px solid var(--color-line);
+  }
+
+  .wedding-local-guides h2 {
+    max-width: 12ch;
+    font-family: var(--font-editorial);
+    font-size: clamp(2.15rem, 1.4rem + 2.35vw, 4.25rem);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 0.98;
+  }
+
+  .wedding-local-guides p:not(.editorial-label) {
+    max-width: var(--reading-max);
+    color: var(--color-muted);
+  }
+
+  .wedding-local-guides__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem 1.6rem;
+    margin-top: var(--space-xs);
   }
 
   .wedding-page :global(.wedding-packages__intro),
@@ -981,6 +1009,22 @@ const structuredData = {
       grid-template-columns: minmax(0, 0.48fr) minmax(0, 1fr);
       gap: clamp(3rem, 7vw, 7rem);
       align-items: start;
+    }
+
+    .wedding-local-guides {
+      grid-template-columns: minmax(0, 0.48fr) minmax(0, 1fr);
+      gap: var(--space-xs) clamp(3rem, 7vw, 7rem);
+      align-items: start;
+    }
+
+    .wedding-local-guides .editorial-label,
+    .wedding-local-guides h2 {
+      grid-column: 1;
+    }
+
+    .wedding-local-guides p,
+    .wedding-local-guides__links {
+      grid-column: 2;
     }
 
     .wedding-page :global(.wedding-faq__intro) {

@@ -5,6 +5,7 @@ import { getImage } from "astro:assets";
 
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
+import logoLifeFocus from "../assets/brand/LIFE FOCUS logo.svg?url";
 import defaultOgImage from "../images/home/hero-main.jpg";
 
 interface Props {
@@ -50,7 +51,66 @@ const defaultSocialImage = await getImage({
   format: "jpg",
   quality: 82,
 });
+const defaultSocialImageUrl = absoluteUrl(defaultSocialImage.src);
 const socialImageUrl = absoluteUrl(ogImage ?? defaultSocialImage.src);
+const logoUrl = absoluteUrl(logoLifeFocus);
+const siteIdentityGraph = [
+  {
+    "@type": "ProfessionalService",
+    "@id": "https://www.lifefocus.fr/#life-focus",
+    name: "Life Focus",
+    url: "https://www.lifefocus.fr/",
+    logo: logoUrl,
+    image: defaultSocialImageUrl,
+    description:
+      "Photographe de mariage et de famille basé à Romans-sur-Isère, dans la Drôme.",
+    telephone: "+33698900917",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "36 TER Rue André Chénier",
+      postalCode: "26100",
+      addressLocality: "Romans-sur-Isère",
+      addressRegion: "Drôme",
+      addressCountry: "FR",
+    },
+    founder: {
+      "@id": "https://www.lifefocus.fr/#alexis-cosentino",
+    },
+    sameAs: [
+      "https://www.instagram.com/life_focus_mariage/",
+      "https://www.facebook.com/LifeFocusPhotographeValence/",
+      "https://www.mariages.net/photo-mariage/life-focus-photographe--e180967/avis",
+    ],
+  },
+  {
+    "@type": "Person",
+    "@id": "https://www.lifefocus.fr/#alexis-cosentino",
+    name: "Alexis Cosentino",
+    jobTitle: "Photographe",
+    url: "https://www.lifefocus.fr/a-propos/",
+    worksFor: {
+      "@id": "https://www.lifefocus.fr/#life-focus",
+    },
+  },
+  {
+    "@type": "WebSite",
+    "@id": "https://www.lifefocus.fr/#website",
+    name: "Life Focus",
+    url: "https://www.lifefocus.fr/",
+    inLanguage: "fr-FR",
+    publisher: {
+      "@id": "https://www.lifefocus.fr/#life-focus",
+    },
+  },
+];
+const normalizeStructuredData = (
+  value: Record<string, unknown> | Array<Record<string, unknown>> | undefined,
+) =>
+  (Array.isArray(value) ? value : value ? [value] : []).map(({ ["@context"]: _context, ...item }) => item);
+const structuredDataGraph = {
+  "@context": "https://schema.org",
+  "@graph": [...siteIdentityGraph, ...normalizeStructuredData(structuredData)],
+};
 ---
 
 <!doctype html>
@@ -87,14 +147,10 @@ const socialImageUrl = absoluteUrl(ogImage ?? defaultSocialImage.src);
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Newsreader:opsz,wght@6..72,400&display=swap"
     />
-    {
-      structuredData && (
-        <script
-          type="application/ld+json"
-          set:html={JSON.stringify(structuredData)}
-        />
-      )
-    }
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(structuredDataGraph)}
+    />
     <title>{title}</title>
   </head>
   <body>
