@@ -1,4 +1,5 @@
 ---
+import ImageSlot from "../../components/ImageSlot.astro";
 import ArticleLayout from "../../layouts/ArticleLayout.astro";
 import { adviceArticles } from "../../data/conseilsArticles";
 
@@ -57,7 +58,19 @@ if (!article) {
     arbres, et les images viennent assez naturellement.
   </p>
   <p><strong>Domaine de la Chartrognière, Saint-Thomas-en-Royans, Drôme</strong></p>
-  <p>Découvrir le Domaine de la Chartrognière</p>
+  <figure class="article-domain-image">
+    <ImageSlot
+      path="src/images/conseils/plus-beaux-domaines-mariage-drome/chartrognière.jpg"
+      orientation="horizontal"
+      label="Mariage au Domaine de la Chartrognière dans la Drôme."
+    />
+    <figcaption>Domaine de la Chartrognière, à Saint-Thomas-en-Royans.</figcaption>
+  </figure>
+  <p>
+    <a href="https://www.domainedelachartrogniere.fr/" target="_blank" rel="noopener noreferrer">
+      Découvrir le Domaine de la Chartrognière
+    </a>
+  </p>
 
   <h2>Les Terres de Sarson, la Drôme provençale dans ce qu'elle a de plus beau</h2>
   <p>Sarson, c'est encore autre chose.</p>
@@ -82,7 +95,19 @@ if (!article) {
     je sais généralement que ça vaut le coup.
   </p>
   <p><strong>Les Terres de Sarson, Grignan, Drôme provençale</strong></p>
-  <p>Découvrir Les Terres de Sarson</p>
+  <figure class="article-domain-image">
+    <ImageSlot
+      path="src/images/conseils/plus-beaux-domaines-mariage-drome/sarson.jpg"
+      orientation="horizontal"
+      label="Mariage aux Terres de Sarson en Drôme provençale."
+    />
+    <figcaption>Les Terres de Sarson, sur les hauteurs de Grignan.</figcaption>
+  </figure>
+  <p>
+    <a href="https://www.terresdesarson.com/" target="_blank" rel="noopener noreferrer">
+      Découvrir Les Terres de Sarson
+    </a>
+  </p>
 
   <h2>Balmes le Château, un domaine spectaculaire aux portes de Romans</h2>
   <p>
@@ -106,7 +131,19 @@ if (!article) {
     s'éloigner quelques minutes pour réaliser des images très différentes du reste de la journée.
   </p>
   <p><strong>Balmes le Château, Romans-sur-Isère, Drôme</strong></p>
-  <p>Découvrir Balmes le Château</p>
+  <figure class="article-domain-image">
+    <ImageSlot
+      path="src/images/conseils/plus-beaux-domaines-mariage-drome/balmes.jpg"
+      orientation="horizontal"
+      label="Mariage à Balmes le Château près de Romans-sur-Isère."
+    />
+    <figcaption>Balmes le Château, près de Romans-sur-Isère.</figcaption>
+  </figure>
+  <p>
+    <a href="https://www.balmeslechateau.com/" target="_blank" rel="noopener noreferrer">
+      Découvrir Balmes le Château
+    </a>
+  </p>
 
   <h2>Le Domaine de Chanteperdrix, un mariage au milieu de la campagne drômoise</h2>
   <p>
@@ -128,7 +165,19 @@ if (!article) {
     exactement les couleurs chaudes que j'aime dans mes images.
   </p>
   <p><strong>Domaine de Chanteperdrix, Allex, Drôme</strong></p>
-  <p>Découvrir le Domaine de Chanteperdrix</p>
+  <figure class="article-domain-image">
+    <ImageSlot
+      path="src/images/conseils/plus-beaux-domaines-mariage-drome/chanteperdrix.jpg"
+      orientation="horizontal"
+      label="Mariage au Domaine de Chanteperdrix à Allex."
+    />
+    <figcaption>Domaine de Chanteperdrix, à Allex.</figcaption>
+  </figure>
+  <p>
+    <a href="http://www.domainedechanteperdrix.fr/#rcont" target="_blank" rel="noopener noreferrer">
+      Découvrir le Domaine de Chanteperdrix
+    </a>
+  </p>
 
   <h2>Le Hameau de Valouse, l'impression de partir en Provence le temps d'un week-end</h2>
   <p>Le Hameau de Valouse porte particulièrement bien son nom.</p>
@@ -150,7 +199,11 @@ if (!article) {
   </p>
   <p>Et c'est souvent là que naissent les photographies auxquelles je suis le plus attaché.</p>
   <p><strong>Hameau de Valouse, Valouse, près de Nyons</strong></p>
-  <p>Découvrir le Hameau de Valouse</p>
+  <p>
+    <a href="https://hameau-de-valouse.com/" target="_blank" rel="noopener noreferrer">
+      Découvrir le Hameau de Valouse
+    </a>
+  </p>
 
   <h2>Maison Claudie, la Provence, mais avec une vraie personnalité</h2>
   <p>À Allan, Maison Claudie est un lieu assez difficile à confondre avec un autre.</p>
@@ -172,7 +225,19 @@ if (!article) {
   <p>Et à la fin, le lieu est présent dans les images sans prendre la place des personnes.</p>
   <p>C'est exactement l'équilibre que je recherche.</p>
   <p><strong>Maison Claudie, Allan, Drôme provençale</strong></p>
-  <p>Découvrir Maison Claudie</p>
+  <figure class="article-domain-image">
+    <ImageSlot
+      path="src/images/conseils/plus-beaux-domaines-mariage-drome/maison_claudie.jpg"
+      orientation="horizontal"
+      label="Mariage à Maison Claudie à Allan."
+    />
+    <figcaption>Maison Claudie, à Allan.</figcaption>
+  </figure>
+  <p>
+    <a href="https://www.maison-claudie.com/" target="_blank" rel="noopener noreferrer">
+      Découvrir Maison Claudie
+    </a>
+  </p>
 
   <h2>La Bastide de Jaillans, de la pierre, des arbres et le Vercors tout proche</h2>
   <p>La Bastide de Jaillans est l'un de ces domaines où l'on se sent rapidement à l'aise.</p>
@@ -194,7 +259,19 @@ if (!article) {
     lumière à une longue séance photo parfaitement organisée.
   </p>
   <p><strong>La Bastide de Jaillans, Jaillans, Drôme</strong></p>
-  <p>Découvrir La Bastide de Jaillans</p>
+  <figure class="article-domain-image">
+    <ImageSlot
+      path="src/images/conseils/plus-beaux-domaines-mariage-drome/jaillans.jpg"
+      orientation="horizontal"
+      label="Mariage à La Bastide de Jaillans dans la Drôme."
+    />
+    <figcaption>La Bastide de Jaillans, aux portes du Vercors.</figcaption>
+  </figure>
+  <p>
+    <a href="https://www.labastidedejaillans.fr/" target="_blank" rel="noopener noreferrer">
+      Découvrir La Bastide de Jaillans
+    </a>
+  </p>
 
   <h2>Le Château du Poët-Célard, probablement l'une des plus belles vues de cette sélection</h2>
   <p>Il y a d'abord la route.</p>
@@ -214,7 +291,19 @@ if (!article) {
   </p>
   <p>Et c'est généralement à ce moment-là que j'embarque mes mariés pour quelques minutes.</p>
   <p><strong>Château du Poët-Célard, Le Poët-Célard, Drôme</strong></p>
-  <p>Découvrir le Château du Poët-Célard</p>
+  <figure class="article-domain-image">
+    <ImageSlot
+      path="src/images/conseils/plus-beaux-domaines-mariage-drome/poet_celard.jpg"
+      orientation="horizontal"
+      label="Mariage au Château du Poët-Célard dans la Drôme."
+    />
+    <figcaption>Château du Poët-Célard, dans la Drôme provençale.</figcaption>
+  </figure>
+  <p>
+    <a href="https://www.chateaudupoetcelard.fr/" target="_blank" rel="noopener noreferrer">
+      Découvrir le Château du Poët-Célard
+    </a>
+  </p>
 
   <h2>Château Le Gâtelet, un château confidentiel à quelques minutes de Romans</h2>
   <p>À Peyrins, le Château Le Gâtelet est presque caché dans la campagne.</p>
@@ -234,7 +323,19 @@ if (!article) {
   </p>
   <p>Et pour moi, un endroit dans lequel je reviens toujours avec plaisir.</p>
   <p><strong>Château Le Gâtelet, Peyrins, Drôme</strong></p>
-  <p>Découvrir le Château Le Gâtelet</p>
+  <figure class="article-domain-image">
+    <ImageSlot
+      path="src/images/conseils/plus-beaux-domaines-mariage-drome/gatelet.jpg"
+      orientation="horizontal"
+      label="Mariage au Château Le Gâtelet à Peyrins."
+    />
+    <figcaption>Château Le Gâtelet, à Peyrins.</figcaption>
+  </figure>
+  <p>
+    <a href="https://www.chateaulegatelet.com/" target="_blank" rel="noopener noreferrer">
+      Découvrir le Château Le Gâtelet
+    </a>
+  </p>
 
   <h2>Alors, quel domaine choisir pour son mariage dans la Drôme ?</h2>
   <p>Je serais bien incapable d'en choisir un seul.</p>
@@ -288,3 +389,20 @@ if (!article) {
     <a href="/mariage/">Photographe de mariage dans la Drôme</a>.
   </p>
 </ArticleLayout>
+
+<style>
+  .article-domain-image {
+    display: grid;
+    gap: 0.75rem;
+    margin: clamp(1.75rem, 4vw, 3rem) 0 clamp(1.25rem, 3vw, 2rem);
+  }
+
+  .article-domain-image figcaption {
+    color: var(--color-muted);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 1.35;
+    text-transform: uppercase;
+  }
+</style>
