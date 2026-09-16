@@ -1,0 +1,278 @@
+---
+import ImageSlot from "../../components/ImageSlot.astro";
+import ArticleLayout from "../../layouts/ArticleLayout.astro";
+import { adviceArticles } from "../../data/conseilsArticles";
+
+const article = adviceArticles.find(
+  (item) => item.slug === "photographe-mariage-romans-sur-isere",
+);
+
+if (!article) {
+  throw new Error("Article introuvable.");
+}
+---
+
+<ArticleLayout article={article}>
+  <p>Romans-sur-Isère, c'est chez moi.</p>
+
+  <p>
+    J'y vis, j'y travaille et j'en connais forcément un peu les habitudes, les lumières et les
+    alentours. Lorsqu'on prépare un mariage ici, on a surtout la chance d'avoir énormément de
+    possibilités à quelques kilomètres seulement : le centre historique de Romans, la campagne de la
+    Drôme des Collines, les premiers reliefs du Vercors et de nombreux domaines facilement
+    accessibles depuis la ville.
+  </p>
+
+  <p>
+    J'avais donc envie de rassembler ici quelques lieux que j'aime, mais surtout des conseils très
+    simples issus de mon expérience de photographe de mariage à Romans-sur-Isère.
+  </p>
+
+  <h2>Se marier à Romans-sur-Isère</h2>
+
+  <p>
+    Pour une cérémonie civile, tout peut commencer en plein centre de Romans. Et contrairement à ce
+    qu'on pourrait imaginer, je trouve que la ville se prête plutôt bien à un mariage.
+  </p>
+
+  <p>
+    Le centre historique, la Collégiale Saint-Barnard, les quais et certaines petites rues anciennes
+    offrent déjà beaucoup de possibilités pour quelques images. On peut ensuite très rapidement
+    quitter la ville et rejoindre la campagne environnante.
+  </p>
+
+  <p>
+    C'est d'ailleurs l'un des avantages de Romans : on reste au cœur de la Drôme tout en étant à
+    quelques minutes seulement de paysages beaucoup plus naturels.
+  </p>
+
+  <div class="article-photo-strip" aria-label="Reportage de mariage autour de Romans-sur-Isère">
+    <figure>
+      <ImageSlot
+        path="src/images/conseils/photographe-mariage-romans-sur-isere/Emilia & Mathieu_483.jpg"
+        orientation="vertical"
+        label="Mariés dans un domaine autour de Romans-sur-Isère."
+      />
+    </figure>
+    <figure>
+      <ImageSlot
+        path="src/images/conseils/photographe-mariage-romans-sur-isere/Emilia & Mathieu - couple_47.jpg"
+        orientation="vertical"
+        label="Séance couple pendant un mariage dans la Drôme."
+      />
+    </figure>
+    <figure>
+      <ImageSlot
+        path="src/images/conseils/photographe-mariage-romans-sur-isere/Emilia & Mathieu_507.jpg"
+        orientation="vertical"
+        label="Moment de mariage photographié en lumière naturelle."
+      />
+    </figure>
+  </div>
+
+  <h2>Des domaines de mariage tout autour de Romans</h2>
+
+  <p>C'est probablement l'un des gros avantages du secteur.</p>
+
+  <p>
+    Sans partir très loin, on trouve déjà <a
+      href="https://www.balmeslechateau.com/"
+      target="_blank"
+      rel="noopener noreferrer">Balme le Château</a
+    >, <a href="https://www.chateaulegatelet.com/" target="_blank" rel="noopener noreferrer"
+      >le Château du Gatellet à Peyrins</a
+    >, <a
+      href="https://www.domainedelachartrogniere.fr/"
+      target="_blank"
+      rel="noopener noreferrer">La Chartrognière à Saint-Thomas-en-Royans</a
+    >, <a href="https://www.labastidedejaillans.fr/" target="_blank" rel="noopener noreferrer"
+      >La Bastide de Jaillans</a
+    > ou encore <a href="https://www.closdupuits.com/" target="_blank" rel="noopener noreferrer"
+      >Le Clos du Puits à Châteauneuf-sur-Isère</a
+    >.
+  </p>
+
+  <p>
+    Ce sont des lieux très différents les uns des autres, et certains font partie des domaines dans
+    lesquels j'ai régulièrement la chance de travailler.
+  </p>
+
+  <figure class="article-inline-image">
+    <ImageSlot
+      path="src/images/conseils/plus-beaux-domaines-mariage-drome/balmes.jpg"
+      orientation="horizontal"
+      label="Domaine de mariage entouré de nature près de Romans-sur-Isère."
+    />
+    <figcaption>Un domaine autour de Romans, entre pierre, nature et lumière de fin de journée.</figcaption>
+  </figure>
+
+  <p>
+    Je ne vais pas tous les détailler ici — j'ai justement consacré un article entier à <a
+      href="/conseils/plus-beaux-domaines-mariage-drome/"
+      >mes domaines de mariage préférés dans la Drôme</a
+    > — mais leur proximité permet quelque chose que je trouve particulièrement important : éviter de
+    passer une partie de son mariage sur la route.
+  </p>
+
+  <p>
+    Depuis Romans-sur-Isère, on peut assez facilement organiser une cérémonie en ville puis rejoindre
+    un domaine dans la Drôme des Collines ou aux alentours sans transformer l'après-midi en
+    succession de trajets.
+  </p>
+
+  <h2>Où faire ses photos de couple autour de Romans ?</h2>
+
+  <p>C'est une question que les futurs mariés me posent régulièrement.</p>
+
+  <p>
+    Et ma réponse est peut-être un peu contre-intuitive : <strong
+      >je ne choisirais jamais un lieu de mariage uniquement pour son “spot photo”.</strong
+    >
+  </p>
+
+  <p>Le jour J passe beaucoup trop vite.</p>
+
+  <p>
+    Je préfère presque toujours une belle lumière dans un endroit simple à cinq minutes de vos
+    invités plutôt qu'un décor spectaculaire nécessitant quarante minutes de voiture.
+  </p>
+
+  <p>
+    Autour de Romans, les possibilités ne manquent pourtant pas. Le centre historique permet quelque
+    chose de plus urbain et graphique. Les bords de l'Isère apportent davantage de végétation.
+    Quelques kilomètres suffisent ensuite pour retrouver les champs et les paysages beaucoup plus
+    ouverts de la Drôme des Collines.
+  </p>
+
+  <figure class="article-inline-image article-inline-image--wide">
+    <ImageSlot
+      path="src/images/conseils/plus-beaux-domaines-mariage-drome/jaillans.jpg"
+      orientation="horizontal"
+      label="Couple de mariés dans un paysage naturel de la Drôme."
+    />
+    <figcaption>Autour des domaines, quelques minutes suffisent souvent lorsque la lumière est juste.</figcaption>
+  </figure>
+
+  <p>
+    Mais mon premier réflexe reste généralement de regarder <strong
+      >ce que nous avons autour du domaine</strong
+    >.
+  </p>
+
+  <p>
+    Un chemin, quelques arbres, une vieille façade ou simplement un champ éclairé par une belle
+    lumière de fin de journée peuvent largement suffire.
+  </p>
+
+  <p>Je préfère vous emmener quinze minutes à l'écart au bon moment, puis vous rendre à vos proches.</p>
+
+  <p>Les photos de couple doivent rester un moment du mariage. Pas devenir le mariage.</p>
+
+  <h2>Mon approche lorsque je photographie un mariage à Romans</h2>
+
+  <p>
+    Photographier un mariage à quelques kilomètres de chez moi a forcément quelque chose de
+    particulier.
+  </p>
+
+  <p>
+    Mais mon approche reste la même : intervenir le moins possible sur ce qui est réellement en train
+    de se passer.
+  </p>
+
+  <p>
+    Les préparatifs, les retrouvailles, une main serrée pendant la cérémonie, les enfants qui courent
+    pendant le cocktail, les discours, les amis qui commencent à mettre le bazar pendant la soirée…
+  </p>
+
+  <p>
+    C'est généralement là que se trouvent les images auxquelles on s'attache quelques années plus
+    tard.
+  </p>
+
+  <p>
+    Bien sûr, je prends aussi le temps de réaliser les photos de famille et quelques portraits de
+    couple. Mais pendant l'essentiel de la journée, je préfère observer et raconter.
+  </p>
+
+  <p>
+    C'est cette approche que je développe dans mon travail de <a href="/mariage/"
+      >photographe de mariage dans la Drôme</a
+    >, depuis Romans-sur-Isère jusqu'à Valence et partout autour de la Drôme des Collines.
+  </p>
+
+  <p>
+    <a class="editorial-link" href="/mariage/">DÉCOUVRIR MON APPROCHE ET MES REPORTAGES DE MARIAGE →</a>
+  </p>
+
+  <h2>Quelques conseils pour organiser son mariage autour de Romans-sur-Isère</h2>
+
+  <p>
+    Si vous commencez vos recherches, je regarderais d'abord la journée dans son ensemble plutôt que
+    chaque lieu séparément.
+  </p>
+
+  <p>
+    Où auront lieu les préparatifs ? La cérémonie ? Combien de temps faudra-t-il ensuite pour
+    rejoindre le domaine ? Est-ce que vos invités devront reprendre plusieurs fois leur voiture ?
+  </p>
+
+  <p>
+    Romans-sur-Isère est plutôt bien placé pour limiter ces contraintes. Peyrins, Génissieux,
+    Châteauneuf-sur-Isère, Jaillans et plus largement la Drôme des Collines offrent beaucoup de
+    possibilités dans un périmètre relativement réduit.
+  </p>
+
+  <p>Et photographiquement, il n'est absolument pas nécessaire de multiplier les lieux.</p>
+
+  <p>
+    Un mariage fluide laisse davantage de place aux imprévus, aux discussions qui durent un peu trop
+    longtemps et à tous ces petits moments qui finissent souvent par devenir mes photos préférées.
+  </p>
+
+  <p>
+    Si vous préparez votre mariage à Romans-sur-Isère ou dans les environs, vous pouvez découvrir mes
+    reportages de mariage dans la Drôme, mes différentes formules et surtout ma façon de raconter ces
+    journées.
+  </p>
+
+  <p>
+    <a class="editorial-link" href="/mariage/"
+      >DÉCOUVRIR LIFE FOCUS — PHOTOGRAPHE DE MARIAGE DANS LA DRÔME →</a
+    >
+  </p>
+</ArticleLayout>
+
+<style>
+  .article-inline-image {
+    display: grid;
+    gap: 0.75rem;
+    margin: clamp(1.75rem, 4vw, 3rem) 0 clamp(1.25rem, 3vw, 2rem);
+  }
+
+  .article-inline-image figcaption {
+    color: var(--color-muted);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 1.35;
+    text-transform: uppercase;
+  }
+
+  .article-photo-strip {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(0.85rem, 2vw, 1.5rem);
+    margin: clamp(2rem, 4.5vw, 3.75rem) 0 clamp(2.25rem, 5vw, 4rem);
+  }
+
+  .article-photo-strip figure {
+    margin: 0;
+  }
+
+  @media (max-width: 42rem) {
+    .article-photo-strip {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

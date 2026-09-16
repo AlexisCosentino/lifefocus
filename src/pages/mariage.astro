@@ -163,6 +163,11 @@ const structuredData = {
           <p>
             Basé à Romans-sur-Isère, près de Valence, je photographie les mariages avec une approche naturelle et spontanée, sans transformer votre journée en séance photo.
           </p>
+          <p class="wedding-hero__context">
+            Vous préparez votre mariage près de Romans ? J'ai aussi réuni quelques <a
+              href="/conseils/photographe-mariage-romans-sur-isere/">conseils pour se marier à Romans-sur-Isère</a
+            >.
+          </p>
         </div>
       </div>
     </section>
@@ -295,6 +300,21 @@ const structuredData = {
     font-size: clamp(2.55rem, 1.55rem + 3.15vw, 4.85rem);
     text-wrap: balance;
     overflow-wrap: break-word;
+  }
+
+  .wedding-hero__context {
+    color: var(--color-muted);
+    font-size: var(--text-sm);
+  }
+
+  .wedding-hero__context a {
+    color: var(--color-text);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+  }
+
+  .wedding-hero__context a:hover {
+    color: var(--color-muted);
   }
 
   .wedding-hero p:not(.editorial-label),

@@ -14,6 +14,20 @@ export interface AdviceArticle {
 
 export const adviceArticles = [
   {
+    title: "Se marier à Romans-sur-Isère : lieux, domaines et conseils d'un photographe local",
+    seoTitle: "Photographe mariage Romans-sur-Isère | Lieux & conseils",
+    description:
+      "Photographe de mariage basé à Romans-sur-Isère, je partage mes conseils, lieux et domaines pour organiser un mariage autour de Romans et dans la Drôme.",
+    slug: "photographe-mariage-romans-sur-isere",
+    publishedAt: new Date("2026-09-16"),
+    category: "Mariage",
+    excerpt:
+      "Lieux, domaines et conseils simples pour organiser un mariage autour de Romans-sur-Isère et dans la Drôme des Collines.",
+    featuredImage: "weddingMain",
+    featuredImageAlt: "Couple de mariés photographié autour de Romans-sur-Isère.",
+    draft: false,
+  },
+  {
     title: "Prestataires de mariage de confiance dans la Drôme",
     seoTitle: "Prestataires mariage Drôme : mes adresses de confiance | Life Focus",
     description:
