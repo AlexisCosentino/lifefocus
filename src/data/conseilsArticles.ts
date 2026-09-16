@@ -14,6 +14,20 @@ export interface AdviceArticle {
 
 export const adviceArticles = [
   {
+    title: "Prestataires de mariage de confiance dans la Drôme",
+    seoTitle: "Prestataires mariage Drôme : mes adresses de confiance | Life Focus",
+    description:
+      "Une sélection personnelle de prestataires de mariage dans la Drôme : domaines, vidéaste et wedding planners autour de Valence et Romans.",
+    slug: "prestataires-mariage-drome",
+    publishedAt: new Date("2026-09-16"),
+    category: "Mariage",
+    excerpt:
+      "Domaines, vidéo, wedding planners : quelques adresses de confiance que je recommande volontiers aux futurs mariés dans la Drôme.",
+    featuredImage: "weddingMain",
+    featuredImageAlt: "Détail de mariage photographié dans la Drôme par Life Focus.",
+    draft: false,
+  },
+  {
     title: "Organiser son mariage dans la Drôme : conseils de photographe",
     seoTitle: "Mariage dans la Drôme : conseils de photographe | Life Focus",
     description:
