@@ -1,0 +1,337 @@
+---
+import ImageSlot from "../../components/ImageSlot.astro";
+import ArticleLayout from "../../layouts/ArticleLayout.astro";
+import { adviceArticles } from "../../data/conseilsArticles";
+
+const article = adviceArticles.find((item) => item.slug === "photographe-mariage-valence");
+
+if (!article) {
+  throw new Error("Article introuvable.");
+}
+---
+
+<ArticleLayout article={article}>
+  <p>
+    Valence est une ville que je connais forcément bien. Je travaille régulièrement dans le secteur,
+    et j'aime particulièrement ce mélange entre une vraie cérémonie en ville et la possibilité de
+    retrouver la campagne quelques kilomètres plus loin.
+  </p>
+
+  <p>
+    C'est aussi ce qui rend Valence intéressante pour organiser un mariage : on peut commencer la
+    journée en plein centre-ville, traverser le Rhône vers l'Ardèche ou rejoindre rapidement un
+    domaine dans la Drôme.
+  </p>
+
+  <p>
+    Et photographiquement, ça offre pas mal de possibilités sans forcément passer sa journée sur la
+    route.
+  </p>
+
+  <h2>Se marier à la mairie de Valence</h2>
+
+  <p>
+    Je vais commencer par elle parce que c'est probablement l'un des endroits que je préfère pour
+    une cérémonie civile dans le secteur : <strong>la mairie de Valence</strong>.
+  </p>
+
+  <p>
+    Elle a quelque chose que toutes les mairies n'ont pas : elle donne immédiatement du caractère à
+    une cérémonie civile.
+  </p>
+
+  <p>
+    L'architecture, les volumes, les escaliers, les détails du bâtiment... visuellement, il se passe
+    déjà quelque chose avant même l'entrée dans la salle. Et pour un photographe, c'est forcément
+    agréable de pouvoir raconter aussi ce petit morceau de la journée.
+  </p>
+
+  <p>
+    J'aime particulièrement ces moments juste avant la cérémonie : les invités qui arrivent
+    progressivement, les mariés qui attendent parfois chacun de leur côté, les retrouvailles dans les
+    escaliers ou devant la mairie.
+  </p>
+
+  <p>
+    Une cérémonie civile est souvent assez courte. Pourtant, elle peut donner certaines des images
+    les plus fortes de la journée.
+  </p>
+
+  <p>Et à Valence, le décor aide franchement.</p>
+
+  <div class="article-photo-strip" aria-label="Reportage de mariage à Valence">
+    <figure>
+      <ImageSlot
+        path="src/images/conseils/photographe-mariage-valence/Clothilde & Loïc.jpg"
+        orientation="vertical"
+        label="Mariage civil photographié dans le secteur de Valence."
+      />
+    </figure>
+    <figure>
+      <ImageSlot
+        path="src/images/conseils/photographe-mariage-valence/David & Sonia.jpg"
+        orientation="vertical"
+        label="Moment de reportage pendant un mariage autour de Valence."
+      />
+    </figure>
+    <figure>
+      <ImageSlot
+        path="src/images/conseils/photographe-mariage-valence/David & Sonia_195.jpg"
+        orientation="vertical"
+        label="Mariés photographiés naturellement pendant leur journée."
+      />
+    </figure>
+  </div>
+
+  <h2>Quelques photos dans Valence... sans transformer le mariage en shooting</h2>
+
+  <p>
+    Après la cérémonie, il peut être tentant de vouloir profiter de la ville pour réaliser
+    immédiatement toutes les photos de couple.
+  </p>
+
+  <p>Personnellement, je préfère rester assez libre.</p>
+
+  <p>
+    Le centre de Valence, le Champ de Mars, le parc Jouvet ou certaines rues permettent de faire
+    quelques images très facilement si le planning s'y prête. Mais je ne pense pas qu'il soit
+    nécessaire de construire toute la journée autour d'une liste de spots photo.
+  </p>
+
+  <p>
+    Le jour d'un mariage, <strong>la lumière compte souvent davantage que le lieu</strong>.
+  </p>
+
+  <p>
+    Un endroit magnifique photographié à une mauvaise heure peut être beaucoup moins intéressant
+    qu'une rue toute simple traversée par une belle lumière.
+  </p>
+
+  <p>Et surtout, je préfère que les mariés profitent réellement de leur journée.</p>
+
+  <p>
+    Si nous avons dix minutes après la cérémonie et qu'un endroit intéressant se trouve à côté,
+    allons-y. Si la meilleure lumière arrive plus tard au domaine, j'attendrai simplement ce
+    moment-là.
+  </p>
+
+  <p>Les photos doivent s'intégrer au mariage, pas l'inverse.</p>
+
+  <figure class="article-inline-image article-inline-image--wide">
+    <ImageSlot
+      path="src/images/conseils/photographe-mariage-valence/Marine & Mickael_118.jpg"
+      orientation="horizontal"
+      label="Couple de mariés photographié dans le secteur de Valence."
+    />
+    <figcaption>Quelques minutes suffisent souvent lorsque la lumière et le rythme sont bons.</figcaption>
+  </figure>
+
+  <h2>Autour de Valence, la campagne arrive très vite</h2>
+
+  <p>C'est probablement ce que j'apprécie le plus dans le secteur.</p>
+
+  <p>
+    Quelques kilomètres suffisent pour quitter complètement l'ambiance urbaine et retrouver des
+    paysages beaucoup plus ouverts.
+  </p>
+
+  <p>
+    En direction de Chabeuil, Alixan ou Châteaudouble, on retrouve rapidement cette Drôme plus
+    rurale, avec ses domaines, ses vieilles pierres et les premiers reliefs qui apparaissent au loin.
+  </p>
+
+  <p>Pour l'organisation d'un mariage, c'est particulièrement pratique.</p>
+
+  <p>
+    On peut très bien imaginer une cérémonie civile à Valence en début d'après-midi puis rejoindre
+    tranquillement le lieu de réception sans imposer une heure de trajet aux invités.
+  </p>
+
+  <p>Et pour moi, cette fluidité compte énormément.</p>
+
+  <p>Moins il y a de temps passé dans les voitures, plus il reste de temps pour tout le reste.</p>
+
+  <p>
+    Si vous cherchez un lieu de réception, j'ai aussi regroupé <a
+      href="/conseils/plus-beaux-domaines-mariage-drome/">mes domaines de mariage préférés dans la Drôme</a
+    >, avec plusieurs adresses faciles à imaginer depuis Valence.
+  </p>
+
+  <h2>De l'autre côté du Rhône, l'Ardèche</h2>
+
+  <p>
+    C'est aussi une particularité assez amusante de Valence : <strong
+      >il suffit de traverser le Rhône pour changer de département.</strong
+    >
+  </p>
+
+  <p>Guilherand-Granges est littéralement en face de la ville et Saint-Péray se trouve quelques minutes plus loin.</p>
+
+  <p>
+    Cela ouvre encore d'autres possibilités pour les couples qui souhaitent célébrer leur mariage
+    autour de Valence sans forcément rester côté Drôme.
+  </p>
+
+  <p>
+    Saint-Péray et ses alentours offrent notamment une ambiance différente, entre vignobles, reliefs
+    ardéchois et paysages beaucoup plus ouverts.
+  </p>
+
+  <p>
+    Finalement, lorsqu'un couple me parle d'un mariage « à Valence », le lieu de réception peut tout
+    aussi bien se trouver dans la Drôme qu'en Ardèche.
+  </p>
+
+  <p>Et c'est justement ce qui rend le secteur intéressant.</p>
+
+  <figure class="article-inline-image">
+    <ImageSlot
+      path="src/images/conseils/photographe-mariage-valence/David & Sonia_211.jpg"
+      orientation="horizontal"
+      label="Reportage de mariage dans un paysage naturel autour de Valence."
+    />
+    <figcaption>Autour de Valence, le décor peut changer très vite sans éloigner les invités.</figcaption>
+  </figure>
+
+  <h2>Où faire ses photos de couple autour de Valence ?</h2>
+
+  <p>Ma réponse est assez simple : <strong>là où nous serons au bon moment.</strong></p>
+
+  <p>
+    Je n'ai jamais aimé faire disparaître les mariés pendant une heure en plein cocktail simplement
+    parce qu'il existe un joli point de vue vingt kilomètres plus loin.
+  </p>
+
+  <p>
+    Je préfère généralement repérer ce que nous avons autour du lieu de réception et attendre une
+    lumière intéressante.
+  </p>
+
+  <p>
+    Parfois, ce sera un endroit évident. Parfois simplement un chemin derrière le domaine, quelques
+    arbres, un mur ancien ou un champ.
+  </p>
+
+  <p>
+    Et si nous sommes encore dans Valence, la ville permet évidemment une approche complètement
+    différente : plus graphique, plus architecturale, parfois presque improvisée au détour d'une rue.
+  </p>
+
+  <p>Ce qui m'intéresse surtout, c'est que les photos ressemblent à <strong>votre journée</strong>.</p>
+
+  <p>Pas à une séance photo organisée indépendamment du mariage.</p>
+
+  <h2>Photographier un mariage à Valence</h2>
+
+  <p>
+    Même si je suis basé à Romans-sur-Isère, Valence fait naturellement partie des secteurs dans
+    lesquels je travaille régulièrement.
+  </p>
+
+  <p>
+    Une trentaine de kilomètres séparent les deux villes, et une grande partie des mariages que je
+    photographie se déroule quelque part entre Valence, <a
+      href="/conseils/photographe-mariage-romans-sur-isere/">Romans-sur-Isère</a
+    > et les différents domaines de la Drôme.
+  </p>
+
+  <p>Mon approche reste toujours la même : raconter la journée avec le moins d'interventions possible.</p>
+
+  <p>
+    Les préparatifs, la cérémonie, les invités qui se retrouvent, les enfants qui courent partout
+    pendant le cocktail, les discours, les embrassades et progressivement la soirée qui commence...
+  </p>
+
+  <p>Je préfère observer tout ça plutôt que fabriquer des moments qui n'existaient pas.</p>
+
+  <p>
+    Les portraits de couple et les photos de famille ont évidemment leur place. Mais ils ne
+    représentent qu'une petite partie de l'histoire.
+  </p>
+
+  <p>
+    C'est cette approche que je développe dans mon travail de <a href="/mariage/"
+      >photographe de mariage dans la Drôme</a
+    >, à Valence, Romans-sur-Isère et partout autour.
+  </p>
+
+  <p>
+    <a class="editorial-link" href="/mariage/">DÉCOUVRIR MON APPROCHE ET MES REPORTAGES DE MARIAGE →</a>
+  </p>
+
+  <h2>Préparer son mariage autour de Valence</h2>
+
+  <p>
+    Si je devais donner un seul conseil aux couples qui commencent leurs recherches, ce serait de
+    regarder leur journée comme un ensemble.
+  </p>
+
+  <p>
+    Une très belle mairie, un superbe domaine et un magnifique endroit pour les photos peuvent
+    devenir beaucoup moins intéressants s'ils impliquent trois longs trajets successifs.
+  </p>
+
+  <p>À Valence, on a justement la chance de pouvoir éviter ça.</p>
+
+  <p>
+    Une cérémonie en centre-ville peut facilement être suivie d'une réception dans la campagne
+    drômoise ou de l'autre côté du Rhône en Ardèche.
+  </p>
+
+  <p>
+    Gardez du temps pour vos invités, prévoyez un peu de marge entre les différentes étapes et ne
+    cherchez pas à remplir chaque minute.
+  </p>
+
+  <p>
+    Les petits imprévus, les moments qui durent un peu plus longtemps que prévu et tout ce qui
+    n'était justement pas inscrit sur le planning font souvent partie de mes souvenirs préférés d'un
+    mariage.
+  </p>
+
+  <p>
+    Si vous préparez votre mariage à Valence ou dans les environs, vous pouvez découvrir <a
+      href="/mariage/">mes reportages de mariage dans la Drôme</a
+    >, mes différentes formules et ma façon de raconter ces journées.
+  </p>
+
+  <p>
+    <a class="editorial-link" href="/mariage/"
+      >DÉCOUVRIR LIFE FOCUS — PHOTOGRAPHE DE MARIAGE DANS LA DRÔME →</a
+    >
+  </p>
+</ArticleLayout>
+
+<style>
+  .article-inline-image {
+    display: grid;
+    gap: 0.75rem;
+    margin: clamp(1.75rem, 4vw, 3rem) 0 clamp(1.25rem, 3vw, 2rem);
+  }
+
+  .article-inline-image figcaption {
+    color: var(--color-muted);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 1.35;
+    text-transform: uppercase;
+  }
+
+  .article-photo-strip {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(0.85rem, 2vw, 1.5rem);
+    margin: clamp(2rem, 4.5vw, 3.75rem) 0 clamp(2.25rem, 5vw, 4rem);
+  }
+
+  .article-photo-strip figure {
+    margin: 0;
+  }
+
+  @media (max-width: 42rem) {
+    .article-photo-strip {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

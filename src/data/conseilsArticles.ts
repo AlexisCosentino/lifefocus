@@ -14,6 +14,20 @@ export interface AdviceArticle {
 
 export const adviceArticles = [
   {
+    title: "Se marier à Valence : lieux, cérémonie et conseils d'un photographe",
+    seoTitle: "Photographe mariage Valence | Lieux & conseils",
+    description:
+      "Photographe de mariage à Valence, je partage mes conseils et idées de lieux pour organiser votre mariage à Valence, dans la Drôme et aux alentours.",
+    slug: "photographe-mariage-valence",
+    publishedAt: new Date("2026-09-16"),
+    category: "Mariage",
+    excerpt:
+      "Mairie de Valence, centre-ville, lumière et domaines proches : quelques repères pour préparer un mariage fluide autour de Valence.",
+    featuredImage: "weddingMain",
+    featuredImageAlt: "Mariage photographié autour de Valence dans la Drôme.",
+    draft: false,
+  },
+  {
     title: "Se marier à Romans-sur-Isère : lieux, domaines et conseils d'un photographe local",
     seoTitle: "Photographe mariage Romans-sur-Isère | Lieux & conseils",
     description:
