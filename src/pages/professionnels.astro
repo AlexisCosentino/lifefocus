@@ -8,6 +8,26 @@ const pageTitle = "Professionnels du mariage & collaborations | Life Focus";
 const pageDescription =
   "Photographe de mariage basé à Romans-sur-Isère, je collabore avec domaines, wedding planners, vidéastes et prestataires en Drôme, Valence et Provence.";
 
+const professionalGalleryAlt = {
+  "src/images/professionnels/gallery/1.jpg": "Photographe avec son appareil pendant un mariage.",
+  "src/images/professionnels/gallery/2.jpg": "Enseigne d'un lieu de réception pour un mariage.",
+  "src/images/professionnels/gallery/3.jpg": "Invités réunis devant un lieu de réception.",
+  "src/images/professionnels/gallery/4.jpg": "Invités debout autour d'une cérémonie en extérieur.",
+  "src/images/professionnels/gallery/5.jpg": "Portrait de convives pendant une réception de mariage.",
+  "src/images/professionnels/gallery/6.jpg": "Jardin aménagé autour d'une demeure en pierre.",
+  "src/images/professionnels/gallery/7.jpg": "Tables dressées dans une salle de réception.",
+  "src/images/professionnels/gallery/8.jpg": "Tables de réception dressées sous une charpente en bois.",
+  "src/images/professionnels/gallery/9.jpg": "Détail de fleurs et de papeterie de mariage.",
+  "src/images/professionnels/gallery/10.jpg": "Détail d'accessoires posés sur une table de mariage.",
+  "src/images/professionnels/gallery/11.jpg": "Portrait de convives pendant une réception.",
+  "src/images/professionnels/gallery/12.jpg": "Salle de réception décorée pour un dîner de mariage.",
+  "src/images/professionnels/gallery/13.jpg": "Tables dressées dans une salle éclairée le soir.",
+  "src/images/professionnels/gallery/14.jpg": "Portrait d'une invitée pendant une réception.",
+  "src/images/professionnels/gallery/15.jpg": "Tables dressées dans une réception en extérieur.",
+  "src/images/professionnels/gallery/16.jpg": "Décoration florale et rubans sur une structure en bois.",
+  "src/images/professionnels/gallery/17.jpg": "Musiciens jouant pendant une réception de mariage.",
+} as const;
+
 const professionalImages = [
   {
     ...homeImages.weddingMain,
@@ -243,6 +263,7 @@ const structuredData = {
       titleId="professionals-gallery-title"
       images={professionalImages}
       galleryFolder="src/images/professionnels/gallery"
+      altByPath={professionalGalleryAlt}
     />
 
     <section class="professionals-contact page-shell" aria-labelledby="professionals-contact-title">

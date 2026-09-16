@@ -18,9 +18,10 @@ interface Props {
   titleId: string;
   images: EditorialGalleryImage[];
   galleryFolder?: string;
+  altByPath?: Record<string, string>;
 }
 
-const { eyebrow, title, titleId, images, galleryFolder } = Astro.props;
+const { eyebrow, title, titleId, images, galleryFolder, altByPath = {} } = Astro.props;
 
 const normalizeSize = (size: EditorialGalleryImage["size"]) => (size === "vertical" ? "portrait" : size ?? "small");
 
@@ -35,7 +36,7 @@ const folderImages = normalizedFolder
       .sort(([pathA], [pathB]) => pathA.localeCompare(pathB, "fr", { numeric: true, sensitivity: "base" }))
       .map(([path, module]) => ({
         resolvedSrc: module.default,
-        alt: "",
+        alt: altByPath[path.slice(1)] ?? "",
         slotPath: path.slice(1),
       }))
   : [];
