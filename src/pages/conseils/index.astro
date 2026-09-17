@@ -51,7 +51,7 @@ const pageDescription =
 
               <figure class="advice-item__image">
                 <ImageSlot
-                  path={`src/images/conseils/${article.slug}.jpg`}
+                  path={article.coverImagePath ?? `src/images/conseils/${article.slug}.jpg`}
                   orientation="horizontal"
                   label={article.featuredImageAlt ?? "Article de conseils de mariage."}
                 />

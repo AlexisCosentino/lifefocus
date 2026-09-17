@@ -1,0 +1,294 @@
+---
+import ImageSlot from "../../components/ImageSlot.astro";
+import ArticleLayout from "../../layouts/ArticleLayout.astro";
+import { adviceArticles } from "../../data/conseilsArticles";
+
+const article = adviceArticles.find((item) => item.slug === "ou-faire-seance-photo-grossesse-drome");
+
+if (!article) {
+  throw new Error("Article introuvable.");
+}
+---
+
+<ArticleLayout article={article}>
+  <p>Quand on me demande où réaliser une séance photo grossesse, j'ai rarement un lieu unique à conseiller.</p>
+
+  <p>Et c'est justement ce que j'aime dans la Drôme.</p>
+
+  <p>
+    En quelques kilomètres autour de Romans-sur-Isère et Valence, on peut passer des hautes herbes à
+    une forêt, d'un bord de rivière à un champ ouvert. Et selon la saison, le même endroit peut
+    raconter quelque chose de complètement différent.
+  </p>
+
+  <p>
+    Finalement, je cherche moins <strong>le plus beau lieu</strong> que le bon mélange entre paysage,
+    tranquillité et lumière.
+  </p>
+
+  <div class="article-photo-strip" aria-label="Ambiances de séance grossesse en extérieur dans la Drôme">
+    <figure>
+      <ImageSlot
+        path="src/images/conseils/ou-faire_une_seance_photo_grossesse_dans_la_drome/hautes herbes.jpg"
+        orientation="vertical"
+        label="Séance grossesse dans les hautes herbes en lumière naturelle."
+      />
+    </figure>
+    <figure>
+      <ImageSlot
+        path="src/images/conseils/ou-faire_une_seance_photo_grossesse_dans_la_drome/printemps parc.jpg"
+        orientation="vertical"
+        label="Future maman photographiée au printemps dans un parc arboré."
+      />
+    </figure>
+    <figure>
+      <ImageSlot
+        path="src/images/conseils/ou-faire_une_seance_photo_grossesse_dans_la_drome/Karlijn_60.jpg"
+        orientation="vertical"
+        label="Séance grossesse en couple dans un paysage naturel de la Drôme."
+      />
+    </figure>
+  </div>
+
+  <h2>Le parc de Lorient, l'un de mes endroits préférés</h2>
+
+  <p>
+    Le parc départemental de Lorient, près de Valence, est probablement l'un des lieux que j'aime le
+    plus pour une séance grossesse en extérieur.
+  </p>
+
+  <p>
+    Il offre énormément de possibilités sans avoir besoin de parcourir des kilomètres : des hautes
+    herbes, de grands platanes, des zones plus boisées, une rivière...
+  </p>
+
+  <p>
+    On peut changer complètement d'ambiance au cours d'une même séance tout en restant dans un
+    environnement assez calme et intime.
+  </p>
+
+  <p>Et cette tranquillité compte beaucoup.</p>
+
+  <p>
+    Une séance grossesse n'a rien d'un shooting où il faudrait savoir poser pendant une heure. Je
+    préfère prendre le temps, marcher un peu, discuter et profiter de ce que nous offre le lieu.
+  </p>
+
+  <figure class="article-inline-image article-inline-image--wide">
+    <ImageSlot
+      path="src/images/conseils/ou-faire_une_seance_photo_grossesse_dans_la_drome/etang.jpg"
+      orientation="horizontal"
+      label="Lieu calme près d'un étang pour une séance grossesse dans la Drôme."
+    />
+    <figcaption>Un lieu simple peut suffire lorsqu'il laisse de la place au calme et à la lumière.</figcaption>
+  </figure>
+
+  <h2>Le bois des Naix à Bourg-de-Péage</h2>
+
+  <p>
+    Autour de Romans-sur-Isère, le bois des Naix à Bourg-de-Péage offre une autre possibilité que
+    j'aime beaucoup.
+  </p>
+
+  <p>
+    On retrouve cette présence de la végétation et des arbres qui fonctionne particulièrement bien
+    lorsque je recherche quelque chose de naturel et assez doux.
+  </p>
+
+  <p>
+    Plus largement, les environs de Romans offrent énormément de petits coins intéressants. Les
+    étangs du côté de Mours-Saint-Eusèbe, par exemple, permettent encore de changer d'atmosphère sans
+    partir très loin.
+  </p>
+
+  <p>Il n'est pas forcément nécessaire d'aller chercher un paysage spectaculaire.</p>
+
+  <p>
+    Parfois, quelques arbres, des herbes hautes et une belle lumière de fin de journée suffisent
+    largement.
+  </p>
+
+  <figure class="article-inline-image">
+    <ImageSlot
+      path="src/images/conseils/ou-faire_une_seance_photo_grossesse_dans_la_drome/hiver_foret.jpg"
+      orientation="vertical"
+      label="Portrait de grossesse en forêt autour de Romans-sur-Isère."
+    />
+    <figcaption>La forêt apporte une ambiance plus douce, plus enveloppante.</figcaption>
+  </figure>
+
+  <h2>Du côté de Valence... et de l'autre côté du Rhône</h2>
+
+  <p>Pour une ambiance plus ouverte, j'aime également regarder ce qui se passe autour du Rhône.</p>
+
+  <p>
+    Depuis Valence, il suffit de traverser pour rejoindre Guilherand-Granges et les paysages
+    ardéchois.
+  </p>
+
+  <p>
+    Les bords du Rhône offrent quelque chose de différent : davantage d'espace, de ciel, une lumière
+    qui peut devenir magnifique en fin de journée.
+  </p>
+
+  <p>
+    C'est aussi tout l'intérêt de travailler entre Romans et Valence : <strong
+      >les paysages changent très vite</strong
+    >.
+  </p>
+
+  <p>
+    On peut chercher quelque chose de boisé, plus sauvage, plus ouvert ou simplement choisir un
+    endroit proche de chez vous auquel vous êtes attachés.
+  </p>
+
+  <h2>Lavandes, coquelicots, tournesols... profiter des saisons</h2>
+
+  <p>Il y a aussi des séances que l'on ne peut tout simplement pas prévoir n'importe quand.</p>
+
+  <p>
+    La floraison des lavandes offre évidemment une ambiance très particulière lorsqu'elle correspond à
+    la période de la grossesse.
+  </p>
+
+  <p>Au printemps, ce sont parfois les coquelicots qui viennent complètement transformer un paysage.</p>
+
+  <p>Plus tard dans la saison, les tournesols peuvent apporter quelque chose de beaucoup plus solaire.</p>
+
+  <p>
+    Et puis il y a <strong>l'automne</strong>, que je trouve particulièrement intéressant pour une
+    séance grossesse.
+  </p>
+
+  <p>
+    Les couleurs deviennent plus chaudes, la végétation change, la lumière descend plus tôt et
+    l'ensemble correspond très bien à l'atmosphère douce que je recherche dans ces séances.
+  </p>
+
+  <p>
+    Je ne construis cependant jamais une séance autour de la promesse absolue d'un champ précis. La
+    nature décide aussi un peu pour nous : les floraisons changent d'une année à l'autre, les
+    cultures également, et c'est très bien comme ça.
+  </p>
+
+  <p>On regarde ce qui est possible au moment de votre séance et on choisit ensemble.</p>
+
+  <figure class="article-inline-image article-inline-image--wide">
+    <ImageSlot
+      path="src/images/conseils/ou-faire_une_seance_photo_grossesse_dans_la_drome/hiver_plaine_glacé.jpg"
+      orientation="horizontal"
+      label="Paysage d'hiver pour une séance grossesse en extérieur dans la Drôme."
+    />
+    <figcaption>Chaque saison apporte une lumière et une matière différentes.</figcaption>
+  </figure>
+
+  <h2>Et surtout, attendre la bonne lumière</h2>
+
+  <p>Le lieu compte.</p>
+
+  <p>Mais <strong>la lumière compte encore davantage</strong>.</p>
+
+  <p>
+    Lorsque c'est possible, j'aime réaliser les séances grossesse en fin de journée, lorsque le soleil
+    descend et que la lumière devient plus douce.
+  </p>
+
+  <p>
+    C'est cette fameuse <em>golden hour</em> qui peut donner aux hautes herbes, à un champ ou même à
+    un simple chemin une atmosphère complètement différente.
+  </p>
+
+  <p>
+    Je préfère souvent un endroit très simple avec une lumière magnifique plutôt qu'un lieu
+    exceptionnel photographié au mauvais moment.
+  </p>
+
+  <p>
+    C'est aussi pour cela que je vous conseille sur l'horaire de la séance en fonction de la période
+    de l'année et de l'endroit choisi.
+  </p>
+
+  <h2>Seule, en couple ou en famille</h2>
+
+  <p>
+    Une séance grossesse peut évidemment être consacrée à la future maman, mais elle peut aussi
+    raconter quelque chose de plus large.
+  </p>
+
+  <p>Votre conjoint peut être présent. Vos enfants aussi.</p>
+
+  <p>
+    Je trouve même souvent très intéressant d'intégrer la famille à cette période particulière, tout
+    en gardant quelques moments uniquement consacrés à la future maman.
+  </p>
+
+  <p>Il n'y a pas vraiment de scénario imposé.</p>
+
+  <p>
+    On marche, on échange, on laisse les enfants vivre leur vie s'ils sont là, et je vous guide
+    lorsque c'est nécessaire.
+  </p>
+
+  <h2>Alors, où réaliser votre séance grossesse ?</h2>
+
+  <p>
+    Peut-être au parc de Lorient. Au bois des Naix. Près des étangs autour de Mours. Sur les bords du
+    Rhône. Dans les paysages de la Drôme des Collines. Au milieu des lavandes, des coquelicots ou des
+    tournesols si la saison nous fait ce cadeau.
+  </p>
+
+  <p>Ou peut-être simplement dans un endroit auquel vous n'auriez pas pensé.</p>
+
+  <p>C'est justement tout l'intérêt d'en discuter ensemble.</p>
+
+  <p>
+    Dites-moi ce que vous aimez, ce que vous n'aimez pas, l'ambiance que vous imaginez et la période
+    à laquelle votre séance doit avoir lieu.
+  </p>
+
+  <p><strong>À partir de là, presque tout est possible.</strong></p>
+
+  <p>
+    <a class="editorial-link" href="/grossesse/"
+      >DÉCOUVRIR MES SÉANCES PHOTO GROSSESSE DANS LA DRÔME →</a
+    >
+  </p>
+</ArticleLayout>
+
+<style>
+  .article-inline-image {
+    display: grid;
+    gap: 0.75rem;
+    margin: clamp(1.75rem, 4vw, 3rem) 0 clamp(1.25rem, 3vw, 2rem);
+  }
+
+  .article-inline-image figcaption {
+    color: var(--color-muted);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 1.35;
+    text-transform: uppercase;
+  }
+
+  .article-inline-image:not(.article-inline-image--wide) {
+    max-width: min(100%, 30rem);
+  }
+
+  .article-photo-strip {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(0.85rem, 2vw, 1.5rem);
+    margin: clamp(2rem, 4.5vw, 3.75rem) 0 clamp(2.25rem, 5vw, 4rem);
+  }
+
+  .article-photo-strip figure {
+    margin: 0;
+  }
+
+  @media (max-width: 42rem) {
+    .article-photo-strip {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

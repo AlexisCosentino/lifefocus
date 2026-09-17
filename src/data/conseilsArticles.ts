@@ -8,11 +8,47 @@ export interface AdviceArticle {
   category: string;
   excerpt: string;
   featuredImage?: string;
+  coverImagePath?: string;
   featuredImageAlt?: string;
+  primaryCtaHref?: string;
+  primaryCtaLabel?: string;
   draft?: boolean;
 }
 
 export const adviceArticles = [
+  {
+    title: "Où faire une séance photo grossesse dans la Drôme ?",
+    seoTitle: "Séance photo grossesse Drôme | Lieux autour de Romans & Valence",
+    description:
+      "Où faire une séance photo grossesse dans la Drôme ? Conseils de photographe autour de Romans-sur-Isère, Valence, nature, saisons et lumière.",
+    slug: "ou-faire-seance-photo-grossesse-drome",
+    publishedAt: new Date("2026-09-17"),
+    category: "Grossesse",
+    excerpt:
+      "Parc de Lorient, bois des Naix, bords du Rhône, saisons et lumière : quelques repères pour choisir un lieu de séance grossesse autour de Romans et Valence.",
+    coverImagePath:
+      "src/images/conseils/ou-faire_une_seance_photo_grossesse_dans_la_drome/hautes herbes.jpg",
+    featuredImageAlt: "Séance grossesse en extérieur dans les hautes herbes de la Drôme.",
+    primaryCtaHref: "/grossesse/",
+    primaryCtaLabel: "DÉCOUVRIR LES SÉANCES GROSSESSE →",
+    draft: false,
+  },
+  {
+    title: "Séance photo naissance à domicile : comment se déroule un reportage en famille ?",
+    seoTitle: "Séance photo naissance à domicile | Reportage famille",
+    description:
+      "Comment se déroule une séance photo naissance à domicile ? Reportage naturel en famille autour du rythme de votre bébé, dans la Drôme.",
+    slug: "seance-photo-naissance-domicile",
+    publishedAt: new Date("2026-09-17"),
+    category: "Naissance",
+    excerpt:
+      "Rythme du bébé, lumière de la maison, pauses, parents, fratrie et petits détails : comment se déroule un reportage naissance à domicile.",
+    coverImagePath: "src/images/conseils/seance_photo_naissance_a_domicile/couverture.jpg",
+    featuredImageAlt: "Reportage naissance à domicile en famille, au rythme du bébé.",
+    primaryCtaHref: "/naissance/",
+    primaryCtaLabel: "DÉCOUVRIR LES REPORTAGES NAISSANCE →",
+    draft: false,
+  },
   {
     title: "Se marier à Valence : lieux, cérémonie et conseils d'un photographe",
     seoTitle: "Photographe mariage Valence | Lieux & conseils",

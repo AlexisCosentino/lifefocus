@@ -14,7 +14,10 @@ interface ArticleData {
   category: string;
   excerpt: string;
   featuredImage?: string;
+  coverImagePath?: string;
   featuredImageAlt?: string;
+  primaryCtaHref?: string;
+  primaryCtaLabel?: string;
 }
 
 const { article } = Astro.props as {
@@ -22,13 +25,17 @@ const { article } = Astro.props as {
 };
 
 const canonicalUrl = `https://www.lifefocus.fr/conseils/${article.slug}/`;
+const primaryCtaHref = article.primaryCtaHref ?? "/mariage/";
+const primaryCtaLabel = article.primaryCtaLabel ?? "DÉCOUVRIR LE MARIAGE →";
+const coverImagePath = article.coverImagePath ?? `src/images/conseils/${article.slug}.jpg`;
+const coverImageImportPath = coverImagePath.replace(/^src\/images\//, "../images/");
 const publishedAt = article.publishedAt.toISOString();
 const updatedAt = (article.updatedAt ?? article.publishedAt).toISOString();
 const articleImages = import.meta.glob<{ default: ImageMetadata }>(
-  "../images/conseils/*.{jpg,jpeg,png,webp,avif}",
+  "../images/conseils/**/*.{jpg,jpeg,png,webp,avif}",
   { eager: true },
 );
-const articleImage = articleImages[`../images/conseils/${article.slug}.jpg`]?.default;
+const articleImage = articleImages[coverImageImportPath]?.default;
 const articleSocialImage = articleImage
   ? await getImage({
       src: articleImage,
@@ -117,7 +124,7 @@ const structuredData = [
 
       <figure class="article-hero__image">
         <ImageSlot
-          path={`src/images/conseils/${article.slug}.jpg`}
+          path={coverImagePath}
           orientation="horizontal"
           label={article.featuredImageAlt ?? "Illustration de l’article de conseils de mariage."}
         />
@@ -132,7 +139,7 @@ const structuredData = [
 
     <footer class="article-next page-shell">
       <p class="editorial-label">POUR ALLER PLUS LOIN</p>
-      <a class="editorial-link" href="/mariage/">DÉCOUVRIR LE MARIAGE →</a>
+      <a class="editorial-link" href={primaryCtaHref}>{primaryCtaLabel}</a>
       <a class="editorial-link" href="/contact/">POSER UNE QUESTION →</a>
     </footer>
   </article>

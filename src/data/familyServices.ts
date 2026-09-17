@@ -57,6 +57,11 @@ export interface FamilyServicePageData {
     text: string;
     image: FamilyServiceImage;
   };
+  editorialBlock?: {
+    label: string;
+    title: string;
+    text: string;
+  };
   package?: FamilyServicePackage;
   pricing?: FamilyServicePricingTexts;
   gallery: FamilyServiceImage[];
@@ -105,15 +110,15 @@ const standardFaq = {
 export const familyServices = {
   grossesse: {
     label: "Grossesse",
-    title: "Photographe grossesse Drôme & Valence | Life Focus",
+    title: "Photographe grossesse Drôme, Romans & Valence | Life Focus",
     description:
-      "Photographe grossesse à Romans-sur-Isère, Valence et dans la Drôme. Une séance photo naturelle, seule, en couple ou en famille, à partir de 250 €.",
+      "Séance grossesse naturelle en extérieur autour de Romans-sur-Isère, Valence et dans la Drôme, seule, en couple ou en famille.",
     canonicalUrl: "https://www.lifefocus.fr/grossesse/",
     hero: {
       eyebrow: "GROSSESSE",
       title: "Photographe grossesse dans la Drôme",
       text:
-        "Une séance photo grossesse naturelle à Romans-sur-Isère, Valence et dans la Drôme, pour garder une trace de cette période, seule, en couple ou en famille.",
+        "Une séance grossesse naturelle en extérieur, autour de Romans-sur-Isère, Valence et dans la Drôme, pour garder une trace de cette période dans un cadre simple, vivant et lumineux.",
       image: image(homeImages.breathing.src, "Femme enceinte en extérieur dans un paysage naturel.", "wide"),
       secondaryImage: image(homeImages.weddingSecondary.src, "Séance grossesse en plein air avec un portrait naturel.", "portrait"),
     },
@@ -121,8 +126,14 @@ export const familyServices = {
       label: "01 / APPROCHE",
       title: "Laisser de la place au corps, aux liens, au moment.",
       text:
-        "Pas besoin de savoir poser. La séance reste simple et détendue, avec quelques indications lorsque vous en avez besoin. Je cherche surtout à photographier votre grossesse naturellement, en laissant de la place aux gestes, aux liens et à ce qui se passe entre vous.",
+        "Pas besoin de savoir poser. La séance se déroule principalement dehors, en lumière naturelle, avec quelques indications lorsque vous en avez besoin. Seule, en couple ou avec vos enfants, je cherche surtout à photographier votre grossesse naturellement, en laissant de la place aux gestes, aux liens et à ce qui se passe entre vous.",
       image: image(homeImages.breathing.src, "Portrait naturel dans une lumière douce.", "wide"),
+    },
+    editorialBlock: {
+      label: "EXPÉRIENCE",
+      title: "Dehors, simplement.",
+      text:
+        "Nous choisissons un lieu calme autour de Romans-sur-Isère, Valence ou ailleurs dans la Drôme, selon la saison, la lumière et ce qui vous ressemble. J'aime travailler en fin de journée, quand la lumière devient plus douce : un chemin, un coin de campagne, une forêt ou un paysage ouvert suffisent. Le décor accompagne les images, sans prendre toute la place.",
     },
     package: {
       title: "GROSSESSE + NAISSANCE",
@@ -134,7 +145,7 @@ export const familyServices = {
     },
     pricing: {
       included: [
-        "Une séance photo d’environ 1 heure, en intérieur ou en extérieur.",
+        "Une séance photo d’environ 1 heure, principalement en extérieur.",
         "Toutes les photographies sélectionnées sont traitées et retouchées naturellement.",
         "Les photographies sont livrées en haute définition, sans limite de nombre.",
         "Déplacement inclus jusqu’à 30 km autour de Valence.",
@@ -142,7 +153,7 @@ export const familyServices = {
       ],
       formula: {
         context:
-          "Une séance grossesse d’environ 1 heure, seule, en couple ou avec vos enfants, en intérieur ou en extérieur.",
+          "Une séance grossesse d’environ 1 heure, seule, en couple ou avec vos enfants, le plus souvent en extérieur et en lumière naturelle.",
         details: [
           "Photos livrées sans limite de nombre.",
           "Un moment simple et guidé juste ce qu’il faut, sans poses figées.",
@@ -191,7 +202,7 @@ export const familyServices = {
       {
         question: "Où se déroule la séance photo grossesse ?",
         answer:
-          "Les séances peuvent être réalisées en extérieur ou dans un lieu qui correspond à l’ambiance recherchée. Je suis basé à Romans-sur-Isère et je me déplace notamment autour de Valence et dans la Drôme.",
+          "Je privilégie les séances grossesse en extérieur, généralement autour de Romans-sur-Isère, Valence et dans la Drôme. Je vous aide à choisir un endroit adapté à la saison, à la lumière et à votre personnalité, tout en gardant de la souplesse si une autre situation a plus de sens pour vous.",
       },
       {
         question: "Combien de photos sont livrées ?",
@@ -212,15 +223,15 @@ export const familyServices = {
   },
   naissance: {
     label: "Naissance",
-    title: "Photographe naissance Drôme & Valence | Life Focus",
+    title: "Photographe naissance Drôme, Romans & Valence | Life Focus",
     description:
-      "Photographe naissance à Romans-sur-Isère, Valence et dans la Drôme. Une séance photo bébé naturelle, au rythme de votre enfant, à partir de 250 €.",
+      "Reportage naissance à domicile autour de Romans-sur-Isère, Valence et dans la Drôme, au rythme de votre bébé et de votre famille.",
     canonicalUrl: "https://www.lifefocus.fr/naissance/",
     hero: {
       eyebrow: "NAISSANCE",
       title: "Photographe naissance dans la Drôme",
       text:
-        "Une séance photo naissance naturelle à Romans-sur-Isère, Valence et dans la Drôme, pensée autour du rythme de votre bébé et de vos premiers moments en famille.",
+        "Un reportage naissance à domicile autour de Romans-sur-Isère, Valence et dans la Drôme, pensé autour du rythme de votre bébé et de vos premiers moments en famille.",
       image: image(homeImages.familySecondary.src, "Parents et bébé dans un moment simple et naturel.", "wide"),
       secondaryImage: image(homeImages.weddingSecondary.src, "Portrait de famille au naturel en extérieur.", "portrait"),
     },
@@ -228,8 +239,14 @@ export const familyServices = {
       label: "01 / APPROCHE",
       title: "Suivre le rythme du bébé avant tout.",
       text:
-        "Pas de rythme imposé ni de poses forcées. La séance s’adapte à votre bébé, aux pauses, aux bras et aux petits imprévus. Je photographie surtout les liens, les gestes et les détails de ces premiers jours, avec les parents et la fratrie lorsqu’ils souhaitent participer.",
+        "Je viens chez vous, dans votre quotidien. Pas de rythme imposé, de décor artificiel ou de posing forcé : la séance s’adapte à votre bébé, aux pauses, aux bras et aux petits imprévus. Je photographie les regards, la fratrie, les gestes, les détails de la maison et tout ce qui raconte votre vie de famille à ce moment-là.",
       image: image(homeImages.familyMain.src, "Famille dans un instant calme, dehors, pendant une séance photo.", "wide"),
+    },
+    editorialBlock: {
+      label: "EXPÉRIENCE",
+      title: "Chez vous, là où tout commence.",
+      text:
+        "La séance se déroule principalement à domicile, pour éviter de déplacer votre bébé et rester dans un environnement familier. On avance avec la lumière disponible, les pauses, les repas, les bras, les frères et sœurs s'il y en a. Votre maison n'a pas besoin d'être parfaite ni particulièrement lumineuse : elle devient simplement le décor réel de ces premiers jours.",
     },
     package: {
       title: "GROSSESSE + NAISSANCE",
@@ -241,7 +258,7 @@ export const familyServices = {
     },
     pricing: {
       included: [
-        "Une séance photo d’environ 1 heure, adaptée au rythme de votre bébé.",
+        "Une séance photo d’environ 1 heure à domicile, adaptée au rythme de votre bébé.",
         "Toutes les photographies sélectionnées sont traitées et retouchées naturellement.",
         "Les photographies sont livrées en haute définition, sans limite de nombre.",
         "Déplacement inclus jusqu’à 30 km autour de Valence.",
@@ -249,7 +266,7 @@ export const familyServices = {
       ],
       formula: {
         context:
-          "Une séance naissance d’environ 1 heure pour photographier votre bébé, les parents et, si vous le souhaitez, les frères et sœurs.",
+          "Une séance naissance d’environ 1 heure à domicile pour photographier votre bébé, les parents et, si vous le souhaitez, les frères et sœurs.",
         details: [
           "Photos livrées sans limite de nombre.",
           "Une séance souple, guidée juste ce qu’il faut, sans mise en scène lourde.",
@@ -298,7 +315,7 @@ export const familyServices = {
       {
         question: "Où se déroule la séance photo naissance ?",
         answer:
-          "Je suis basé à Romans-sur-Isère et je me déplace notamment autour de Valence et dans la Drôme. Le lieu de la séance est choisi avec vous selon votre situation, l’âge du bébé et l’ambiance recherchée.",
+          "Les reportages naissance se déroulent principalement à votre domicile, autour de Romans-sur-Isère, Valence et dans la Drôme. Je m’adapte à la lumière disponible et à votre rythme : vous n’avez pas besoin d’avoir une maison parfaite, très lumineuse ou entièrement rangée.",
       },
       {
         question: "Combien de photos sont livrées ?",

@@ -1,0 +1,322 @@
+---
+import ImageSlot from "../../components/ImageSlot.astro";
+import ArticleLayout from "../../layouts/ArticleLayout.astro";
+import { adviceArticles } from "../../data/conseilsArticles";
+
+const article = adviceArticles.find((item) => item.slug === "seance-photo-naissance-domicile");
+
+if (!article) {
+  throw new Error("Article introuvable.");
+}
+---
+
+<ArticleLayout article={article}>
+  <p>
+    Une séance naissance avec moi se déroule généralement là où les premières semaines de votre bébé
+    ont réellement lieu : <strong>chez vous</strong>.
+  </p>
+
+  <p>
+    Pas de studio à rejoindre avec un nouveau-né, pas de décor à préparer et surtout pas besoin
+    d'avoir une maison parfaitement rangée.
+  </p>
+
+  <p>Je viens simplement passer un moment avec votre famille et raconter cette période telle qu'elle est.</p>
+
+  <p>
+    Et s'il y a une règle plus importante que toutes les autres, c'est probablement celle-ci : <strong
+      >on s'adapte au bébé. Toujours.</strong
+    >
+  </p>
+
+  <div class="article-photo-strip" aria-label="Reportage naissance à domicile en famille">
+    <figure>
+      <ImageSlot
+        path="src/images/conseils/seance_photo_naissance_a_domicile/couverture.jpg"
+        orientation="vertical"
+        label="Bébé photographié naturellement pendant une séance naissance à domicile."
+      />
+    </figure>
+    <figure>
+      <ImageSlot
+        path="src/images/conseils/seance_photo_naissance_a_domicile/Arthur_1.jpg"
+        orientation="vertical"
+        label="Nouveau-né dans les bras de ses parents à la maison."
+      />
+    </figure>
+    <figure>
+      <ImageSlot
+        path="src/images/conseils/seance_photo_naissance_a_domicile/Naissance Anna_8.jpg"
+        orientation="vertical"
+        label="Moment calme avec bébé pendant un reportage naissance."
+      />
+    </figure>
+  </div>
+
+  <h2>À quelle heure prévoir la séance ?</h2>
+
+  <p>Lorsque nous réservons la séance avant la naissance, nous fixons évidemment une date et un horaire.</p>
+
+  <p>Mais une fois bébé arrivé, vous commencez progressivement à découvrir son rythme.</p>
+
+  <p>
+    S'il devient évident qu'un autre moment de la journée serait plus adapté, nous pouvons en discuter
+    et ajuster l'horaire en amont lorsque c'est possible.
+  </p>
+
+  <p>L'idée n'est pas de forcer votre bébé à entrer dans le planning de la séance.</p>
+
+  <p>C'est plutôt l'inverse.</p>
+
+  <figure class="article-inline-image article-inline-image--wide">
+    <ImageSlot
+      path="src/images/conseils/seance_photo_naissance_a_domicile/Arthur_78.jpg"
+      orientation="horizontal"
+      label="Reportage naissance à domicile avec les parents et leur bébé."
+    />
+    <figcaption>La séance suit le rythme réel de votre bébé, sans déroulé rigide.</figcaption>
+  </figure>
+
+  <h2>Et si bébé a faim pendant les photos ?</h2>
+
+  <p>Alors on fait une pause.</p>
+
+  <p>
+    Biberon, allaitement, couche à changer, besoin d'être rassuré... tout cela fait simplement partie
+    de la séance.
+  </p>
+
+  <p>
+    Il n'y a aucun chronomètre qui tourne pendant qu'on attend impatiemment de pouvoir recommencer les
+    photos.
+  </p>
+
+  <p>Et ces moments peuvent parfois eux-mêmes faire partie du reportage.</p>
+
+  <p>
+    Je photographie généralement des instants où bébé est bien éveillé, d'autres où il commence à
+    s'endormir, des moments dans vos bras et des détails beaucoup plus simples.
+  </p>
+
+  <p>Je ne cherche pas à obtenir une succession de poses parfaites.</p>
+
+  <p>Je veux surtout garder une trace de <strong>ce qu'était votre famille à ce moment précis</strong>.</p>
+
+  <h2>Une séance avec bébé, mais surtout avec votre famille</h2>
+
+  <p>
+    Même si l'arrivée de bébé est évidemment au centre du reportage, je ne considère pas vraiment une
+    séance naissance comme une séance uniquement consacrée au nouveau-né.
+  </p>
+
+  <p>Papa a toute sa place.</p>
+
+  <p>Les grands frères et grandes sœurs aussi.</p>
+
+  <p>Et même les animaux de la maison peuvent venir se glisser dans l'histoire.</p>
+
+  <p>
+    Ce sont justement ces interactions qui m'intéressent : un bébé dans les bras de son père, une
+    grande sœur qui vient voir ce qui se passe, quelques minutes tous ensemble sur le lit...
+  </p>
+
+  <p>Votre bébé est arrivé dans une famille.</p>
+
+  <p><strong>C'est cette famille que j'ai envie de photographier.</strong></p>
+
+  <div class="article-photo-strip" aria-label="Parents, bébé et fratrie pendant une séance naissance">
+    <figure>
+      <ImageSlot
+        path="src/images/conseils/seance_photo_naissance_a_domicile/Kaylia_41.jpg"
+        orientation="vertical"
+        label="Portrait naturel de bébé pendant une séance naissance en famille."
+      />
+    </figure>
+    <figure>
+      <ImageSlot
+        path="src/images/conseils/seance_photo_naissance_a_domicile/Léna_5.jpg"
+        orientation="vertical"
+        label="Bébé photographié dans les bras pendant un reportage à domicile."
+      />
+    </figure>
+    <figure>
+      <ImageSlot
+        path="src/images/conseils/seance_photo_naissance_a_domicile/Naissance Anna_36.jpg"
+        orientation="vertical"
+        label="Détail tendre d'une séance photo naissance à la maison."
+      />
+    </figure>
+  </div>
+
+  <h2>Où fait-on les photos dans la maison ?</h2>
+
+  <p>Très souvent, nous commençons dans la chambre des parents.</p>
+
+  <p>
+    Un grand lit permet naturellement de vous réunir, de prendre bébé dans les bras et de créer des
+    images sans avoir besoin de construire quoi que ce soit.
+  </p>
+
+  <p>
+    La chambre du bébé peut également avoir beaucoup de sens, particulièrement si vous avez pris le
+    temps de préparer cet endroit avant sa naissance.
+  </p>
+
+  <p>Mais je regarde surtout <strong>la lumière disponible chez vous</strong>.</p>
+
+  <p>
+    Une grande fenêtre dans une pièce à laquelle vous n'aviez absolument pas pensé peut parfois
+    devenir l'endroit le plus intéressant de la maison.
+  </p>
+
+  <p>Je m'adapte.</p>
+
+  <figure class="article-inline-image article-inline-image--wide">
+    <ImageSlot
+      path="src/images/conseils/seance_photo_naissance_a_domicile/Léna_24.jpg"
+      orientation="horizontal"
+      label="Séance naissance à domicile dans la lumière naturelle de la maison."
+    />
+    <figcaption>La lumière disponible guide souvent le choix des pièces.</figcaption>
+  </figure>
+
+  <h2>Faut-il préparer sa maison ?</h2>
+
+  <p>Non.</p>
+
+  <p>Et certainement pas la transformer en maison témoin avant mon arrivée.</p>
+
+  <p>On pourra simplement déplacer ensemble deux ou trois choses si elles gênent réellement une photographie.</p>
+
+  <p>
+    Pour le lit, j'aime généralement conseiller des draps assez clairs et sans motifs trop présents.
+    Ils réfléchissent bien la lumière et évitent d'attirer l'œil loin de vous.
+  </p>
+
+  <p>Mais si vos draps sont très colorés, inutile d'en acheter de nouveaux pour moi.</p>
+
+  <p><strong>Un plaid clair posé sur le lit peut largement suffire.</strong></p>
+
+  <h2>Comment s'habiller ?</h2>
+
+  <p>Là encore, je préfère quelque chose de simple.</p>
+
+  <p>
+    Les couleurs claires, naturelles et assez douces fonctionnent généralement très bien à domicile.
+    J'éviterais surtout les très gros motifs ou les vêtements portant des inscriptions particulièrement
+    visibles.
+  </p>
+
+  <p>Mais je ne veux pas non plus que vous vous déguisiez pour vos photos.</p>
+
+  <p>Vous devez vous reconnaître.</p>
+
+  <p>
+    Préparez quelques possibilités si vous hésitez et nous pourrons décider ensemble au moment de la
+    séance.
+  </p>
+
+  <figure class="article-inline-image article-inline-image--wide">
+    <ImageSlot
+      path="src/images/conseils/seance_photo_naissance_a_domicile/Naissance Anna.jpg"
+      orientation="horizontal"
+      label="Famille photographiée simplement pendant une séance naissance à domicile."
+    />
+    <figcaption>Des vêtements simples et doux suffisent largement pour des images naturelles.</figcaption>
+  </figure>
+
+  <h2>Peut-on prévoir plusieurs tenues pour bébé ?</h2>
+
+  <p>Bien sûr.</p>
+
+  <p>Vous pouvez préparer deux ou trois petites tenues que vous aimez particulièrement.</p>
+
+  <p>
+    Je vous conseille simplement de les mettre de côté avant mon arrivée, avec les quelques accessoires
+    ou objets auxquels vous tenez.
+  </p>
+
+  <p>Un doudou.</p>
+
+  <p>Une petite paire de chaussures.</p>
+
+  <p>Une couverture.</p>
+
+  <p>Un objet transmis dans la famille.</p>
+
+  <p>Quelque chose préparé pendant la grossesse.</p>
+
+  <p>
+    Ces détails ne sont pas obligatoires et je ne cherche pas à construire un décor autour de bébé.
+  </p>
+
+  <p>
+    Mais lorsqu'un objet raconte réellement quelque chose de votre histoire, je trouve intéressant
+    d'en garder une trace.
+  </p>
+
+  <h2>Et si tout ne se passe pas comme prévu ?</h2>
+
+  <p>C'est probablement ce qui arrivera.</p>
+
+  <p>
+    Bébé aura peut-être faim exactement au moment où nous commencerons. Il faudra peut-être changer
+    une couche. Un grand frère n'aura absolument aucune envie de faire une photo. Le chien décidera
+    que c'est le meilleur moment pour venir sur le lit.
+  </p>
+
+  <p>Et ce n'est pas grave.</p>
+
+  <p>Une séance naissance à domicile n'a pas besoin d'être parfaite pour être belle.</p>
+
+  <p>Au contraire.</p>
+
+  <p>
+    Quelques années plus tard, ce sont parfois précisément ces petits détails du quotidien qui donnent
+    toute leur valeur aux images.
+  </p>
+
+  <p>Je viens chez vous pour photographier l'arrivée d'un bébé, évidemment.</p>
+
+  <p>Mais surtout <strong>les premiers moments d'une nouvelle famille</strong>.</p>
+
+  <p>
+    <a class="editorial-link" href="/naissance/"
+      >DÉCOUVRIR MES REPORTAGES PHOTO NAISSANCE À DOMICILE DANS LA DRÔME →</a
+    >
+  </p>
+</ArticleLayout>
+
+<style>
+  .article-inline-image {
+    display: grid;
+    gap: 0.75rem;
+    margin: clamp(1.75rem, 4vw, 3rem) 0 clamp(1.25rem, 3vw, 2rem);
+  }
+
+  .article-inline-image figcaption {
+    color: var(--color-muted);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 1.35;
+    text-transform: uppercase;
+  }
+
+  .article-photo-strip {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(0.85rem, 2vw, 1.5rem);
+    margin: clamp(2rem, 4.5vw, 3.75rem) 0 clamp(2.25rem, 5vw, 4rem);
+  }
+
+  .article-photo-strip figure {
+    margin: 0;
+  }
+
+  @media (max-width: 42rem) {
+    .article-photo-strip {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
