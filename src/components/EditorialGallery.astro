@@ -1,5 +1,5 @@
 ---
-import { Picture } from "astro:assets";
+import { Picture, getImage } from "astro:assets";
 import type { ImageMetadata } from "astro";
 
 import ImageSlot from "./ImageSlot.astro";
@@ -42,6 +42,27 @@ const folderImages = normalizedFolder
   : [];
 
 const galleryImages = folderImages.length > 0 ? folderImages : images;
+const galleryImagesWithLightbox = await Promise.all(
+  galleryImages.map(async (image) => {
+    const src = "resolvedSrc" in image ? image.resolvedSrc : image.src;
+
+    if (!src) {
+      return image;
+    }
+
+    const lightboxImage = await getImage({
+      src,
+      width: Math.min(2200, src.width),
+      format: "jpg",
+      quality: 86,
+    });
+
+    return {
+      ...image,
+      lightboxSrc: lightboxImage.src,
+    };
+  }),
+);
 
 const getOrientation = (image: Pick<EditorialGalleryImage, "size" | "slotOrientation"> & { src?: ImageMetadata }) => {
   if (image.slotOrientation) {
@@ -64,7 +85,7 @@ const getOrientation = (image: Pick<EditorialGalleryImage, "size" | "slotOrienta
 
   <div class="editorial-gallery__grid">
     {
-      galleryImages.map((image, index) => (
+      galleryImagesWithLightbox.map((image, index) => (
         <figure class:list={["editorial-gallery__item", `editorial-gallery__item--${normalizeSize(image.size)}`]}>
           {"resolvedSrc" in image ? (
             <Picture
@@ -76,12 +97,17 @@ const getOrientation = (image: Pick<EditorialGalleryImage, "size" | "slotOrienta
               fallbackFormat="webp"
               quality={82}
               loading="lazy"
+              data-photo-lightbox={image.lightboxSrc ? "" : undefined}
+              data-photo-lightbox-src={image.lightboxSrc}
+              data-photo-lightbox-alt={image.alt ?? ""}
+              data-photo-lightbox-group={titleId}
             />
           ) : (
             <ImageSlot
               path={image.slotPath ?? `src/images/gallery/${String(index + 1).padStart(2, "0")}.jpg`}
               orientation={getOrientation(image)}
               label={image.alt ?? ""}
+              lightboxGroup={titleId}
             />
           )}
         </figure>

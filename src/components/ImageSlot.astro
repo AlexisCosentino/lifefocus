@@ -1,5 +1,5 @@
 ---
-import { Picture } from "astro:assets";
+import { Picture, getImage } from "astro:assets";
 import type { ImageMetadata } from "astro";
 
 interface Props {
@@ -9,6 +9,8 @@ interface Props {
   loading?: "eager" | "lazy";
   sizes?: string;
   quality?: number;
+  lightbox?: boolean;
+  lightboxGroup?: string;
 }
 
 const {
@@ -18,6 +20,8 @@ const {
   loading = "lazy",
   sizes = "(min-width: 90rem) 70vw, (min-width: 64rem) 62vw, calc(100vw - (2 * var(--page-padding)))",
   quality = 82,
+  lightbox = true,
+  lightboxGroup,
 } = Astro.props;
 const safeLabel = label.trim();
 const imageModules = import.meta.glob<{ default: ImageMetadata }>("/src/images/**/*.{jpg,jpeg,png,webp,avif,JPG,JPEG,PNG,WEBP,AVIF}", {
@@ -27,6 +31,15 @@ const image = imageModules[`/${path}`]?.default;
 const isHeroCandidate = orientation === "horizontal" && (loading === "eager" || quality >= 90);
 const widths = orientation === "vertical" ? [480, 720, 960, 1200] : isHeroCandidate ? [960, 1280, 1600, 1920, 2400] : [640, 960, 1280, 1600];
 const pictureQuality = isHeroCandidate ? Math.min(quality, 86) : Math.min(quality, 82);
+const lightboxImage =
+  lightbox && image
+    ? await getImage({
+        src: image,
+        width: Math.min(2200, image.width),
+        format: "jpg",
+        quality: 86,
+      })
+    : undefined;
 ---
 
 {
@@ -40,6 +53,10 @@ const pictureQuality = isHeroCandidate ? Math.min(quality, 86) : Math.min(qualit
       fallbackFormat="webp"
       quality={pictureQuality}
       loading={loading}
+      data-photo-lightbox={lightboxImage ? "" : undefined}
+      data-photo-lightbox-src={lightboxImage?.src}
+      data-photo-lightbox-alt={safeLabel}
+      data-photo-lightbox-group={lightboxGroup}
     />
   ) : (
     <div

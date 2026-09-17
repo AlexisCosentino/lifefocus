@@ -5,6 +5,7 @@ import { getImage } from "astro:assets";
 
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
+import PhotoLightbox from "../components/PhotoLightbox.astro";
 import logoLifeFocus from "../assets/brand/LIFE FOCUS logo.svg?url";
 import defaultOgImage from "../images/home/hero-main.jpg";
 
@@ -158,6 +159,7 @@ const structuredDataGraph = {
     <main class="site-main">
       <slot />
     </main>
+    <PhotoLightbox />
     <Footer />
   </body>
 </html>

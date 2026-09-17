@@ -1,0 +1,326 @@
+<div class="photo-lightbox" data-photo-lightbox-root hidden role="dialog" aria-modal="true" aria-label="Photographie agrandie">
+  <button class="photo-lightbox__button photo-lightbox__close" type="button" data-photo-lightbox-close aria-label="Fermer">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <button class="photo-lightbox__button photo-lightbox__previous" type="button" data-photo-lightbox-previous aria-label="Photo precedente">
+    <span aria-hidden="true">&lsaquo;</span>
+  </button>
+  <figure class="photo-lightbox__figure">
+    <img data-photo-lightbox-image alt="" />
+  </figure>
+  <button class="photo-lightbox__button photo-lightbox__next" type="button" data-photo-lightbox-next aria-label="Photo suivante">
+    <span aria-hidden="true">&rsaquo;</span>
+  </button>
+</div>
+
+<script>
+  const root = document.querySelector("[data-photo-lightbox-root]");
+
+  if (root instanceof HTMLElement) {
+    const image = root.querySelector("[data-photo-lightbox-image]");
+    const closeButton = root.querySelector("[data-photo-lightbox-close]");
+    const previousButton = root.querySelector("[data-photo-lightbox-previous]");
+    const nextButton = root.querySelector("[data-photo-lightbox-next]");
+    const ignoredParents = "a, button, summary, label, [role='button'], header, footer, nav";
+    const triggers = Array.from(document.querySelectorAll("img[data-photo-lightbox-src]")).filter(
+      (trigger) =>
+        trigger instanceof HTMLImageElement &&
+        trigger.dataset.photoLightboxSrc &&
+        !trigger.closest(ignoredParents),
+    );
+    let activeGroup = [];
+    let activeIndex = 0;
+    let lastFocus = null;
+    let touchStartX = 0;
+
+    triggers.forEach((trigger) => {
+      trigger.classList.add("photo-lightbox-trigger");
+      trigger.tabIndex = 0;
+      trigger.setAttribute("role", "button");
+      trigger.setAttribute("aria-label", "Agrandir la photographie");
+
+      trigger.addEventListener("click", () => {
+        openLightbox(trigger);
+      });
+
+      trigger.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") {
+          return;
+        }
+
+        event.preventDefault();
+        openLightbox(trigger);
+      });
+    });
+
+    const focusableControls = () =>
+      Array.from(root.querySelectorAll("button:not([hidden])")).filter(
+        (control) => control instanceof HTMLButtonElement,
+      );
+
+    const lockScroll = () => {
+      document.documentElement.classList.add("has-photo-lightbox");
+    };
+
+    const unlockScroll = () => {
+      document.documentElement.classList.remove("has-photo-lightbox");
+    };
+
+    const setNavigationState = () => {
+      const hasNavigation = activeGroup.length > 1;
+
+      if (previousButton instanceof HTMLButtonElement) {
+        previousButton.hidden = !hasNavigation;
+      }
+
+      if (nextButton instanceof HTMLButtonElement) {
+        nextButton.hidden = !hasNavigation;
+      }
+    };
+
+    const renderImage = () => {
+      const trigger = activeGroup[activeIndex];
+
+      if (!(trigger instanceof HTMLImageElement) || !(image instanceof HTMLImageElement)) {
+        return;
+      }
+
+      image.src = trigger.dataset.photoLightboxSrc || "";
+      image.alt = trigger.dataset.photoLightboxAlt || trigger.alt || "";
+    };
+
+    const openLightbox = (trigger) => {
+      activeGroup = triggers;
+      activeIndex = Math.max(activeGroup.indexOf(trigger), 0);
+      lastFocus = document.activeElement;
+
+      renderImage();
+      setNavigationState();
+      root.hidden = false;
+      lockScroll();
+
+      if (closeButton instanceof HTMLButtonElement) {
+        closeButton.focus({ preventScroll: true });
+      }
+    };
+
+    const closeLightbox = () => {
+      root.hidden = true;
+      unlockScroll();
+
+      if (image instanceof HTMLImageElement) {
+        image.removeAttribute("src");
+      }
+
+      if (lastFocus instanceof HTMLElement) {
+        lastFocus.focus({ preventScroll: true });
+      }
+    };
+
+    const showAdjacentImage = (direction) => {
+      if (activeGroup.length < 2) {
+        return;
+      }
+
+      activeIndex = (activeIndex + direction + activeGroup.length) % activeGroup.length;
+      renderImage();
+    };
+
+    closeButton?.addEventListener("click", closeLightbox);
+    previousButton?.addEventListener("click", () => showAdjacentImage(-1));
+    nextButton?.addEventListener("click", () => showAdjacentImage(1));
+
+    root.addEventListener("click", (event) => {
+      if (event.target === root) {
+        closeLightbox();
+      }
+    });
+
+    root.addEventListener("touchstart", (event) => {
+      touchStartX = event.changedTouches[0]?.clientX || 0;
+    });
+
+    root.addEventListener("touchend", (event) => {
+      const touchEndX = event.changedTouches[0]?.clientX || 0;
+      const deltaX = touchEndX - touchStartX;
+
+      if (Math.abs(deltaX) > 55) {
+        showAdjacentImage(deltaX > 0 ? -1 : 1);
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (root.hidden) {
+        return;
+      }
+
+      if (event.key === "Escape") {
+        closeLightbox();
+      }
+
+      if (event.key === "ArrowLeft") {
+        showAdjacentImage(-1);
+      }
+
+      if (event.key === "ArrowRight") {
+        showAdjacentImage(1);
+      }
+
+      if (event.key === "Tab") {
+        const controls = focusableControls();
+        const firstControl = controls[0];
+        const lastControl = controls[controls.length - 1];
+
+        if (!firstControl || !lastControl) {
+          return;
+        }
+
+        if (event.shiftKey && document.activeElement === firstControl) {
+          event.preventDefault();
+          lastControl.focus();
+        } else if (!event.shiftKey && document.activeElement === lastControl) {
+          event.preventDefault();
+          firstControl.focus();
+        }
+      }
+    });
+  }
+</script>
+
+<style>
+  :global(.has-photo-lightbox) {
+    overflow: hidden;
+  }
+
+  :global(.photo-lightbox-trigger) {
+    cursor: zoom-in;
+    transition:
+      transform 180ms ease,
+      filter 180ms ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    :global(.photo-lightbox-trigger:hover) {
+      filter: brightness(0.97);
+      transform: scale(1.01);
+    }
+  }
+
+  .photo-lightbox[hidden] {
+    display: none;
+  }
+
+  .photo-lightbox {
+    --photo-lightbox-edge: clamp(1rem, 3vw, 2rem);
+    --photo-lightbox-controls-space: 0rem;
+    --photo-lightbox-max-width: calc(100vw - (2 * var(--photo-lightbox-edge)));
+    --photo-lightbox-max-height: calc(100vh - (2 * var(--photo-lightbox-edge)) - var(--photo-lightbox-controls-space));
+    --photo-lightbox-max-height: calc(100dvh - (2 * var(--photo-lightbox-edge)) - var(--photo-lightbox-controls-space));
+
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    box-sizing: border-box;
+    width: 100vw;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: var(--photo-lightbox-edge);
+    background: rgb(10 9 8 / 0.92);
+    overflow: hidden;
+  }
+
+  .photo-lightbox__figure {
+    display: grid;
+    place-items: center;
+    width: var(--photo-lightbox-max-width);
+    height: var(--photo-lightbox-max-height);
+    min-width: 0;
+    min-height: 0;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .photo-lightbox__figure img {
+    display: block;
+    width: auto !important;
+    height: auto !important;
+    max-width: min(96rem, var(--photo-lightbox-max-width));
+    max-height: var(--photo-lightbox-max-height);
+    object-fit: contain;
+    box-shadow: 0 1.5rem 5rem rgb(0 0 0 / 0.32);
+  }
+
+  .photo-lightbox__button {
+    position: fixed;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: clamp(2.75rem, 5vw, 3.5rem);
+    height: clamp(2.75rem, 5vw, 3.5rem);
+    border: 0;
+    border-radius: 50%;
+    background: rgb(245 241 234 / 0.92);
+    color: var(--color-text);
+    cursor: pointer;
+    font-family: var(--font-interface);
+    line-height: 1;
+  }
+
+  .photo-lightbox__button span {
+    display: block;
+    translate: 0 -0.06em;
+    font-size: clamp(1.8rem, 3.4vw, 2.5rem);
+  }
+
+  .photo-lightbox__button:focus-visible {
+    outline: 2px solid var(--color-paper);
+    outline-offset: 0.25rem;
+  }
+
+  .photo-lightbox__close {
+    top: clamp(0.8rem, 2vw, 1.5rem);
+    right: clamp(0.8rem, 2vw, 1.5rem);
+  }
+
+  .photo-lightbox__previous,
+  .photo-lightbox__next {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .photo-lightbox__previous {
+    left: clamp(0.8rem, 2vw, 1.5rem);
+  }
+
+  .photo-lightbox__next {
+    right: clamp(0.8rem, 2vw, 1.5rem);
+  }
+
+  @media (max-width: 42rem) {
+    .photo-lightbox {
+      --photo-lightbox-edge: 0.75rem;
+      --photo-lightbox-controls-space: 3.75rem;
+
+      align-items: start;
+    }
+
+    .photo-lightbox__previous,
+    .photo-lightbox__next {
+      top: auto;
+      bottom: 1rem;
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.photo-lightbox-trigger) {
+      transition: none;
+    }
+
+    :global(.photo-lightbox-trigger:hover) {
+      transform: none;
+    }
+  }
+</style>
