@@ -67,6 +67,22 @@ const galleryImages = service.gallery.map((image, index) => ({
     )
   }
 
+  {
+    service.adviceBlock && (
+      <section class="family-service-advice page-shell" aria-labelledby="family-advice-title">
+        <div class="family-service-advice__heading">
+          <p class="editorial-label">{service.adviceBlock.label}</p>
+          <h2 id="family-advice-title">{service.adviceBlock.title}</h2>
+        </div>
+
+        <div class="family-service-advice__content">
+          <p>{service.adviceBlock.text}</p>
+          <a class="editorial-link" href={service.adviceBlock.href}>{service.adviceBlock.linkLabel}</a>
+        </div>
+      </section>
+    )
+  }
+
   <FamilyServicePricing package={service.package} pricing={service.pricing} />
   <FamilyServiceGallery images={galleryImages} galleryFolder={`src/images/${serviceSlug}/gallery`} />
   <FamilyServiceLinks links={service.links} />
@@ -110,8 +126,25 @@ const galleryImages = service.gallery.map((image, index) => ({
     border-top: 1px solid var(--color-line);
   }
 
+  .family-service-advice {
+    display: grid;
+    gap: var(--space-sm);
+    max-width: 76rem;
+    padding-block: clamp(2.75rem, 5vw, 4.5rem);
+    border-top: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .family-service-advice__heading,
+  .family-service-advice__content {
+    display: grid;
+    gap: var(--space-xs);
+    min-width: 0;
+  }
+
   .family-service-approach h2,
   .family-service-editorial h2,
+  .family-service-advice h2,
   .family-service-contact h2 {
     max-width: 12ch;
     font-family: var(--font-editorial);
@@ -122,9 +155,14 @@ const galleryImages = service.gallery.map((image, index) => ({
   }
 
   .family-service-approach p:not(.editorial-label),
-  .family-service-editorial p:not(.editorial-label) {
+  .family-service-editorial p:not(.editorial-label),
+  .family-service-advice p:not(.editorial-label) {
     max-width: var(--reading-max);
     color: var(--color-muted);
+  }
+
+  .family-service-advice .editorial-link {
+    width: fit-content;
   }
 
   .family-service-approach__image {
@@ -164,6 +202,16 @@ const galleryImages = service.gallery.map((image, index) => ({
 
     .family-service-editorial p {
       grid-column: 2;
+    }
+
+    .family-service-advice {
+      grid-template-columns: minmax(0, 0.48fr) minmax(0, 1fr);
+      gap: clamp(2rem, 5vw, 5rem);
+      align-items: start;
+    }
+
+    .family-service-advice__content {
+      padding-top: 0.15rem;
     }
 
     .family-service-contact h2,

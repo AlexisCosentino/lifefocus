@@ -62,6 +62,13 @@ export interface FamilyServicePageData {
     title: string;
     text: string;
   };
+  adviceBlock?: {
+    label: string;
+    title: string;
+    text: string;
+    href: string;
+    linkLabel: string;
+  };
   package?: FamilyServicePackage;
   pricing?: FamilyServicePricingTexts;
   gallery: FamilyServiceImage[];
@@ -134,6 +141,14 @@ export const familyServices = {
       title: "Dehors, simplement.",
       text:
         "Nous choisissons un lieu calme autour de Romans-sur-Isère, Valence ou ailleurs dans la Drôme, selon la saison, la lumière et ce qui vous ressemble. J'aime travailler en fin de journée, quand la lumière devient plus douce : un chemin, un coin de campagne, une forêt ou un paysage ouvert suffisent. Le décor accompagne les images, sans prendre toute la place.",
+    },
+    adviceBlock: {
+      label: "REPÈRE",
+      title: "Trouver le lieu de votre séance.",
+      text:
+        "Parc, hautes herbes, forêt, bords du Rhône, lavandes ou couleurs d'automne : j'ai rassemblé quelques lieux et paysages que j'aime autour de Romans et Valence, avec mes conseils selon la lumière et les saisons.",
+      href: "/conseils/ou-faire-seance-photo-grossesse-drome/",
+      linkLabel: "Où faire une séance photo grossesse dans la Drôme ? →",
     },
     package: {
       title: "GROSSESSE + NAISSANCE",
@@ -247,6 +262,14 @@ export const familyServices = {
       title: "Chez vous, là où tout commence.",
       text:
         "La séance se déroule principalement à domicile, pour éviter de déplacer votre bébé et rester dans un environnement familier. On avance avec la lumière disponible, les pauses, les repas, les bras, les frères et sœurs s'il y en a. Votre maison n'a pas besoin d'être parfaite ni particulièrement lumineuse : elle devient simplement le décor réel de ces premiers jours.",
+    },
+    adviceBlock: {
+      label: "REPÈRE",
+      title: "Comment se passe une séance à la maison ?",
+      text:
+        "Le rythme du bébé, les pauses, la lumière, les vêtements, la chambre, les frères et sœurs : j'ai rassemblé quelques conseils pour vous montrer concrètement comment se déroule un reportage naissance à domicile.",
+      href: "/conseils/seance-photo-naissance-domicile/",
+      linkLabel: "Préparer votre séance naissance à la maison →",
     },
     package: {
       title: "GROSSESSE + NAISSANCE",
