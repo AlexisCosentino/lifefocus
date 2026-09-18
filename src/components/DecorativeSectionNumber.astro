@@ -1,0 +1,81 @@
+---
+interface Props {
+  value: string;
+  placement?: "left" | "center" | "right";
+  tone?: "light" | "dark";
+  scale?: "standard" | "quiet";
+}
+
+const { value, placement = "right", tone = "light", scale = "standard" } = Astro.props;
+---
+
+<span
+  class:list={[
+    "decorative-section-number",
+    `decorative-section-number--${placement}`,
+    `decorative-section-number--${tone}`,
+    `decorative-section-number--${scale}`,
+  ]}
+  aria-hidden="true"
+>
+  {value}
+</span>
+
+<style>
+  :global(.decorative-section-number-frame) {
+    position: relative;
+    isolation: isolate;
+  }
+
+  :global(.decorative-section-number-content) {
+    position: relative;
+    z-index: 1;
+  }
+
+  .decorative-section-number {
+    position: absolute;
+    top: var(--decorative-section-number-top, clamp(0.75rem, 2.8vw, 1.7rem));
+    z-index: 0;
+    color: color-mix(in srgb, var(--color-text) 7%, var(--color-background));
+    font-family: var(--font-editorial);
+    font-size: var(--decorative-section-number-size, clamp(8rem, 19vw, 23rem));
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 0.72;
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+  }
+
+  .decorative-section-number--dark {
+    color: color-mix(in srgb, var(--color-background) 12%, var(--color-dark));
+  }
+
+  .decorative-section-number--quiet {
+    font-size: var(--decorative-section-number-size, clamp(7rem, 17vw, 21rem));
+  }
+
+  .decorative-section-number--right {
+    right: var(--decorative-section-number-inline, clamp(0.35rem, 1.8vw, 1.35rem));
+  }
+
+  .decorative-section-number--left {
+    left: var(--decorative-section-number-inline, clamp(0.35rem, 1.8vw, 1.35rem));
+  }
+
+  .decorative-section-number--center {
+    left: var(--decorative-section-number-center, 58%);
+    transform: translateX(-50%);
+  }
+
+  @media (max-width: 47.99rem) {
+    .decorative-section-number {
+      top: var(--decorative-section-number-mobile-top, 1.2rem);
+      font-size: var(--decorative-section-number-mobile-size, clamp(5.75rem, 29vw, 9rem));
+    }
+
+    .decorative-section-number--center {
+      left: var(--decorative-section-number-mobile-center, 62%);
+    }
+  }
+</style>

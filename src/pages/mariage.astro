@@ -1,5 +1,6 @@
 ---
 import ImageSlot from "../components/ImageSlot.astro";
+import DecorativeSectionNumber from "../components/DecorativeSectionNumber.astro";
 import WeddingChapter from "../components/WeddingChapter.astro";
 import WeddingFAQ from "../components/WeddingFAQ.astro";
 import WeddingGallery from "../components/WeddingGallery.astro";
@@ -169,8 +170,9 @@ const structuredData = {
       </div>
     </section>
 
-    <section class="wedding-approach page-shell" aria-labelledby="approach-title">
-      <div class="wedding-approach__text">
+    <section class="wedding-approach page-shell decorative-section-number-frame" aria-labelledby="approach-title">
+      <DecorativeSectionNumber value="01" placement="right" />
+      <div class="wedding-approach__text decorative-section-number-content">
         <p class="editorial-label">01 / MON APPROCHE</p>
         <h2 id="approach-title">Une présence proche, mais jamais envahissante.</h2>
         <p>
@@ -180,7 +182,7 @@ const structuredData = {
         </p>
       </div>
 
-      <figure class="wedding-approach__image">
+      <figure class="wedding-approach__image decorative-section-number-content">
         <ImageSlot
           path="src/images/mariage/approach-main.jpg"
           orientation="horizontal"
@@ -203,13 +205,14 @@ const structuredData = {
     }
 
     <section class="wedding-support" aria-labelledby="support-title">
-      <div class="wedding-support__inner page-shell">
-        <div class="wedding-support__intro">
+      <div class="wedding-support__inner page-shell decorative-section-number-frame">
+        <DecorativeSectionNumber value="07" placement="center" tone="dark" scale="quiet" />
+        <div class="wedding-support__intro decorative-section-number-content">
           <p class="editorial-label">07 / MON ACCOMPAGNEMENT</p>
           <h2 id="support-title">Garder le fil sans prendre toute la place.</h2>
         </div>
 
-        <div class="wedding-support__steps">
+        <div class="wedding-support__steps decorative-section-number-content">
           <section>
             <h3>AVANT</h3>
             <p>Un échange pour comprendre votre journée, votre organisation et les personnes qui comptent pour vous.</p>
@@ -350,6 +353,9 @@ const structuredData = {
   }
 
   .wedding-approach {
+    --decorative-section-number-inline: clamp(0.55rem, 2vw, 1.6rem);
+    --decorative-section-number-top: clamp(0.9rem, 3vw, 1.9rem);
+
     display: grid;
     gap: var(--space-md);
     align-items: end;
@@ -432,6 +438,11 @@ const structuredData = {
   }
 
   .wedding-support__inner {
+    --decorative-section-number-center: 63%;
+    --decorative-section-number-mobile-center: 68%;
+    --decorative-section-number-top: clamp(1.1rem, 3.2vw, 2.35rem);
+    --decorative-section-number-mobile-top: 1.35rem;
+
     display: grid;
     gap: var(--space-md);
     width: min(calc(100% - (var(--page-padding) * 1.4)), 84rem);

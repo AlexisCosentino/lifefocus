@@ -1,5 +1,6 @@
 ---
 import type { FamilyServicePageData } from "../data/familyServices";
+import DecorativeSectionNumber from "./DecorativeSectionNumber.astro";
 import FamilyServiceFAQ from "./FamilyServiceFAQ.astro";
 import FamilyServiceGallery from "./FamilyServiceGallery.astro";
 import FamilyServiceHero from "./FamilyServiceHero.astro";
@@ -18,6 +19,14 @@ const serviceSlugs = {
   Famille: "famille",
 } as const;
 const serviceSlug = serviceSlugs[service.label as keyof typeof serviceSlugs] ?? "service";
+const approachNumber = service.approach.label.match(/^\d+/)?.[0];
+const approachNumberPlacements = {
+  grossesse: "right",
+  naissance: "left",
+  famille: "center",
+  service: "right",
+} as const;
+const approachNumberPlacement = approachNumberPlacements[serviceSlug as keyof typeof approachNumberPlacements] ?? "right";
 const galleryImages = service.gallery.map((image, index) => ({
   ...image,
   slotPath: image.slotPath ?? `src/images/${serviceSlug}/gallery/${String(index + 1).padStart(2, "0")}.jpg`,
@@ -41,14 +50,23 @@ const galleryImages = service.gallery.map((image, index) => ({
     }}
   />
 
-  <section class="family-service-approach page-shell" aria-labelledby="family-approach-title">
-    <div class="family-service-approach__text">
+  <section
+    class:list={[
+      "family-service-approach",
+      "page-shell",
+      "decorative-section-number-frame",
+      `family-service-approach--${serviceSlug}`,
+    ]}
+    aria-labelledby="family-approach-title"
+  >
+    {approachNumber && <DecorativeSectionNumber value={approachNumber} placement={approachNumberPlacement} />}
+    <div class="family-service-approach__text decorative-section-number-content">
       <p class="editorial-label">{service.approach.label}</p>
       <h2 id="family-approach-title">{service.approach.title}</h2>
       <p>{service.approach.text}</p>
     </div>
 
-    <figure class="family-service-approach__image">
+    <figure class="family-service-approach__image decorative-section-number-content">
       <ImageSlot
         path={service.approach.image.slotPath ?? `src/images/${serviceSlug}/approach-main.jpg`}
         orientation={service.approach.image.slotOrientation ?? "horizontal"}
@@ -105,11 +123,23 @@ const galleryImages = service.gallery.map((image, index) => ({
   }
 
   .family-service-approach {
+    --decorative-section-number-inline: clamp(0.55rem, 2vw, 1.6rem);
+    --decorative-section-number-top: clamp(0.85rem, 2.8vw, 1.8rem);
+
     display: grid;
     gap: var(--space-md);
     align-items: end;
     max-width: 76rem;
     padding-block: var(--space-lg);
+  }
+
+  .family-service-approach--naissance {
+    --decorative-section-number-inline: clamp(0.3rem, 1.5vw, 1.1rem);
+  }
+
+  .family-service-approach--famille {
+    --decorative-section-number-center: 56%;
+    --decorative-section-number-mobile-center: 64%;
   }
 
   .family-service-approach__text {
