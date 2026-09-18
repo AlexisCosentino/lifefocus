@@ -7,13 +7,58 @@ const familyItems = [
   { number: "03", label: "Famille", href: "/famille/" },
 ];
 
+const mobileNavItems = [
+  {
+    number: "01",
+    label: "Mariage",
+    href: "/mariage/",
+    caption: "Histoires de mariage",
+  },
+  {
+    number: "02",
+    label: "Famille",
+    href: "/famille/",
+    caption: "Grossesse · Naissance · Famille",
+    family: true,
+  },
+  {
+    number: "03",
+    label: "À propos",
+    href: "/a-propos/",
+    caption: "Alexis Cosentino",
+  },
+  {
+    number: "04",
+    label: "Conseils",
+    href: "/conseils/",
+    caption: "Journal & guides",
+  },
+  {
+    number: "05",
+    label: "Contact",
+    href: "/contact/",
+    caption: "Parlons de votre histoire",
+  },
+];
+
 const clientArea = {
   label: "Espace client \u2197",
   href: "https://alexis-cosentino.lumys.photo/",
 };
+
+const socialLinks = [
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/life_focus_mariage/",
+  },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/LifeFocusPhotographeValence/",
+  },
+];
 ---
 
-<header class="site-header">
+<header class="site-header" data-site-header>
   <div class="site-header__inner page-shell">
     <a class="site-identity" href="/" aria-label="Life Focus, accueil">
       <img
@@ -25,6 +70,10 @@ const clientArea = {
         loading="eager"
         decoding="sync"
       />
+      <span class="site-identity__split" aria-hidden="true">
+        <span>LIFE /</span>
+        <span>FOCUS</span>
+      </span>
     </a>
 
     <nav class="site-nav" aria-label="Navigation principale">
@@ -53,33 +102,263 @@ const clientArea = {
       </a>
     </nav>
 
-    <details class="site-menu">
-      <summary class="site-menu__summary">Menu</summary>
-      <nav class="site-menu__panel" aria-label="Navigation mobile">
-        <a href="/mariage/">Mariage</a>
-        <details class="site-menu__group">
-          <summary>Famille</summary>
-          <div class="site-menu__family">
-            {familyItems.map((item) => (
-              <a href={item.href}>
-                <span>{item.number}</span>
-                <strong>{item.label}</strong>
-              </a>
-            ))}
-          </div>
-        </details>
-        <a href="/a-propos/">À propos</a>
-        <a href="/conseils/">Conseils</a>
-        <a href="/contact/">Contact</a>
-        <a
-          class="site-menu__utility"
-          href={clientArea.href}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {clientArea.label}
-        </a>
+    <button
+      class="site-menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Ouvrir la table des matières"
+      data-menu-toggle
+    >
+      <span data-menu-toggle-label>Menu</span>
+      <span class="site-menu-toggle__mark" aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <div class="site-menu" id="mobile-menu" aria-hidden="true" inert data-mobile-menu>
+    <div class="site-menu__inner page-shell">
+      <div class="site-menu__brand" aria-hidden="true">
+        <span>LIFE /</span>
+        <span>FOCUS</span>
+      </div>
+
+      <nav class="site-menu__nav" aria-label="Navigation mobile">
+        <p class="site-menu__eyebrow">Index</p>
+        <ol class="site-menu__list">
+          {mobileNavItems.map((item) => (
+            <li class:list={["site-menu__item", item.family && "site-menu__item--family"]}>
+              {item.family ? (
+                <>
+                  <div class="site-menu__family-heading">
+                    <button
+                      class="site-menu__link site-menu__link--button"
+                      type="button"
+                      aria-expanded="false"
+                      aria-controls="mobile-family-links"
+                      data-family-toggle
+                    >
+                      <span class="site-menu__number">{item.number}</span>
+                      <span class="site-menu__dash" aria-hidden="true"></span>
+                      <span class="site-menu__label">{item.label}</span>
+                      <span class="site-menu__family-mark" aria-hidden="true">+</span>
+                    </button>
+                  </div>
+                  <p class="site-menu__caption">{item.caption}</p>
+                  <div
+                    class="site-menu__family"
+                    id="mobile-family-links"
+                    hidden
+                    data-family-panel
+                  >
+                    {familyItems.map((familyItem) => (
+                      <a href={familyItem.href} data-menu-link>{familyItem.label}</a>
+                    ))}
+                  </div>
+                </>
+              ) : (
+                <>
+                  <a class="site-menu__link" href={item.href} data-menu-link>
+                    <span class="site-menu__number">{item.number}</span>
+                    <span class="site-menu__dash" aria-hidden="true"></span>
+                    <span class="site-menu__label">{item.label}</span>
+                  </a>
+                  <p class="site-menu__caption">{item.caption}</p>
+                </>
+              )}
+            </li>
+          ))}
+        </ol>
       </nav>
-    </details>
+
+      <div class="site-menu__colophon">
+        <p>Romans-sur-Isère · Drôme</p>
+        <nav aria-label="Liens secondaires mobiles">
+          {socialLinks.map((item) => (
+            <a href={item.href} target="_blank" rel="noopener noreferrer" data-menu-link>
+              {item.label}
+            </a>
+          ))}
+          <a
+            href={clientArea.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-menu-link
+          >
+            {clientArea.label}
+          </a>
+        </nav>
+      </div>
+    </div>
   </div>
 </header>
+
+<script>
+  const header = document.querySelector("[data-site-header]");
+  const menu = document.querySelector("[data-mobile-menu]");
+  const toggle = document.querySelector("[data-menu-toggle]");
+  const toggleLabel = document.querySelector("[data-menu-toggle-label]");
+  const familyToggle = document.querySelector("[data-family-toggle]");
+  const familyPanel = document.querySelector("[data-family-panel]");
+
+  if (
+    header instanceof HTMLElement &&
+    menu instanceof HTMLElement &&
+    toggle instanceof HTMLButtonElement &&
+    toggleLabel instanceof HTMLElement
+  ) {
+    let scrollY = 0;
+    let lastFocusedElement = null;
+    let menuHistoryOpen = false;
+    let restoreFocusAfterPop = false;
+
+    const focusableSelector =
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+    const getFocusableMenuItems = () =>
+      Array.from(menu.querySelectorAll(focusableSelector)).filter(
+        (element) =>
+          element instanceof HTMLElement &&
+          !element.hasAttribute("hidden") &&
+          element.offsetParent !== null,
+      );
+
+    const lockScroll = () => {
+      scrollY = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = "0";
+      document.body.style.right = "0";
+      document.body.style.width = "100%";
+    };
+
+    const unlockScroll = () => {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.width = "";
+      window.scrollTo(0, scrollY);
+    };
+
+    const setMenuState = (isOpen, restoreFocus = true, updateHistory = true) => {
+      header.dataset.menuOpen = String(isOpen);
+      menu.setAttribute("aria-hidden", String(!isOpen));
+      menu.inert = !isOpen;
+      toggle.setAttribute("aria-expanded", String(isOpen));
+      toggle.setAttribute(
+        "aria-label",
+        isOpen ? "Fermer la table des matières" : "Ouvrir la table des matières",
+      );
+      toggleLabel.textContent = isOpen ? "Fermer" : "Menu";
+      document.documentElement.classList.toggle("has-mobile-menu-open", isOpen);
+
+      if (isOpen) {
+        lastFocusedElement = document.activeElement;
+        lockScroll();
+        window.setTimeout(() => {
+          toggle.focus();
+        }, 260);
+        if (updateHistory) {
+          history.pushState({ mobileMenuOpen: true }, "");
+          menuHistoryOpen = true;
+        }
+      } else {
+        unlockScroll();
+        menuHistoryOpen = false;
+        if (
+          familyToggle instanceof HTMLButtonElement &&
+          familyPanel instanceof HTMLElement
+        ) {
+          familyToggle.setAttribute("aria-expanded", "false");
+          familyToggle.querySelector(".site-menu__family-mark")?.replaceChildren("+");
+          familyPanel.hidden = true;
+          familyPanel.dataset.open = "false";
+          menu.dataset.familyOpen = "false";
+        }
+        if (
+          restoreFocus &&
+          lastFocusedElement instanceof HTMLElement &&
+          document.contains(lastFocusedElement)
+        ) {
+          lastFocusedElement.focus();
+        }
+      }
+    };
+
+    const closeMenu = (restoreFocus = true, updateHistory = false) => {
+      if (toggle.getAttribute("aria-expanded") === "true") {
+        if (updateHistory && menuHistoryOpen) {
+          restoreFocusAfterPop = restoreFocus;
+          history.back();
+          return;
+        }
+        setMenuState(false, restoreFocus, updateHistory);
+      }
+    };
+
+    toggle.addEventListener("click", () => {
+      const shouldOpen = toggle.getAttribute("aria-expanded") !== "true";
+      if (shouldOpen) {
+        setMenuState(true);
+      } else {
+        closeMenu(true, true);
+      }
+    });
+
+    menu.addEventListener("click", (event) => {
+      const link = event.target instanceof Element ? event.target.closest("[data-menu-link]") : null;
+      if (link) {
+        closeMenu(false);
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (toggle.getAttribute("aria-expanded") !== "true") return;
+
+      if (event.key === "Escape") {
+        event.preventDefault();
+        closeMenu(true, true);
+      }
+
+      if (event.key === "Tab") {
+        const focusableItems = [toggle, ...getFocusableMenuItems()];
+        const first = focusableItems[0];
+        const last = focusableItems[focusableItems.length - 1];
+
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    });
+
+    window.addEventListener("popstate", () => {
+      const shouldRestoreFocus = restoreFocusAfterPop;
+      restoreFocusAfterPop = false;
+      menuHistoryOpen = false;
+      closeMenu(shouldRestoreFocus);
+    });
+
+    const desktopQuery = window.matchMedia("(min-width: 48rem)");
+    desktopQuery.addEventListener("change", (event) => {
+      if (event.matches) closeMenu(false, true);
+    });
+  }
+
+  if (
+    familyToggle instanceof HTMLButtonElement &&
+    familyPanel instanceof HTMLElement
+  ) {
+    familyToggle.addEventListener("click", () => {
+      const isOpen = familyToggle.getAttribute("aria-expanded") === "true";
+      familyToggle.setAttribute("aria-expanded", String(!isOpen));
+      familyToggle.querySelector(".site-menu__family-mark")?.replaceChildren(!isOpen ? "−" : "+");
+      familyPanel.hidden = isOpen;
+      familyPanel.dataset.open = String(!isOpen);
+      menu instanceof HTMLElement && (menu.dataset.familyOpen = String(!isOpen));
+    });
+  }
+</script>
