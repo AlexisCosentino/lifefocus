@@ -2,11 +2,11 @@
 import ImageSlot from "./ImageSlot.astro";
 
 const included = [
-  "Toutes les photographies sélectionnées, triées et retouchées individuellement en haute définition.",
-  "Une galerie privée en ligne à partager avec vos proches.",
-  "Livraison des photographies sous 2 semaines maximum.",
-  "Un coffret personnalisé offert avec votre reportage.",
-  "Un accompagnement avant le mariage pour préparer sereinement votre journée.",
+  "Photos sélectionnées, triées et retouchées en haute définition.",
+  "Galerie privée en ligne à partager avec vos proches.",
+  "Livraison sous 2 semaines maximum.",
+  "Coffret personnalisé offert avec votre reportage.",
+  "Accompagnement avant le mariage.",
 ];
 
 const packages = [
@@ -47,23 +47,20 @@ const packages = [
 const addOns = [
   {
     title: "Séance Engagement",
+    summary: "Un moment à deux avant le mariage.",
     text:
       "Un moment à deux avant le mariage, sans pression, pour créer des images qui vous ressemblent et vous familiariser avec ma façon de photographier.",
   },
   {
     title: "Séance Trash The Dress",
+    summary: "Une séance plus libre après le mariage.",
     text:
       "Une séance après le mariage, plus libre, pour remettre vos tenues et créer des images différentes sans contrainte de planning.",
   },
 ];
 
-const addOnIncluded = [
-  "Séance photo d'1 h en extérieur.",
-  "Toutes les photos livrées, traitées et retouchées naturellement.",
-  "Pack photo HD au format numérique, sans limite de photos.",
-  "Déplacement jusqu'à 30 km autour de Valence.",
-  "Livraison des photos numériques sous 1 semaine maximum.",
-];
+const addOnDetails =
+  "Photos livrées sans limite de nombre. Séance d'1 h en extérieur autour de Romans-sur-Isère ou Valence, au format numérique sous 1 semaine.";
 ---
 
 <section class="wedding-packages page-shell" aria-labelledby="packages-title">
@@ -84,7 +81,6 @@ const addOnIncluded = [
 
       <div class="wedding-packages__keepsake">
         <p>Un reportage qui vous ressemble.</p>
-        <p>Chaque mariage est différent. Vous choisissez avant tout le temps de présence qui correspond à votre journée ; mon approche et le soin apporté aux images restent les mêmes quelle que soit la formule.</p>
       </div>
     </div>
 
@@ -107,15 +103,19 @@ const addOnIncluded = [
       {
         packages.map((item) => (
           <li>
-            <p class="wedding-packages__duration">{item.duration}</p>
+            <div class="wedding-packages__formula-top">
+              <p class="wedding-packages__duration">
+                <span>{item.duration.split(" ")[0]}</span>
+                <span>heures</span>
+              </p>
 
-            <div class="wedding-packages__details">
-              <h3>{item.name}</h3>
-              <p>{item.context}</p>
+              <p class="wedding-packages__price">{item.price}</p>
             </div>
 
-            <div class="wedding-packages__price">
-              <p>{item.price}</p>
+            <h3>{item.name}</h3>
+            <p class="wedding-packages__context">{item.context}</p>
+
+            <div class="wedding-packages__conditions">
               <p>{item.travel}</p>
               {
                 item.details.map((detail) => (
@@ -132,32 +132,35 @@ const addOnIncluded = [
   <aside class="wedding-packages__addon" aria-labelledby="addon-title">
     <div class="wedding-packages__addon-heading">
       <p class="wedding-packages__eyebrow">En supplément</p>
-      <h3 id="addon-title">Avant ou après le mariage, prolonger l'histoire.</h3>
+      <h3 id="addon-title">Avant ou après le mariage.</h3>
     </div>
 
-    <div class="wedding-packages__addon-content">
-      <div class="wedding-packages__addon-types">
-        {
-          addOns.map((item) => (
-            <section>
-              <h4>{item.title}</h4>
-              <p>{item.text}</p>
-            </section>
-          ))
-        }
-      </div>
+    <div class="wedding-packages__addon-list">
+      {
+        addOns.map((item) => (
+          <section class="wedding-packages__addon-item">
+            <div class="wedding-packages__addon-main">
+              <div>
+                <h4>{item.title}</h4>
+                <p>{item.summary}</p>
+              </div>
+              <p class="wedding-packages__addon-price">250 €</p>
+            </div>
 
-      <div class="wedding-packages__addon-details">
-        <p class="wedding-packages__addon-note">Photos livrées sans limite de nombre.</p>
-        <ul>
-          {
-            addOnIncluded.map((item) => (
-              <li>{item}</li>
-            ))
-          }
-        </ul>
-        <p class="wedding-packages__addon-price">250 €</p>
-      </div>
+            <details class="wedding-packages__addon-details">
+              <summary>
+                <span>En savoir plus</span>
+                <span aria-hidden="true"></span>
+              </summary>
+
+              <div class="wedding-packages__addon-panel">
+                <p>{item.text}</p>
+                <p class="wedding-packages__addon-note">{addOnDetails}</p>
+              </div>
+            </details>
+          </section>
+        ))
+      }
     </div>
   </aside>
 </section>

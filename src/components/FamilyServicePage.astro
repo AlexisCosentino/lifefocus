@@ -31,6 +31,32 @@ const galleryImages = service.gallery.map((image, index) => ({
   ...image,
   slotPath: image.slotPath ?? `src/images/${serviceSlug}/gallery/${String(index + 1).padStart(2, "0")}.jpg`,
 }));
+const pricingImage =
+  serviceSlug === "grossesse"
+    ? {
+        src: service.hero.secondaryImage.src,
+        alt: "Photo de grossesse en format vertical.",
+        size: "portrait" as const,
+        slotPath: "src/images/grossesse/price.jpg",
+        slotOrientation: "vertical" as const,
+      }
+    : serviceSlug === "naissance"
+      ? {
+          src: service.hero.secondaryImage.src,
+          alt: "Photo de naissance en format vertical.",
+          size: "portrait" as const,
+          slotPath: "src/images/naissance/price.jpg",
+          slotOrientation: "vertical" as const,
+        }
+      : serviceSlug === "famille"
+        ? {
+            src: service.hero.secondaryImage.src,
+            alt: "Photo de famille en format vertical.",
+            size: "portrait" as const,
+            slotPath: "src/images/famille/price.jpg",
+            slotOrientation: "vertical" as const,
+          }
+      : undefined;
 ---
 
 <div class="family-service-page">
@@ -101,7 +127,7 @@ const galleryImages = service.gallery.map((image, index) => ({
     )
   }
 
-  <FamilyServicePricing package={service.package} pricing={service.pricing} />
+  <FamilyServicePricing package={service.package} pricing={service.pricing} image={pricingImage} />
   <FamilyServiceGallery images={galleryImages} galleryFolder={`src/images/${serviceSlug}/gallery`} />
   <FamilyServiceLinks links={service.links} />
   <FamilyServiceFAQ items={service.faq} />

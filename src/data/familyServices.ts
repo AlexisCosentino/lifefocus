@@ -29,12 +29,22 @@ export interface FamilyServicePackage {
 }
 
 export interface FamilyServicePricingTexts {
+  layout?: "sessions";
+  includedStyle?: "numbered";
   included: string[];
   formula: {
+    sessionCount?: string;
+    sessionUnit?: string;
+    typeLabel?: string;
+    durationLabel?: string;
     context: string;
     details: string[];
   };
   combined?: {
+    sessionCount?: string;
+    sessionUnit?: string;
+    typeLabel?: string;
+    durationLabel?: string;
     details: string[];
   };
 }
@@ -159,23 +169,31 @@ export const familyServices = {
       linkLabel: "DÉCOUVRIR LA SÉANCE NAISSANCE →",
     },
     pricing: {
+      includedStyle: "numbered",
       included: [
-        "Une séance photo d’environ 1 heure, principalement en extérieur.",
-        "Toutes les photographies sélectionnées sont traitées et retouchées naturellement.",
-        "Les photographies sont livrées en haute définition, sans limite de nombre.",
+        "Photos triées et retouchées naturellement.",
+        "Haute définition, sans limite de nombre.",
         "Déplacement inclus jusqu’à 30 km autour de Valence.",
-        "Livraison de la galerie numérique sous 1 semaine maximum.",
+        "Galerie numérique sous 1 semaine.",
       ],
       formula: {
+        sessionCount: "01",
+        sessionUnit: "séance",
+        typeLabel: "Grossesse",
+        durationLabel: "Env. 1 heure",
         context:
-          "Une séance grossesse d’environ 1 heure, seule, en couple ou avec vos enfants, le plus souvent en extérieur et en lumière naturelle.",
+          "Une s\u00e9ance grossesse d\u2019environ 1 heure, seule, en couple ou en famille, en ext\u00e9rieur autour de Romans-sur-Is\u00e8re, Valence et dans la Dr\u00f4me.",
         details: [
-          "Photos livrées sans limite de nombre.",
-          "Un moment simple et guidé juste ce qu’il faut, sans poses figées.",
+          "Photos livr\u00e9es sans limite de nombre.",
+          "Une s\u00e9ance simple et guid\u00e9e juste ce qu\u2019il faut, sans mise en sc\u00e8ne lourde.",
         ],
       },
       combined: {
-        details: ["Deux séances d’1 h."],
+        sessionCount: "02",
+        sessionUnit: "séances",
+        typeLabel: "Grossesse + Naissance",
+        durationLabel: "2 × Env. 1 heure",
+        details: ["Deux s\u00e9ances d\u20191 h."],
       },
     },
     gallery: baseGallery,
@@ -280,12 +298,12 @@ export const familyServices = {
       linkLabel: "DÉCOUVRIR LA SÉANCE GROSSESSE →",
     },
     pricing: {
+      includedStyle: "numbered",
       included: [
-        "Une séance photo d’environ 1 heure à domicile, adaptée au rythme de votre bébé.",
-        "Toutes les photographies sélectionnées sont traitées et retouchées naturellement.",
-        "Les photographies sont livrées en haute définition, sans limite de nombre.",
-        "Déplacement inclus jusqu’à 30 km autour de Valence.",
-        "Livraison de la galerie numérique sous 1 semaine maximum.",
+        "Photos tri\u00e9es et retouch\u00e9es naturellement.",
+        "Haute d\u00e9finition, sans limite de nombre.",
+        "D\u00e9placement inclus jusqu\u2019\u00e0 30 km autour de Valence.",
+        "Galerie num\u00e9rique sous 1 semaine.",
       ],
       formula: {
         context:
@@ -379,12 +397,12 @@ export const familyServices = {
       image: image(homeImages.familySecondary.src, "Famille en plein air dans un moment naturel.", "wide"),
     },
     pricing: {
+      includedStyle: "numbered",
       included: [
-        "Une séance photo d’environ 1 heure, adaptée au rythme de votre famille.",
-        "Toutes les photographies sélectionnées sont traitées et retouchées naturellement.",
-        "Les photographies sont livrées en haute définition, sans limite de nombre.",
+        "Photos triées et retouchées naturellement.",
+        "Haute définition, sans limite de nombre.",
         "Déplacement inclus jusqu’à 30 km autour de Valence.",
-        "Livraison de la galerie numérique sous 1 semaine maximum.",
+        "Galerie numérique sous 1 semaine.",
       ],
       formula: {
         context:
