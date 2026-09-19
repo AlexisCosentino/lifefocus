@@ -173,7 +173,7 @@ export const familyServices = {
       included: [
         "Photos triées et retouchées naturellement.",
         "Haute définition, sans limite de nombre.",
-        "Déplacement inclus jusqu’à 30 km autour de Valence.",
+        "Déplacement inclus jusqu’à 30 km autour de Romans-sur-Isère.",
         "Galerie numérique sous 1 semaine.",
       ],
       formula: {
@@ -302,7 +302,7 @@ export const familyServices = {
       included: [
         "Photos tri\u00e9es et retouch\u00e9es naturellement.",
         "Haute d\u00e9finition, sans limite de nombre.",
-        "D\u00e9placement inclus jusqu\u2019\u00e0 30 km autour de Valence.",
+        "D\u00e9placement inclus jusqu\u2019\u00e0 30 km autour de Romans-sur-Is\u00e8re.",
         "Galerie num\u00e9rique sous 1 semaine.",
       ],
       formula: {
@@ -401,7 +401,7 @@ export const familyServices = {
       included: [
         "Photos triées et retouchées naturellement.",
         "Haute définition, sans limite de nombre.",
-        "Déplacement inclus jusqu’à 30 km autour de Valence.",
+        "Déplacement inclus jusqu’à 30 km autour de Romans-sur-Isère.",
         "Galerie numérique sous 1 semaine.",
       ],
       formula: {
