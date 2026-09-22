@@ -11,6 +11,8 @@ const mapQuery = encodeURIComponent(
 );
 const mapsLink = "https://maps.app.goo.gl/SjgE8WsEJZYKRPMW6";
 const mapsEmbed = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
+const whatsappHref =
+  "https://wa.me/33698900917?text=Bonjour%20Alexis%2C%20je%20vous%20contacte%20depuis%20votre%20site%20Life%20Focus%20concernant%20un%20projet%20photo.";
 const turnstileSiteKey = import.meta.env.TURNSTILE_SITE_KEY ?? "";
 ---
 
@@ -124,6 +126,14 @@ const turnstileSiteKey = import.meta.env.TURNSTILE_SITE_KEY ?? "";
           <span>Téléphone</span>
           <a href="tel:+33698900917">06 98 90 09 17</a>
           <a class="editorial-link" href="tel:+33698900917">APPELER →</a>
+        </div>
+
+        <div class="contact-details__item">
+          <span>WhatsApp</span>
+          <a href={whatsappHref} target="_blank" rel="noopener noreferrer">Message prérempli</a>
+          <a class="editorial-link" href={whatsappHref} target="_blank" rel="noopener noreferrer">
+            ÉCRIRE SUR WHATSAPP →
+          </a>
         </div>
 
         <div class="contact-details__item">
