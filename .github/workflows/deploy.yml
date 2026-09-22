@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -31,6 +33,11 @@ jobs:
           key: astro-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-${{ hashFiles('astro.config.mjs') }}
           restore-keys: |
             astro-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-
+
+      - name: Prepare IndexNow verification file
+        env:
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+        run: npm run indexnow:prepare
 
       - name: Build Astro site
         env:
@@ -83,3 +90,10 @@ jobs:
           strip_components: 1
           rm: false
           overwrite: true
+
+      - name: Notify IndexNow
+        env:
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+          INDEXNOW_PREVIOUS_SHA: ${{ github.event.before }}
+          INDEXNOW_CURRENT_SHA: ${{ github.sha }}
+        run: npm run indexnow:submit
