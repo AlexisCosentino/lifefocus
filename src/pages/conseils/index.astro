@@ -10,6 +10,9 @@ const articles = adviceArticles
       b.publishedAt.getTime() - a.publishedAt.getTime(),
   );
 
+const categories = [...new Set(articles.map((article) => article.category))];
+const initialVisibleArticles = 4;
+const articlesPerBatch = 4;
 const pageTitle = "Conseils mariage et photographie | Life Focus";
 const pageDescription =
   "Conseils pratiques autour du mariage, de la photographie de couple et des images de famille par Life Focus, photographe dans la Drôme.";
@@ -30,12 +33,47 @@ const pageDescription =
       </p>
     </header>
 
-    <div class="advice-list" aria-label="Articles publiés">
+    <div
+      class="advice-filters"
+      aria-label="Filtrer les articles par catégorie"
+      data-advice-filters
+    >
+      <span>Voir</span>
+      <div class="advice-filters__list">
+        <button class="advice-filter is-active" type="button" data-advice-filter="all" aria-pressed="true">
+          Tous
+        </button>
+        {
+          categories.map((category) => (
+            <button
+              class="advice-filter"
+              type="button"
+              data-advice-filter={category}
+              aria-pressed="false"
+            >
+              {category}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+
+    <div
+      class="advice-list"
+      aria-label="Articles publiés"
+      data-advice-list
+      data-initial-visible={initialVisibleArticles}
+      data-batch-size={articlesPerBatch}
+    >
       {
         articles.map((article, index) => (
-            <article class="advice-item">
+            <article
+              class="advice-item"
+              data-advice-item
+              data-advice-category={article.category}
+            >
               <div class="advice-item__meta">
-                <span>{String(index + 1).padStart(2, "0")}</span>
+                <span data-advice-index>{String(index + 1).padStart(2, "0")}</span>
                 <span>{article.category}</span>
               </div>
 
@@ -61,12 +99,126 @@ const pageDescription =
           ))
       }
     </div>
+    <p class="advice-list__status" data-advice-status aria-live="polite"></p>
+    <div class="advice-list__sentinel" data-advice-sentinel aria-hidden="true"></div>
 
     <footer class="advice-contact" aria-labelledby="advice-contact-title">
       <h2 id="advice-contact-title">Une question plus précise ?</h2>
       <a class="editorial-link" href="/contact/">ÉCRIRE À ALEXIS →</a>
     </footer>
   </section>
+
+  <script>
+    const initAdviceFilters = () => {
+      const adviceList = document.querySelector("[data-advice-list]");
+      const filterGroup = document.querySelector("[data-advice-filters]");
+
+      if (!(adviceList instanceof HTMLElement) || adviceList.dataset.adviceReady === "true") {
+        return;
+      }
+
+      adviceList.dataset.adviceReady = "true";
+
+      const items = Array.from(adviceList.querySelectorAll("[data-advice-item]"));
+      const filters = Array.from(document.querySelectorAll("[data-advice-filter]"));
+      const sentinel = document.querySelector("[data-advice-sentinel]");
+      const status = document.querySelector("[data-advice-status]");
+      const initialVisible = Number(adviceList.dataset.initialVisible) || 4;
+      const batchSize = Number(adviceList.dataset.batchSize) || initialVisible;
+      let activeCategory = "all";
+      let visibleLimit = initialVisible;
+
+      const matchingItems = () =>
+        items.filter(
+          (item) =>
+            item instanceof HTMLElement &&
+            (activeCategory === "all" || item.dataset.adviceCategory === activeCategory),
+        );
+
+      const updateAdviceList = () => {
+        const matches = matchingItems();
+
+        items.forEach((item) => {
+          if (item instanceof HTMLElement) {
+            item.hidden = true;
+          }
+        });
+
+        matches.slice(0, visibleLimit).forEach((item, index) => {
+          if (!(item instanceof HTMLElement)) {
+            return;
+          }
+
+          const indexLabel = item.querySelector("[data-advice-index]");
+
+          item.hidden = false;
+
+          if (indexLabel) {
+            indexLabel.textContent = String(index + 1).padStart(2, "0");
+          }
+        });
+
+        const visibleCount = Math.min(visibleLimit, matches.length);
+        const hasMore = visibleCount < matches.length;
+
+        if (sentinel instanceof HTMLElement) {
+          sentinel.dataset.adviceDisabled = hasMore ? "false" : "true";
+        }
+
+        if (status) {
+          status.textContent =
+            matches.length === 0
+              ? "Aucun article dans cette catégorie pour le moment."
+              : `${visibleCount} sur ${matches.length}`;
+        }
+      };
+
+      filterGroup?.addEventListener("click", (event) => {
+        const target = event.target instanceof Element
+          ? event.target.closest("[data-advice-filter]")
+          : null;
+
+        if (!(target instanceof HTMLButtonElement)) {
+          return;
+        }
+
+        activeCategory = target.getAttribute("data-advice-filter") || "all";
+        visibleLimit = initialVisible;
+
+        filters.forEach((item) => {
+          const isActive = item === target;
+          item.classList.toggle("is-active", isActive);
+          item.setAttribute("aria-pressed", String(isActive));
+        });
+
+        updateAdviceList();
+      });
+
+      if ("IntersectionObserver" in window && sentinel instanceof HTMLElement) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            const [entry] = entries;
+
+            if (entry?.isIntersecting && sentinel.dataset.adviceDisabled !== "true") {
+              visibleLimit += batchSize;
+              updateAdviceList();
+            }
+          },
+          { rootMargin: "360px 0px" },
+        );
+
+        observer.observe(sentinel);
+      }
+
+      updateAdviceList();
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initAdviceFilters, { once: true });
+    } else {
+      initAdviceFilters();
+    }
+  </script>
 </BaseLayout>
 
 <style>
@@ -105,6 +257,59 @@ const pageDescription =
     color: var(--color-muted);
   }
 
+  .advice-filters {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: calc(var(--space-md) * -0.45);
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--color-line);
+  }
+
+  .advice-filters > span {
+    color: var(--color-muted);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .advice-filters__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem clamp(1rem, 2.4vw, 2rem);
+    align-items: baseline;
+  }
+
+  .advice-filter {
+    border: 0;
+    border-bottom: 1px solid transparent;
+    padding: 0 0 0.2rem;
+    background: transparent;
+    color: var(--color-muted);
+    cursor: pointer;
+    font-family: var(--font-interface);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .advice-filter:hover,
+  .advice-filter.is-active {
+    border-bottom-color: currentColor;
+    color: var(--color-text);
+  }
+
+  .advice-filter.is-active {
+    color: var(--color-text);
+  }
+
+  .advice-filter:focus-visible {
+    outline-offset: 0.35rem;
+  }
+
   .advice-list {
     display: grid;
     gap: var(--space-md);
@@ -116,6 +321,10 @@ const pageDescription =
     align-items: start;
     padding-block: var(--space-md);
     border-top: 1px solid var(--color-line);
+  }
+
+  .advice-item[hidden] {
+    display: none;
   }
 
   .advice-item__meta {
@@ -160,6 +369,27 @@ const pageDescription =
     height: auto;
   }
 
+  .advice-list__status {
+    justify-self: end;
+    margin-top: calc(var(--space-lg) * -0.82);
+    color: var(--color-muted);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .advice-list__sentinel {
+    width: 100%;
+    height: 1px;
+    margin-top: calc(var(--space-lg) * -1);
+  }
+
+  .advice-list__sentinel[data-advice-disabled="true"] {
+    display: none;
+  }
+
   .advice-contact {
     display: grid;
     gap: var(--space-sm);
@@ -176,6 +406,11 @@ const pageDescription =
   @media (min-width: 72rem) {
     .advice-hero {
       margin-left: clamp(5rem, 10vw, 12rem);
+    }
+
+    .advice-filters {
+      grid-template-columns: minmax(5rem, 0.2fr) minmax(0, 1fr);
+      gap: clamp(2rem, 4vw, 4rem);
     }
 
     .advice-item {
