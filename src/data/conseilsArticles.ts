@@ -17,6 +17,54 @@ export interface AdviceArticle {
 
 export const adviceArticles = [
   {
+    title: "Une séance grossesse en hiver au Parc de Lorient",
+    seoTitle: "Séance grossesse au Parc de Lorient près de Valence | Life Focus",
+    description:
+      "Une séance photo grossesse en hiver au Parc de Lorient, près de Valence. Une lumière douce, la nature et un reportage simple, loin des poses figées.",
+    slug: "seance-grossesse-parc-lorient-valence",
+    publishedAt: new Date("2026-09-23"),
+    category: "Grossesse",
+    excerpt:
+      "Une séance grossesse réalisée en février au Parc de Lorient, près de Valence, dans une ambiance sobre, douce et hivernale.",
+    coverImagePath: "src/images/conseils/seance-grossesse-parc-lorient-valence/Bérénice & Pierrick_15.jpg",
+    featuredImageAlt: "Séance grossesse en hiver au Parc de Lorient près de Valence.",
+    primaryCtaHref: "/grossesse/",
+    primaryCtaLabel: "DÉCOUVRIR LES SÉANCES GROSSESSE →",
+    draft: false,
+  },
+  {
+    title: "Une séance grossesse un matin de gel près de Chabeuil",
+    seoTitle: "Séance grossesse en hiver près de Chabeuil | Life Focus",
+    description:
+      "Une séance grossesse un matin de gel près de Chabeuil, dans la Drôme. Une robe rouge, une lumière froide et un paysage transformé par l’hiver.",
+    slug: "seance-grossesse-hiver-chabeuil",
+    publishedAt: new Date("2026-09-23"),
+    category: "Grossesse",
+    excerpt:
+      "Une séance grossesse en plein hiver près de Chabeuil, portée par le gel, une lumière froide et le contraste d'une robe rouge.",
+    coverImagePath: "src/images/conseils/seance-grossesse-hiver-chabeuil/Joffrey & Lucie_17.jpg",
+    featuredImageAlt: "Séance grossesse en hiver près de Chabeuil avec une robe rouge dans un paysage gelé.",
+    primaryCtaHref: "/grossesse/",
+    primaryCtaLabel: "DÉCOUVRIR MON APPROCHE DES SÉANCES GROSSESSE →",
+    draft: false,
+  },
+  {
+    title: "Un soir d'été entre tournesols et lavandes, près de Valence",
+    seoTitle: "Séance photo famille tournesols et lavandes près de Valence | Life Focus",
+    description:
+      "Une séance photo famille au coucher du soleil dans les tournesols et les lavandes, près de Valence. Des images naturelles et lumineuses dans la Drôme.",
+    slug: "seance-famille-tournesols-valence",
+    publishedAt: new Date("2026-09-23"),
+    category: "Famille",
+    excerpt:
+      "Une séance famille simple et lumineuse au coucher du soleil, entre tournesols et lavandes autour de Valence, pendant quelques jours de vacances dans la Drôme.",
+    coverImagePath: "src/images/conseils/seance-famille-tournesols-valence/Karlijn_22.jpg",
+    featuredImageAlt: "Séance photo famille dans les tournesols et les lavandes près de Valence au coucher du soleil.",
+    primaryCtaHref: "/famille/",
+    primaryCtaLabel: "DÉCOUVRIR LES SÉANCES FAMILLE →",
+    draft: false,
+  },
+  {
     title: "Où faire une séance photo grossesse dans la Drôme ?",
     seoTitle: "Séance photo grossesse Drôme | Lieux autour de Romans & Valence",
     description:
@@ -101,7 +149,7 @@ export const adviceArticles = [
     category: "Mariage",
     excerpt:
       "Lieu, lumière, rythme de la journée, ambiance et choix des prestataires : mes conseils pour préparer un mariage dans la Drôme.",
-    featuredImage: "weddingMain",
+    coverImagePath: "src/images/conseils/conseils-mariage-drome/Natalia & Antonin_335.jpg",
     featuredImageAlt: "Mariage dans la Drôme photographié dans une lumière naturelle.",
     draft: false,
   },

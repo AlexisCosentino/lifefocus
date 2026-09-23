@@ -1,4 +1,5 @@
 ---
+import ImageSlot from "../../components/ImageSlot.astro";
 import ArticleLayout from "../../layouts/ArticleLayout.astro";
 import { adviceArticles } from "../../data/conseilsArticles";
 
@@ -9,6 +10,18 @@ const article = adviceArticles.find(
 if (!article) {
   throw new Error("Article introuvable.");
 }
+
+const galleryImages = [
+  { filename: "Natalia & Antonin_329.jpg", orientation: "vertical" as const },
+  { filename: "Natalia & Antonin_332.jpg", orientation: "vertical" as const },
+  { filename: "Natalia & Antonin_335.jpg", orientation: "horizontal" as const },
+  { filename: "Natalia & Antonin_338.jpg", orientation: "vertical" as const },
+  { filename: "Natalia & Antonin_341.jpg", orientation: "vertical" as const },
+].map((image, index) => ({
+  path: `src/images/conseils/conseils-mariage-drome/${image.filename}`,
+  orientation: image.orientation,
+  label: `Reportage de mariage dans la Drôme, image ${index + 1}.`,
+}));
 ---
 
 <ArticleLayout article={article}>
@@ -31,6 +44,14 @@ if (!article) {
     partager quelques conseils issus de ce que je vois réellement sur les mariages que je photographie
     dans la Drôme.
   </p>
+
+  <div class="article-reportage-grid" aria-label="Reportage de mariage dans la Drôme">
+    {galleryImages.slice(0, 3).map((image, index) => (
+      <figure class:list={["article-reportage-grid__item", index === 2 && "article-reportage-grid__item--wide"]}>
+        <ImageSlot path={image.path} orientation={image.orientation} label={image.label} />
+      </figure>
+    ))}
+  </div>
 
   <h2>Choisir un lieu dans lequel vous vous projetez vraiment</h2>
   <p>Le domaine donne énormément de personnalité à une journée.</p>
@@ -74,6 +95,14 @@ if (!article) {
     La lumière devient plus douce, les couleurs changent et, surtout, on respire enfin un peu.
   </p>
   <p>Ces vingt minutes sont souvent parmi mes préférées de toute la journée.</p>
+
+  <div class="article-reportage-grid article-reportage-grid--final" aria-label="Photos de mariage dans une lumière naturelle en Drôme">
+    {galleryImages.slice(3).map((image) => (
+      <figure class="article-reportage-grid__item">
+        <ImageSlot path={image.path} orientation={image.orientation} label={image.label} />
+      </figure>
+    ))}
+  </div>
 
   <h2>Garder de l'espace dans la journée</h2>
   <p>
@@ -161,3 +190,30 @@ if (!article) {
   </p>
   <p>Le reste, ce sera votre histoire.</p>
 </ArticleLayout>
+
+<style>
+  .article-reportage-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(0.85rem, 2vw, 1.5rem);
+    margin: clamp(2rem, 4.5vw, 3.75rem) 0 clamp(2.25rem, 5vw, 4rem);
+  }
+
+  .article-reportage-grid__item {
+    margin: 0;
+  }
+
+  .article-reportage-grid__item--wide {
+    grid-column: 1 / -1;
+  }
+
+  .article-reportage-grid--final {
+    max-width: min(100%, 42rem);
+  }
+
+  @media (max-width: 42rem) {
+    .article-reportage-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

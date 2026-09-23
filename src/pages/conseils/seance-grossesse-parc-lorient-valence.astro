@@ -1,0 +1,243 @@
+---
+import ImageSlot from "../../components/ImageSlot.astro";
+import ArticleLayout from "../../layouts/ArticleLayout.astro";
+import { adviceArticles } from "../../data/conseilsArticles";
+
+const article = adviceArticles.find((item) => item.slug === "seance-grossesse-parc-lorient-valence");
+
+if (!article) {
+  throw new Error("Article introuvable.");
+}
+
+const galleryImages = [
+  { filename: "Bérénice & Pierrick_15.jpg", orientation: "horizontal" },
+  { filename: "Bérénice & Pierrick_19.jpg", orientation: "vertical" },
+  { filename: "Bérénice & Pierrick_21.jpg", orientation: "vertical" },
+  { filename: "Bérénice & Pierrick_30.jpg", orientation: "vertical" },
+  { filename: "Bérénice & Pierrick_35.jpg", orientation: "horizontal" },
+  { filename: "Bérénice & Pierrick_40.jpg", orientation: "vertical" },
+  { filename: "Bérénice & Pierrick_49.jpg", orientation: "horizontal" },
+  { filename: "Bérénice & Pierrick_5.jpg", orientation: "horizontal" },
+  { filename: "Bérénice & Pierrick_55.jpg", orientation: "vertical" },
+  { filename: "Bérénice & Pierrick_78.jpg", orientation: "vertical" },
+  { filename: "Bérénice & Pierrick_8.jpg", orientation: "vertical" },
+].map((image, index) => ({
+  path: `src/images/conseils/seance-grossesse-parc-lorient-valence/${image.filename}`,
+  orientation: image.orientation,
+  label: `Reportage grossesse au Parc de Lorient près de Valence, image ${index + 1}.`,
+}));
+---
+
+<ArticleLayout article={article}>
+  <p>Il y a des endroits qui n'ont pas besoin d'en faire beaucoup.</p>
+
+  <p>Le Parc de Lorient fait partie de ceux-là.</p>
+
+  <p>
+    À quelques minutes de Valence, il suffit de s'éloigner un peu des chemins principaux pour
+    retrouver des arbres, de grandes étendues d'herbe et cette impression d'être beaucoup plus loin
+    de la ville qu'on ne l'est réellement.
+  </p>
+
+  <p>Cette séance grossesse a été réalisée au début du mois de février.</p>
+
+  <p>Pas de champs en fleurs, pas de couleurs flamboyantes, pas de coucher de soleil d'été.</p>
+
+  <p>Juste l'hiver.</p>
+
+  <p>Et finalement, c'est probablement ce qui me plaît le plus dans ces images.</p>
+
+  <h2>Photographier une grossesse en plein hiver</h2>
+
+  <p>
+    On imagine souvent une séance grossesse dans des herbes hautes, sous un soleil chaud, avec une
+    robe légère qui bouge dans le vent.
+  </p>
+
+  <p>C'est magnifique.</p>
+
+  <p>Mais ce n'est pas la seule manière de raconter cette période.</p>
+
+  <p>
+    En hiver, la nature devient beaucoup plus simple. Les couleurs disparaissent un peu, la lumière
+    est plus basse, les arbres se dessinent davantage et tout semble plus calme.
+  </p>
+
+  <p>Cela crée des photographies différentes. Plus sobres, parfois un peu plus intimes.</p>
+
+  <p>
+    Et surtout, on évite cette sensation de décor parfait dans lequel il faudrait absolument
+    correspondre à une certaine image de la grossesse.
+  </p>
+
+  <p>Le lieu devient simplement un cadre.</p>
+
+  <div class="article-reportage-grid" aria-label="Reportage grossesse au Parc de Lorient">
+    {galleryImages.slice(0, 4).map((image, index) => (
+      <figure class:list={["article-reportage-grid__item", index === 0 && "article-reportage-grid__item--wide"]}>
+        <ImageSlot
+          path={image.path}
+          orientation={image.orientation}
+          label={image.label}
+        />
+      </figure>
+    ))}
+  </div>
+
+  <h2>Le Parc de Lorient, près de Valence</h2>
+
+  <p>J'aime beaucoup travailler au Parc de Lorient pour cette raison.</p>
+
+  <p>
+    Il est suffisamment grand pour ne pas donner l'impression de refaire toujours les mêmes
+    photographies.
+  </p>
+
+  <p>
+    En quelques minutes, on peut passer d'un chemin entouré d'arbres à une zone complètement ouverte,
+    puis retrouver une lumière beaucoup plus douce à l'ombre.
+  </p>
+
+  <p>Je cherche rarement un emplacement précis avant une séance.</p>
+
+  <p>Je préfère regarder ce que la lumière fait ce jour-là.</p>
+
+  <p>
+    Une zone que j'utilise habituellement peut devenir complètement quelconque, alors qu'un endroit
+    auquel je n'avais jamais prêté attention fonctionne soudain parfaitement.
+  </p>
+
+  <p>C'est aussi ce qui rend chaque séance différente.</p>
+
+  <h2>Pas besoin de savoir poser</h2>
+
+  <p>C'est probablement la chose que l'on me dit le plus souvent avant une séance :</p>
+
+  <blockquote>
+    <p>Je ne suis pas à l'aise devant un appareil photo.</p>
+  </blockquote>
+
+  <p>
+    Et c'est justement pour ça que je ne construis pas mes séances autour d'une succession de poses.
+  </p>
+
+  <p>On marche.</p>
+
+  <p>On discute.</p>
+
+  <p>On s'arrête quand la lumière devient intéressante.</p>
+
+  <p>
+    Je donne parfois une direction, bien sûr, mais l'idée reste de laisser suffisamment de place aux
+    gestes naturels.
+  </p>
+
+  <p>Une main posée sur le ventre.</p>
+
+  <p>Un regard.</p>
+
+  <p>Une façon de marcher ensemble.</p>
+
+  <p>Des choses toutes simples qui racontent beaucoup mieux ce moment qu'une pose parfaitement exécutée.</p>
+
+  <div class="article-reportage-grid" aria-label="Moments naturels pendant une séance grossesse au Parc de Lorient">
+    {galleryImages.slice(4, 8).map((image, index) => (
+      <figure class:list={["article-reportage-grid__item", index === 3 && "article-reportage-grid__item--wide"]}>
+        <ImageSlot
+          path={image.path}
+          orientation={image.orientation}
+          label={image.label}
+        />
+      </figure>
+    ))}
+  </div>
+
+  <h2>Une séance à deux, mais aussi déjà un peu à trois</h2>
+
+  <p>
+    Lorsqu'un couple vient pour une séance grossesse, quelque chose me plaît particulièrement : les
+    photographies ne parlent finalement pas seulement de la grossesse.
+  </p>
+
+  <p>
+    Elles parlent aussi de cette période très particulière où la famille existe déjà, mais où tout
+    est encore en attente.
+  </p>
+
+  <p>
+    Quelques semaines ou quelques mois plus tard, ces images prennent déjà une autre valeur. Et avec
+    les années, probablement encore davantage.
+  </p>
+
+  <p>C'est aussi pour cette raison que je photographie beaucoup les moments entre deux images.</p>
+
+  <p>Quand on recommence à marcher.</p>
+
+  <p>Quand l'un des deux rigole.</p>
+
+  <p>Quand on remet une veste parce qu'en février, franchement, il ne fait pas toujours très chaud.</p>
+
+  <p>Ce sont rarement les photographies que l'on avait imaginées avant la séance.</p>
+
+  <p>Et pourtant, ce sont souvent celles que je préfère.</p>
+
+  <h2>Faire une séance grossesse près de Valence</h2>
+
+  <p>
+    Pour une séance photo grossesse autour de Valence, le Parc de Lorient est l'un des endroits que
+    je propose régulièrement.
+  </p>
+
+  <p>Il est facile d'accès, suffisamment vaste et surtout très différent selon les saisons.</p>
+
+  <p>En février, il donne quelque chose de très doux et épuré.</p>
+
+  <p>Au printemps, tout devient plus vert.</p>
+
+  <p>À l'automne, les couleurs changent complètement.</p>
+
+  <p>Je ne pense donc pas qu'il existe une « meilleure » saison pour y faire des photos.</p>
+
+  <p>Il existe surtout des ambiances différentes.</p>
+
+  <p>Et c'est précisément ce qui m'intéresse.</p>
+
+  <div class="article-reportage-grid article-reportage-grid--final" aria-label="Dernières images de séance grossesse au Parc de Lorient">
+    {galleryImages.slice(8).map((image) => (
+      <figure class="article-reportage-grid__item">
+        <ImageSlot path={image.path} orientation={image.orientation} label={image.label} />
+      </figure>
+    ))}
+  </div>
+
+  <p>
+    <a class="editorial-link" href="/grossesse/">DÉCOUVRIR LES SÉANCES GROSSESSE →</a>
+  </p>
+</ArticleLayout>
+
+<style>
+  .article-reportage-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(0.85rem, 2vw, 1.5rem);
+    margin: clamp(2rem, 4.5vw, 3.75rem) 0 clamp(2.25rem, 5vw, 4rem);
+  }
+
+  .article-reportage-grid__item {
+    margin: 0;
+  }
+
+  .article-reportage-grid__item--wide {
+    grid-column: 1 / -1;
+  }
+
+  .article-reportage-grid--final {
+    max-width: min(100%, 34rem);
+  }
+
+  @media (max-width: 42rem) {
+    .article-reportage-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

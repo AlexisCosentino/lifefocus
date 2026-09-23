@@ -1,0 +1,247 @@
+---
+import ImageSlot from "../../components/ImageSlot.astro";
+import ArticleLayout from "../../layouts/ArticleLayout.astro";
+import { adviceArticles } from "../../data/conseilsArticles";
+
+const article = adviceArticles.find((item) => item.slug === "seance-famille-tournesols-valence");
+
+if (!article) {
+  throw new Error("Article introuvable.");
+}
+
+const galleryImages = [
+  "Karlijn_22.jpg",
+  "Karlijn_31.jpg",
+  "Karlijn_34.jpg",
+  "Karlijn_39.jpg",
+  "Karlijn_40.jpg",
+  "Karlijn_5.jpg",
+  "Karlijn_58.jpg",
+  "Karlijn_60.jpg",
+  "Karlijn_65.jpg",
+  "Karlijn_66.jpg",
+  "Karlijn_70.jpg",
+].map((filename, index) => ({
+  path: `src/images/conseils/seance-famille-tournesols-valence/${filename}`,
+  orientation: "horizontal",
+  label: `Séance famille dans les tournesols et les lavandes près de Valence, image ${index + 1}.`,
+}));
+---
+
+<ArticleLayout article={article}>
+  <p>Ils étaient venus des Pays-Bas pour quelques jours de vacances dans la Drôme.</p>
+
+  <p>Quelques baignades à Crest, du soleil, du temps ensemble.</p>
+
+  <p>
+    Et puis un soir, nous nous sommes retrouvés entre les tournesols et les lavandes, quelque part
+    autour de Valence.
+  </p>
+
+  <p>
+    Il faisait encore chaud, la lumière commençait doucement à descendre, et les couleurs de fin
+    d'été prenaient toute la place : le jaune des tournesols, le violet plus doux des lavandes, cette
+    lumière dorée que l'on ne retrouve que quelques semaines dans l'année.
+  </p>
+
+  <p>C'était une séance famille très simple.</p>
+
+  <p>Un couple, leur fille, et presque rien d'autre.</p>
+
+  <h2>Une séance qui ressemble aux vacances</h2>
+
+  <p>
+    Ce que j'aime dans les séances famille, c'est quand elles ne ressemblent pas vraiment à une
+    séance photo.
+  </p>
+
+  <p>On marche.</p>
+
+  <p>On discute.</p>
+
+  <p>Les enfants explorent.</p>
+
+  <p>On s'arrête quand quelque chose se passe.</p>
+
+  <p>
+    Ce soir-là, leur fille avait cette énergie très particulière des enfants en vacances. Elle
+    courait entre les fleurs, revenait vers ses parents, repartait quelques mètres plus loin.
+  </p>
+
+  <p>Je n'avais pas besoin de créer énormément de situations.</p>
+
+  <p>Il suffisait surtout de la laisser faire.</p>
+
+  <p>Les images sont venues comme ça.</p>
+
+  <div class="article-reportage-grid" aria-label="Séance famille dans les tournesols et les lavandes près de Valence">
+    {galleryImages.slice(0, 4).map((image, index) => (
+      <figure class:list={["article-reportage-grid__item", index === 0 && "article-reportage-grid__item--wide"]}>
+        <ImageSlot
+          path={image.path}
+          orientation={image.orientation}
+          label={image.label}
+        />
+      </figure>
+    ))}
+  </div>
+
+  <h2>Photographier une famille sans chercher la photo parfaite</h2>
+
+  <p>Je donne évidemment quelques indications pendant une séance.</p>
+
+  <p>Où se placer.</p>
+
+  <p>Où regarder.</p>
+
+  <p>Parfois ralentir un mouvement ou recommencer quelque chose.</p>
+
+  <p>Mais je ne cherche pas à obtenir vingt fois la même image parfaitement composée.</p>
+
+  <p>Ce qui m'intéresse davantage, c'est ce qui se passe juste avant ou juste après.</p>
+
+  <p>Une enfant qui se serre contre sa mère.</p>
+
+  <p>Un regard entre les parents.</p>
+
+  <p>Une main qui se pose naturellement sur une épaule.</p>
+
+  <p>Les moments où l'on oublie un peu que je suis là.</p>
+
+  <p>Ce sont souvent ces photographies-là qui restent.</p>
+
+  <h2>Les tournesols et les lavandes au coucher du soleil</h2>
+
+  <p>Les champs de tournesols sont évidemment magnifiques à photographier.</p>
+
+  <p>Les lavandes apportent autre chose.</p>
+
+  <p>Une couleur plus calme.</p>
+
+  <p>Une sensation plus douce, presque plus méditerranéenne.</p>
+
+  <p>Mais pour les tournesols comme pour les lavandes, la période reste courte.</p>
+
+  <p>
+    Quelques semaines seulement pendant lesquelles ils transforment complètement les paysages autour
+    de Valence et dans la Drôme.
+  </p>
+
+  <p>En fin de journée, la lumière devient particulièrement intéressante.</p>
+
+  <p>Elle traverse les fleurs, accroche les cheveux, crée des ombres longues.</p>
+
+  <p>Le jaune des tournesols devient plus chaud, le violet des lavandes gagne en profondeur.</p>
+
+  <p>Et quand le soleil descend suffisamment, tout devient presque silencieux.</p>
+
+  <p>
+    Pour une séance famille, ces deux décors restent très simples, mais ils donnent immédiatement une
+    impression d'été dans la Drôme.
+  </p>
+
+  <div class="article-reportage-grid" aria-label="Photos de famille au coucher du soleil dans les tournesols et les lavandes">
+    {galleryImages.slice(4, 8).map((image, index) => (
+      <figure class:list={["article-reportage-grid__item", index === 3 && "article-reportage-grid__item--wide"]}>
+        <ImageSlot
+          path={image.path}
+          orientation={image.orientation}
+          label={image.label}
+        />
+      </figure>
+    ))}
+  </div>
+
+  <h2>Une séance famille près de Valence</h2>
+
+  <p>
+    Je travaille régulièrement autour de Valence, Romans-sur-Isère et plus largement dans la Drôme.
+  </p>
+
+  <p>Pour les séances famille, je préfère généralement les endroits ouverts et naturels.</p>
+
+  <p>Pas forcément les lieux les plus connus.</p>
+
+  <p>Un champ de tournesols.</p>
+
+  <p>Un coin de lavandes.</p>
+
+  <p>Un chemin.</p>
+
+  <p>Un coin de rivière.</p>
+
+  <p>Une prairie.</p>
+
+  <p>Ce qui compte surtout, c'est la lumière et ce que l'endroit permet de faire ensemble.</p>
+
+  <p>Une famille avec de jeunes enfants n'a pas besoin d'un décor spectaculaire.</p>
+
+  <p>
+    Elle a surtout besoin d'un espace où les enfants peuvent bouger, courir, jouer et oublier un peu
+    l'appareil photo.
+  </p>
+
+  <h2>Garder une trace d'un moment très simple</h2>
+
+  <p>Ce reportage ne raconte pas un événement particulier.</p>
+
+  <p>Pas de mariage.</p>
+
+  <p>Pas d'anniversaire.</p>
+
+  <p>Pas de grande occasion.</p>
+
+  <p>Juste quelques jours de vacances en famille dans la Drôme.</p>
+
+  <p>Et finalement, c'est probablement ce qui lui donne de la valeur.</p>
+
+  <p>Parce que dans quelques années, cette petite fille aura grandi.</p>
+
+  <p>
+    Ses parents se souviendront peut-être des baignades à Crest, de la chaleur de cet été, du voyage
+    depuis les Pays-Bas.
+  </p>
+
+  <p>Et il restera aussi ces quelques images prises un soir, entre les tournesols et les lavandes.</p>
+
+  <p>Parfois, ça suffit largement.</p>
+
+  <div class="article-reportage-grid article-reportage-grid--final" aria-label="Dernières images de séance famille dans les tournesols et les lavandes">
+    {galleryImages.slice(8).map((image) => (
+      <figure class="article-reportage-grid__item">
+        <ImageSlot path={image.path} orientation={image.orientation} label={image.label} />
+      </figure>
+    ))}
+  </div>
+
+  <p>
+    <a class="editorial-link" href="/famille/">DÉCOUVRIR LES SÉANCES FAMILLE →</a>
+  </p>
+</ArticleLayout>
+
+<style>
+  .article-reportage-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(0.85rem, 2vw, 1.5rem);
+    margin: clamp(2rem, 4.5vw, 3.75rem) 0 clamp(2.25rem, 5vw, 4rem);
+  }
+
+  .article-reportage-grid__item {
+    margin: 0;
+  }
+
+  .article-reportage-grid__item--wide {
+    grid-column: 1 / -1;
+  }
+
+  .article-reportage-grid--final {
+    max-width: min(100%, 34rem);
+  }
+
+  @media (max-width: 42rem) {
+    .article-reportage-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

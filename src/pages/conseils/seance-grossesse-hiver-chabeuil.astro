@@ -1,0 +1,257 @@
+---
+import ImageSlot from "../../components/ImageSlot.astro";
+import ArticleLayout from "../../layouts/ArticleLayout.astro";
+import { adviceArticles } from "../../data/conseilsArticles";
+
+const article = adviceArticles.find((item) => item.slug === "seance-grossesse-hiver-chabeuil");
+
+if (!article) {
+  throw new Error("Article introuvable.");
+}
+
+const galleryImages = [
+  { filename: "Joffrey & Lucie_17.jpg", orientation: "horizontal" },
+  { filename: "Joffrey & Lucie_11.jpg", orientation: "vertical" },
+  { filename: "Joffrey & Lucie_19.jpg", orientation: "vertical" },
+  { filename: "Joffrey & Lucie_24.jpg", orientation: "horizontal" },
+  { filename: "Joffrey & Lucie_6.jpg", orientation: "vertical" },
+  { filename: "Joffrey & Lucie_5.jpg", orientation: "horizontal" },
+  { filename: "Joffrey & Lucie_41.jpg", orientation: "vertical" },
+  { filename: "Joffrey & Lucie_35.jpg", orientation: "vertical" },
+  { filename: "Joffrey & Lucie_26.jpg", orientation: "horizontal" },
+].map((image, index) => ({
+  path: `src/images/conseils/seance-grossesse-hiver-chabeuil/${image.filename}`,
+  orientation: image.orientation,
+  label: `Reportage grossesse en hiver près de Chabeuil, image ${index + 1}.`,
+}));
+---
+
+<ArticleLayout article={article}>
+  <p>Il faisait vraiment froid.</p>
+
+  <p>Pas le petit froid agréable d'une matinée d'hiver.</p>
+
+  <p>
+    Le genre de froid où l'herbe craque légèrement sous les chaussures et où chaque respiration
+    devient visible quelques secondes.
+  </p>
+
+  <p>Ce matin-là, près de Chabeuil, tout était recouvert de gel.</p>
+
+  <p>Les chemins.</p>
+
+  <p>Les champs.</p>
+
+  <p>Les petites branches.</p>
+
+  <p>Même les couleurs semblaient avoir disparu du paysage.</p>
+
+  <p>Toutes sauf une.</p>
+
+  <p>Une robe rouge.</p>
+
+  <h2>Quand la météo décide du décor</h2>
+
+  <p>Je crois beaucoup au fait de ne pas chercher à tout contrôler pendant une séance photo.</p>
+
+  <p>On peut choisir un lieu.</p>
+
+  <p>Une heure.</p>
+
+  <p>Une tenue.</p>
+
+  <p>Mais la lumière, le vent, les nuages ou le froid feront toujours un peu ce qu'ils veulent.</p>
+
+  <p>Et parfois, c'est exactement ce qui crée les images les plus intéressantes.</p>
+
+  <p>Ce matin-là, le gel avait complètement transformé un endroit pourtant assez simple.</p>
+
+  <p>Les tons étaient presque monochromes.</p>
+
+  <p>Le paysage tirait vers le blanc, le gris et le brun.</p>
+
+  <p>Et au milieu de tout ça, cette robe rouge devenait presque irréelle.</p>
+
+  <p>Je n'aurais probablement jamais imaginé ce contraste en préparant la séance.</p>
+
+  <p>C'est justement pour ça que je l'aime.</p>
+
+  <div class="article-reportage-grid" aria-label="Reportage grossesse en hiver près de Chabeuil">
+    {galleryImages.slice(0, 4).map((image, index) => (
+      <figure class:list={["article-reportage-grid__item", index === 0 && "article-reportage-grid__item--wide"]}>
+        <ImageSlot
+          path={image.path}
+          orientation={image.orientation}
+          label={image.label}
+        />
+      </figure>
+    ))}
+  </div>
+
+  <h2>Une séance grossesse en hiver dans la Drôme</h2>
+
+  <p>On associe facilement les séances grossesse à l'été ou au printemps.</p>
+
+  <p>Pourtant, l'hiver offre quelque chose que les autres saisons ont beaucoup moins : du silence.</p>
+
+  <p>Les paysages sont plus dépouillés.</p>
+
+  <p>Il y a moins d'éléments dans l'image.</p>
+
+  <p>On peut alors vraiment concentrer le regard sur une silhouette, un geste ou une couleur.</p>
+
+  <p>
+    Sur cette séance près de Chabeuil, je n'avais pas besoin de chercher énormément de décors.
+  </p>
+
+  <p>Le gel faisait déjà tout le travail.</p>
+
+  <p>Il dessinait les contours du paysage et transformait la lumière.</p>
+
+  <p>Il suffisait surtout de ne pas en rajouter.</p>
+
+  <h2>Le rouge au milieu de l'hiver</h2>
+
+  <p>La robe a évidemment beaucoup compté dans cette série.</p>
+
+  <p>Dans un paysage aussi froid et désaturé, le rouge devient immédiatement le centre de l'image.</p>
+
+  <p>Mais ce que j'aime, c'est que le résultat ne paraît pas artificiel.</p>
+
+  <p>La robe ne cherche pas à imiter la nature autour d'elle.</p>
+
+  <p>Au contraire.</p>
+
+  <p>Elle tranche complètement.</p>
+
+  <p>
+    Et parfois, une séance fonctionne justement parce qu'un élément ne semble pas appartenir au
+    décor.
+  </p>
+
+  <p>Je trouve même que cela correspond assez bien à la grossesse.</p>
+
+  <p>
+    Le paysage continue son rythme habituel, alors qu'au milieu de tout ça quelque chose de
+    complètement nouveau est en train d'arriver.
+  </p>
+
+  <div class="article-reportage-grid" aria-label="Robe rouge et paysage gelé pendant une séance grossesse">
+    {galleryImages.slice(4, 8).map((image, index) => (
+      <figure class:list={["article-reportage-grid__item", index === 3 && "article-reportage-grid__item--wide"]}>
+        <ImageSlot
+          path={image.path}
+          orientation={image.orientation}
+          label={image.label}
+        />
+      </figure>
+    ))}
+  </div>
+
+  <h2>Il n'y a pas de mauvaise saison</h2>
+
+  <p>Je le répète souvent lorsqu'on me demande quand organiser une séance grossesse :</p>
+
+  <p>il n'existe pas vraiment de saison parfaite.</p>
+
+  <p>Une prairie en juin sera magnifique.</p>
+
+  <p>Des arbres orange en octobre aussi.</p>
+
+  <p>
+    Mais un champ recouvert de gel en plein hiver peut raconter quelque chose de totalement
+    différent.
+  </p>
+
+  <p>Ce qui compte davantage, c'est l'envie que vous avez pour vos images.</p>
+
+  <p>Certaines personnes veulent quelque chose de très lumineux et chaleureux.</p>
+
+  <p>D'autres préfèrent une atmosphère plus brute.</p>
+
+  <p>Et parfois, on part simplement avec ce que la météo nous donne.</p>
+
+  <p>C'est souvent là que les photographies deviennent les plus personnelles.</p>
+
+  <h2>Photographier sans transformer le moment</h2>
+
+  <p>Même avec une robe spectaculaire et un paysage aussi particulier, mon approche reste la même.</p>
+
+  <p>Je ne cherche pas à construire une image parfaite autour de chaque mouvement.</p>
+
+  <p>Je préfère partir de ce qui existe déjà.</p>
+
+  <p>Marcher quelques mètres.</p>
+
+  <p>S'arrêter.</p>
+
+  <p>Profiter d'une lumière.</p>
+
+  <p>Laisser les mains trouver naturellement leur place.</p>
+
+  <p>Il y a évidemment quelques indications lorsque c'est nécessaire.</p>
+
+  <p>
+    Mais l'objectif reste toujours que la photographie ressemble davantage à la personne devant moi
+    qu'à une photographie de grossesse vue cent fois ailleurs.
+  </p>
+
+  <h2>Une séance grossesse autour de Chabeuil</h2>
+
+  <p>Chabeuil et ses alentours offrent énormément de possibilités pour une séance grossesse.</p>
+
+  <p>
+    En quelques kilomètres, on trouve des paysages ouverts, de la campagne et les premières
+    perspectives vers le Vercors.
+  </p>
+
+  <p>Et surtout, les lieux changent énormément au fil de l'année.</p>
+
+  <p>Cette séance en est probablement le meilleur exemple.</p>
+
+  <p>Sans ce matin de gel, les photographies auraient été complètement différentes.</p>
+
+  <p>
+    C'est aussi ce que j'aime dans les séances réalisées dehors : on ne peut jamais vraiment
+    reproduire deux fois la même chose.
+  </p>
+
+  <div class="article-reportage-grid article-reportage-grid--final" aria-label="Dernières images de séance grossesse près de Chabeuil">
+    {galleryImages.slice(8).map((image) => (
+      <figure class="article-reportage-grid__item">
+        <ImageSlot path={image.path} orientation={image.orientation} label={image.label} />
+      </figure>
+    ))}
+  </div>
+
+  <p>
+    <a class="editorial-link" href="/grossesse/">DÉCOUVRIR MON APPROCHE DES SÉANCES GROSSESSE →</a>
+  </p>
+</ArticleLayout>
+
+<style>
+  .article-reportage-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(0.85rem, 2vw, 1.5rem);
+    margin: clamp(2rem, 4.5vw, 3.75rem) 0 clamp(2.25rem, 5vw, 4rem);
+  }
+
+  .article-reportage-grid__item {
+    margin: 0;
+  }
+
+  .article-reportage-grid__item--wide {
+    grid-column: 1 / -1;
+  }
+
+  .article-reportage-grid--final {
+    max-width: min(100%, 34rem);
+  }
+
+  @media (max-width: 42rem) {
+    .article-reportage-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
