@@ -5,6 +5,8 @@ const CONTACT_TO = 'contact@lifefocus.fr';
 const CONTACT_FROM = 'noreply@lifefocus.fr';
 const REDIRECT_SUCCESS = '/contact/?status=success';
 const REDIRECT_ERROR = '/contact/?status=error';
+const REDIRECT_SUCCESS_EN = '/en/wedding-photographer-drome-provence/?status=success#contact';
+const REDIRECT_ERROR_EN = '/en/wedding-photographer-drome-provence/?status=error#contact';
 const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 const RATE_LIMIT_WINDOW_SECONDS = 600;
 const RATE_LIMIT_MAX_REQUESTS = 5;
@@ -17,7 +19,19 @@ function redirect_to(string $url): void
 
 function reject(bool $silentSuccess = false): void
 {
-    redirect_to($silentSuccess ? REDIRECT_SUCCESS : REDIRECT_ERROR);
+    $language = $GLOBALS['contact_language'] ?? 'fr';
+    redirect_to(contact_redirect_url($silentSuccess ? 'success' : 'error', is_string($language) ? $language : 'fr'));
+}
+
+function contact_redirect_url(string $status, string $language): string
+{
+    $isEnglish = $language === 'en';
+
+    if ($status === 'success') {
+        return $isEnglish ? REDIRECT_SUCCESS_EN : REDIRECT_SUCCESS;
+    }
+
+    return $isEnglish ? REDIRECT_ERROR_EN : REDIRECT_ERROR;
 }
 
 function post_string(string $key, int $maxLength): ?string
@@ -247,6 +261,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     reject();
 }
 
+$languageRaw = post_string('lang', 5);
+$acceptedLanguages = ['fr', 'en'];
+$contactLanguage = in_array($languageRaw, $acceptedLanguages, true) ? $languageRaw : 'fr';
+$GLOBALS['contact_language'] = $contactLanguage;
+
 $honeypot = post_string('website', 200);
 if ($honeypot === null || trim($honeypot) !== '') {
     reject(true);
@@ -272,6 +291,14 @@ $sessionLabels = [
     'autre' => 'Autre',
 ];
 
+$sessionLabelsEn = [
+    'mariage' => 'Wedding',
+    'grossesse' => 'Pregnancy',
+    'naissance' => 'Newborn',
+    'famille' => 'Family',
+    'autre' => 'Other',
+];
+
 $nameRaw = post_string('name', 120);
 $emailRaw = post_string('email', 160);
 $phoneRaw = post_string('phone', 40);
@@ -279,11 +306,12 @@ $sessionTypeRaw = post_string('session_type', 30);
 $eventDateRaw = post_string('event_date', 20);
 $locationRaw = post_string('location', 160);
 $messageRaw = post_string('message', 4000);
+$phoneRequired = $contactLanguage !== 'en';
 
 if (
     $nameRaw === null ||
     $emailRaw === null ||
-    $phoneRaw === null ||
+    ($phoneRequired && $phoneRaw === null) ||
     $sessionTypeRaw === null ||
     $eventDateRaw === null ||
     $locationRaw === null ||
@@ -297,7 +325,7 @@ if (
 $name = clean_text($nameRaw);
 $emailCandidate = trim($emailRaw);
 $email = filter_var($emailCandidate, FILTER_VALIDATE_EMAIL);
-$phone = clean_text($phoneRaw);
+$phone = $phoneRaw === null ? '' : clean_text($phoneRaw);
 $sessionType = clean_text($sessionTypeRaw);
 $eventDate = clean_text($eventDateRaw);
 $location = clean_text($locationRaw);
@@ -307,8 +335,8 @@ if (
     $name === '' ||
     !is_valid_name($name) ||
     $email === false ||
-    $phone === '' ||
-    !is_valid_phone($phone) ||
+    ($phoneRequired && $phone === '') ||
+    ($phone !== '' && !is_valid_phone($phone)) ||
     $message === '' ||
     strlen($message) < 10 ||
     !array_key_exists($sessionType, $sessionLabels)
@@ -330,15 +358,19 @@ if (
 }
 
 $sessionLabel = $sessionLabels[$sessionType];
-$subject = sprintf('Nouvelle demande Life Focus - %s', $sessionLabel);
-$clientSubject = 'Merci pour votre message';
+$sessionLabelForClient = $contactLanguage === 'en' ? $sessionLabelsEn[$sessionType] : $sessionLabel;
+$subject = $contactLanguage === 'en'
+    ? sprintf('New Life Focus enquiry - %s', $sessionLabelForClient)
+    : sprintf('Nouvelle demande Life Focus - %s', $sessionLabel);
+$clientSubject = $contactLanguage === 'en' ? 'Thank you for your message' : 'Merci pour votre message';
 
 $body = implode("\n", [
-    'Nouvelle demande depuis le site Life Focus',
+    $contactLanguage === 'en' ? 'New enquiry from the Life Focus website' : 'Nouvelle demande depuis le site Life Focus',
+    'Langue : ' . ($contactLanguage === 'en' ? 'Anglais' : 'Français'),
     '',
     'Nom et prénom : ' . $name,
     'Email : ' . $email,
-    'Téléphone : ' . $phone,
+    'Téléphone : ' . ($phone !== '' ? $phone : 'Non renseigné'),
     'Type de séance : ' . $sessionLabel,
     'Date de la séance / événement : ' . ($eventDate !== '' ? $eventDate : 'Non renseignée'),
     'Lieu : ' . ($location !== '' ? $location : 'Non renseigné'),
@@ -350,25 +382,45 @@ $body = implode("\n", [
     'Envoyé depuis lifefocus.fr',
 ]);
 
-$clientBody = implode("\n", [
-    'Bonjour ' . first_name_from($name) . ',',
-    '',
-    'Merci pour votre message.',
-    '',
-    'J’ai bien reçu votre demande et je reviendrai vers vous rapidement pour échanger autour de votre projet.',
-    '',
-    'Récapitulatif de votre demande',
-    '',
-    'Type de séance : ' . $sessionLabel,
-    'Date de la séance / événement : ' . ($eventDate !== '' ? $eventDate : 'Non renseignée'),
-    'Lieu : ' . ($location !== '' ? $location : 'Non renseigné'),
-    '',
-    'Votre message :',
-    $message,
-    '',
-    'À très bientôt,',
-    'Alexis - Life Focus',
-]);
+$clientBody = $contactLanguage === 'en'
+    ? implode("\n", [
+        'Hello ' . first_name_from($name) . ',',
+        '',
+        'Thank you for your message.',
+        '',
+        'I have received your enquiry and will get back to you soon so we can talk about your wedding.',
+        '',
+        'Summary of your enquiry',
+        '',
+        'Session type: ' . $sessionLabelForClient,
+        'Date: ' . ($eventDate !== '' ? $eventDate : 'Not provided'),
+        'Location: ' . ($location !== '' ? $location : 'Not provided'),
+        '',
+        'Your message:',
+        $message,
+        '',
+        'Speak soon,',
+        'Alexis - Life Focus',
+    ])
+    : implode("\n", [
+        'Bonjour ' . first_name_from($name) . ',',
+        '',
+        'Merci pour votre message.',
+        '',
+        'J’ai bien reçu votre demande et je reviendrai vers vous rapidement pour échanger autour de votre projet.',
+        '',
+        'Récapitulatif de votre demande',
+        '',
+        'Type de séance : ' . $sessionLabel,
+        'Date de la séance / événement : ' . ($eventDate !== '' ? $eventDate : 'Non renseignée'),
+        'Lieu : ' . ($location !== '' ? $location : 'Non renseigné'),
+        '',
+        'Votre message :',
+        $message,
+        '',
+        'À très bientôt,',
+        'Alexis - Life Focus',
+    ]);
 
 $headers = [
     'From: Life Focus <' . CONTACT_FROM . '>',
@@ -392,4 +444,4 @@ if ($sent) {
     mail($email, encode_subject($clientSubject), $clientBody, implode("\r\n", $clientHeaders));
 }
 
-redirect_to($sent ? REDIRECT_SUCCESS : REDIRECT_ERROR);
+redirect_to(contact_redirect_url($sent ? 'success' : 'error', $contactLanguage));

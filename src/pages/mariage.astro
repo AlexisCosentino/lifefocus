@@ -131,6 +131,10 @@ const structuredData = {
   title={pageTitle}
   description={pageDescription}
   canonicalUrl="https://www.lifefocus.fr/mariage/"
+  alternateLinks={[
+    { hreflang: "fr", href: "https://www.lifefocus.fr/mariage/" },
+    { hreflang: "en", href: "https://www.lifefocus.fr/en/wedding-photographer-drome-provence/" },
+  ]}
   structuredData={structuredData}
 >
   <div class="wedding-page">
@@ -231,6 +235,18 @@ const structuredData = {
 
     <WeddingPackages />
     <WeddingGallery images={galleryImages} galleryFolder="src/images/mariage/gallery" />
+
+    <section class="wedding-english page-shell" aria-labelledby="english-wedding-title">
+      <p class="editorial-label">ENGLISH</p>
+      <h2 id="english-wedding-title">Planning your wedding from abroad?</h2>
+      <p>
+        I have created a dedicated English page for couples getting married in Drôme or Provence,
+        with photographs, collections and a contact form in English.
+      </p>
+      <a class="editorial-link" href="/en/wedding-photographer-drome-provence/"
+        >WEDDING PHOTOGRAPHY IN ENGLISH →</a
+      >
+    </section>
 
     <section class="wedding-local-guides page-shell" aria-labelledby="local-guides-title">
       <p class="editorial-label">REPÈRES LOCAUX</p>
@@ -490,10 +506,31 @@ const structuredData = {
 
   .wedding-page :global(.wedding-packages),
   .wedding-page :global(.wedding-faq),
+  .wedding-english,
   .wedding-local-guides,
   .wedding-contact {
     max-width: var(--service-narrow);
     padding-block: var(--space-lg);
+  }
+
+  .wedding-english {
+    display: grid;
+    gap: var(--space-xs);
+    border-top: 1px solid var(--color-line);
+  }
+
+  .wedding-english h2 {
+    max-width: 13ch;
+    font-family: var(--font-editorial);
+    font-size: clamp(2.15rem, 1.4rem + 2.35vw, 4.25rem);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 0.98;
+  }
+
+  .wedding-english p:not(.editorial-label) {
+    max-width: var(--reading-max);
+    color: var(--color-muted);
   }
 
   .wedding-local-guides {

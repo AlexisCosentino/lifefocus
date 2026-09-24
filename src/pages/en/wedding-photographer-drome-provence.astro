@@ -1,0 +1,993 @@
+﻿---
+import EditorialGallery from "../../components/EditorialGallery.astro";
+import ImageSlot from "../../components/ImageSlot.astro";
+import { weddingIncludedEn, weddingPackages } from "../../data/weddingCollections";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const pageTitle = "Wedding Photographer in Drôme & Provence | Life Focus";
+const pageDescription =
+  "English-friendly wedding photography in Drôme and Provence by Alexis Cosentino, Life Focus, based near Valence and Romans-sur-Isère.";
+const canonicalUrl = "https://www.lifefocus.fr/en/wedding-photographer-drome-provence/";
+const turnstileSiteKey = import.meta.env.TURNSTILE_SITE_KEY ?? "";
+const whatsappHref =
+  "https://wa.me/33698900917?text=Hello%20Alexis%2C%20we%20are%20planning%20a%20wedding%20in%20Dr%C3%B4me%20or%20Provence%20and%20found%20your%20English%20wedding%20page.";
+const englishWeddingPackages = weddingPackages.filter((item) =>
+  ["06", "09", "12"].includes(item.durationHours),
+);
+const formatEnglishPrice = (price: string) => {
+  const amount = Number(price.replace(/[^\d]/g, ""));
+  return Number.isFinite(amount) ? `€${amount.toLocaleString("en-US")}` : price;
+};
+const realWeddingStoryHref =
+  "https://www.mariages.net/photo-mariage/life-focus-photographe--e180967/vrais-mariages/65010";
+
+const galleryImages = [
+  {
+    slotPath: "src/images/mariage/gallery/hero.jpg",
+    slotOrientation: "horizontal" as const,
+    size: "wide" as const,
+    alt: "Bride and groom photographed outdoors during a wedding reportage in France.",
+  },
+  {
+    slotPath: "src/images/mariage/gallery/Louise & Alexandre_47.jpg",
+    slotOrientation: "vertical" as const,
+    size: "vertical" as const,
+    alt: "Black and white wedding portrait with a natural and quiet mood.",
+  },
+  {
+    slotPath: "src/images/mariage/gallery/Marine & Mickael_433.jpg",
+    slotOrientation: "horizontal" as const,
+    size: "small" as const,
+    alt: "Wedding couple and guests photographed during a lively moment of the day.",
+  },
+  {
+    slotPath: "src/images/mariage/gallery/Olivia & Aurelien_493.jpg",
+    slotOrientation: "vertical" as const,
+    size: "vertical" as const,
+    alt: "Bride and groom walking together in warm evening light.",
+  },
+  {
+    slotPath: "src/images/mariage/gallery/Océane & Greg_565.jpg",
+    slotOrientation: "horizontal" as const,
+    size: "wide" as const,
+    alt: "Wedding reception photographed with guests and atmosphere.",
+  },
+  {
+    slotPath: "src/images/mariage/gallery/Krissmed & Eric_17.jpg",
+    slotOrientation: "horizontal" as const,
+    size: "small" as const,
+    alt: "Emotional wedding moment photographed in a reportage style.",
+  },
+  {
+    slotPath: "src/images/mariage/gallery/Céline & Mathieu_494.jpg",
+    slotOrientation: "vertical" as const,
+    size: "vertical" as const,
+    alt: "Vertical wedding photograph of a couple in a natural setting.",
+  },
+  {
+    slotPath: "src/images/mariage/gallery/yes.jpg",
+    slotOrientation: "horizontal" as const,
+    size: "small" as const,
+    alt: "Joyful wedding celebration photographed on the dance floor.",
+  },
+  {
+    slotPath: "src/images/mariage/gallery/Aubin & Pauline_95.jpg",
+    slotOrientation: "horizontal" as const,
+    size: "wide" as const,
+    alt: "Wedding couple photographed outdoors with a soft documentary approach.",
+  },
+];
+
+const faqs = [
+  {
+    question: "Can we communicate in English?",
+    answer:
+      "Yes. We can discuss your plans in English before the wedding and on the day itself.",
+  },
+  {
+    question: "Can we plan everything remotely?",
+    answer:
+      "Yes. We can prepare the photography by email, phone or video call. Your date, venue and a rough outline of the day are enough to start the conversation.",
+  },
+  {
+    question: "Where do you photograph weddings?",
+    answer:
+      "I'm based in Romans-sur-Isere, near Valence, and photograph weddings across Drome and Provence. Tell me where you're getting married and I'll confirm the travel arrangements in your quote.",
+  },
+  {
+    question: "How do we enquire about our date?",
+    answer:
+      "Use the form below to share your date, venue and a few details about your plans. I'll check my availability and get back to you so we can discuss the photography and the next steps.",
+  },
+  {
+    question: "What if we feel uncomfortable in front of the camera?",
+    answer:
+      "You don't need to know how to pose. For couple portraits, I'll give you simple guidance and time to settle in. For the rest of the day, you can focus on being with your guests while I photograph what unfolds.",
+  },
+  {
+    question: "How and when will we receive our photographs?",
+    answer:
+      "Within four weeks of your wedding, you'll receive your selected and individually edited photographs in a private online gallery. You'll be able to download them in high resolution and share the gallery with family and friends.",
+  },
+  {
+    question: "How many photographs will we receive?",
+    answer:
+      "There is no cap on the number of photographs delivered. You'll receive every image I select from your wedding, individually edited. The final number depends on the length of coverage and how your day unfolds.",
+  },
+];
+
+const structuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": canonicalUrl,
+    url: canonicalUrl,
+    name: pageTitle,
+    description: pageDescription,
+    inLanguage: "en",
+    isPartOf: {
+      "@id": "https://www.lifefocus.fr/#website",
+    },
+    about: {
+      "@id": "https://www.lifefocus.fr/#life-focus",
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Wedding photography in Drôme and Provence",
+    serviceType: "Wedding photography",
+    areaServed: ["Drôme", "Provence", "Valence", "Romans-sur-Isère"],
+    provider: {
+      "@id": "https://www.lifefocus.fr/#life-focus",
+    },
+    inLanguage: "en",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    inLanguage: "en",
+    mainEntity: faqs.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  },
+];
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl={canonicalUrl}
+  lang="en"
+  ogLocale="en_US"
+  alternateLinks={[
+    { hreflang: "en", href: canonicalUrl },
+    { hreflang: "fr", href: "https://www.lifefocus.fr/mariage/" },
+  ]}
+  structuredData={structuredData}
+>
+  <article class="en-wedding">
+    <section class="en-hero" aria-labelledby="page-title">
+      <div class="en-hero__inner">
+        <figure class="en-hero__image">
+          <ImageSlot
+            path="src/images/mariage/hero-main.jpg"
+            orientation="horizontal"
+            loading="eager"
+            quality={92}
+            sizes="(min-width: 72rem) 58vw, calc(100vw - (2 * var(--page-padding)))"
+            label="Bride and groom photographed outdoors during a natural wedding reportage."
+          />
+        </figure>
+
+        <div class="en-hero__copy">
+          <p class="editorial-label">LIFE FOCUS · WEDDINGS IN ENGLISH</p>
+          <h1 id="page-title">Wedding photographer in Drôme &amp; Provence</h1>
+          <p>
+            I'm Alexis, a wedding photographer based in Romans-sur-Isere, near Valence. I photograph
+            weddings across Drome and Provence, with an eye for the people, the atmosphere and the
+            moments you might otherwise miss. My approach combines documentary photography with
+            gently guided portraits, so you can enjoy your day and feel comfortable in front of the
+            camera.
+          </p>
+          <div class="en-hero__actions">
+            <a class="editorial-link" href="#photos">Explore the photographs</a>
+            <a class="editorial-link" href="#contact">Tell me about your wedding</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="photos" class="en-section en-gallery-anchor">
+      <EditorialGallery
+        eyebrow="01 / WEDDING PORTFOLIO"
+        title="Your people. Your moments. Your day."
+        titleId="photos-title"
+        images={galleryImages}
+      />
+    </section>
+
+    <section id="about" class="en-about page-shell en-section" aria-labelledby="about-title">
+      <div class="en-about__copy">
+        <p class="editorial-label">02 / MEET ALEXIS</p>
+        <h2 id="about-title">A calm presence, space to be yourselves.</h2>
+        <p>
+          I'm Alexis, the photographer behind Life Focus. Since 2018, I've been photographing
+          weddings and families, looking for the expressions, gestures and connections that make each
+          story personal.
+        </p>
+        <p>
+          On your wedding day, I stay attentive without asking you to perform for the camera. I'll
+          offer gentle guidance for portraits, then give you room to enjoy your guests and everything
+          happening around you.
+        </p>
+        <p>
+          If you're organising your wedding from abroad, we can prepare together in English, from our
+          first conversation to the final details before the day.
+        </p>
+      </div>
+
+      <figure class="en-about__portrait">
+        <ImageSlot
+          path="src/images/a-propos/alexis-main.jpg"
+          orientation="vertical"
+          label="Portrait of Alexis Cosentino, photographer at Life Focus."
+        />
+      </figure>
+    </section>
+
+    <section id="experience" class="en-experience en-section" aria-labelledby="experience-title">
+      <div class="en-experience__inner page-shell">
+        <div class="en-experience__intro">
+          <p class="editorial-label">03 / YOUR WEDDING EXPERIENCE</p>
+          <h2 id="experience-title">From our first conversation to your finished photographs.</h2>
+        </div>
+
+        <div class="en-steps">
+          <section>
+            <h3>Let's talk</h3>
+            <p>
+              Tell me your date, venue and a little about the wedding you're planning. I'll check my
+              availability, answer your questions and help you choose the coverage that fits your
+              day.
+            </p>
+          </section>
+          <section>
+            <h3>Planning from abroad</h3>
+            <p>
+              We can prepare by email, phone or video call. We'll talk through your schedule, the
+              people who matter to you and any photographs you particularly want, so we both know
+              what to expect.
+            </p>
+          </section>
+          <section>
+            <h3>On your wedding day</h3>
+            <p>
+              I follow the day as it unfolds, making time for gently guided couple portraits and any
+              group photographs we've planned. The moments covered depend on your schedule and the
+              collection you choose.
+            </p>
+          </section>
+          <section>
+            <h3>Your photographs</h3>
+            <p>
+              Within four weeks of your wedding, you'll receive your selected and individually
+              edited photographs in a private online gallery, ready to download in high resolution
+              and share with family and friends.
+            </p>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="en-location page-shell en-section" aria-labelledby="location-title">
+      <div class="en-location__copy">
+        <p class="editorial-label">04 / DRÔME & PROVENCE</p>
+        <h2 id="location-title">Your wedding in Drôme &amp; Provence</h2>
+      </div>
+      <div class="en-location__body">
+        <p>
+          Based in Romans-sur-Isere, near Valence, I photograph weddings throughout Drome and travel
+          to Provence. Whether you're bringing everyone together near home or travelling to France
+          for the celebration, we can plan the photography around your venue and the day you have in
+          mind.
+        </p>
+        <p>
+          A chateau, a country house or a garden celebration: what interests me is how the place
+          comes alive with your people. Alongside the portraits, I pay attention to the setting, the
+          small details and the atmosphere between the main events.
+        </p>
+        <p>
+          Share your venue when you get in touch. I'll confirm the travel arrangements and include
+          any additional costs in your quote.
+        </p>
+        <a class="editorial-link" href="/conseils/plus-beaux-domaines-mariage-drome/">
+          Explore wedding venues in Drome — guide in French
+        </a>
+        <a class="editorial-link" href={realWeddingStoryHref} target="_blank" rel="noopener noreferrer">
+          View a real wedding story on Mariages.net — story in French
+        </a>
+      </div>
+    </section>
+
+    <section id="collections" class="en-collections page-shell en-section" aria-labelledby="collections-title">
+      <div class="en-collections__intro">
+        <p class="editorial-label">05 / WEDDING COLLECTIONS</p>
+        <h2 id="collections-title">Choose the coverage that fits your day.</h2>
+        <p>
+          From a shorter celebration to a full day with your guests, choose the time you'd like me by
+          your side. We'll work out the best starting and finishing times together, based on your
+          plans.
+        </p>
+        <p>We'll agree your coverage times together, based on your wedding schedule.</p>
+      </div>
+
+      <div class="en-collections__included">
+        <figure>
+          <ImageSlot
+            path="src/images/mariage/package-included.jpg"
+            orientation="horizontal"
+            label="A couple photographed during a wedding reportage."
+          />
+        </figure>
+        <div>
+          <p class="en-eyebrow">Every collection includes</p>
+          <ul>
+            {
+              weddingIncludedEn.map((item, index) => (
+                <li>
+                  <span>
+                    {index === 0 ? (
+                      <>
+                      <strong>No limit on the number of photographs delivered</strong>, each
+                      carefully selected and individually edited in high resolution.
+                      </>
+                    ) : (
+                      item
+                    )}
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+
+      <ol class="en-package-list">
+        {
+          englishWeddingPackages.map((item) => (
+            <li class:list={[item.durationHours === "09" && "en-package-list__item--featured"]}>
+              <p class="en-package-list__duration">
+                <span>{item.durationHours}</span>
+                <span>hours</span>
+              </p>
+              <p class="en-package-list__price">{formatEnglishPrice(item.price)}</p>
+              <h3>{item.nameEn}</h3>
+              <p>{item.contextEn}</p>
+              <div class="en-package-list__conditions">
+                <p>{item.travelEn}</p>
+                {item.detailsEn.map((detail) => <p>{detail}</p>)}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+
+      <p class="en-collections__note">
+        Travel is included within the distance stated for each collection. For venues further
+        afield, I'll include any additional travel and accommodation costs in your personalised
+        quote.
+      </p>
+    </section>
+
+    <section class="en-faq page-shell en-section" aria-labelledby="faq-title">
+      <div class="en-faq__intro">
+        <p class="editorial-label">06 / FREQUENTLY ASKED QUESTIONS</p>
+        <h2 id="faq-title">Your questions, answered.</h2>
+      </div>
+      <div class="en-faq__items">
+        {
+          faqs.map((item) => (
+            <details>
+              <summary>{item.question}</summary>
+              <p>{item.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+    </section>
+
+    <section id="contact" class="en-contact page-shell en-section" aria-labelledby="contact-title">
+      <div class="en-contact__intro">
+        <p class="editorial-label">07 / CONTACT</p>
+        <h2 id="contact-title">Tell me about your wedding.</h2>
+        <p>
+          Tell me your date, where you're getting married and a little about the celebration you have
+          in mind. You can write to me in English.
+        </p>
+      </div>
+
+      <form class="en-form" action="/api/contact.php" method="post">
+        <input type="hidden" name="lang" value="en" />
+        <input type="hidden" name="session_type" value="mariage" />
+
+        <div class="contact-status contact-status--success" hidden data-status-message="success" role="status">
+          <p class="contact-status__title">Thank you, your message has been sent.</p>
+          <p>I will get back to you soon so we can talk about your wedding.</p>
+        </div>
+        <div class="contact-status contact-status--error" hidden data-status-message="error" role="alert">
+          <p class="contact-status__title">Your message could not be sent.</p>
+          <p>You can also contact me directly by email, phone or WhatsApp.</p>
+        </div>
+
+        <div class="en-form__field">
+          <label for="name">Full name *</label>
+          <input id="name" name="name" type="text" autocomplete="name" maxlength="120" required />
+        </div>
+
+        <div class="en-form__field">
+          <label for="email">Email *</label>
+          <input id="email" name="email" type="email" autocomplete="email" maxlength="160" required />
+        </div>
+
+        <div class="en-form__field">
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="40" />
+        </div>
+
+        <div class="en-form__field">
+          <label for="event_date">Wedding date</label>
+          <input id="event_date" name="event_date" type="date" />
+        </div>
+
+        <div class="en-form__field en-form__field--full">
+          <label for="location">Venue or location</label>
+          <input id="location" name="location" type="text" maxlength="160" />
+        </div>
+
+        <div class="en-form__field en-form__field--full">
+          <label for="message">Message *</label>
+          <textarea id="message" name="message" rows="7" maxlength="4000" required></textarea>
+        </div>
+
+        <div class="en-form__trap" aria-hidden="true">
+          <label for="website">Website</label>
+          <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+
+        {
+          turnstileSiteKey && (
+            <div
+              class="en-form__turnstile cf-turnstile"
+              data-sitekey={turnstileSiteKey}
+              data-appearance="interaction-only"
+              data-theme="light"
+            />
+          )
+        }
+
+        <button class="en-form__submit editorial-link" type="submit">Send my enquiry</button>
+        <p class="en-form__privacy">
+          The information sent through this form is used only to answer your enquiry. Legal and
+          privacy information on the site is currently in French.
+        </p>
+      </form>
+
+      <aside class="en-contact__details" aria-label="Direct contact details">
+        <p class="en-eyebrow">Direct contact</p>
+        <a href="mailto:contact@lifefocus.fr">contact@lifefocus.fr</a>
+        <a href="tel:+33698900917">+33 6 98 90 09 17</a>
+        <a href={whatsappHref} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </aside>
+    </section>
+  </article>
+
+  <script is:inline>
+    const status = new URLSearchParams(window.location.search).get("status");
+    if (status === "success" || status === "error") {
+      document
+        .querySelector(`[data-status-message="${status}"]`)
+        ?.removeAttribute("hidden");
+    }
+  </script>
+  {turnstileSiteKey && <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
+</BaseLayout>
+
+<style>
+  .en-wedding {
+    --service-narrow: 76rem;
+    overflow-x: clip;
+  }
+
+  .en-wedding :global(figure) {
+    margin: 0;
+    background: var(--color-line);
+  }
+
+  .en-wedding :global(img) {
+    width: 100%;
+    height: auto;
+  }
+
+  .en-section {
+    scroll-margin-top: clamp(7rem, 13vw, 10rem);
+  }
+
+  .en-hero {
+    padding-block: clamp(0.75rem, 1.8vw, 1.5rem) clamp(3.5rem, 6vw, 5.5rem);
+  }
+
+  .en-hero__inner {
+    isolation: isolate;
+    display: grid;
+    gap: var(--space-sm);
+    width: min(92vw, 82rem);
+    margin-inline: auto;
+  }
+
+  .en-hero__image {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .en-hero__image :global(.photo-lightbox-trigger:hover),
+  .en-hero__image :global(.photo-lightbox-trigger:focus-visible) {
+    transform: none;
+  }
+
+  .en-hero__copy {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    gap: 0.95rem;
+    width: min(100%, 40rem);
+    padding: clamp(1.35rem, 2.35vw, 2.35rem);
+    background: var(--color-surface-soft);
+  }
+
+  .en-hero h1,
+  .en-about h2,
+  .en-experience h2,
+  .en-location h2,
+  .en-collections h2,
+  .en-faq h2,
+  .en-contact h2 {
+    font-family: var(--font-editorial);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 0.98;
+  }
+
+  .en-hero h1 {
+    max-width: 12ch;
+    font-size: clamp(2.55rem, 1.55rem + 3.15vw, 4.85rem);
+    text-wrap: balance;
+  }
+
+  .en-about h2,
+  .en-experience h2,
+  .en-location h2,
+  .en-collections h2,
+  .en-faq h2,
+  .en-contact h2 {
+    max-width: 13ch;
+    font-size: clamp(2.45rem, 1.55rem + 3vw, 5rem);
+  }
+
+  .en-gallery-anchor :global(.editorial-gallery h2),
+  .en-experience h2,
+  .en-location h2 {
+    max-width: 18ch;
+  }
+
+  .en-about h2 {
+    max-width: 16ch;
+  }
+
+  .en-hero p:not(.editorial-label),
+  .en-about p,
+  .en-location p,
+  .en-collections p,
+  .en-faq p,
+  .en-contact p {
+    max-width: var(--reading-max);
+    color: var(--color-muted);
+  }
+
+  .en-hero__actions,
+  .en-location__body {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem 1.45rem;
+  }
+
+  .en-about,
+  .en-location,
+  .en-collections,
+  .en-faq,
+  .en-contact {
+    display: grid;
+    gap: var(--space-md);
+    max-width: var(--service-narrow);
+    padding-block: var(--space-lg);
+  }
+
+  .en-about__copy,
+  .en-experience__intro,
+  .en-location__copy,
+  .en-collections__intro,
+  .en-faq__intro,
+  .en-contact__intro {
+    display: grid;
+    gap: var(--space-xs);
+  }
+
+  .en-experience {
+    margin-block: var(--space-lg);
+    color: var(--color-background);
+  }
+
+  .en-experience__inner {
+    display: grid;
+    gap: var(--space-md);
+    width: min(calc(100% - (var(--page-padding) * 1.4)), 84rem);
+    margin-right: var(--page-padding);
+    margin-left: auto;
+    padding-block: clamp(4rem, 7vw, 6.5rem);
+    background: var(--color-dark);
+  }
+
+  .en-experience .editorial-label,
+  .en-experience p {
+    color: color-mix(in srgb, var(--color-background) 76%, var(--color-white));
+  }
+
+  .en-steps {
+    display: grid;
+    gap: var(--space-sm);
+  }
+
+  .en-steps section {
+    display: grid;
+    gap: 0.8rem;
+    padding-top: var(--space-xs);
+    border-top: 1px solid color-mix(in srgb, var(--color-background) 22%, transparent);
+  }
+
+  .en-steps h3,
+  .en-eyebrow {
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .en-location {
+    border-top: 1px solid var(--color-line);
+  }
+
+  .en-location__body {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .en-collections__included {
+    display: grid;
+    gap: var(--space-sm);
+    align-items: start;
+  }
+
+  .en-collections__included > div {
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  .en-collections ul,
+  .en-package-list {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .en-collections ul li {
+    display: grid;
+    grid-template-columns: clamp(2.15rem, 5.5vw, 3rem) minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 0.85rem;
+    border-bottom: 1px solid var(--color-line);
+    color: var(--color-muted);
+    font-size: var(--text-sm);
+  }
+
+  .en-collections ul {
+    counter-reset: included;
+  }
+
+  .en-collections ul li {
+    counter-increment: included;
+  }
+
+  .en-collections ul li::before {
+    content: counter(included, decimal-leading-zero);
+    color: var(--color-text);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.12em;
+  }
+
+  .en-package-list {
+    gap: clamp(1.35rem, 3vw, 2.25rem);
+    border-top: 0;
+  }
+
+  .en-package-list li {
+    display: grid;
+    gap: 0.9rem;
+    padding-block: clamp(1.45rem, 3vw, 2.35rem);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .en-package-list__duration {
+    display: flex;
+    gap: 0.65rem;
+    align-items: flex-start;
+    color: var(--color-text) !important;
+    line-height: 0.86;
+  }
+
+  .en-package-list__duration span:first-child {
+    font-family: var(--font-editorial);
+    font-size: clamp(4.2rem, 15vw, 7.35rem);
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  .en-package-list__duration span:last-child {
+    padding-top: 0.55rem;
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .en-package-list h3,
+  .en-package-list h3 {
+    font-family: var(--font-interface);
+    font-size: clamp(1.08rem, 1rem + 0.3vw, 1.35rem);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .en-package-list__price {
+    color: var(--color-text) !important;
+    font-family: var(--font-editorial);
+    font-size: clamp(1.85rem, 1.35rem + 1vw, 2.5rem);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .en-package-list__conditions {
+    display: grid;
+    gap: 0.3rem;
+  }
+
+  .en-package-list__conditions p,
+  .en-collections__note {
+    font-size: var(--text-sm);
+  }
+
+  .en-package-list__item--featured {
+    padding-inline: clamp(1rem, 2vw, 1.4rem);
+    box-shadow: inset 0 1px 0 var(--color-text);
+  }
+
+  .en-faq {
+    border-top: 1px solid var(--color-line);
+  }
+
+  .en-faq__items {
+    display: grid;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .en-faq details {
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .en-faq summary {
+    cursor: pointer;
+    padding-block: 1.25rem;
+    color: var(--color-text);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  .en-faq details p {
+    padding-bottom: 1.25rem;
+  }
+
+  .en-contact {
+    border-top: 1px solid var(--color-line);
+  }
+
+  .en-form,
+  .en-contact__details {
+    display: grid;
+    gap: var(--space-sm);
+    min-width: 0;
+  }
+
+  .contact-status {
+    display: grid;
+    gap: 0.45rem;
+    padding: var(--space-xs) clamp(1rem, 2vw, 1.5rem);
+    color: var(--color-text);
+    background: var(--color-surface-soft);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .contact-status[hidden] {
+    display: none;
+  }
+
+  .contact-status__title {
+    font-family: var(--font-editorial);
+    font-size: clamp(1.7rem, 1.25rem + 1.25vw, 2.6rem);
+    line-height: 1;
+  }
+
+  .en-form__field {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .en-form label {
+    color: var(--color-muted);
+    font-size: clamp(0.78rem, 0.74rem + 0.14vw, 0.9rem);
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .en-form input,
+  .en-form textarea {
+    width: 100%;
+    min-width: 0;
+    border: 0;
+    border-bottom: 1px solid var(--color-line);
+    border-radius: 0;
+    padding: 0 0 0.75rem;
+    background: transparent;
+    color: var(--color-text);
+    font-family: var(--font-interface);
+    font-size: clamp(1.03rem, 0.98rem + 0.18vw, 1.16rem);
+    line-height: 1.45;
+  }
+
+  .en-form textarea {
+    resize: vertical;
+  }
+
+  .en-form__trap {
+    position: absolute;
+    left: -100vw;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .en-form__submit {
+    width: fit-content;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    cursor: pointer;
+  }
+
+  .en-contact__details {
+    align-content: start;
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--color-line);
+  }
+
+  .en-contact__details a {
+    width: fit-content;
+    color: var(--color-text);
+    font-size: var(--text-lead);
+    line-height: 1.2;
+    text-decoration: none;
+  }
+
+  @media (min-width: 48rem) {
+    .en-steps {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .en-form {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .en-form__field--full,
+    .contact-status,
+    .en-form__turnstile,
+    .en-form__submit,
+    .en-form__privacy {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (min-width: 72rem) {
+    .en-hero__inner {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      align-items: start;
+    }
+
+    .en-hero__image {
+      grid-column: 4 / 13;
+      grid-row: 1;
+    }
+
+    .en-hero__copy {
+      grid-column: 1 / 6;
+      grid-row: 1;
+      margin-top: clamp(2rem, 4.5vw, 3.75rem);
+    }
+
+    .en-about,
+    .en-location,
+    .en-contact,
+    .en-collections__included,
+    .en-faq {
+      grid-template-columns: minmax(0, 0.48fr) minmax(0, 1fr);
+      gap: clamp(3rem, 7vw, 7rem);
+      align-items: start;
+    }
+
+    .en-about__portrait {
+      grid-column: 2;
+      width: min(100%, 30rem);
+      justify-self: end;
+    }
+
+    .en-location__body,
+    .en-faq__items,
+    .en-form,
+    .en-contact__details {
+      grid-column: 2;
+    }
+
+    .en-package-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: clamp(1.5rem, 3vw, 3rem);
+    }
+
+    .en-package-list li {
+      grid-template-rows: auto auto auto minmax(5.5rem, auto) auto;
+    }
+
+    .en-contact__details {
+      grid-row: 2;
+    }
+  }
+
+  @media (min-width: 86rem) {
+    .en-package-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+</style>
+

@@ -15,6 +15,9 @@ interface Props {
   canonicalUrl?: string;
   ogImage?: string;
   ogType?: "website" | "article";
+  lang?: "fr" | "en";
+  ogLocale?: string;
+  alternateLinks?: Array<{ href: string; hreflang: string }>;
   robots?: string;
   structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
 }
@@ -25,6 +28,9 @@ const {
   canonicalUrl,
   ogImage,
   ogType = "website",
+  lang = "fr",
+  ogLocale = lang === "en" ? "en_US" : "fr_FR",
+  alternateLinks = [],
   robots,
   structuredData,
 } = Astro.props;
@@ -115,7 +121,7 @@ const structuredDataGraph = {
 ---
 
 <!doctype html>
-<html lang="fr">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -123,13 +129,18 @@ const structuredDataGraph = {
     <meta name="description" content={description} />
     {robots && <meta name="robots" content={robots} />}
     <link rel="canonical" href={pageUrl} />
+    {
+      alternateLinks.map((link) => (
+        <link rel="alternate" hreflang={link.hreflang} href={absoluteUrl(link.href)} />
+      ))
+    }
     <meta property="og:type" content={ogType} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={pageUrl} />
     <meta property="og:site_name" content="Life Focus" />
     <meta property="og:image" content={socialImageUrl} />
-    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:locale" content={ogLocale} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
@@ -156,11 +167,11 @@ const structuredDataGraph = {
     <title>{title}</title>
   </head>
   <body>
-    <Header />
+    <Header lang={lang} />
     <main class="site-main">
       <slot />
     </main>
     <PhotoLightbox />
-    <Footer />
+    <Footer lang={lang} />
   </body>
 </html>

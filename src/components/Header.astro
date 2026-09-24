@@ -1,6 +1,13 @@
 ---
 import logoLifeFocus from "../assets/brand/LIFE FOCUS logo.svg?url";
 
+interface Props {
+  lang?: "fr" | "en";
+}
+
+const { lang = "fr" } = Astro.props;
+const isEnglishPage = lang === "en";
+
 const familyItems = [
   { number: "01", label: "Grossesse", href: "/grossesse/" },
   { number: "02", label: "Naissance", href: "/naissance/" },
@@ -42,7 +49,7 @@ const mobileNavItems = [
 ];
 
 const clientArea = {
-  label: "Espace client \u2197",
+  label: "Espace client ↗",
   href: "https://alexis-cosentino.lumys.photo/",
 };
 
@@ -58,9 +65,9 @@ const socialLinks = [
 ];
 ---
 
-<header class="site-header" data-site-header>
+<header class:list={["site-header", isEnglishPage && "site-header--english"]} data-site-header>
   <div class="site-header__inner page-shell">
-    <a class="site-identity" href="/" aria-label="Life Focus, accueil">
+    <a class="site-identity" href="/" aria-label={isEnglishPage ? "Life Focus, French homepage" : "Life Focus, accueil"}>
       <img
         class="site-identity__logo"
         src={logoLifeFocus}
@@ -76,120 +83,160 @@ const socialLinks = [
       </span>
     </a>
 
-    <nav class="site-nav" aria-label="Navigation principale">
-      <a href="/mariage/">Mariage</a>
-      <details class="site-nav__group">
-        <summary class="site-nav__summary">Famille</summary>
-        <div class="site-nav__panel" aria-label="Choisir une séance famille">
-          {familyItems.map((item) => (
-            <a class="site-nav__panel-link" href={item.href}>
-              <span>{item.number}</span>
-              <strong>{item.label}</strong>
-            </a>
-          ))}
+    {
+      isEnglishPage ? (
+        <div class="english-header-tools">
+          <nav class="english-header-nav" aria-label="Wedding page sections">
+            <a href="#photos">Photos</a>
+            <a href="#about">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#collections">Collections</a>
+            <a href="#contact">Contact</a>
+          </nav>
+          <a class="english-header-french" href="/">Site en français</a>
         </div>
-      </details>
-      <a href="/a-propos/">À propos</a>
-      <a href="/conseils/">Conseils</a>
-      <a href="/contact/">Contact</a>
-      <a
-        class="site-nav__utility"
-        href={clientArea.href}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {clientArea.label}
-      </a>
-    </nav>
-
-    <button
-      class="site-menu-toggle"
-      type="button"
-      aria-expanded="false"
-      aria-controls="mobile-menu"
-      aria-label="Ouvrir la table des matières"
-      data-menu-toggle
-    >
-      <span data-menu-toggle-label>Menu</span>
-      <span class="site-menu-toggle__mark" aria-hidden="true"></span>
-    </button>
-  </div>
-
-  <div class="site-menu" id="mobile-menu" aria-hidden="true" inert data-mobile-menu>
-    <div class="site-menu__inner page-shell">
-      <div class="site-menu__brand" aria-hidden="true">
-        <span>LIFE /</span>
-        <span>FOCUS</span>
-      </div>
-
-      <nav class="site-menu__nav" aria-label="Navigation mobile">
-        <p class="site-menu__eyebrow">Index</p>
-        <ol class="site-menu__list">
-          {mobileNavItems.map((item) => (
-            <li class:list={["site-menu__item", item.family && "site-menu__item--family"]}>
-              {item.family ? (
-                <>
-                  <div class="site-menu__family-heading">
-                    <button
-                      class="site-menu__link site-menu__link--button"
-                      type="button"
-                      aria-expanded="false"
-                      aria-controls="mobile-family-links"
-                      data-family-toggle
-                    >
-                      <span class="site-menu__number">{item.number}</span>
-                      <span class="site-menu__dash" aria-hidden="true"></span>
-                      <span class="site-menu__label">{item.label}</span>
-                      <span class="site-menu__family-mark" aria-hidden="true">+</span>
-                    </button>
-                  </div>
-                  <p class="site-menu__caption">{item.caption}</p>
-                  <div
-                    class="site-menu__family"
-                    id="mobile-family-links"
-                    hidden
-                    data-family-panel
-                  >
-                    {familyItems.map((familyItem) => (
-                      <a href={familyItem.href} data-menu-link>{familyItem.label}</a>
-                    ))}
-                  </div>
-                </>
-              ) : (
-                <>
-                  <a class="site-menu__link" href={item.href} data-menu-link>
-                    <span class="site-menu__number">{item.number}</span>
-                    <span class="site-menu__dash" aria-hidden="true"></span>
-                    <span class="site-menu__label">{item.label}</span>
+      ) : (
+        <>
+          <nav class="site-nav" aria-label="Navigation principale">
+            <a href="/mariage/">Mariage</a>
+            <details class="site-nav__group">
+              <summary class="site-nav__summary">Famille</summary>
+              <div class="site-nav__panel" aria-label="Choisir une séance famille">
+                {familyItems.map((item) => (
+                  <a class="site-nav__panel-link" href={item.href}>
+                    <span>{item.number}</span>
+                    <strong>{item.label}</strong>
                   </a>
-                  <p class="site-menu__caption">{item.caption}</p>
-                </>
-              )}
-            </li>
-          ))}
-        </ol>
-      </nav>
-
-      <div class="site-menu__colophon">
-        <p>Romans-sur-Isère · Drôme</p>
-        <nav aria-label="Liens secondaires mobiles">
-          {socialLinks.map((item) => (
-            <a href={item.href} target="_blank" rel="noopener noreferrer" data-menu-link>
-              {item.label}
+                ))}
+              </div>
+            </details>
+            <a href="/a-propos/">À propos</a>
+            <a href="/conseils/">Conseils</a>
+            <a href="/contact/">Contact</a>
+            <a
+              class="site-nav__utility"
+              href={clientArea.href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {clientArea.label}
             </a>
-          ))}
-          <a
-            href={clientArea.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            data-menu-link
-          >
-            {clientArea.label}
-          </a>
-        </nav>
-      </div>
-    </div>
+            <a
+              class="site-language-link"
+              href="/en/wedding-photographer-drome-provence/"
+              aria-label="Wedding photography in English"
+            >
+              EN
+            </a>
+          </nav>
+        </>
+      )
+    }
+
+    {
+      !isEnglishPage && (
+        <button
+          class="site-menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          aria-label="Ouvrir la table des matières"
+          data-menu-toggle
+        >
+          <span data-menu-toggle-label>Menu</span>
+          <span class="site-menu-toggle__mark" aria-hidden="true" />
+        </button>
+      )
+    }
   </div>
+
+  {
+    !isEnglishPage && (
+      <div class="site-menu" id="mobile-menu" aria-hidden="true" inert data-mobile-menu>
+        <div class="site-menu__inner page-shell">
+          <div class="site-menu__brand" aria-hidden="true">
+            <span>LIFE /</span>
+            <span>FOCUS</span>
+          </div>
+
+          <nav class="site-menu__nav" aria-label="Navigation mobile">
+            <p class="site-menu__eyebrow">Index</p>
+            <ol class="site-menu__list">
+              {mobileNavItems.map((item) => (
+                <li class:list={["site-menu__item", item.family && "site-menu__item--family"]}>
+                  {item.family ? (
+                    <>
+                      <div class="site-menu__family-heading">
+                        <button
+                          class="site-menu__link site-menu__link--button"
+                          type="button"
+                          aria-expanded="false"
+                          aria-controls="mobile-family-links"
+                          data-family-toggle
+                        >
+                          <span class="site-menu__number">{item.number}</span>
+                          <span class="site-menu__dash" aria-hidden="true" />
+                          <span class="site-menu__label">{item.label}</span>
+                          <span class="site-menu__family-mark" aria-hidden="true">+</span>
+                        </button>
+                      </div>
+                      <p class="site-menu__caption">{item.caption}</p>
+                      <div
+                        class="site-menu__family"
+                        id="mobile-family-links"
+                        hidden
+                        data-family-panel
+                      >
+                        {familyItems.map((familyItem) => (
+                          <a href={familyItem.href} data-menu-link>{familyItem.label}</a>
+                        ))}
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <a class="site-menu__link" href={item.href} data-menu-link>
+                        <span class="site-menu__number">{item.number}</span>
+                        <span class="site-menu__dash" aria-hidden="true" />
+                        <span class="site-menu__label">{item.label}</span>
+                      </a>
+                      <p class="site-menu__caption">{item.caption}</p>
+                    </>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </nav>
+
+          <div class="site-menu__colophon">
+            <p>Romans-sur-Isère · Drôme</p>
+            <nav aria-label="Liens secondaires mobiles">
+              {socialLinks.map((item) => (
+                <a href={item.href} target="_blank" rel="noopener noreferrer" data-menu-link>
+                  {item.label}
+                </a>
+              ))}
+              <a
+                href={clientArea.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-menu-link
+              >
+                {clientArea.label}
+              </a>
+            </nav>
+            <a
+              class="site-menu__language"
+              href="/en/wedding-photographer-drome-provence/"
+              aria-label="Wedding photography in English"
+              data-menu-link
+            >
+              EN · Wedding photography in English
+            </a>
+          </div>
+        </div>
+      </div>
+    )
+  }
 </header>
 
 <script>
@@ -342,7 +389,7 @@ const socialLinks = [
       closeMenu(shouldRestoreFocus);
     });
 
-    const desktopQuery = window.matchMedia("(min-width: 48rem)");
+    const desktopQuery = window.matchMedia("(min-width: 64rem)");
     desktopQuery.addEventListener("change", (event) => {
       if (event.matches) closeMenu(false, true);
     });

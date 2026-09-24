@@ -1,8 +1,16 @@
 ---
 import logoLifeFocus from "../assets/brand/LIFE FOCUS logo.svg?url";
 
-const whatsappHref =
-  "https://wa.me/33698900917?text=Bonjour%20Alexis%2C%20je%20vous%20contacte%20depuis%20votre%20site%20Life%20Focus%20concernant%20un%20projet%20photo.";
+interface Props {
+  lang?: "fr" | "en";
+}
+
+const { lang = "fr" } = Astro.props;
+const isEnglishPage = lang === "en";
+
+const whatsappHref = isEnglishPage
+  ? "https://wa.me/33698900917?text=Hello%20Alexis%2C%20we%20are%20planning%20a%20wedding%20in%20Dr%C3%B4me%20or%20Provence%20and%20found%20your%20English%20wedding%20page."
+  : "https://wa.me/33698900917?text=Bonjour%20Alexis%2C%20je%20vous%20contacte%20depuis%20votre%20site%20Life%20Focus%20concernant%20un%20projet%20photo.";
 
 const socialLinks = [
   {
@@ -26,9 +34,13 @@ const socialLinks = [
     href: "https://www.mariages.net/photo-mariage/life-focus-photographe--e180967/avis",
   },
 ];
+
+const displayedSocialLinks = isEnglishPage
+  ? socialLinks.filter((item) => item.label === "WhatsApp" || item.label === "Instagram")
+  : socialLinks;
 ---
 
-<footer class="site-footer">
+<footer class:list={["site-footer", isEnglishPage && "site-footer--english"]}>
   <div class="site-footer__inner page-shell">
     <div class="site-footer__signature">
       <img
@@ -39,31 +51,68 @@ const socialLinks = [
         height="941"
         loading="lazy"
       />
-      <p>Photographe de mariage</p>
+      {
+        isEnglishPage ? (
+          <p>Wedding photographer in Dr&ocirc;me</p>
+        ) : (
+          <p>Photographe de mariage</p>
+        )
+      }
     </div>
 
     <div class="site-footer__content">
       <div class="site-footer__meta">
-        <p>Romans-sur-Isère</p>
-        <p>Drôme · France</p>
+        <p>Romans-sur-Is&egrave;re</p>
+        <p>Dr&ocirc;me &middot; France</p>
         <p>SIRET 83827982600013</p>
       </div>
 
-      <nav class="site-footer__links" aria-label="Liens de pied de page">
-        <a href="/conseils/">Conseils</a>
-        <a href="/professionnels/">Professionnels</a>
-        <a href="/contact/">Contact</a>
-        <a
-          href="https://alexis-cosentino.lumys.photo/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Espace clients &#8599;
-        </a>
-      </nav>
+      <div class="site-footer__navs">
+        <nav class="site-footer__links" aria-label={isEnglishPage ? "Footer links" : "Liens de pied de page"}>
+          {
+            isEnglishPage ? (
+              <>
+                <span class="site-footer__link-row">
+                  <a href="#contact">Contact</a>
+                  <a
+                    href="https://alexis-cosentino.lumys.photo/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Client gallery &#8599;
+                  </a>
+                </span>
+                <span class="site-footer__link-row">
+                  <a href="/">Site en fran&ccedil;ais</a>
+                </span>
+              </>
+            ) : (
+              <>
+                <span class="site-footer__link-row">
+                  <a href="/conseils/">Conseils</a>
+                  <a href="/professionnels/">Professionnels</a>
+                </span>
+                <span class="site-footer__link-row">
+                  <a href="/contact/">Contact</a>
+                  <a
+                    href="https://alexis-cosentino.lumys.photo/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Espace clients &#8599;
+                  </a>
+                </span>
+                <span class="site-footer__link-row">
+                  <a href="/en/wedding-photographer-drome-provence/">English</a>
+                </span>
+              </>
+            )
+          }
+        </nav>
+      </div>
 
-      <nav class="site-footer__socials" aria-label="Réseaux sociaux">
-        {socialLinks.map((item) => (
+      <nav class="site-footer__socials" aria-label={isEnglishPage ? "Social links" : "Reseaux sociaux"}>
+        {displayedSocialLinks.map((item) => (
           <a href={item.href} target="_blank" rel="noopener noreferrer">
             <span aria-hidden="true">{item.mark}</span>
             <strong>{item.label}</strong>

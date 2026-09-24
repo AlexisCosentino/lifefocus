@@ -1,66 +1,12 @@
 ---
 import ImageSlot from "./ImageSlot.astro";
-
-const included = [
-  "Photos sélectionnées, triées et retouchées en haute définition.",
-  "Galerie privée en ligne à partager avec vos proches.",
-  "Livraison sous 2 semaines maximum.",
-  "Coffret personnalisé offert avec votre reportage.",
-  "Accompagnement avant le mariage.",
-];
-
-const packages = [
-  {
-    duration: "03 H",
-    name: "Cérémonie",
-    context: "Pour une cérémonie civile, un mariage intime ou quelques heures essentielles.",
-    travel: "Déplacement jusqu’à 50 km autour de Romans-sur-Isère.",
-    price: "950 €",
-    details: ["250 € / heure supplémentaire."],
-  },
-  {
-    duration: "06 H",
-    name: "L'Essentiel",
-    context: "Des préparatifs du mariage jusqu’au vin d’honneur.",
-    travel: "Déplacement jusqu’à 50 km autour de Romans-sur-Isère.",
-    price: "1 600 €",
-    details: ["200 € / heure supplémentaire."],
-  },
-  {
-    duration: "09 H",
-    name: "La Journée",
-    context: "Une couverture plus complète pour raconter votre mariage avec davantage de respiration.",
-    travel: "Déplacement jusqu’à 100 km autour de Romans-sur-Isère.",
-    price: "2 100 €",
-    details: [],
-  },
-  {
-    duration: "12 H",
-    name: "L'Intégrale",
-    context: "Des préparatifs jusqu’à la soirée, pour raconter votre journée du début à la fin.",
-    travel: "Déplacement jusqu’à 100 km autour de Romans-sur-Isère.",
-    price: "2 500 €",
-    details: [],
-  },
-];
-
-const addOns = [
-  {
-    title: "Séance Engagement",
-    summary: "Un moment à deux avant le mariage.",
-    text:
-      "Un moment à deux avant le mariage, sans pression, pour créer des images qui vous ressemblent et vous familiariser avec ma façon de photographier.",
-  },
-  {
-    title: "Séance Trash The Dress",
-    summary: "Une séance plus libre après le mariage.",
-    text:
-      "Une séance après le mariage, plus libre, pour remettre vos tenues et créer des images différentes sans contrainte de planning.",
-  },
-];
-
-const addOnDetails =
-  "Photos livrées sans limite de nombre. Séance d'1 h en extérieur autour de Romans-sur-Isère ou Valence, au format numérique sous 1 semaine.";
+import {
+  weddingAddOnDetails,
+  weddingAddOnPrice,
+  weddingAddOns,
+  weddingIncluded,
+  weddingPackages,
+} from "../data/weddingCollections";
 ---
 
 <section class="wedding-packages page-shell" aria-labelledby="packages-title">
@@ -75,7 +21,7 @@ const addOnDetails =
         <ImageSlot
           path="src/images/mariage/package-included.jpg"
           orientation="horizontal"
-          label="Moment de reportage de mariage avec un couple au centre de l’image."
+          label="Moment de reportage de mariage avec un couple au centre de l'image."
         />
       </figure>
 
@@ -88,8 +34,19 @@ const addOnDetails =
       <p class="wedding-packages__eyebrow">Inclus dans chaque reportage</p>
       <ul class="wedding-packages__included">
         {
-          included.map((item) => (
-            <li>{item}</li>
+          weddingIncluded.map((item, index) => (
+            <li>
+              <span>
+                {index === 0 ? (
+                  <>
+                  Photos livrées <strong>sans limite de nombre</strong>, sélectionnées et
+                  retouchées individuellement en haute définition.
+                  </>
+                ) : (
+                  item
+                )}
+              </span>
+            </li>
           ))
         }
       </ul>
@@ -101,11 +58,11 @@ const addOnDetails =
 
     <ol class="wedding-packages__list">
       {
-        packages.map((item) => (
+        weddingPackages.map((item) => (
           <li>
             <div class="wedding-packages__formula-top">
               <p class="wedding-packages__duration">
-                <span>{item.duration.split(" ")[0]}</span>
+                <span>{item.durationHours}</span>
                 <span>heures</span>
               </p>
 
@@ -117,11 +74,7 @@ const addOnDetails =
 
             <div class="wedding-packages__conditions">
               <p>{item.travel}</p>
-              {
-                item.details.map((detail) => (
-                  <p>{detail}</p>
-                ))
-              }
+              {item.details.map((detail) => <p>{detail}</p>)}
             </div>
           </li>
         ))
@@ -137,14 +90,14 @@ const addOnDetails =
 
     <div class="wedding-packages__addon-list">
       {
-        addOns.map((item) => (
+        weddingAddOns.map((item) => (
           <section class="wedding-packages__addon-item">
             <div class="wedding-packages__addon-main">
               <div>
                 <h4>{item.title}</h4>
                 <p>{item.summary}</p>
               </div>
-              <p class="wedding-packages__addon-price">250 €</p>
+              <p class="wedding-packages__addon-price">{weddingAddOnPrice}</p>
             </div>
 
             <details class="wedding-packages__addon-details">
@@ -155,7 +108,7 @@ const addOnDetails =
 
               <div class="wedding-packages__addon-panel">
                 <p>{item.text}</p>
-                <p class="wedding-packages__addon-note">{addOnDetails}</p>
+                <p class="wedding-packages__addon-note">{weddingAddOnDetails}</p>
               </div>
             </details>
           </section>
