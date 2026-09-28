@@ -467,10 +467,17 @@ const structuredData = [
               data-sitekey={turnstileSiteKey}
               data-appearance="interaction-only"
               data-theme="light"
+              data-callback="lifeFocusTurnstileValidated"
+              data-expired-callback="lifeFocusTurnstileNeedsRetry"
+              data-error-callback="lifeFocusTurnstileNeedsRetry"
+              data-timeout-callback="lifeFocusTurnstileNeedsRetry"
             />
           )
         }
 
+        <p class="en-form__turnstile-message" data-turnstile-message hidden>
+          The anti-spam check could not be validated. Please try again.
+        </p>
         <button class="en-form__submit editorial-link" type="submit">Send my enquiry</button>
         <p class="en-form__privacy">
           The information sent through this form is used only to answer your enquiry. Legal and
@@ -494,6 +501,59 @@ const structuredData = [
         .querySelector(`[data-status-message="${status}"]`)
         ?.removeAttribute("hidden");
     }
+
+    const turnstileErrorMessage = "The anti-spam check could not be validated. Please try again.";
+    const getTurnstileToken = (form) =>
+      form?.querySelector('[name="cf-turnstile-response"]')?.value?.trim() ?? "";
+
+    const showTurnstileMessage = (form, message = turnstileErrorMessage) => {
+      const messageElement = form?.querySelector("[data-turnstile-message]");
+      if (!messageElement) return;
+      messageElement.textContent = message;
+      messageElement.removeAttribute("hidden");
+    };
+
+    const hideTurnstileMessage = (form) => {
+      form?.querySelector("[data-turnstile-message]")?.setAttribute("hidden", "");
+    };
+
+    const resetTurnstile = (form) => {
+      const widget = form?.querySelector(".cf-turnstile");
+      if (!widget || !window.turnstile?.reset) return;
+
+      try {
+        window.turnstile.reset(widget);
+      } catch {
+        window.turnstile.reset();
+      }
+    };
+
+    window.lifeFocusTurnstileValidated = () => {
+      document.querySelectorAll("form").forEach((form) => hideTurnstileMessage(form));
+    };
+
+    window.lifeFocusTurnstileNeedsRetry = () => {
+      document.querySelectorAll("form").forEach((form) => {
+        if (!form.querySelector(".cf-turnstile")) return;
+        showTurnstileMessage(form);
+        resetTurnstile(form);
+      });
+    };
+
+    document.querySelectorAll("form").forEach((form) => {
+      form.addEventListener("submit", (event) => {
+        const widget = form.querySelector(".cf-turnstile");
+        if (!widget || !getTurnstileToken(form)) {
+          event.preventDefault();
+          showTurnstileMessage(form);
+          resetTurnstile(form);
+          widget?.scrollIntoView({ block: "center", behavior: "smooth" });
+          return;
+        }
+
+        hideTurnstileMessage(form);
+      });
+    });
   </script>
   {turnstileSiteKey && <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
 </BaseLayout>
@@ -890,6 +950,17 @@ const structuredData = [
     overflow: hidden;
   }
 
+  .en-form__turnstile-message {
+    max-width: var(--reading-max);
+    color: var(--color-muted);
+    font-size: var(--text-sm);
+    line-height: 1.55;
+  }
+
+  .en-form__turnstile-message[hidden] {
+    display: none;
+  }
+
   .en-form__submit {
     width: fit-content;
     border-top: 0;
@@ -924,6 +995,7 @@ const structuredData = [
     .en-form__field--full,
     .contact-status,
     .en-form__turnstile,
+    .en-form__turnstile-message,
     .en-form__submit,
     .en-form__privacy {
       grid-column: 1 / -1;

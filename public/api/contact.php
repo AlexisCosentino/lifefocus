@@ -8,6 +8,7 @@ const REDIRECT_ERROR = '/contact/?status=error';
 const REDIRECT_SUCCESS_EN = '/en/wedding-photographer-drome-provence/?status=success#contact';
 const REDIRECT_ERROR_EN = '/en/wedding-photographer-drome-provence/?status=error#contact';
 const TURNSTILE_VERIFY_URL = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+const TURNSTILE_ALLOWED_HOSTNAMES = ['www.lifefocus.fr', 'lifefocus.fr'];
 const RATE_LIMIT_WINDOW_SECONDS = 600;
 const RATE_LIMIT_MAX_REQUESTS = 5;
 
@@ -194,23 +195,28 @@ function config_value(string $key): ?string
     return null;
 }
 
-function verify_turnstile(string $token, string $secret, string $ip): bool
+function verify_turnstile(string $token, string $secret, string $ip): array
 {
     if ($token === '' || strlen($token) > 2048 || has_header_injection($token)) {
-        return false;
+        return ['success' => false, 'reason' => 'turnstile_token_missing'];
     }
 
-    $payload = http_build_query([
+    $payloadFields = [
         'secret' => $secret,
         'response' => $token,
-        'remoteip' => $ip,
-    ]);
+    ];
+
+    if (filter_var($ip, FILTER_VALIDATE_IP)) {
+        $payloadFields['remoteip'] = $ip;
+    }
+
+    $payload = http_build_query($payloadFields);
 
     if (function_exists('curl_init')) {
         $curl = curl_init(TURNSTILE_VERIFY_URL);
 
         if ($curl === false) {
-            return false;
+            return ['success' => false, 'reason' => 'turnstile_verification_network_error'];
         }
 
         curl_setopt_array($curl, [
@@ -224,10 +230,18 @@ function verify_turnstile(string $token, string $secret, string $ip): bool
 
         $response = curl_exec($curl);
         $status = (int)curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
+        $curlErrno = curl_errno($curl);
+        $curlError = curl_error($curl);
         curl_close($curl);
 
         if (!is_string($response) || $status < 200 || $status >= 300) {
-            return false;
+            error_log(sprintf(
+                'Life Focus Turnstile transport failed: http_status=%d curl_errno=%d curl_error=%s',
+                $status,
+                $curlErrno,
+                substr($curlError, 0, 180)
+            ));
+            return ['success' => false, 'reason' => 'turnstile_verification_network_error'];
         }
     } else {
         $context = stream_context_create([
@@ -242,13 +256,58 @@ function verify_turnstile(string $token, string $secret, string $ip): bool
         $response = file_get_contents(TURNSTILE_VERIFY_URL, false, $context);
 
         if (!is_string($response)) {
-            return false;
+            error_log('Life Focus Turnstile transport failed: file_get_contents returned false');
+            return ['success' => false, 'reason' => 'turnstile_verification_network_error'];
         }
     }
 
     $result = json_decode($response, true);
 
-    return is_array($result) && ($result['success'] ?? false) === true;
+    if (!is_array($result)) {
+        error_log('Life Focus Turnstile response invalid JSON');
+        return ['success' => false, 'reason' => 'turnstile_invalid_response'];
+    }
+
+    if (($result['success'] ?? false) !== true) {
+        $errorCodes = $result['error-codes'] ?? [];
+        $errorCodeList = is_array($errorCodes) ? implode(',', array_filter($errorCodes, 'is_string')) : 'unknown';
+        $hostname = isset($result['hostname']) && is_string($result['hostname']) ? $result['hostname'] : 'unknown';
+
+        error_log(sprintf(
+            'Life Focus Turnstile verification failed: error_codes=%s hostname=%s',
+            $errorCodeList !== '' ? $errorCodeList : 'none',
+            $hostname
+        ));
+
+        if (is_array($errorCodes)) {
+            if (in_array('timeout-or-duplicate', $errorCodes, true)) {
+                return ['success' => false, 'reason' => 'turnstile_timeout_or_duplicate'];
+            }
+
+            if (in_array('missing-input-secret', $errorCodes, true) || in_array('invalid-input-secret', $errorCodes, true)) {
+                return ['success' => false, 'reason' => 'turnstile_invalid_secret'];
+            }
+
+            if (in_array('missing-input-response', $errorCodes, true)) {
+                return ['success' => false, 'reason' => 'turnstile_token_missing'];
+            }
+        }
+
+        return ['success' => false, 'reason' => 'turnstile_invalid_response'];
+    }
+
+    $hostname = $result['hostname'] ?? null;
+
+    if (!is_string($hostname) || !in_array($hostname, TURNSTILE_ALLOWED_HOSTNAMES, true)) {
+        error_log(sprintf(
+            'Life Focus Turnstile hostname mismatch: hostname=%s',
+            is_string($hostname) ? $hostname : 'missing'
+        ));
+
+        return ['success' => false, 'reason' => 'turnstile_hostname_mismatch'];
+    }
+
+    return ['success' => true, 'reason' => 'turnstile_ok'];
 }
 
 function is_valid_date(string $value): bool
@@ -285,29 +344,30 @@ $GLOBALS['contact_language'] = $contactLanguage;
 
 $honeypot = post_string('website', 200);
 if ($honeypot === null || trim($honeypot) !== '') {
+    log_contact_rejection('honeypot_triggered');
     reject(true, 'honeypot');
 }
 
 $ip = client_ip();
-if (!check_rate_limit($ip)) {
-    reject(false, 'rate_limit');
-}
-
 $turnstileSecret = config_value('TURNSTILE_SECRET_KEY');
 $turnstileToken = post_string('cf-turnstile-response', 2048);
 
-if ($turnstileSecret !== null && $turnstileToken !== null && !verify_turnstile($turnstileToken, $turnstileSecret, $ip)) {
-    reject(false, 'turnstile_verify_failed');
+if ($turnstileSecret === null) {
+    reject(false, 'turnstile_secret_missing');
 }
 
-if ($turnstileSecret === null || $turnstileToken === null) {
-    error_log(sprintf(
-        'Life Focus contact form continuing without Turnstile: secret=%s token=%s lang=%s ip_hash=%s',
-        $turnstileSecret === null ? 'missing' : 'present',
-        $turnstileToken === null ? 'missing' : 'present',
-        $contactLanguage,
-        hash('sha256', $ip)
-    ));
+if ($turnstileToken === null) {
+    reject(false, 'turnstile_token_missing');
+}
+
+$turnstileResult = verify_turnstile($turnstileToken, $turnstileSecret, $ip);
+if (($turnstileResult['success'] ?? false) !== true) {
+    $turnstileReason = $turnstileResult['reason'] ?? 'turnstile_invalid_response';
+    reject(false, is_string($turnstileReason) ? $turnstileReason : 'turnstile_invalid_response');
+}
+
+if (!check_rate_limit($ip)) {
+    reject(false, 'rate_limit_triggered');
 }
 
 $sessionLabels = [
@@ -346,7 +406,7 @@ if (
     has_header_injection($emailRaw) ||
     has_header_injection($nameRaw)
 ) {
-    reject(false, 'missing_or_invalid_raw_fields');
+    reject(false, 'invalid_form_data');
 }
 
 $name = clean_text($nameRaw);
@@ -368,11 +428,11 @@ if (
     strlen($message) < 10 ||
     !array_key_exists($sessionType, $sessionLabels)
 ) {
-    reject(false, 'invalid_clean_fields');
+    reject(false, 'invalid_form_data');
 }
 
 if ($eventDate !== '' && !is_valid_date($eventDate)) {
-    reject(false, 'invalid_event_date');
+    reject(false, 'invalid_form_data');
 }
 
 if (
@@ -381,7 +441,7 @@ if (
     has_header_injection($eventDate) ||
     has_header_injection($location)
 ) {
-    reject(false, 'header_injection');
+    reject(false, 'invalid_form_data');
 }
 
 $sessionLabel = $sessionLabels[$sessionType];
@@ -469,6 +529,8 @@ $sent = mail(CONTACT_TO, encode_subject($subject), $body, implode("\r\n", $heade
 
 if ($sent) {
     mail($email, encode_subject($clientSubject), $clientBody, implode("\r\n", $clientHeaders));
+} else {
+    log_contact_rejection('mail_send_failed');
 }
 
 redirect_to(contact_redirect_url($sent ? 'success' : 'error', $contactLanguage));
