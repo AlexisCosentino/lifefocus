@@ -17,8 +17,25 @@ function redirect_to(string $url): void
     exit;
 }
 
-function reject(bool $silentSuccess = false): void
+function log_contact_rejection(string $reason): void
 {
+    $language = $GLOBALS['contact_language'] ?? 'unknown';
+    $ip = client_ip();
+
+    error_log(sprintf(
+        'Life Focus contact form rejected: reason=%s lang=%s ip_hash=%s',
+        $reason,
+        is_string($language) ? $language : 'unknown',
+        hash('sha256', $ip)
+    ));
+}
+
+function reject(bool $silentSuccess = false, string $reason = 'unknown'): void
+{
+    if (!$silentSuccess) {
+        log_contact_rejection($reason);
+    }
+
     $language = $GLOBALS['contact_language'] ?? 'fr';
     redirect_to(contact_redirect_url($silentSuccess ? 'success' : 'error', is_string($language) ? $language : 'fr'));
 }
@@ -258,7 +275,7 @@ function is_valid_name(string $value): bool
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    reject();
+    reject(false, 'invalid_method');
 }
 
 $languageRaw = post_string('lang', 5);
@@ -268,19 +285,27 @@ $GLOBALS['contact_language'] = $contactLanguage;
 
 $honeypot = post_string('website', 200);
 if ($honeypot === null || trim($honeypot) !== '') {
-    reject(true);
+    reject(true, 'honeypot');
 }
 
 $ip = client_ip();
 if (!check_rate_limit($ip)) {
-    reject();
+    reject(false, 'rate_limit');
 }
 
 $turnstileSecret = config_value('TURNSTILE_SECRET_KEY');
 $turnstileToken = post_string('cf-turnstile-response', 2048);
 
-if ($turnstileSecret === null || $turnstileToken === null || !verify_turnstile($turnstileToken, $turnstileSecret, $ip)) {
-    reject();
+if ($turnstileSecret === null) {
+    reject(false, 'turnstile_secret_missing');
+}
+
+if ($turnstileToken === null) {
+    reject(false, 'turnstile_token_missing');
+}
+
+if (!verify_turnstile($turnstileToken, $turnstileSecret, $ip)) {
+    reject(false, 'turnstile_verify_failed');
 }
 
 $sessionLabels = [
@@ -319,7 +344,7 @@ if (
     has_header_injection($emailRaw) ||
     has_header_injection($nameRaw)
 ) {
-    reject();
+    reject(false, 'missing_or_invalid_raw_fields');
 }
 
 $name = clean_text($nameRaw);
@@ -341,11 +366,11 @@ if (
     strlen($message) < 10 ||
     !array_key_exists($sessionType, $sessionLabels)
 ) {
-    reject();
+    reject(false, 'invalid_clean_fields');
 }
 
 if ($eventDate !== '' && !is_valid_date($eventDate)) {
-    reject();
+    reject(false, 'invalid_event_date');
 }
 
 if (
@@ -354,7 +379,7 @@ if (
     has_header_injection($eventDate) ||
     has_header_injection($location)
 ) {
-    reject();
+    reject(false, 'header_injection');
 }
 
 $sessionLabel = $sessionLabels[$sessionType];
