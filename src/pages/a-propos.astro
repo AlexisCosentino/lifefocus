@@ -39,9 +39,19 @@ const mariagesNetReviewsUrl =
     </section>
 
     <section class="about-intro page-shell" aria-labelledby="identity-title">
-      <div class="about-intro__copy">
+      <div class="about-intro__media">
         <p class="editorial-label">01 / IDENTITÉ</p>
         <h2 id="identity-title">Derrière Life Focus, il y a une personne.</h2>
+        <figure class="about-intro__image">
+          <ImageSlot
+            path="src/images/a-propos/alexis-secondary.jpg"
+            orientation="horizontal"
+            label="Alexis Cosentino en extérieur, portrait naturel."
+          />
+        </figure>
+      </div>
+
+      <div class="about-intro__copy">
         <p>
           Je vis et travaille à Romans-sur-Isère, dans la Drôme. J’ai créé Life Focus en 2018
           avec une idée simple : photographier les mariages, les grossesses, les naissances et
@@ -50,21 +60,18 @@ const mariagesNetReviewsUrl =
           à l’appareil et tous ces petits moments que l’on ne pourrait pas vraiment reproduire une
           deuxième fois.
         </p>
-        <div class="about-intro__links" aria-label="Services Life Focus">
+        <p>
+          Je suis aussi marié, papa de deux filles, et forcément sensible à ce que les images
+          gardent d’une famille : les détails du quotidien, les liens, les gestes simples et les
+          souvenirs qui prennent de la valeur avec les années.
+        </p>
+        <nav class="about-intro__links" aria-label="Services Life Focus">
           <a class="editorial-link" href="/mariage/">MARIAGE →</a>
           <a class="editorial-link" href="/grossesse/">GROSSESSE →</a>
           <a class="editorial-link" href="/naissance/">NAISSANCE →</a>
           <a class="editorial-link" href="/famille/">FAMILLE →</a>
-        </div>
+        </nav>
       </div>
-
-      <figure class="about-intro__image">
-        <ImageSlot
-          path="src/images/a-propos/alexis-secondary.jpg"
-          orientation="vertical"
-          label="Alexis Cosentino en extérieur, portrait naturel."
-        />
-      </figure>
     </section>
 
     <section class="about-experience page-shell" aria-labelledby="experience-title">
@@ -160,8 +167,17 @@ const mariagesNetReviewsUrl =
     </section>
 
     <section class="about-contact page-shell" aria-labelledby="contact-title">
-      <h2 id="contact-title">Maintenant que vous savez qui sera derrière l’appareil, parlons de vous.</h2>
-      <a class="editorial-link" href="/contact/">PARLEZ-MOI DE VOUS →</a>
+      <figure class="about-contact__portrait">
+        <ImageSlot
+          path="src/images/a-propos/contact.jpg"
+          orientation="vertical"
+          label="Portrait d’Alexis Cosentino, photographe Life Focus."
+        />
+      </figure>
+      <div class="about-contact__copy">
+        <h2 id="contact-title">Maintenant que vous savez qui sera derrière l’appareil, parlons de vous.</h2>
+        <a class="editorial-link" href="/contact/">PARLEZ-MOI DE VOUS →</a>
+      </div>
     </section>
   </article>
 </BaseLayout>
@@ -193,6 +209,7 @@ const mariagesNetReviewsUrl =
   }
 
   .about-hero__text,
+  .about-intro__media,
   .about-intro__copy,
   .about-experience__text,
   .about-guidance__text,
@@ -251,8 +268,18 @@ const mariagesNetReviewsUrl =
   .about-intro__links {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.9rem 1.6rem;
-    margin-top: var(--space-xs);
+    gap: 0.8rem 1.15rem;
+    margin-top: 0.4rem;
+  }
+
+  .about-intro__links :global(.editorial-link) {
+    font-size: clamp(0.74rem, 0.68rem + 0.18vw, 0.86rem);
+  }
+
+  .about-intro__image :global(img) {
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    object-position: center;
   }
 
   .about-sensitivity {
@@ -333,6 +360,16 @@ const mariagesNetReviewsUrl =
     padding-block: var(--space-lg);
   }
 
+  .about-contact__copy {
+    display: grid;
+    gap: var(--space-sm);
+    align-content: center;
+  }
+
+  .about-contact__portrait {
+    width: min(13rem, 52vw);
+  }
+
   @media (min-width: 72rem) {
     .about-hero {
       grid-template-columns: minmax(0, 0.7fr) minmax(0, 0.62fr);
@@ -344,14 +381,24 @@ const mariagesNetReviewsUrl =
     }
 
     .about-intro {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 0.55fr);
-      gap: clamp(3rem, 7vw, 7rem);
-      align-items: center;
+      grid-template-columns: minmax(0, 0.58fr) minmax(20rem, 0.42fr);
+      max-width: 90rem;
+      gap: clamp(2.5rem, 4.5vw, 5rem);
+      align-items: start;
     }
 
     .about-intro__image {
-      width: min(100%, 28rem);
-      justify-self: end;
+      margin-top: clamp(0.8rem, 1.6vw, 1.4rem);
+      width: 100%;
+      justify-self: stretch;
+    }
+
+    .about-intro__copy {
+      padding-top: clamp(3.75rem, 8vw, 7.5rem);
+    }
+
+    .about-intro__copy p {
+      max-width: 32rem;
     }
 
     .about-experience {
@@ -402,12 +449,19 @@ const mariagesNetReviewsUrl =
     }
 
     .about-contact {
-      grid-template-columns: minmax(0, 0.45fr) minmax(0, 1fr);
+      grid-template-columns: minmax(10rem, 0.32fr) minmax(0, 1fr);
+      gap: clamp(2.5rem, 5vw, 5rem);
+      align-items: center;
     }
 
-    .about-contact h2,
-    .about-contact a {
+    .about-contact__copy {
       grid-column: 2;
+    }
+
+    .about-contact__portrait {
+      grid-column: 1;
+      justify-self: start;
+      width: min(100%, 12rem);
     }
   }
 </style>
