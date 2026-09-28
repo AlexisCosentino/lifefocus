@@ -296,16 +296,18 @@ if (!check_rate_limit($ip)) {
 $turnstileSecret = config_value('TURNSTILE_SECRET_KEY');
 $turnstileToken = post_string('cf-turnstile-response', 2048);
 
-if ($turnstileSecret === null) {
-    reject(false, 'turnstile_secret_missing');
-}
-
-if ($turnstileToken === null) {
-    reject(false, 'turnstile_token_missing');
-}
-
-if (!verify_turnstile($turnstileToken, $turnstileSecret, $ip)) {
+if ($turnstileSecret !== null && $turnstileToken !== null && !verify_turnstile($turnstileToken, $turnstileSecret, $ip)) {
     reject(false, 'turnstile_verify_failed');
+}
+
+if ($turnstileSecret === null || $turnstileToken === null) {
+    error_log(sprintf(
+        'Life Focus contact form continuing without Turnstile: secret=%s token=%s lang=%s ip_hash=%s',
+        $turnstileSecret === null ? 'missing' : 'present',
+        $turnstileToken === null ? 'missing' : 'present',
+        $contactLanguage,
+        hash('sha256', $ip)
+    ));
 }
 
 $sessionLabels = [
