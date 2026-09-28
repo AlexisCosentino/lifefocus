@@ -32,7 +32,7 @@ const turnstileSiteKey = import.meta.env.TURNSTILE_SITE_KEY ?? "";
     </section>
 
     <section class="contact-main page-shell" aria-labelledby="contact-form-title">
-      <form class="contact-form" action="/api/contact.php" method="post">
+      <form class="contact-form" action="/api/contact.php" method="post" novalidate>
         <div class="contact-status contact-status--success" hidden data-status-message="success" role="status">
           <p class="contact-status__title">Merci, votre message est bien arrivé.</p>
           <p>Je reviendrai vers vous rapidement pour échanger autour de votre projet.</p>
@@ -188,6 +188,132 @@ const turnstileSiteKey = import.meta.env.TURNSTILE_SITE_KEY ?? "";
     const getTurnstileToken = (form) =>
       form?.querySelector('[name="cf-turnstile-response"]')?.value?.trim() ?? "";
 
+    const validationMessages = {
+      required: "Ce champ est obligatoire.",
+      email: "Saisissez une adresse email valide.",
+      phone: "Saisissez un numéro de téléphone valide.",
+      name: "Saisissez un nom ou prénom valide.",
+      date: "Saisissez une date valide.",
+      message: "Décrivez votre demande en quelques mots.",
+      sessionType: "Choisissez un type de séance.",
+      maxLength: "Cette valeur est trop longue.",
+    };
+    const sessionTypes = new Set(["mariage", "grossesse", "naissance", "famille", "autre"]);
+    const encoder = new TextEncoder();
+
+    const getField = (form, name) => form?.querySelector(`[name="${name}"]`);
+    const fieldValue = (form, name) => getField(form, name)?.value?.trim() ?? "";
+    const fieldBytes = (value) => encoder.encode(value).length;
+    const hasLetter = (value) => /\p{L}/u.test(value);
+    const validPhone = (value) => {
+      if (!/^\+?[0-9][0-9\s().\/-]{5,39}$/u.test(value)) return false;
+      const digits = value.replace(/\D/g, "");
+      return digits.length >= 6 && digits.length <= 20;
+    };
+    const validDate = (value) => {
+      if (value === "") return true;
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+      const date = new Date(`${value}T00:00:00Z`);
+      return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value;
+    };
+
+    const setFieldError = (field, message) => {
+      if (!field) return;
+      const wrapper = field.closest(".contact-form__field") ?? field.parentElement;
+      const id = `${field.id || field.name}-error`;
+      let messageElement = wrapper?.querySelector("[data-field-error]");
+
+      if (!messageElement) {
+        messageElement = document.createElement("p");
+        messageElement.dataset.fieldError = "";
+        messageElement.className = "contact-form__field-error";
+        wrapper?.appendChild(messageElement);
+      }
+
+      field.setAttribute("aria-invalid", "true");
+      field.setAttribute("aria-describedby", id);
+      field.classList.add("contact-form__input--error");
+      messageElement.id = id;
+      messageElement.textContent = message;
+      messageElement.removeAttribute("hidden");
+    };
+
+    const clearFieldError = (field) => {
+      if (!field) return;
+      field.removeAttribute("aria-invalid");
+      field.removeAttribute("aria-describedby");
+      field.classList.remove("contact-form__input--error");
+      field.closest(".contact-form__field")?.querySelector("[data-field-error]")?.setAttribute("hidden", "");
+    };
+
+    const getContactFieldError = (form, name) => {
+      const field = getField(form, name);
+      if (!field) return "";
+
+      const value = field.value.trim();
+      const maxLength = Number(field.getAttribute("maxlength") || "0");
+      if (maxLength > 0 && field.value.length > maxLength) return validationMessages.maxLength;
+
+      if (name === "name") {
+        if (value === "") return validationMessages.required;
+        if (!hasLetter(value)) return validationMessages.name;
+      }
+
+      if (name === "email") {
+        if (value === "") return validationMessages.required;
+        if (!field.validity.valid) return validationMessages.email;
+      }
+
+      if (name === "phone") {
+        if (value === "") return validationMessages.required;
+        if (!validPhone(value)) return validationMessages.phone;
+      }
+
+      if (name === "session_type" && !sessionTypes.has(value)) return validationMessages.sessionType;
+      if (name === "event_date" && !validDate(value)) return validationMessages.date;
+
+      if (name === "message") {
+        if (value === "") return validationMessages.required;
+        if (fieldBytes(value) < 10) return validationMessages.message;
+      }
+
+      return "";
+    };
+
+    const validateContactField = (form, name) => {
+      const field = getField(form, name);
+      if (!field) return true;
+
+      const error = getContactFieldError(form, name);
+      clearFieldError(field);
+      if (error) {
+        setFieldError(field, error);
+        return false;
+      }
+
+      return true;
+    };
+
+    const validateContactForm = (form, focusFirstInvalid = false) => {
+      const errors = [];
+
+      ["name", "email", "phone", "session_type", "event_date", "location", "message"].forEach((name) => {
+        const field = getField(form, name);
+        if (!field) return;
+        clearFieldError(field);
+        const error = getContactFieldError(form, name);
+        if (error) errors.push([field, error]);
+      });
+
+      errors.forEach(([field, message]) => setFieldError(field, message));
+
+      if (errors.length > 0 && focusFirstInvalid) {
+        errors[0][0]?.focus();
+      }
+
+      return errors.length === 0;
+    };
+
     const showTurnstileMessage = (form, message = turnstileErrorMessage) => {
       const messageElement = form?.querySelector("[data-turnstile-message]");
       if (!messageElement) return;
@@ -223,7 +349,17 @@ const turnstileSiteKey = import.meta.env.TURNSTILE_SITE_KEY ?? "";
     };
 
     document.querySelectorAll("form").forEach((form) => {
+      ["name", "email", "phone", "session_type", "event_date", "location", "message"].forEach((name) => {
+        getField(form, name)?.addEventListener("input", () => validateContactField(form, name));
+        getField(form, name)?.addEventListener("change", () => validateContactField(form, name));
+      });
+
       form.addEventListener("submit", (event) => {
+        if (!validateContactForm(form, true)) {
+          event.preventDefault();
+          return;
+        }
+
         const widget = form.querySelector(".cf-turnstile");
         if (!widget || !getTurnstileToken(form)) {
           event.preventDefault();
@@ -372,6 +508,23 @@ const turnstileSiteKey = import.meta.env.TURNSTILE_SITE_KEY ?? "";
   .contact-form textarea:focus {
     outline: 2px solid var(--color-text);
     outline-offset: 0.25rem;
+  }
+
+  .contact-form input.contact-form__input--error,
+  .contact-form select.contact-form__input--error,
+  .contact-form textarea.contact-form__input--error {
+    border-bottom-color: #b42318;
+  }
+
+  .contact-form .contact-form__field-error {
+    margin: -0.25rem 0 0;
+    color: #b42318;
+    font-size: var(--text-sm);
+    line-height: 1.45;
+  }
+
+  .contact-form .contact-form__field-error[hidden] {
+    display: none;
   }
 
   .contact-form__trap {

@@ -18,23 +18,38 @@ function redirect_to(string $url): void
     exit;
 }
 
-function log_contact_rejection(string $reason): void
+function log_contact_rejection(string $reason, array $context = []): void
 {
     $language = $GLOBALS['contact_language'] ?? 'unknown';
     $ip = client_ip();
+    $contextParts = [];
+
+    foreach ($context as $key => $value) {
+        if (!is_string($key) || !is_scalar($value)) {
+            continue;
+        }
+
+        $safeKey = preg_replace('/[^a-z0-9_-]/i', '', $key) ?? '';
+        $safeValue = preg_replace('/[^a-z0-9_.:-]/i', '', (string)$value) ?? '';
+
+        if ($safeKey !== '' && $safeValue !== '') {
+            $contextParts[] = $safeKey . '=' . $safeValue;
+        }
+    }
 
     error_log(sprintf(
-        'Life Focus contact form rejected: reason=%s lang=%s ip_hash=%s',
+        'Life Focus contact form rejected: reason=%s lang=%s ip_hash=%s%s',
         $reason,
         is_string($language) ? $language : 'unknown',
-        hash('sha256', $ip)
+        hash('sha256', $ip),
+        $contextParts === [] ? '' : ' ' . implode(' ', $contextParts)
     ));
 }
 
-function reject(bool $silentSuccess = false, string $reason = 'unknown'): void
+function reject(bool $silentSuccess = false, string $reason = 'unknown', array $context = []): void
 {
     if (!$silentSuccess) {
-        log_contact_rejection($reason);
+        log_contact_rejection($reason, $context);
     }
 
     $language = $GLOBALS['contact_language'] ?? 'fr';
@@ -319,6 +334,8 @@ function is_valid_date(string $value): bool
 
 function is_valid_phone(string $value): bool
 {
+    $value = str_replace('/', '-', $value);
+
     if (!preg_match('/^\+?[0-9][0-9\s().-]{5,39}$/', $value)) {
         return false;
     }
@@ -330,7 +347,11 @@ function is_valid_phone(string $value): bool
 
 function is_valid_name(string $value): bool
 {
-    return (bool)preg_match('/^[\p{L}\p{M}][\p{L}\p{M}\s\'’.-]{1,119}$/u', $value);
+    if (strlen($value) < 2 || strlen($value) > 120 || has_header_injection($value)) {
+        return false;
+    }
+
+    return (bool)preg_match('/\p{L}/u', $value);
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -395,6 +416,24 @@ $locationRaw = post_string('location', 160);
 $messageRaw = post_string('message', 4000);
 $phoneRequired = $contactLanguage !== 'en';
 
+$rawFieldErrors = [
+    'name' => $nameRaw === null ? 'missing_or_too_long' : null,
+    'email' => $emailRaw === null ? 'missing_or_too_long' : null,
+    'phone' => ($phoneRequired && $phoneRaw === null) ? 'missing_or_too_long' : null,
+    'session_type' => $sessionTypeRaw === null ? 'missing_or_too_long' : null,
+    'event_date' => $eventDateRaw === null ? 'missing_or_too_long' : null,
+    'location' => $locationRaw === null ? 'missing_or_too_long' : null,
+    'message' => $messageRaw === null ? 'missing_or_too_long' : null,
+    'email_header' => ($emailRaw !== null && has_header_injection($emailRaw)) ? 'header_injection' : null,
+    'name_header' => ($nameRaw !== null && has_header_injection($nameRaw)) ? 'header_injection' : null,
+];
+
+foreach ($rawFieldErrors as $field => $rule) {
+    if ($rule !== null) {
+        reject(false, 'invalid_form_data', ['field' => $field, 'rule' => $rule]);
+    }
+}
+
 if (
     $nameRaw === null ||
     $emailRaw === null ||
@@ -406,7 +445,7 @@ if (
     has_header_injection($emailRaw) ||
     has_header_injection($nameRaw)
 ) {
-    reject(false, 'invalid_form_data');
+    reject(false, 'invalid_form_data', ['field' => 'raw', 'rule' => 'fallback']);
 }
 
 $name = clean_text($nameRaw);
@@ -418,21 +457,22 @@ $eventDate = clean_text($eventDateRaw);
 $location = clean_text($locationRaw);
 $message = clean_message($messageRaw);
 
-if (
-    $name === '' ||
-    !is_valid_name($name) ||
-    $email === false ||
-    ($phoneRequired && $phone === '') ||
-    ($phone !== '' && !is_valid_phone($phone)) ||
-    $message === '' ||
-    strlen($message) < 10 ||
-    !array_key_exists($sessionType, $sessionLabels)
-) {
-    reject(false, 'invalid_form_data');
+$cleanFieldErrors = [
+    'name' => ($name === '' || !is_valid_name($name)) ? 'invalid_name' : null,
+    'email' => $email === false ? 'invalid_email' : null,
+    'phone' => ($phoneRequired && $phone === '') ? 'missing_phone' : (($phone !== '' && !is_valid_phone($phone)) ? 'invalid_phone' : null),
+    'message' => ($message === '' || strlen($message) < 10) ? 'invalid_message' : null,
+    'session_type' => !array_key_exists($sessionType, $sessionLabels) ? 'unexpected_session_type' : null,
+];
+
+foreach ($cleanFieldErrors as $field => $rule) {
+    if ($rule !== null) {
+        reject(false, 'invalid_form_data', ['field' => $field, 'rule' => $rule]);
+    }
 }
 
 if ($eventDate !== '' && !is_valid_date($eventDate)) {
-    reject(false, 'invalid_form_data');
+    reject(false, 'invalid_form_data', ['field' => 'event_date', 'rule' => 'invalid_date']);
 }
 
 if (
@@ -441,7 +481,7 @@ if (
     has_header_injection($eventDate) ||
     has_header_injection($location)
 ) {
-    reject(false, 'invalid_form_data');
+    reject(false, 'invalid_form_data', ['field' => 'clean', 'rule' => 'header_injection']);
 }
 
 $sessionLabel = $sessionLabels[$sessionType];

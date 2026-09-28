@@ -412,7 +412,7 @@ const structuredData = [
         </p>
       </div>
 
-      <form class="en-form" action="/api/contact.php" method="post">
+      <form class="en-form" action="/api/contact.php" method="post" novalidate>
         <input type="hidden" name="lang" value="en" />
         <input type="hidden" name="session_type" value="mariage" />
 
@@ -506,6 +506,126 @@ const structuredData = [
     const getTurnstileToken = (form) =>
       form?.querySelector('[name="cf-turnstile-response"]')?.value?.trim() ?? "";
 
+    const validationMessages = {
+      required: "This field is required.",
+      email: "Enter a valid email address.",
+      phone: "Enter a valid phone number.",
+      name: "Enter a valid name.",
+      date: "Enter a valid date.",
+      message: "Tell me a little more about your enquiry.",
+      maxLength: "This value is too long.",
+    };
+    const encoder = new TextEncoder();
+
+    const getField = (form, name) => form?.querySelector(`[name="${name}"]`);
+    const fieldValue = (form, name) => getField(form, name)?.value?.trim() ?? "";
+    const fieldBytes = (value) => encoder.encode(value).length;
+    const hasLetter = (value) => /\p{L}/u.test(value);
+    const validPhone = (value) => {
+      if (value === "") return true;
+      if (!/^\+?[0-9][0-9\s().\/-]{5,39}$/u.test(value)) return false;
+      const digits = value.replace(/\D/g, "");
+      return digits.length >= 6 && digits.length <= 20;
+    };
+    const validDate = (value) => {
+      if (value === "") return true;
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+      const date = new Date(`${value}T00:00:00Z`);
+      return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value;
+    };
+
+    const setFieldError = (field, message) => {
+      if (!field) return;
+      const wrapper = field.closest(".en-form__field") ?? field.parentElement;
+      const id = `${field.id || field.name}-error`;
+      let messageElement = wrapper?.querySelector("[data-field-error]");
+
+      if (!messageElement) {
+        messageElement = document.createElement("p");
+        messageElement.dataset.fieldError = "";
+        messageElement.className = "en-form__field-error";
+        wrapper?.appendChild(messageElement);
+      }
+
+      field.setAttribute("aria-invalid", "true");
+      field.setAttribute("aria-describedby", id);
+      field.classList.add("en-form__input--error");
+      messageElement.id = id;
+      messageElement.textContent = message;
+      messageElement.removeAttribute("hidden");
+    };
+
+    const clearFieldError = (field) => {
+      if (!field) return;
+      field.removeAttribute("aria-invalid");
+      field.removeAttribute("aria-describedby");
+      field.classList.remove("en-form__input--error");
+      field.closest(".en-form__field")?.querySelector("[data-field-error]")?.setAttribute("hidden", "");
+    };
+
+    const getContactFieldError = (form, name) => {
+      const field = getField(form, name);
+      if (!field) return "";
+
+      const value = field.value.trim();
+      const maxLength = Number(field.getAttribute("maxlength") || "0");
+      if (maxLength > 0 && field.value.length > maxLength) return validationMessages.maxLength;
+
+      if (name === "name") {
+        if (value === "") return validationMessages.required;
+        if (!hasLetter(value)) return validationMessages.name;
+      }
+
+      if (name === "email") {
+        if (value === "") return validationMessages.required;
+        if (!field.validity.valid) return validationMessages.email;
+      }
+
+      if (name === "phone" && !validPhone(value)) return validationMessages.phone;
+      if (name === "event_date" && !validDate(value)) return validationMessages.date;
+
+      if (name === "message") {
+        if (value === "") return validationMessages.required;
+        if (fieldBytes(value) < 10) return validationMessages.message;
+      }
+
+      return "";
+    };
+
+    const validateContactField = (form, name) => {
+      const field = getField(form, name);
+      if (!field) return true;
+
+      const error = getContactFieldError(form, name);
+      clearFieldError(field);
+      if (error) {
+        setFieldError(field, error);
+        return false;
+      }
+
+      return true;
+    };
+
+    const validateContactForm = (form, focusFirstInvalid = false) => {
+      const errors = [];
+
+      ["name", "email", "phone", "event_date", "location", "message"].forEach((name) => {
+        const field = getField(form, name);
+        if (!field) return;
+        clearFieldError(field);
+        const error = getContactFieldError(form, name);
+        if (error) errors.push([field, error]);
+      });
+
+      errors.forEach(([field, message]) => setFieldError(field, message));
+
+      if (errors.length > 0 && focusFirstInvalid) {
+        errors[0][0]?.focus();
+      }
+
+      return errors.length === 0;
+    };
+
     const showTurnstileMessage = (form, message = turnstileErrorMessage) => {
       const messageElement = form?.querySelector("[data-turnstile-message]");
       if (!messageElement) return;
@@ -541,7 +661,17 @@ const structuredData = [
     };
 
     document.querySelectorAll("form").forEach((form) => {
+      ["name", "email", "phone", "event_date", "location", "message"].forEach((name) => {
+        getField(form, name)?.addEventListener("input", () => validateContactField(form, name));
+        getField(form, name)?.addEventListener("change", () => validateContactField(form, name));
+      });
+
       form.addEventListener("submit", (event) => {
+        if (!validateContactForm(form, true)) {
+          event.preventDefault();
+          return;
+        }
+
         const widget = form.querySelector(".cf-turnstile");
         if (!widget || !getTurnstileToken(form)) {
           event.preventDefault();
@@ -940,6 +1070,22 @@ const structuredData = [
 
   .en-form textarea {
     resize: vertical;
+  }
+
+  .en-form input.en-form__input--error,
+  .en-form textarea.en-form__input--error {
+    border-bottom-color: #b42318;
+  }
+
+  .en-form .en-form__field-error {
+    margin: -0.25rem 0 0;
+    color: #b42318;
+    font-size: var(--text-sm);
+    line-height: 1.45;
+  }
+
+  .en-form .en-form__field-error[hidden] {
+    display: none;
   }
 
   .en-form__trap {
