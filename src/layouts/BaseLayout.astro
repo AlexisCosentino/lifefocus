@@ -7,6 +7,7 @@ import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import PhotoLightbox from "../components/PhotoLightbox.astro";
 import logoLifeFocus from "../assets/brand/LIFE FOCUS logo.svg?url";
+import favicon from "../assets/brand/favicon.png?url";
 import defaultOgImage from "../images/home/hero-main.jpg";
 
 interface Props {
@@ -145,11 +146,7 @@ const structuredDataGraph = {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImageUrl} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=5" />
-    <link rel="icon" type="image/png" href="/favicon-32.png?v=5" sizes="32x32" />
-    <link rel="icon" type="image/png" href="/icon-192.png?v=5" sizes="192x192" />
-    <link rel="shortcut icon" href="/favicon.ico?v=5" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=5" />
+    <link rel="icon" type="image/png" href={favicon} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
       rel="preconnect"
