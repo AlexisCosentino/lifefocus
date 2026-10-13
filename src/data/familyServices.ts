@@ -129,7 +129,7 @@ export const familyServices = {
     label: "Grossesse",
     title: "Photographe grossesse Drôme, Romans & Valence | Life Focus",
     description:
-      "Séance grossesse naturelle en extérieur autour de Romans-sur-Isère, Valence et dans la Drôme, seule, en couple ou en famille.",
+      "Avant que tout change, prenons le temps de garder une trace de cette parenthèse. Des séances grossesse en extérieur, autour de Romans et Valence.",
     canonicalUrl: "https://www.lifefocus.fr/grossesse/",
     hero: {
       eyebrow: "GROSSESSE",
@@ -258,7 +258,7 @@ export const familyServices = {
     label: "Naissance",
     title: "Photographe naissance Drôme, Romans & Valence | Life Focus",
     description:
-      "Reportage naissance à domicile autour de Romans-sur-Isère, Valence et dans la Drôme, au rythme de votre bébé et de votre famille.",
+      "Les premiers jours passent si vite. Chez vous, au rythme de votre bébé, je photographie les petits gestes, les regards et cette nouvelle vie qui commence.",
     canonicalUrl: "https://www.lifefocus.fr/naissance/",
     hero: {
       eyebrow: "NAISSANCE",
@@ -379,7 +379,7 @@ export const familyServices = {
     label: "Famille",
     title: "Photographe famille Drôme & Valence | Life Focus",
     description:
-      "Photographe famille à Romans-sur-Isère, Valence et dans la Drôme. Une séance photo naturelle et vivante, avec vos enfants, à partir de 250 €.",
+      "Pas besoin de poser ni de demander aux enfants de sourire. On joue, on bouge, on profite. Je photographie votre famille telle qu'elle est, dans la Drôme.",
     canonicalUrl: "https://www.lifefocus.fr/famille/",
     hero: {
       eyebrow: "FAMILLE",
