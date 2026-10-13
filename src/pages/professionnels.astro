@@ -1,7 +1,6 @@
 ---
 import EditorialGallery from "../components/EditorialGallery.astro";
 import ImageSlot from "../components/ImageSlot.astro";
-import { homeImages } from "../data/homeImages";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const pageTitle = "Professionnels du mariage & collaborations | Life Focus";
@@ -27,81 +26,6 @@ const professionalGalleryAlt = {
   "src/images/professionnels/gallery/16.jpg": "Décoration florale et rubans sur une structure en bois.",
   "src/images/professionnels/gallery/17.jpg": "Musiciens jouant pendant une réception de mariage.",
 } as const;
-
-const professionalImages = [
-  {
-    ...homeImages.weddingMain,
-    size: "wide",
-    slotPath: "src/images/professionnels/gallery/01.jpg",
-    slotOrientation: "horizontal",
-  },
-  {
-    ...homeImages.weddingSecondary,
-    size: "vertical",
-    slotPath: "src/images/professionnels/gallery/02.jpg",
-    slotOrientation: "vertical",
-  },
-  {
-    ...homeImages.hero,
-    size: "small",
-    slotPath: "src/images/professionnels/gallery/03.jpg",
-    slotOrientation: "horizontal",
-  },
-  {
-    ...homeImages.heroSecondary,
-    size: "vertical",
-    slotPath: "src/images/professionnels/gallery/04.jpg",
-    slotOrientation: "vertical",
-  },
-  {
-    ...homeImages.weddingMain,
-    size: "wide",
-    slotPath: "src/images/professionnels/gallery/05.jpg",
-    slotOrientation: "horizontal",
-  },
-  {
-    ...homeImages.heroSecondary,
-    size: "vertical",
-    slotPath: "src/images/professionnels/gallery/06.jpg",
-    slotOrientation: "vertical",
-  },
-  {
-    ...homeImages.hero,
-    size: "small",
-    slotPath: "src/images/professionnels/gallery/07.jpg",
-    slotOrientation: "horizontal",
-  },
-  {
-    ...homeImages.weddingSecondary,
-    size: "vertical",
-    slotPath: "src/images/professionnels/gallery/08.jpg",
-    slotOrientation: "vertical",
-  },
-  {
-    ...homeImages.weddingMain,
-    size: "wide",
-    slotPath: "src/images/professionnels/gallery/09.jpg",
-    slotOrientation: "horizontal",
-  },
-  {
-    ...homeImages.hero,
-    size: "small",
-    slotPath: "src/images/professionnels/gallery/10.jpg",
-    slotOrientation: "horizontal",
-  },
-  {
-    ...homeImages.heroSecondary,
-    size: "vertical",
-    slotPath: "src/images/professionnels/gallery/11.jpg",
-    slotOrientation: "vertical",
-  },
-  {
-    ...homeImages.weddingSecondary,
-    size: "small",
-    slotPath: "src/images/professionnels/gallery/12.jpg",
-    slotOrientation: "horizontal",
-  },
-] as const;
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -214,6 +138,7 @@ const structuredData = {
             Avec l'accord des mariés, je peux partager certaines images avec les professionnels
             présents pour mettre en valeur leur travail. Une façon simple de prolonger cette belle
             collaboration, dans le respect de chacun et avec la mention
+            {" "}
             <span>Life Focus — Alexis Cosentino</span> lors de leur utilisation.
           </p>
         </div>
@@ -261,7 +186,7 @@ const structuredData = {
       eyebrow="04 / GALERIE"
       title="Lieux, décors, matières et ambiances."
       titleId="professionals-gallery-title"
-      images={professionalImages}
+      images={[]}
       galleryFolder="src/images/professionnels/gallery"
       altByPath={professionalGalleryAlt}
     />
