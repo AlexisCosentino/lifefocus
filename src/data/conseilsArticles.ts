@@ -17,6 +17,22 @@ export interface AdviceArticle {
 
 export const adviceArticles = [
   {
+    title: "Combien coûte un photographe de mariage dans la Drôme en 2027 ?",
+    seoTitle: "Prix photographe mariage Drôme 2027 : quel budget prévoir ?",
+    description:
+      "Quel budget prévoir pour un photographe de mariage dans la Drôme en 2027 ? Tarifs, prestations et conseils pour choisir la bonne formule.",
+    slug: "prix-photographe-mariage-drome",
+    publishedAt: new Date("2026-10-14"),
+    category: "Mariage",
+    excerpt:
+      "Durée de présence, tri, retouche, galerie, accompagnement : comprendre ce qui compose le prix d'un reportage de mariage dans la Drôme.",
+    coverImagePath: "src/images/conseils/combien-coute-un-photographe/Melissa & Nicolas_281.jpg",
+    featuredImageAlt: "Mélissa et Nicolas ensemble dans un jardin le jour de leur mariage.",
+    primaryCtaHref: "/mariage/",
+    primaryCtaLabel: "DÉCOUVRIR MES REPORTAGES DE MARIAGE →",
+    draft: false,
+  },
+  {
     title: "Une séance grossesse en hiver au Parc de Lorient",
     seoTitle: "Séance grossesse au Parc de Lorient près de Valence | Life Focus",
     description:

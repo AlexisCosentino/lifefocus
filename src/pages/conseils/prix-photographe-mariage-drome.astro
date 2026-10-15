@@ -1,0 +1,369 @@
+---
+import ImageSlot from "../../components/ImageSlot.astro";
+import ArticleLayout from "../../layouts/ArticleLayout.astro";
+import { adviceArticles } from "../../data/conseilsArticles";
+import { weddingIncluded, weddingPackages } from "../../data/weddingCollections";
+
+const article = adviceArticles.find((item) => item.slug === "prix-photographe-mariage-drome");
+
+if (!article) {
+  throw new Error("Article introuvable.");
+}
+
+const galleryImages = [
+  { filename: "Melissa & Nicolas_16.jpg", orientation: "horizontal", label: "Mélissa pendant ses préparatifs, face au miroir." },
+  { filename: "Melissa & Nicolas_34.jpg", orientation: "horizontal", label: "Mélissa entourée de ses proches pendant les préparatifs." },
+  { filename: "Melissa & Nicolas_41.jpg", orientation: "horizontal", label: "Mélissa et une proche échangent un sourire dehors." },
+  { filename: "Melissa & Nicolas_66.jpg", orientation: "horizontal", label: "Nicolas aidé par une proche à ajuster son nœud papillon." },
+  { filename: "Melissa & Nicolas_75.jpg", orientation: "horizontal", label: "Un proche aide Nicolas à terminer ses préparatifs." },
+  { filename: "Melissa & Nicolas_79.jpg", orientation: "vertical", label: "Nicolas partage une étreinte pendant les préparatifs." },
+  { filename: "Melissa & Nicolas_283.jpg", orientation: "vertical", label: "Mélissa et Nicolas dans une allée bordée de verdure." },
+  { filename: "Melissa & Nicolas_296.jpg", orientation: "vertical", label: "Portrait de Mélissa et Nicolas enlacés en extérieur." },
+  { filename: "Melissa & Nicolas_306.jpg", orientation: "horizontal", label: "Mélissa et Nicolas ensemble près d'une bâtisse en pierre." },
+  { filename: "Melissa & Nicolas_340.jpg", orientation: "horizontal", label: "Les mains des mariés et le bouquet de Mélissa." },
+  { filename: "Melissa & Nicolas_361.jpg", orientation: "horizontal", label: "Nicolas soulève Mélissa dans un champ." },
+  { filename: "Melissa & Nicolas_380.jpg", orientation: "horizontal", label: "Mélissa et Nicolas assis ensemble devant un paysage ouvert." },
+  { filename: "Melissa & Nicolas_521.jpg", orientation: "horizontal", label: "Nicolas et ses proches réunis devant une voiture." },
+].map((image) => ({
+  ...image,
+  path: `src/images/conseils/combien-coute-un-photographe/${image.filename}`,
+}));
+---
+
+<ArticleLayout article={article}>
+  <p>
+    Quand on commence à organiser son mariage, on découvre rapidement que les prix des photographes
+    peuvent aller du simple au triple. Parfois même davantage. Certains proposent quelques heures de
+    présence pour quelques centaines d'euros, d'autres facturent plusieurs milliers d'euros pour une
+    journée complète.
+  </p>
+
+  <p>Alors, comment s'y retrouver ? Et surtout, qu'est-ce qui justifie de telles différences ?</p>
+
+  <p>
+    Je suis photographe de mariage à Romans-sur-Isère, près de Valence, et je préfère être transparent
+    sur le sujet. Dans cet article, je vous donne quelques repères sur les prix pratiqués, je vous
+    présente mes propres formules et je vous explique ce qui compte vraiment, selon moi, lorsqu'on
+    choisit son photographe.
+  </p>
+
+  <div class="article-reportage-grid" aria-label="Préparatifs du mariage de Mélissa et Nicolas">
+    {galleryImages.slice(0, 5).map((image, index) => (
+      <figure class:list={["article-reportage-grid__item", index === 0 && "article-reportage-grid__item--wide"]}>
+        <ImageSlot path={image.path} orientation={image.orientation} label={image.label} />
+      </figure>
+    ))}
+  </div>
+
+  <h2>Quel budget prévoir pour un photographe de mariage ?</h2>
+
+  <p>
+    Pour avoir un premier ordre d'idée, le <a href="https://www.mariages.net/articles/prix-photographe-mariage--c11471" target="_blank" rel="noopener noreferrer">rapport 2024 cité par Mariages.net </a>
+     indiquait un budget moyen de 1 300 € consacré au photographe par les couples français interrogés.
+    C'est un chiffre intéressant, mais il faut le replacer dans son contexte : tous les mariages ne
+    nécessitent pas la même durée de présence, et les prestations peuvent être très différentes.
+  </p>
+
+  <p>
+    Pour une couverture assez complète de la journée, une enveloppe de 1 500 à 2 500 € constitue un
+    repère raisonnable parmi les offres de photographes professionnels. On trouve évidemment des
+    prestations moins chères, et d'autres qui dépassent largement les 3 000 €.
+  </p>
+
+  <p>
+    Dans la Drôme, autour de Valence, Romans-sur-Isère ou Montélimar, les tarifs varient également
+    selon les photographes et les formules proposées. Il n'existe pas un prix unique pour une journée
+    de mariage.
+  </p>
+
+  <p>
+    Mon conseil ? Avant de comparer deux devis, regardez combien d'heures sont comprises, ce qui est
+    livré et surtout le travail du photographe. Deux prestations affichées au même prix peuvent
+    raconter deux histoires très différentes.
+  </p>
+
+  <h2>Pourquoi les prix varient-ils autant ?</h2>
+
+  <p>
+    La première différence, assez évidente, c'est le temps de présence. Photographier une cérémonie
+    civile de trois heures et accompagner un couple depuis ses préparatifs jusqu'à la soirée ne
+    représentent pas le même travail.
+  </p>
+
+  <p>Mais les heures passées avec vous ne sont qu'une partie de la prestation.</p>
+
+  <p>
+    Avant votre mariage, il y a les échanges, la préparation, la compréhension de votre planning et
+    parfois les repérages. Après, il faut trier plusieurs milliers d'images, sélectionner celles qui
+    racontent le mieux la journée, puis les travailler une à une pour obtenir un reportage cohérent.
+  </p>
+
+  <p>
+    Il y a aussi l'expérience. Avec les mariages, on apprend à anticiper : une cérémonie qui prend du
+    retard, une lumière compliquée, une séance de couple qu'il faut déplacer au dernier moment ou des
+    photos de groupe à organiser sans monopoliser tous les invités.
+  </p>
+
+  <p>
+    Ce sont des situations que l'on ne peut pas toujours prévoir. Et c'est justement là que
+    l'expérience d'un photographe prend tout son sens.
+  </p>
+
+  <p>
+    Enfin, chaque professionnel a son approche. Certains privilégient les portraits très travaillés,
+    d'autres la spontanéité, la mode ou le reportage documentaire. Il n'y a pas une seule bonne façon
+    de photographier un mariage. L'essentiel est de trouver celle qui vous correspond.
+  </p>
+
+  <div class="article-reportage-grid" aria-label="Moments de Mélissa et Nicolas">
+    {galleryImages.slice(5, 7).map((image) => (
+      <figure class="article-reportage-grid__item">
+        <ImageSlot path={image.path} orientation={image.orientation} label={image.label} />
+      </figure>
+    ))}
+  </div>
+
+  <h2>Mes formules de reportage chez Life Focus</h2>
+
+  <p>
+    Chez Life Focus, j'ai choisi de proposer quatre formules, principalement différenciées par le
+    temps de présence. Que vous organisiez un mariage civil en petit comité ou une grande journée de
+    fête, l'idée est de trouver une couverture adaptée à votre programme.
+  </p>
+
+  <div class="article-pricing" aria-label="Formules mariage Life Focus">
+    {weddingPackages.map((item) => (
+      <section class="article-pricing__item">
+        <div class="article-pricing__top">
+          <h3>{item.name}</h3>
+          <p class="article-pricing__price">{item.price}</p>
+        </div>
+        <p>{Number(item.durationHours)} heures · {item.context}</p>
+      </section>
+    ))}
+  </div>
+
+  <p>
+    Ces formules sont un point de départ. Si vous hésitez entre deux durées, nous pouvons simplement
+    regarder votre planning ensemble. Je préfère vous conseiller une prestation qui correspond
+    réellement à votre journée plutôt que de vous faire réserver des heures dont vous n'avez pas
+    besoin.
+  </p>
+
+  <p>
+    Vous pouvez retrouver le détail des prestations et des conditions de déplacement sur ma <a href="/mariage/">page photographe de mariage</a>.
+  </p>
+
+  <h2>Combien d'heures de photographie prévoir ?</h2>
+
+  <p>
+    C'est une question que les couples me posent régulièrement, et la réponse dépend surtout de ce
+    que vous souhaitez conserver en images.
+  </p>
+
+  <p>
+    Pour un mariage civil intimiste, trois heures peuvent suffire à raconter l'essentiel : l'arrivée
+    des invités, la cérémonie, les félicitations, quelques photos de groupe et un moment à deux.
+  </p>
+
+  <p>
+    Avec six heures, on commence à raconter davantage qu'une cérémonie. Selon les horaires, on peut
+    intégrer les préparatifs, les retrouvailles, les échanges entre invités et une partie du vin
+    d'honneur.
+  </p>
+
+  <p>
+    Neuf ou douze heures permettent d'aller plus loin dans le reportage. J'aime particulièrement ces
+    couvertures parce qu'elles laissent de la place aux moments auxquels personne ne pense forcément
+    : un parent qui observe la scène à distance, des enfants qui jouent, un fou rire entre amis ou
+    quelques minutes de calme au milieu de l'agitation.
+  </p>
+
+  <p>Ce sont parfois ces images-là qui prennent le plus de valeur avec les années.</p>
+
+  <p>
+    Il y a toutefois une chose à garder en tête : une journée de mariage ne se déroule jamais
+    exactement comme prévu. Mieux vaut donc prévoir un peu de marge, surtout si plusieurs lieux sont
+    impliqués ou si vous souhaitez des photos en soirée.
+  </p>
+
+  <figure class="article-reportage-grid article-reportage-grid--final" aria-label="Portrait de Mélissa et Nicolas">
+    <ImageSlot
+      path={galleryImages[7].path}
+      orientation={galleryImages[7].orientation}
+      label={galleryImages[7].label}
+    />
+  </figure>
+
+  <h2>Ce qui est compris dans mes prestations</h2>
+
+  <p>Quelle que soit la formule choisie, mon travail ne commence pas au moment où je sors mon appareil photo.</p>
+
+  <p>
+    Avant votre mariage, nous prenons le temps d'échanger sur votre journée, les personnes importantes,
+    vos envies et les éventuelles contraintes. Je peux vous aider à réfléchir au meilleur moment pour
+    les photos de couple, à organiser les photos de groupe ou à anticiper les déplacements.
+  </p>
+
+  <p>
+    Et si vous n'avez aucune idée du temps qu'il faut prévoir, aucun problème. C'est aussi mon rôle de
+    vous conseiller.
+  </p>
+
+  <p>
+    Après le mariage, je réalise personnellement le tri et le traitement de vos photographies. Je ne
+    fixe pas de limite arbitraire au nombre d'images livrées : je sélectionne celles qui méritent leur
+    place dans le reportage, sans chercher à atteindre un quota.
+  </p>
+
+  <p>
+    {weddingIncluded[1]} {weddingIncluded[2]} {weddingIncluded[3]}
+  </p>
+
+  <p>
+    Je propose aussi, en option, des séances avant ou après le mariage. Une séance engagement peut
+    notamment être une belle occasion de faire connaissance devant l'objectif, sans le rythme parfois
+    intense du jour J.
+  </p>
+
+  <h2>Le feeling avec votre photographe</h2>
+
+  <p>
+    On parle beaucoup de prix, de matériel et de style photographique. Mais il y a quelque chose que
+    je trouve tout aussi important : la relation que vous allez avoir avec votre photographe.
+  </p>
+
+  <p>
+    Vous allez partager avec lui des moments très personnels. Les préparatifs, parfois un peu de
+    stress, les émotions de vos proches, les imprévus. Vous devez pouvoir lui parler librement, lui
+    expliquer ce que vous aimez, ce que vous ne voulez pas, ou même ce qui vous inquiète.
+  </p>
+
+  <p>
+    Personnellement, j'aime beaucoup cette partie de mon métier. Découvrir les couples, comprendre
+    leur histoire, leur caractère, leur façon d'être ensemble. Je ne viens pas simplement réaliser
+    une série de jolies images : je m'intéresse vraiment à la journée que vous préparez.
+  </p>
+
+  <p>
+    Je suis quelqu'un d'investi, de sensible à ce qui se passe autour de moi. J'aime conseiller
+    lorsque c'est nécessaire, trouver des solutions lorsqu'un planning change et savoir aussi
+    m'effacer quand un moment mérite simplement d'être vécu.
+  </p>
+
+  <p>
+    Je pense notamment aux photos de couple. Certains mariés adorent poser, d'autres redoutent
+    complètement cet exercice. Et c'est parfaitement normal. Mon rôle est de vous mettre à l'aise, de
+    vous guider juste ce qu'il faut, sans vous demander de devenir quelqu'un d'autre devant l'appareil.
+  </p>
+
+  <p>Le jour du mariage, j'aimerais que vous puissiez me faire confiance au point de ne plus avoir à penser aux photos.</p>
+
+  <p>Profitez de vos invités, de votre famille, de cette journée qui passe toujours un peu trop vite. Je m'occupe du reste.</p>
+
+  <div class="article-reportage-grid" aria-label="Mélissa, Nicolas et leurs proches">
+    {galleryImages.slice(8).map((image, index) => (
+      <figure class:list={["article-reportage-grid__item", index === 0 && "article-reportage-grid__item--wide"]}>
+        <ImageSlot path={image.path} orientation={image.orientation} label={image.label} />
+      </figure>
+    ))}
+  </div>
+
+  <p>
+    Et si vous êtes encore en train de comparer plusieurs professionnels, j'ai écrit un guide sur les
+    <a href="/conseils/10-questions-a-poser-a-votre-photographe-avant-de-signer/"> 10 questions à poser à votre photographe avant de signer</a>.
+    Il pourra vous aider à faire votre choix avec davantage de recul.
+  </p>
+
+  <h2>Choisir au-delà du prix</h2>
+
+  <p>
+    Un budget est important, évidemment. Un mariage représente beaucoup de dépenses, et chaque couple
+    doit faire ses choix.
+  </p>
+
+  <p>
+    Mais une fois les tarifs comparés, je vous encourage surtout à regarder les images. Pas seulement
+    les dix plus belles photos d'un portfolio : prenez le temps de découvrir plusieurs reportages, de
+    regarder les cérémonies, les invités, les moments simples et les photos prises lorsque la lumière
+    est moins évidente.
+  </p>
+
+  <p>Demandez-vous si vous vous reconnaissez dans cette manière de raconter une histoire.</p>
+
+  <p>
+    De mon côté, je cherche des photographies naturelles, vivantes, parfois un peu imparfaites, mais
+    qui racontent quelque chose. Des images que vous aurez plaisir à revoir dans quelques mois, mais
+    aussi dans dix ou vingt ans.
+  </p>
+
+  <p>
+    Si cette approche vous parle et que vous préparez votre mariage dans la Drôme, autour de Valence,
+    Romans-sur-Isère, en Ardèche ou en Provence, je serais ravi d'en discuter avec vous.
+  </p>
+
+  <p>
+    Vous pouvez <a href="/contact/">me raconter votre projet</a> en quelques mots. On prendra le
+    temps de parler de votre journée et de voir ensemble quelle formule vous conviendrait le mieux.
+  </p>
+</ArticleLayout>
+
+<style>
+  .article-reportage-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(0.85rem, 2vw, 1.5rem);
+    margin: clamp(2rem, 4.5vw, 3.75rem) 0 clamp(2.25rem, 5vw, 4rem);
+  }
+
+  .article-reportage-grid__item {
+    margin: 0;
+  }
+
+  .article-reportage-grid__item--wide {
+    grid-column: 1 / -1;
+  }
+
+  .article-reportage-grid--final {
+    display: block;
+    max-width: min(100%, 34rem);
+  }
+
+  @media (max-width: 42rem) {
+    .article-reportage-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .article-pricing {
+    display: grid;
+    margin-block: clamp(1.5rem, 3vw, 2.5rem);
+    border-top: 1px solid var(--color-line);
+  }
+
+  .article-pricing__item {
+    display: grid;
+    gap: 0.5rem;
+    padding-block: clamp(1.25rem, 2.5vw, 1.75rem);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .article-pricing__top {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1rem;
+    align-items: baseline;
+  }
+
+  .article-pricing h3 {
+    margin: 0;
+  }
+
+  .article-pricing__price {
+    color: var(--color-text);
+    font-family: var(--font-editorial);
+    font-size: clamp(1.5rem, 1.25rem + 0.8vw, 2rem);
+    line-height: 1;
+    white-space: nowrap;
+  }
+</style>
