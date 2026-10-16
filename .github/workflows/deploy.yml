@@ -30,8 +30,10 @@ jobs:
           path: |
             .astro
             node_modules/.astro
-          key: astro-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-${{ hashFiles('astro.config.mjs') }}
+          key: astro-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-${{ hashFiles('astro.config.mjs') }}-${{ hashFiles('src/images/**/*') }}
           restore-keys: |
+            astro-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-${{ hashFiles('astro.config.mjs') }}-
+            astro-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-${{ hashFiles('astro.config.mjs') }}
             astro-${{ runner.os }}-${{ hashFiles('package-lock.json') }}-
 
       - name: Prepare IndexNow verification file
