@@ -6,9 +6,10 @@ import EditorialGallery from "./EditorialGallery.astro";
 interface Props {
   images: FamilyServiceImage[];
   galleryFolder?: string;
+  altByPath?: Record<string, string>;
 }
 
-const { images, galleryFolder } = Astro.props;
+const { images, galleryFolder, altByPath } = Astro.props;
 ---
 
 <EditorialGallery
@@ -17,4 +18,5 @@ const { images, galleryFolder } = Astro.props;
   titleId="family-gallery-title"
   images={images}
   galleryFolder={galleryFolder}
+  altByPath={altByPath}
 />

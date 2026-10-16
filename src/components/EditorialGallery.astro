@@ -36,7 +36,7 @@ const folderImages = normalizedFolder
       .sort(([pathA], [pathB]) => pathA.localeCompare(pathB, "fr", { numeric: true, sensitivity: "base" }))
       .map(([path, module]) => ({
         resolvedSrc: module.default,
-        alt: altByPath[path.slice(1)] ?? "",
+        alt: altByPath[path.slice(1)] ?? altByPath[path.split("/").at(-1) ?? ""] ?? "",
         slotPath: path.slice(1),
       }))
   : [];

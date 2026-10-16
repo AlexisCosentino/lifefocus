@@ -7,6 +7,7 @@ import FamilyServiceHero from "./FamilyServiceHero.astro";
 import FamilyServiceLinks from "./FamilyServiceLinks.astro";
 import FamilyServicePricing from "./FamilyServicePricing.astro";
 import ImageSlot from "./ImageSlot.astro";
+import { familyGalleryAlts } from "../data/galleryAlts";
 
 interface Props {
   service: FamilyServicePageData;
@@ -128,7 +129,7 @@ const pricingImage =
   }
 
   <FamilyServicePricing package={service.package} pricing={service.pricing} image={pricingImage} />
-  <FamilyServiceGallery images={galleryImages} galleryFolder={`src/images/${serviceSlug}/gallery`} />
+  <FamilyServiceGallery images={galleryImages} galleryFolder={`src/images/${serviceSlug}/gallery`} altByPath={familyGalleryAlts[serviceSlug] ?? {}} />
   <FamilyServiceLinks links={service.links} />
   <FamilyServiceFAQ items={service.faq} />
 

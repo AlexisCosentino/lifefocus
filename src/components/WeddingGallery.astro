@@ -12,9 +12,10 @@ interface GalleryImage {
 interface Props {
   images: GalleryImage[];
   galleryFolder?: string;
+  altByPath?: Record<string, string>;
 }
 
-const { images, galleryFolder } = Astro.props;
+const { images, galleryFolder, altByPath } = Astro.props;
 ---
 
 <EditorialGallery
@@ -23,4 +24,5 @@ const { images, galleryFolder } = Astro.props;
   titleId="gallery-title"
   images={images}
   galleryFolder={galleryFolder}
+  altByPath={altByPath}
 />

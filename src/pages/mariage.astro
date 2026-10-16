@@ -6,6 +6,7 @@ import WeddingFAQ from "../components/WeddingFAQ.astro";
 import WeddingGallery from "../components/WeddingGallery.astro";
 import WeddingPackages from "../components/WeddingPackages.astro";
 import { homeImages } from "../data/homeImages";
+import { weddingGalleryAlts } from "../data/galleryAlts";
 import { weddingFaq } from "../data/weddingFaq";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
@@ -234,7 +235,7 @@ const structuredData = {
     </section>
 
     <WeddingPackages />
-    <WeddingGallery images={galleryImages} galleryFolder="src/images/mariage/gallery" />
+    <WeddingGallery images={galleryImages} galleryFolder="src/images/mariage/gallery" altByPath={weddingGalleryAlts} />
 
     <section class="wedding-english page-shell" aria-labelledby="english-wedding-title">
       <p class="editorial-label">ENGLISH</p>
