@@ -7,11 +7,17 @@ import {
   weddingIncluded,
   weddingPackages,
 } from "../data/weddingCollections";
+
+interface Props {
+  eyebrow?: string;
+}
+
+const { eyebrow = "08 / LES FORMULES" } = Astro.props;
 ---
 
 <section class="wedding-packages page-shell" aria-labelledby="packages-title">
   <div class="wedding-packages__intro">
-    <p class="editorial-label">08 / LES FORMULES</p>
+    <p class="editorial-label">{eyebrow}</p>
     <h2 id="packages-title">Des formules pensées<br />selon le temps de présence.</h2>
   </div>
 

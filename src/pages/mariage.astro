@@ -268,6 +268,18 @@ const structuredData = {
       </div>
     </section>
 
+    <section class="wedding-regions page-shell" aria-labelledby="wedding-regions-title">
+      <p class="editorial-label">VOTRE MARIAGE DANS LA RÉGION</p>
+      <h2 id="wedding-regions-title">Des journées différentes, d'un lieu à l'autre.</h2>
+      <p>Basé à Romans-sur-Isère, je me déplace pour raconter votre mariage dans la Drôme et en Ardèche. Retrouvez les formules et quelques repères propres à chaque secteur.</p>
+      <div class="wedding-regions__links">
+        <a href="/photographe-mariage-romans-sur-isere/">Mariage à Romans-sur-Isère →</a>
+        <a href="/photographe-mariage-valence/">Mariage à Valence →</a>
+        <a href="/photographe-mariage-montelimar/">Mariage à Montélimar →</a>
+        <a href="/photographe-mariage-ardeche/">Mariage en Ardèche →</a>
+      </div>
+    </section>
+
     <WeddingFAQ />
 
     <section class="wedding-contact page-shell" aria-labelledby="wedding-contact-title">
@@ -562,6 +574,27 @@ const structuredData = {
     gap: 0.9rem 1.6rem;
     margin-top: var(--space-xs);
   }
+
+  .wedding-regions {
+    display: grid;
+    gap: var(--space-xs);
+    max-width: var(--service-narrow);
+    padding-block: var(--space-lg);
+    border-top: 1px solid var(--color-line);
+  }
+
+  .wedding-regions h2 {
+    max-width: 17ch;
+    font-family: var(--font-editorial);
+    font-size: clamp(2.15rem, 1.4rem + 2.35vw, 4.25rem);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.05;
+  }
+
+  .wedding-regions p:not(.editorial-label) { max-width: var(--reading-max); color: var(--color-muted); }
+  .wedding-regions__links { display: flex; flex-wrap: wrap; gap: 0.8rem 1.5rem; margin-top: var(--space-xs); }
+  .wedding-regions__links a { color: var(--color-text); text-underline-offset: 0.3em; }
 
   .wedding-page :global(.wedding-packages__intro),
   .wedding-page :global(.wedding-faq__intro) {

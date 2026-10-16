@@ -115,9 +115,9 @@ export const adviceArticles = [
   },
   {
     title: "Se marier à Valence : lieux, cérémonie et conseils d'un photographe",
-    seoTitle: "Photographe mariage Valence | Lieux & conseils",
+    seoTitle: "Se marier à Valence : lieux et conseils | Life Focus",
     description:
-      "Photographe de mariage à Valence, je partage mes conseils et idées de lieux pour organiser votre mariage à Valence, dans la Drôme et aux alentours.",
+      "Mairie de Valence, lieux de réception, lumière et temps de trajet : mes conseils de photographe pour organiser une journée de mariage fluide.",
     slug: "photographe-mariage-valence",
     publishedAt: new Date("2026-09-16"),
     category: "Mariage",
@@ -129,9 +129,9 @@ export const adviceArticles = [
   },
   {
     title: "Se marier à Romans-sur-Isère : lieux, domaines et conseils d'un photographe local",
-    seoTitle: "Photographe mariage Romans-sur-Isère | Lieux & conseils",
+    seoTitle: "Se marier à Romans-sur-Isère : lieux et conseils | Life Focus",
     description:
-      "Photographe de mariage basé à Romans-sur-Isère, je partage mes conseils, lieux et domaines pour organiser un mariage autour de Romans et dans la Drôme.",
+      "Centre historique, domaines de la Drôme des Collines et photos de couple : mes repères pour préparer un mariage à Romans-sur-Isère.",
     slug: "photographe-mariage-romans-sur-isere",
     publishedAt: new Date("2026-09-16"),
     category: "Mariage",

@@ -109,6 +109,17 @@ const displayedSocialLinks = isEnglishPage
             )
           }
         </nav>
+        {!isEnglishPage && (
+          <nav class="site-footer__regions" aria-label="Mariages dans la région">
+            <p>Mariages dans la région</p>
+            <div>
+              <a href="/photographe-mariage-romans-sur-isere/">Romans-sur-Isère</a>
+              <a href="/photographe-mariage-valence/">Valence</a>
+              <a href="/photographe-mariage-montelimar/">Montélimar</a>
+              <a href="/photographe-mariage-ardeche/">Ardèche</a>
+            </div>
+          </nav>
+        )}
       </div>
 
       <nav class="site-footer__socials" aria-label={isEnglishPage ? "Social links" : "Reseaux sociaux"}>

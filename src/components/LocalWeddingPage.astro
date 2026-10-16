@@ -1,0 +1,190 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LocalWeddingPhotos from "./LocalWeddingPhotos.astro";
+import WeddingPackages from "./WeddingPackages.astro";
+import type { LocalWeddingPageData } from "../data/localWeddingPages";
+
+const { page } = Astro.props as { page: LocalWeddingPageData };
+const canonicalUrl = `https://www.lifefocus.fr/${page.slug}/`;
+---
+
+<BaseLayout title={page.seoTitle} description={page.description} canonicalUrl={canonicalUrl}>
+  <article class="local-wedding">
+    <section class="local-wedding__hero page-shell" aria-labelledby="local-wedding-title">
+      <div class="local-wedding__hero-inner">
+        <p class="editorial-label">MARIAGE · {page.region}</p>
+        <h1 id="local-wedding-title">{page.title}</h1>
+        <div class="local-wedding__intro">
+          {page.introduction.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+        <a class="editorial-link" href="/contact/">VÉRIFIER MA DISPONIBILITÉ →</a>
+      </div>
+      <LocalWeddingPhotos placement="opening" photos={page.photos.opening} lightboxGroup={page.slug} />
+    </section>
+
+    <section class="local-wedding__story page-shell" aria-labelledby="place-title">
+      <p class="editorial-label">UN MARIAGE ICI</p>
+      <LocalWeddingPhotos placement="place" photos={page.photos.place} lightboxGroup={page.slug} />
+      <div class="local-wedding__story-content">
+        <h2 id="place-title">{page.placeTitle}</h2>
+        {page.placeParagraphs.map((paragraph) => <p>{paragraph}</p>)}
+        <h3>{page.planningTitle}</h3>
+        {page.planningParagraphs.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+    </section>
+
+    <section class="local-wedding__approach page-shell" aria-labelledby="local-approach-title">
+      <p class="editorial-label">MON APPROCHE</p>
+      <div>
+        <h2 id="local-approach-title">Présent quand il le faut, discret le reste du temps.</h2>
+        {page.approach.map((paragraph) => <p>{paragraph}</p>)}
+        <a href="/mariage/">Découvrir mon approche, mon accompagnement et davantage d'images de mariage</a>
+      </div>
+      <LocalWeddingPhotos placement="approach" photos={page.photos.approach} lightboxGroup={page.slug} />
+    </section>
+
+    <div class="local-wedding__packages">
+      <WeddingPackages eyebrow="MES FORMULES" />
+      <div class="local-wedding__packages-contact page-shell">
+        <a class="editorial-link" href="/contact/">PARLONS DE VOTRE MARIAGE →</a>
+      </div>
+    </div>
+
+    <section class="local-wedding__faq page-shell" aria-labelledby="local-faq-title">
+      <LocalWeddingPhotos placement="after-packages" photos={page.photos.afterPackages} lightboxGroup={page.slug} />
+      <div>
+        <p class="editorial-label">QUESTIONS UTILES</p>
+        <h2 id="local-faq-title">Quelques réponses avant de se rencontrer.</h2>
+      </div>
+      <div class="local-wedding__faq-list">
+        {page.faq.map((item) => (
+          <details>
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    {(page.guide || page.resource) && (
+      <section class="local-wedding__resources page-shell" aria-labelledby="local-resources-title">
+        <p class="editorial-label">POUR ALLER PLUS LOIN</p>
+        <h2 id="local-resources-title">Préparer votre journée.</h2>
+        <div>
+          {page.guide && <a href={page.guide.href}>{page.guide.label} →</a>}
+          {page.resource && <a href={page.resource.href}>{page.resource.label} →</a>}
+        </div>
+      </section>
+    )}
+
+    <section class="local-wedding__contact page-shell" aria-labelledby="local-contact-title">
+      <div class="local-wedding__contact-content">
+        <h2 id="local-contact-title">Racontez-moi votre projet.</h2>
+        <p>Où et quand vous mariez-vous ? Parlons de votre journée et de la place que vous souhaitez donner aux photos.</p>
+        <a class="editorial-link" href="/contact/">VÉRIFIER MA DISPONIBILITÉ →</a>
+      </div>
+      <LocalWeddingPhotos placement="closing" photos={page.photos.closing} lightboxGroup={page.slug} />
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .local-wedding { --local-width: 76rem; --local-visual-width: 92rem; }
+  .local-wedding :global(h1), .local-wedding :global(h2), .local-wedding :global(h3) {
+    font-family: var(--font-editorial);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+  .local-wedding :global(h2) { font-size: clamp(2.4rem, 1.7rem + 2.8vw, 4.6rem); }
+  .local-wedding :global(h3) { font-size: clamp(1.8rem, 1.4rem + 1.2vw, 2.6rem); }
+  .local-wedding__hero {
+    display: grid;
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: center;
+    max-width: var(--local-visual-width);
+    padding-block: clamp(2.5rem, 5vw, 5rem) var(--space-lg);
+  }
+  .local-wedding__hero-inner { display: grid; gap: clamp(1.3rem, 2.5vw, 2.4rem); min-width: 0; }
+  .local-wedding__hero h1 { font-size: clamp(3.2rem, 2.3rem + 3vw, 5.4rem); overflow-wrap: break-word; }
+  .local-wedding__intro { display: grid; gap: 1rem; max-width: 43rem; font-size: var(--text-lead); }
+  .local-wedding__hero .editorial-link { justify-self: start; }
+  .local-wedding__hero :global(.local-wedding-photos) { width: 100%; }
+  .local-wedding__story, .local-wedding__approach, .local-wedding__faq {
+    display: grid;
+    gap: 1.4rem clamp(2rem, 6vw, 6rem);
+    max-width: var(--local-visual-width);
+    padding-block: var(--space-lg);
+    border-top: 1px solid var(--color-line);
+  }
+  .local-wedding__story > .editorial-label,
+  .local-wedding__approach > .editorial-label { grid-column: 1 / -1; }
+  .local-wedding__story-content, .local-wedding__approach > div:not(.local-wedding-photos) { display: grid; gap: 1.3rem; max-width: 44rem; min-width: 0; }
+  .local-wedding__story-content h3 { margin-top: 1.6rem; }
+  .local-wedding__approach a, .local-wedding__resources a { color: var(--color-text); text-underline-offset: 0.3em; }
+  .local-wedding__packages { padding-block: var(--space-lg); background: var(--color-surface-soft); }
+  .local-wedding__packages :global(.wedding-packages) { max-width: var(--local-width); }
+  .local-wedding__packages :global(.wedding-packages__intro),
+  .local-wedding__packages :global(.wedding-packages__included-section),
+  .local-wedding__packages :global(.wedding-packages__formulas),
+  .local-wedding__packages :global(.wedding-packages__base),
+  .local-wedding__packages :global(.wedding-packages__addon-heading),
+  .local-wedding__packages :global(.wedding-packages__addon-list) { display: grid; gap: 1.3rem; }
+  .local-wedding__packages :global(.wedding-packages__included-section),
+  .local-wedding__packages :global(.wedding-packages__formulas) { margin-top: var(--space-md); }
+  .local-wedding__packages :global(.wedding-packages__included-image) { max-width: 35rem; margin: 0; }
+  .local-wedding__packages :global(.wedding-packages__included-image img) { width: 100%; height: auto; }
+  .local-wedding__packages :global(.wedding-packages__keepsake) { font-family: var(--font-editorial); font-size: var(--text-lead); }
+  .local-wedding__packages :global(.wedding-packages__included),
+  .local-wedding__packages :global(.wedding-packages__list) { margin: 0; padding: 0; list-style: none; }
+  .local-wedding__packages :global(.wedding-packages__included li),
+  .local-wedding__packages :global(.wedding-packages__list li) { padding-block: 1rem; border-top: 1px solid var(--color-line); }
+  .local-wedding__packages :global(.wedding-packages__list) { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
+  .local-wedding__packages :global(.wedding-packages__list li) { display: grid; gap: 0.8rem; align-content: start; }
+  .local-wedding__packages :global(.wedding-packages__formula-top),
+  .local-wedding__packages :global(.wedding-packages__addon-main) { display: flex; justify-content: space-between; gap: 1rem; align-items: start; }
+  .local-wedding__packages :global(.wedding-packages__duration),
+  .local-wedding__packages :global(.wedding-packages__price),
+  .local-wedding__packages :global(.wedding-packages__addon-price) { font-family: var(--font-editorial); font-size: clamp(1.7rem, 1.1rem + 2vw, 3rem); line-height: 1; }
+  .local-wedding__packages :global(.wedding-packages__duration span:last-child) { font-family: var(--font-interface); font-size: var(--text-xs); text-transform: uppercase; }
+  .local-wedding__packages :global(.wedding-packages__conditions),
+  .local-wedding__packages :global(.wedding-packages__context) { color: var(--color-muted); font-size: var(--text-sm); }
+  .local-wedding__packages :global(.wedding-packages__conditions) { display: grid; gap: 0.3rem; }
+  .local-wedding__packages :global(.wedding-packages__addon) { display: grid; gap: var(--space-sm); margin-top: var(--space-lg); padding-top: var(--space-sm); border-top: 1px solid var(--color-line); }
+  .local-wedding__packages :global(.wedding-packages__addon-item) { padding-block: 1rem; border-top: 1px solid var(--color-line); }
+  .local-wedding__packages :global(.wedding-packages__addon-details summary) { cursor: pointer; font-size: var(--text-sm); }
+  .local-wedding__packages :global(.wedding-packages__addon-panel) { padding-top: 0.8rem; }
+  .local-wedding__packages :global(.wedding-packages__addon-panel ul) { padding-left: 1.2rem; }
+  .local-wedding__packages-contact { max-width: var(--local-width); padding-top: var(--space-sm); }
+  .local-wedding__faq-list { min-width: 0; }
+  .local-wedding__faq-list details { border-top: 1px solid var(--color-line); }
+  .local-wedding__faq-list details:last-child { border-bottom: 1px solid var(--color-line); }
+  .local-wedding__faq-list summary { cursor: pointer; padding-block: 1.2rem; font-weight: 500; }
+  .local-wedding__faq-list details p { padding-bottom: 1.2rem; color: var(--color-muted); }
+  .local-wedding__resources { display: grid; gap: 1rem; max-width: var(--local-width); padding-block: var(--space-lg); border-top: 1px solid var(--color-line); }
+  .local-wedding__resources > div { display: grid; gap: 0.7rem; }
+  .local-wedding__contact { display: grid; gap: clamp(2rem, 5vw, 5rem); max-width: var(--local-visual-width); padding-block: var(--space-lg); border-top: 1px solid var(--color-line); }
+  .local-wedding__contact-content { display: grid; gap: 1.2rem; align-content: center; min-width: 0; }
+  .local-wedding__contact p { max-width: var(--reading-max); }
+  .local-wedding__contact .editorial-link { justify-self: start; }
+  @media (min-width: 64rem) {
+    .local-wedding__hero { grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr); }
+    .local-wedding__story, .local-wedding__faq { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); }
+    .local-wedding__approach, .local-wedding__contact { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); }
+    .local-wedding__story :global(.local-wedding-photos) { grid-column: 1; grid-row: 2; }
+    .local-wedding__story-content { grid-column: 2; grid-row: 2; }
+    .local-wedding__approach > div:not(.local-wedding-photos) { grid-column: 1; grid-row: 2; }
+    .local-wedding__approach :global(.local-wedding-photos) { grid-column: 2; grid-row: 2; }
+    .local-wedding__faq :global(.local-wedding-photos) { grid-column: 1; grid-row: 1 / 3; }
+    .local-wedding__faq > div:not(.local-wedding-photos) { grid-column: 2; }
+    .local-wedding__faq-list { grid-row: 2; }
+    .local-wedding__packages :global(.wedding-packages__included-section),
+    .local-wedding__packages :global(.wedding-packages__addon) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2rem, 5vw, 5rem); }
+  }
+  @media (max-width: 42rem) {
+    .local-wedding__packages :global(.wedding-packages__list) { grid-template-columns: 1fr; gap: 0; }
+    .local-wedding__packages :global(.wedding-packages__formula-top),
+    .local-wedding__packages :global(.wedding-packages__addon-main) { flex-wrap: wrap; }
+  }
+</style>

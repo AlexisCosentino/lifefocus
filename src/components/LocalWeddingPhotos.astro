@@ -1,0 +1,71 @@
+---
+import { Picture, getImage } from "astro:assets";
+import type { LocalWeddingPhoto } from "../data/localWeddingPages";
+
+interface Props {
+  photos: LocalWeddingPhoto[];
+  placement: "opening" | "place" | "approach" | "after-packages" | "closing";
+  lightboxGroup: string;
+}
+
+const { photos, placement, lightboxGroup } = Astro.props;
+const pairs = Array.from({ length: Math.ceil(photos.length / 2) }, (_, index) => photos.slice(index * 2, index * 2 + 2));
+const enlarged = await Promise.all(
+  photos.map((photo) => getImage({
+    src: photo.src,
+    width: Math.min(2200, photo.src.width),
+    format: "jpg",
+    quality: 86,
+  })),
+);
+---
+
+{photos.length > 0 && (
+  <div class:list={["local-wedding-photos", `local-wedding-photos--${placement}`]}>
+    {pairs.map((pair, pairIndex) => (
+      <div class="local-wedding-photos__pair">
+        {pair.map((photo, index) => (
+          <figure class="local-wedding-photos__item" data-local-wedding-photo>
+            <Picture
+              src={photo.src}
+              alt={photo.alt}
+              widths={[480, 960, 1440]}
+              sizes="(min-width: 72rem) 48vw, (min-width: 42rem) 65vw, calc(100vw - (2 * var(--page-padding)))"
+              formats={["avif"]}
+              fallbackFormat="webp"
+              quality={80}
+              loading={placement === "opening" && pairIndex === 0 && index === 0 ? "eager" : "lazy"}
+              data-photo-lightbox=""
+              data-photo-lightbox-src={enlarged[pairIndex * 2 + index].src}
+              data-photo-lightbox-alt={photo.alt}
+              data-photo-lightbox-group={lightboxGroup}
+            />
+          </figure>
+        ))}
+      </div>
+    ))}
+  </div>
+)}
+
+<style>
+  .local-wedding-photos { display: block; width: 100%; min-width: 0; }
+  .local-wedding-photos__pair { width: 100%; isolation: isolate; }
+  .local-wedding-photos__pair + .local-wedding-photos__pair { margin-top: clamp(1.5rem, 4vw, 3.5rem); }
+  .local-wedding-photos__item { width: 78%; margin: 0; min-width: 0; }
+  .local-wedding-photos__item + .local-wedding-photos__item {
+    position: relative;
+    z-index: 2;
+    width: 54%;
+    margin: -24% 0 0 auto;
+  }
+  .local-wedding-photos__item:only-child { width: 90%; margin-inline: auto; }
+  .local-wedding-photos__pair:nth-child(even) .local-wedding-photos__item:first-child { margin-left: auto; }
+  .local-wedding-photos__pair:nth-child(even) .local-wedding-photos__item + .local-wedding-photos__item { margin-right: auto; margin-left: 0; }
+  .local-wedding-photos__item :global(picture),
+  .local-wedding-photos__item :global(img) { display: block; width: 100%; }
+  .local-wedding-photos__item :global(img) { height: auto; }
+  @media (max-width: 42rem) {
+    .local-wedding-photos__item { width: 84%; }
+    .local-wedding-photos__item + .local-wedding-photos__item { width: 60%; margin-top: -26%; }
+  }
+</style>
