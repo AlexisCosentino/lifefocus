@@ -229,6 +229,7 @@ export const localWeddingPages: Record<string, LocalWeddingPageData> = {
     placeParagraphs: [
       "Près de Valence, Guilherand-Granges et Saint-Péray ont pour horizon le Rhône et les reliefs ardéchois. Vers Tournon-sur-Rhône, les coteaux viticoles donnent un autre caractère aux images. Plus au sud, les villages et les paysages changent encore : je ne cherche pas à faire entrer tous les mariages ardéchois dans le même décor.",
       "Que vous célébriez votre union dans un village, un domaine ou chez vous, je porte mon attention sur ce qui se passe entre les personnes. Le lieu a sa place dans le reportage, mais il ne doit pas prendre celle de votre histoire.",
+      "J’ai notamment photographié une cérémonie de mariage à Viviers, en Ardèche, avant de retrouver les mariés et leurs proches pour la réception à Maison Claudie, à Allan, dans la Drôme.",
     ],
     planningTitle: "Laisser le lieu exister sans en faire une mise en scène",
     planningParagraphs: [
