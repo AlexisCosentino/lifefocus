@@ -7,6 +7,7 @@ import FamilyServiceHero from "./FamilyServiceHero.astro";
 import FamilyServiceLinks from "./FamilyServiceLinks.astro";
 import FamilyServicePricing from "./FamilyServicePricing.astro";
 import ImageSlot from "./ImageSlot.astro";
+import WeddingTrust from "./WeddingTrust.astro";
 import { familyGalleryAlts } from "../data/galleryAlts";
 
 interface Props {
@@ -91,6 +92,7 @@ const pricingImage =
       <p class="editorial-label">{service.approach.label}</p>
       <h2 id="family-approach-title">{service.approach.title}</h2>
       <p>{service.approach.text}</p>
+      <WeddingTrust variant="family" />
     </div>
 
     <figure class="family-service-approach__image decorative-section-number-content">

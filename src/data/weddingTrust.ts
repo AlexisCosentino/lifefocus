@@ -1,6 +1,6 @@
 // Ratings are dated when verified; null means no current value is published here.
 export const weddingTrust = {
-  experience: "Depuis 2018",
+  experienceYear: 2018,
   awardCount: "7×",
   awardPeriod: "2020–2026",
   google: {
