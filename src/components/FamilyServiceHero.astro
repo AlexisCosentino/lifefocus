@@ -1,13 +1,13 @@
 ---
-import type { FamilyServiceImage } from "../data/familyServices";
+import type { FamilyServicePhoto } from "../data/familyServices";
 import ImageSlot from "./ImageSlot.astro";
 
 interface Props {
   eyebrow: string;
   title: string;
   text: string;
-  image: FamilyServiceImage;
-  secondaryImage: FamilyServiceImage;
+  image: FamilyServicePhoto;
+  secondaryImage: FamilyServicePhoto;
 }
 
 const { eyebrow, title, text, image, secondaryImage } = Astro.props;
@@ -17,23 +17,23 @@ const { eyebrow, title, text, image, secondaryImage } = Astro.props;
   <div class="family-service-hero__visuals">
     <figure class="family-service-hero__image family-service-hero__image--main">
       <ImageSlot
-        path={image.slotPath ?? "src/images/service/hero-main.jpg"}
+        path={image.slotPath}
         orientation={image.slotOrientation ?? "horizontal"}
         loading="eager"
         quality={92}
-        sizes="(min-width: 72rem) 58vw, calc(100vw - (2 * var(--page-padding)))"
-        label={image.alt ?? ""}
+        sizes="(min-width: 72rem) min(51.2vw, 43.2rem), 92vw"
+        label={image.alt}
       />
     </figure>
 
     <figure class="family-service-hero__image family-service-hero__image--secondary">
       <ImageSlot
-        path={secondaryImage.slotPath ?? "src/images/service/hero-secondary.jpg"}
+        path={secondaryImage.slotPath}
         orientation={secondaryImage.slotOrientation ?? "vertical"}
         loading="eager"
         quality={92}
-        sizes="(min-width: 72rem) 20vw, 48vw"
-        label={secondaryImage.alt ?? ""}
+        sizes="(min-width: 72rem) min(19.2vw, 16.2rem), (min-width: 31.25rem) 15rem, 48vw"
+        label={secondaryImage.alt}
       />
     </figure>
   </div>
@@ -42,6 +42,10 @@ const { eyebrow, title, text, image, secondaryImage } = Astro.props;
     <p class="editorial-label">{eyebrow}</p>
     <h1 id="family-service-title">{title}</h1>
     <p>{text}</p>
+    <nav class="family-service-hero__actions" aria-label="Accès aux formules et au contact">
+      <a class="editorial-link" href="#family-pricing-title">Voir les formules ↓</a>
+      <a class="editorial-link" href="/contact/">Me contacter →</a>
+    </nav>
   </div>
 </section>
 
@@ -115,6 +119,18 @@ const { eyebrow, title, text, image, secondaryImage } = Astro.props;
   .family-service-hero__text > p:not(.editorial-label) {
     max-width: var(--reading-max);
     color: var(--color-muted);
+  }
+
+  .family-service-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem 1.2rem;
+    align-items: baseline;
+    margin-top: 0.25rem;
+  }
+
+  .family-service-hero__actions :global(.editorial-link) {
+    font-size: var(--text-sm);
   }
 
   @media (min-width: 72rem) {

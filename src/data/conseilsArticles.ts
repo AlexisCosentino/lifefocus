@@ -8,7 +8,7 @@ export interface AdviceArticle {
   category: string;
   excerpt: string;
   featuredImage?: string;
-  coverImagePath?: string;
+  coverImagePath?: string | null;
   featuredImageAlt?: string;
   primaryCtaHref?: string;
   primaryCtaLabel?: string;
@@ -30,6 +30,21 @@ export const adviceArticles = [
     featuredImageAlt: "Mélissa et Nicolas ensemble dans un jardin le jour de leur mariage.",
     primaryCtaHref: "/mariage/",
     primaryCtaLabel: "DÉCOUVRIR MES REPORTAGES DE MARIAGE →",
+    draft: false,
+  },
+  {
+    title: "Amélie D Wedding : organiser son mariage avec une wedding planner et son photographe",
+    seoTitle: "Amélie D Wedding : wedding planner & photographe mariage | Life Focus",
+    description:
+      "Interview d'Amélie D Wedding, wedding planner dans la Drôme : planning, photos de groupe, séance couple et collaboration avec le photographe de mariage.",
+    slug: "amelie-d-wedding-wedding-planner-photographe-mariage",
+    publishedAt: new Date("2026-10-13"),
+    category: "Mariage",
+    excerpt:
+      "Planning du jour J, photos de groupe, séance couple et imprévus : Amélie D Wedding partage son regard de wedding planner sur le travail avec le photographe.",
+    coverImagePath: null,
+    primaryCtaHref: "/mariage/",
+    primaryCtaLabel: "DÉCOUVRIR MON APPROCHE DU MARIAGE →",
     draft: false,
   },
   {

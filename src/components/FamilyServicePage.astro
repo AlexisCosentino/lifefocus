@@ -36,25 +36,19 @@ const galleryImages = service.gallery.map((image, index) => ({
 const pricingImage =
   serviceSlug === "grossesse"
     ? {
-        src: service.hero.secondaryImage.src,
         alt: "Photo de grossesse en format vertical.",
-        size: "portrait" as const,
         slotPath: "src/images/grossesse/price.jpg",
         slotOrientation: "vertical" as const,
       }
     : serviceSlug === "naissance"
       ? {
-          src: service.hero.secondaryImage.src,
           alt: "Photo de naissance en format vertical.",
-          size: "portrait" as const,
           slotPath: "src/images/naissance/price.jpg",
           slotOrientation: "vertical" as const,
         }
       : serviceSlug === "famille"
         ? {
-            src: service.hero.secondaryImage.src,
             alt: "Photo de famille en format vertical.",
-            size: "portrait" as const,
             slotPath: "src/images/famille/price.jpg",
             slotOrientation: "vertical" as const,
           }
@@ -66,16 +60,8 @@ const pricingImage =
     eyebrow={service.hero.eyebrow}
     title={service.hero.title}
     text={service.hero.text}
-    image={{
-      ...service.hero.image,
-      slotPath: service.hero.image.slotPath ?? `src/images/${serviceSlug}/hero-main.jpg`,
-      slotOrientation: service.hero.image.slotOrientation ?? "horizontal",
-    }}
-    secondaryImage={{
-      ...service.hero.secondaryImage,
-      slotPath: service.hero.secondaryImage.slotPath ?? `src/images/${serviceSlug}/hero-secondary.jpg`,
-      slotOrientation: service.hero.secondaryImage.slotOrientation ?? "vertical",
-    }}
+    image={service.hero.image}
+    secondaryImage={service.hero.secondaryImage}
   />
 
   <section
@@ -97,9 +83,10 @@ const pricingImage =
 
     <figure class="family-service-approach__image decorative-section-number-content">
       <ImageSlot
-        path={service.approach.image.slotPath ?? `src/images/${serviceSlug}/approach-main.jpg`}
+        path={service.approach.image.slotPath}
         orientation={service.approach.image.slotOrientation ?? "horizontal"}
-        label={service.approach.image.alt ?? ""}
+        sizes="(min-width: 72rem) 34rem, 90vw"
+        label={service.approach.image.alt}
       />
     </figure>
   </section>

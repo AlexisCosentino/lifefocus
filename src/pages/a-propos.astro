@@ -1,6 +1,5 @@
 ---
 import { Image } from "astro:assets";
-
 import ImageSlot from "../components/ImageSlot.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { awardImages } from "../data/homeImages";
@@ -138,26 +137,17 @@ const mariagesNetReviewsUrl =
         <p class="editorial-label">05 / CONFIANCE</p>
         <h2 id="trust-title">Des années de mariages, de familles et de confiance.</h2>
       </div>
-
       <div class="about-trust__proof">
         <ol class="about-awards" aria-label="Wedding Awards et recommandation Mariages.net">
-          {
-            awardImages.map((award) => (
-              <li>
-                <span>{award.year}</span>
-                <a
-                  href={mariagesNetReviewsUrl}
-                  target="_blank"
-                  rel="nofollow noopener noreferrer"
-                  aria-label={`${award.alt} Voir les avis Mariages.net.`}
-                >
-                  <Image src={award.src} alt={award.alt} width={112} loading="lazy" />
-                </a>
-              </li>
-            ))
-          }
+          {awardImages.map((award) => (
+            <li>
+              <span>{award.year}</span>
+              <a href={mariagesNetReviewsUrl} target="_blank" rel="nofollow noopener noreferrer" aria-label={`${award.alt} Voir les avis Mariages.net.`}>
+                <Image src={award.src} alt={award.alt} width={112} loading="lazy" />
+              </a>
+            </li>
+          ))}
         </ol>
-
         <p class="about-trust__text">
           Depuis 2018, Life Focus s’est construit au fil des mariages, des séances famille et des
           rencontres. Les Wedding Awards Mariages.net reçus chaque année depuis 2020 représentent
@@ -165,6 +155,7 @@ const mariagesNetReviewsUrl =
         </p>
       </div>
     </section>
+
 
     <section class="about-contact page-shell" aria-labelledby="contact-title">
       <figure class="about-contact__portrait">

@@ -1,6 +1,5 @@
 ---
 import { Image } from "astro:assets";
-
 import ImageSlot from "../components/ImageSlot.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { awardImages } from "../data/homeImages";
@@ -27,7 +26,7 @@ const mariagesNetReviewsUrl =
             orientation="horizontal"
             loading="eager"
             quality={92}
-            sizes="(min-width: 90rem) 69vw, (min-width: 72rem) 69vw, calc(100vw - (2 * var(--page-padding)))"
+            sizes="(min-width: 90rem) 69vw, (min-width: 72rem) 69vw, 90vw"
             label="Couple de mariés photographié dans un paysage de campagne."
           />
         </figure>
@@ -200,32 +199,21 @@ const mariagesNetReviewsUrl =
     <section class="trust page-shell" aria-labelledby="trust-title">
       <div class="trust__heading">
         <p class="editorial-label">04 / CONFIANCE</p>
-        <h2 id="trust-title">
-          Depuis 2020,<br />
-          chaque année.
-        </h2>
+        <h2 id="trust-title">Depuis 2020,<br />chaque année.</h2>
       </div>
 
       <div class="trust__proof">
         <div class="trust__awards">
           <ol class="awards" aria-label="Wedding Awards Mariages.net">
-            {
-              awardImages.map((award) => (
-                <li>
-                  <span>{award.year}</span>
-                  <a
-                    href={mariagesNetReviewsUrl}
-                    target="_blank"
-                    rel="nofollow noopener noreferrer"
-                    aria-label={`${award.alt} Voir les avis Mariages.net.`}
-                  >
-                    <Image src={award.src} alt={award.alt} width={112} loading="lazy" />
-                  </a>
-                </li>
-              ))
-            }
+            {awardImages.map((award) => (
+              <li>
+                <span>{award.year}</span>
+                <a href={mariagesNetReviewsUrl} target="_blank" rel="nofollow noopener noreferrer" aria-label={`${award.alt} Voir les avis Mariages.net.`}>
+                  <Image src={award.src} alt={award.alt} width={112} loading="lazy" />
+                </a>
+              </li>
+            ))}
           </ol>
-
           <div class="trust__copy">
             <p class="trust__source">Wedding Awards — Mariages.net</p>
             <p>Une reconnaissance qui vient avant tout des couples qui m’ont fait confiance.</p>
@@ -233,35 +221,18 @@ const mariagesNetReviewsUrl =
         </div>
 
         <aside class="trust__reviews" aria-label="Avis Mariages.net">
-          <script
-            is:inline
-            src="https://cdn1.mariages.net/js/wp-widget.js?symfnw-FR48-1-20260907-006-0_www_m_"
-          ></script>
+          <script is:inline src="https://cdn1.mariages.net/js/wp-widget.js?symfnw-FR48-1-20260907-006-0_www_m_"></script>
           <div id="wp-widget-reviews">
             <div id="wp-widget-preview">
-              Lire
-              <a
-                href={mariagesNetReviewsUrl}
-                rel="nofollow"
-              >
-                nos avis
-              </a>
-              à&nbsp;
-              <a href="https://www.mariages.net" rel="nofollow">
-                <img
-                  src="https://cdn1.mariages.net/assets/img/logos/gen_logoHeader.svg"
-                  height="20"
-                  alt="Mariages.net"
-                />
-              </a>
+              Lire <a href={mariagesNetReviewsUrl} rel="nofollow">nos avis</a> à&nbsp;
+              <a href="https://www.mariages.net" rel="nofollow"><img src="https://cdn1.mariages.net/assets/img/logos/gen_logoHeader.svg" height="20" alt="Mariages.net" /></a>
             </div>
           </div>
-          <script is:inline>
-            wpShowReviews(180967, "white");
-          </script>
+          <script is:inline>wpShowReviews(180967, "white");</script>
         </aside>
       </div>
     </section>
+
 
     <section class="contact page-shell" aria-labelledby="contact-title">
       <h2 id="contact-title">

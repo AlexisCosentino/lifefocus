@@ -68,7 +68,10 @@ const pageDescription =
       {
         articles.map((article, index) => (
             <article
-              class="advice-item"
+              class:list={[
+                "advice-item",
+                article.coverImagePath === null && "advice-item--no-image",
+              ]}
               data-advice-item
               data-advice-category={article.category}
             >
@@ -87,14 +90,18 @@ const pageDescription =
                 </a>
               </div>
 
-              <figure class="advice-item__image">
-                <ImageSlot
-                  path={article.coverImagePath ?? `src/images/conseils/${article.slug}.jpg`}
-                  orientation="horizontal"
-                  label={article.featuredImageAlt ?? "Article de conseils de mariage."}
-                  lightbox={false}
-                />
-              </figure>
+              {
+                article.coverImagePath !== null && (
+                  <figure class="advice-item__image">
+                    <ImageSlot
+                      path={article.coverImagePath ?? `src/images/conseils/${article.slug}.jpg`}
+                      orientation="horizontal"
+                      label={article.featuredImageAlt ?? "Article de conseils de mariage."}
+                      lightbox={false}
+                    />
+                  </figure>
+                )
+              }
             </article>
           ))
       }
@@ -416,6 +423,10 @@ const pageDescription =
     .advice-item {
       grid-template-columns: minmax(5rem, 0.2fr) minmax(0, 0.9fr) minmax(18rem, 0.62fr);
       gap: clamp(2rem, 4vw, 4rem);
+    }
+
+    .advice-item--no-image {
+      grid-template-columns: minmax(5rem, 0.2fr) minmax(0, 1fr);
     }
 
     .advice-item__image {

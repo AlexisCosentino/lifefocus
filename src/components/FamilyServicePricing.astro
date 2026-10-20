@@ -1,11 +1,11 @@
 ---
-import type { FamilyServiceImage, FamilyServicePackage, FamilyServicePricingTexts } from "../data/familyServices";
+import type { FamilyServicePhoto, FamilyServicePackage, FamilyServicePricingTexts } from "../data/familyServices";
 import ImageSlot from "./ImageSlot.astro";
 
 interface Props {
   package?: FamilyServicePackage;
   pricing?: FamilyServicePricingTexts;
-  image?: FamilyServiceImage;
+  image?: FamilyServicePhoto;
 }
 
 const { package: combinedPackage, pricing, image } = Astro.props;
@@ -74,7 +74,7 @@ const formulas = [
             path={image.slotPath}
             orientation={image.slotOrientation ?? "vertical"}
             label={image.alt ?? ""}
-            sizes="(min-width: 72rem) 18rem, 42vw"
+            sizes="14rem"
           />
         </figure>
       )

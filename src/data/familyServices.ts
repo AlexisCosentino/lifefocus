@@ -10,6 +10,12 @@ export interface FamilyServiceImage {
   slotOrientation?: "horizontal" | "vertical" | "square";
 }
 
+export interface FamilyServicePhoto {
+  slotPath: string;
+  alt: string;
+  slotOrientation?: "horizontal" | "vertical" | "square";
+}
+
 export interface FamilyServiceLink {
   label: string;
   href: string;
@@ -58,14 +64,14 @@ export interface FamilyServicePageData {
     eyebrow: string;
     title: string;
     text: string;
-    image: FamilyServiceImage;
-    secondaryImage: FamilyServiceImage;
+    image: FamilyServicePhoto;
+    secondaryImage: FamilyServicePhoto;
   };
   approach: {
     label: string;
     title: string;
     text: string;
-    image: FamilyServiceImage;
+    image: FamilyServicePhoto;
   };
   editorialBlock?: {
     label: string;
@@ -100,6 +106,12 @@ const image = (
   slotOrientation,
 });
 
+const servicePhoto = (
+  slotPath: string,
+  alt: string,
+  slotOrientation: FamilyServicePhoto["slotOrientation"] = "horizontal",
+): FamilyServicePhoto => ({ slotPath, alt, slotOrientation });
+
 const baseGallery = [
   image(homeImages.familyMain.src, "Famille réunie dehors dans un moment naturel.", "wide"),
   image(homeImages.weddingSecondary.src, "Portrait vertical dans un champ fleuri.", "portrait"),
@@ -127,24 +139,24 @@ const standardFaq = {
 export const familyServices = {
   grossesse: {
     label: "Grossesse",
-    title: "Photographe grossesse Drôme, Romans & Valence | Life Focus",
+    title: "Photographe grossesse à Romans-sur-Isère & Valence | Life Focus",
     description:
-      "Avant que tout change, prenons le temps de garder une trace de cette parenthèse. Des séances grossesse en extérieur, autour de Romans et Valence.",
+      "Une séance photo grossesse naturelle en extérieur, à Romans-sur-Isère, Valence et dans la Drôme. Seule, en couple ou avec vos enfants.",
     canonicalUrl: "https://www.lifefocus.fr/grossesse/",
     hero: {
       eyebrow: "GROSSESSE",
-      title: "Photographe grossesse dans la Drôme",
+      title: "Photographe grossesse à Romans-sur-Isère",
       text:
-        "Une séance grossesse naturelle en extérieur, autour de Romans-sur-Isère, Valence et dans la Drôme, pour garder une trace de cette période dans un cadre simple, vivant et lumineux.",
-      image: image(homeImages.breathing.src, "Femme enceinte en extérieur dans un paysage naturel.", "wide"),
-      secondaryImage: image(homeImages.weddingSecondary.src, "Séance grossesse en plein air avec un portrait naturel.", "portrait"),
+        "Basé à Romans-sur-Isère, je photographie votre grossesse en extérieur, autour de Valence et dans la Drôme. Seule, en couple ou avec vos enfants, nous prenons le temps de créer des images naturelles de cette période.",
+      image: servicePhoto("src/images/grossesse/hero-main.jpg", "Un couple assis au bord de l’eau pendant une séance grossesse en extérieur.", "horizontal"),
+      secondaryImage: servicePhoto("src/images/grossesse/hero-secondary.jpg", "Un homme embrasse sa compagne enceinte pendant une séance en extérieur.", "vertical"),
     },
     approach: {
       label: "01 / APPROCHE",
       title: "Laisser de la place au corps, aux liens, au moment.",
       text:
         "Pas besoin de savoir poser. La séance se déroule principalement dehors, en lumière naturelle, avec quelques indications lorsque vous en avez besoin. Seule, en couple ou avec vos enfants, je cherche surtout à photographier votre grossesse naturellement, en laissant de la place aux gestes, aux liens et à ce qui se passe entre vous.",
-      image: image(homeImages.breathing.src, "Portrait naturel dans une lumière douce.", "wide"),
+      image: servicePhoto("src/images/grossesse/approach-main.jpg", "Une femme enceinte partage un moment en extérieur avec ses enfants.", "horizontal"),
     },
     editorialBlock: {
       label: "EXPÉRIENCE",
@@ -256,24 +268,24 @@ export const familyServices = {
   },
   naissance: {
     label: "Naissance",
-    title: "Photographe naissance Drôme, Romans & Valence | Life Focus",
+    title: "Photographe naissance à Romans-sur-Isère & Valence | Life Focus",
     description:
-      "Les premiers jours passent si vite. Chez vous, au rythme de votre bébé, je photographie les petits gestes, les regards et cette nouvelle vie qui commence.",
+      "Photographe naissance à domicile à Romans-sur-Isère, Valence et dans la Drôme. Des images naturelles de vos premiers moments, au rythme de votre bébé.",
     canonicalUrl: "https://www.lifefocus.fr/naissance/",
     hero: {
       eyebrow: "NAISSANCE",
-      title: "Photographe naissance dans la Drôme",
+      title: "Photographe naissance à domicile à Romans-sur-Isère",
       text:
-        "Un reportage naissance à domicile autour de Romans-sur-Isère, Valence et dans la Drôme, pensé autour du rythme de votre bébé et de vos premiers moments en famille.",
-      image: image(homeImages.familySecondary.src, "Parents et bébé dans un moment simple et naturel.", "wide"),
-      secondaryImage: image(homeImages.weddingSecondary.src, "Portrait de famille au naturel en extérieur.", "portrait"),
+        "Basé à Romans-sur-Isère, je me déplace à votre domicile, à Valence et dans les environs, pour photographier vos premiers moments avec votre bébé. La séance suit son rythme, avec les pauses et la place nécessaire pour toute la famille.",
+      image: servicePhoto("src/images/naissance/hero-main.jpg", "Une mère et son nouveau-né réunis sur le lit, à la maison.", "horizontal"),
+      secondaryImage: servicePhoto("src/images/naissance/hero-secondary.jpg", "Un parent tient son nouveau-né dans ses bras pendant une séance à la maison.", "vertical"),
     },
     approach: {
       label: "01 / APPROCHE",
       title: "Suivre le rythme du bébé avant tout.",
       text:
         "Je viens chez vous, dans votre quotidien. Pas de rythme imposé, de décor artificiel ou de posing forcé : la séance s’adapte à votre bébé, aux pauses, aux bras et aux petits imprévus. Je photographie les regards, la fratrie, les gestes, les détails de la maison et tout ce qui raconte votre vie de famille à ce moment-là.",
-      image: image(homeImages.familyMain.src, "Famille dans un instant calme, dehors, pendant une séance photo.", "wide"),
+      image: servicePhoto("src/images/naissance/approach-main.jpg", "Un parent enlace son nouveau-né sur le lit, à la maison.", "horizontal"),
     },
     editorialBlock: {
       label: "EXPÉRIENCE",
@@ -386,15 +398,15 @@ export const familyServices = {
       title: "Photographe famille dans la Drôme",
       text:
         "Une séance photo famille naturelle à Romans-sur-Isère, Valence et dans la Drôme, pour garder des images vivantes de vous, sans demander aux enfants de rester immobiles.",
-      image: image(homeImages.familyMain.src, "Famille réunie dehors dans un moment vivant.", "wide"),
-      secondaryImage: image(homeImages.weddingSecondary.src, "Portrait naturel de famille en extérieur.", "portrait"),
+      image: servicePhoto("src/images/famille/hero-main.jpg", "Une famille réunie en extérieur dans un moment vivant.", "horizontal"),
+      secondaryImage: servicePhoto("src/images/famille/hero-secondary.jpg", "Portrait d’une famille en extérieur.", "vertical"),
     },
     approach: {
       label: "01 / APPROCHE",
       title: "Photographier ce qui circule entre vous.",
       text:
         "Pas besoin de savoir poser ni de demander aux enfants de regarder l’appareil. La séance suit les mouvements, les jeux, les gestes et les interactions. Je vous guide lorsque c’est utile, puis je laisse surtout votre famille vivre le moment.",
-      image: image(homeImages.familySecondary.src, "Famille en plein air dans un moment naturel.", "wide"),
+      image: servicePhoto("src/images/famille/approach-main.jpg", "Une famille élargie se réunit avec ses chiens dans un jardin.", "horizontal"),
     },
     pricing: {
       includedStyle: "numbered",
