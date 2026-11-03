@@ -42,7 +42,9 @@ export const adviceArticles = [
     category: "Mariage",
     excerpt:
       "Planning du jour J, photos de groupe, séance couple et imprévus : Amélie D Wedding partage son regard de wedding planner sur le travail avec le photographe.",
-    coverImagePath: null,
+    coverImagePath: "src/images/conseils/interview-amelie-d-wedding/Amelie D Wedding_9.jpg",
+    featuredImageAlt:
+      "Portrait d’Amélie D Wedding, wedding planner installée à Romans-sur-Isère.",
     primaryCtaHref: "/mariage/",
     primaryCtaLabel: "DÉCOUVRIR MON APPROCHE DU MARIAGE →",
     draft: false,

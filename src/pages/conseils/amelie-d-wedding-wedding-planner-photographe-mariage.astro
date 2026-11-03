@@ -1,0 +1,235 @@
+---
+import ArticleLayout from "../../layouts/ArticleLayout.astro";
+import ImageSlot from "../../components/ImageSlot.astro";
+import { adviceArticles } from "../../data/conseilsArticles";
+
+const article = adviceArticles.find(
+  (item) => item.slug === "amelie-d-wedding-wedding-planner-photographe-mariage",
+);
+
+if (!article) {
+  throw new Error("Article introuvable.");
+}
+---
+
+<ArticleLayout article={article}>
+  <p>
+    J'ai rencontré Amélie en 2025 lors d'un mariage que je photographiais à la Maison Claudie, dans
+    le sud de la Drôme. Comme photographe de mariage, je vois souvent à quel point le déroulé d'une
+    journée dépend de la préparation, des échanges entre prestataires et de la capacité de chacun à
+    s'adapter sans ajouter de pression aux mariés.
+  </p>
+  <p>Pour les mariages dans cette partie de la Drôme provençale, retrouvez aussi mes repères de <a href="/photographe-mariage-montelimar/">photographe autour de Montélimar</a>.</p>
+
+  <p>
+    J'ai donc eu envie de lui donner la parole ici. Son regard de wedding planner permet de mieux
+    comprendre ce qui se joue avant et pendant le jour J : le planning, les photos de groupe, les
+    photos de couple, les imprévus et la manière de travailler ensemble autour des mariés.
+  </p>
+
+  <figure class="interview-photo">
+    <ImageSlot path="src/images/conseils/interview-amelie-d-wedding/Amelie D Wedding.jpg" label="Amélie D Wedding, wedding planner à Romans-sur-Isère, en situation de travail." sizes="(min-width: 72rem) 48rem, 90vw" />
+    <figcaption>Amélie D Wedding, wedding planner à Romans-sur-Isère, prépare et coordonne les journées de mariage.</figcaption>
+  </figure>
+
+  <h2>Pour commencer, peux-tu te présenter et nous raconter comment tu es devenue wedding planner ?</h2>
+  <blockquote>
+    <p>Réponse d'Amélie</p>
+    <p>
+      Je suis Amélie, wedding planner spécialisée dans l'organisation de mariages militaires. Je
+      suis basée dans la Drôme, mais les militaires me font voyager dans toute la France : Provence,
+      Toulouse, Paris, le Jura et même en Bretagne !
+    </p>
+    <p>
+      J'ai découvert le monde du mariage grâce à mon ancien travail. J'étais commerciale dans un
+      château en Isère. Je faisais essentiellement de la location de domaine et de la mise en
+      relation avec les prestataires pour les mariages et les séminaires.
+    </p>
+    <p>
+      J'ai voulu aller plus loin dans l'accompagnement des mariés. C'est pourquoi je me suis formée
+      au métier de wedding planner et que j'ai lancé mon agence en 2022.
+    </p>
+  </blockquote>
+
+  <figure class="interview-photo">
+    <ImageSlot path="src/images/conseils/interview-amelie-d-wedding/Amelie D Wedding_13.jpg" label="Ordinateur et café sur le bureau d’Amélie D Wedding, wedding planner à Romans-sur-Isère." sizes="(min-width: 72rem) 48rem, 90vw" />
+    <figcaption>Le travail de préparation se poursuit aussi entre les rendez-vous, au bureau d’Amélie à Romans-sur-Isère.</figcaption>
+  </figure>
+
+  <h2>Quels types d'accompagnement proposes-tu aux couples, et comment les aides-tu à choisir celui qui leur convient ?</h2>
+  <blockquote>
+    <p>Réponse d'Amélie</p>
+    <p>Je propose deux formules :</p>
+    <p>
+      L'organisation complète : je les accompagne dans la recherche de tous les prestataires
+      (recherche, présence aux rendez-vous découverte, suivi des contrats) et je viens coordonner le
+      mariage.
+    </p>
+    <p>
+      La coordination du jour J : ils recherchent leurs prestataires. On fait des points réguliers
+      dans l'année pour suivre l'avancement des préparatifs et répondre à leurs questions. Et je
+      viens coordonner le mariage.
+    </p>
+    <p>
+      Le choix de la formule dépend du niveau de disponibilité pour la recherche des prestataires.
+      Les couples qui ont le temps et qui se sentent capables de chercher les prestataires prendront
+      plutôt la coordination du jour J. Ceux qui procrastinent, qui ont du mal à se lancer ou qui
+      ont peur de choisir les mauvais prestataires partiront sur l'organisation complète.
+    </p>
+    <p>
+      Dans mon cas, j'ai plus d'organisations complètes, ce qui est directement lié à mon
+      accompagnement des couples militaires, qui ont souvent des contraintes particulières. Les
+      départs en mission, les mutations ou les périodes d'absence peuvent rendre l'organisation du
+      mariage assez compliquée à gérer à deux.
+    </p>
+    <p>
+      Il arrive aussi que les deux futurs mariés soient militaires, avec des départs en mission
+      décalés. Dans ces situations, ils peuvent être séparés pendant plusieurs mois et avoir très
+      peu de temps pour avancer ensemble sur les préparatifs. Je suis vraiment leur point de repère
+      tout au long des préparatifs, même lorsqu'ils sont à l'étranger.
+    </p>
+  </blockquote>
+
+  <h2>Qu'est-ce que les futurs mariés sous-estiment le plus dans l'organisation de leur journée ?</h2>
+  <blockquote>
+    <p>Réponse d'Amélie</p>
+    <p>
+      Que c'est un monde complexe, avec beaucoup de détails et de termes spécifiques. Nous, les
+      prestataires du mariage, avons notre langage et nos façons de travailler. On sait ce qu'est un
+      flatlay et ce dont on aura besoin pour le photographier, qu'on peut faire une séance
+      d'engagement pour utiliser les photos pour le faire-part, etc. Quand on n'est pas du milieu,
+      ce n'est pas évident de tout comprendre et de penser à tout.
+    </p>
+    <p>
+      Quand je suis en rendez-vous découverte avec un prestataire et des mariés, je les laisse
+      toujours échanger ensemble. Le prestataire se présente et les mariés posent deux ou trois
+      questions. Ensuite, j'interviens avec ma liste de questions. Des questions qui permettent aux
+      mariés de comprendre l'ensemble de la prestation. Et souvent, mes mariés disent : « Ah oui
+      tiens, c'est intéressant comme sujet, on n'y avait pas pensé. »
+    </p>
+  </blockquote>
+
+  <h2>Quand tu prépares le déroulé du jour J, comment prévois-tu les photos de groupe et de couple avec les mariés et le photographe ?</h2>
+  <blockquote>
+    <p>Réponse d'Amélie</p>
+    <p>
+      Je prévois les temps des photos de couple et de groupe dans le planning dès sa construction,
+      en tenant compte du rythme de la journée et des besoins du photographe.
+    </p>
+    <p>
+      Pour les photos de groupe notamment, j'anticipe la liste des groupes afin que le moment soit
+      efficace et ne s'éternise pas. Et je programme cette séance toujours avant le vin d'honneur.
+      Jamais pendant, parce que les invités sont moins attentifs et ça peut déranger le service du
+      traiteur.
+    </p>
+    <p>
+      Pour les photos de couple, j'échange aussi avec les mariés sur ce qu'ils souhaitent : certains
+      veulent des photos à deux à la sortie de la cérémonie religieuse, dans le village ; d'autres
+      veulent des photos à l'extérieur et à l'intérieur du domaine, s'il y a un majestueux escalier
+      par exemple. Ça me permet d'adapter le planning et de prévoir des créneaux réalistes pour que
+      la journée se déroule parfaitement.
+    </p>
+  </blockquote>
+
+  <h2>Avant le mariage, quelles informations échanges-tu avec le photographe pour que vous puissiez bien travailler ensemble ?</h2>
+  <blockquote>
+    <p>Réponse d'Amélie</p>
+    <p>
+      Je demande toujours au photographe de valider son horaire d'arrivée et de départ. Ça me permet
+      notamment de programmer les horaires des habillages et de savoir jusqu'à quelle heure, au
+      maximum, je dois lancer la première danse.
+    </p>
+    <p>
+      Je lui demande s'il est d'accord avec le planning que j'ai élaboré, notamment pour la durée
+      des moments importants : l'habillage du marié et de la mariée, et la durée des photos de
+      couple.
+    </p>
+    <p>
+      Dans le planning, j'anticipe le départ du photographe à l'église après l'habillage de la
+      mariée pour qu'il puisse prendre ses repères avant que la cérémonie commence.
+    </p>
+    <p>Et je partage la liste des photos de groupe.</p>
+    <p>
+      Je finalise le planning du jour J avec les remarques et la validation de tous les
+      prestataires. Je vois le jour J comme un travail d'équipe, et je prends en considération toutes
+      les demandes des prestataires.
+    </p>
+  </blockquote>
+
+  <figure class="interview-photo">
+    <ImageSlot path="src/images/conseils/interview-amelie-d-wedding/maison_claudie.jpg" label="Mariage à la Maison Claudie dans la Drôme, photographié lors d’une collaboration avec Amélie D Wedding." sizes="(min-width: 72rem) 48rem, 90vw" />
+    <figcaption>Une collaboration réelle lors d’un mariage à la Maison Claudie, dans la Drôme.</figcaption>
+  </figure>
+
+  <h2>Le jour J, comment vous coordonnez-vous lorsqu'il y a un retard ou un imprévu, sans que les mariés aient à s'en occuper ?</h2>
+  <blockquote>
+    <p>Réponse d'Amélie</p>
+    <p>
+      Je tiens informé le photographe, en temps réel, du retard ou des changements de planning. Même
+      si l'information change cinq fois en trente minutes, il a toujours la bonne information à
+      l'instant T.
+    </p>
+    <p>
+      Et on s'adapte, on s'écoute et on échange beaucoup. Encore une fois, c'est pour que les
+      besoins de chaque prestataire soient respectés et que leur travail soit bien exécuté. Il se
+      peut qu'à un moment donné, un prestataire soit plus important qu'un autre.
+    </p>
+    <p>
+      Par exemple, la séance photo de couple au coucher du soleil est très importante, parce que
+      l'instant est précis et rapide si l'on veut la bonne couleur. Sur ce moment, c'est priorité au
+      photographe, parce que le moment ne se répétera pas deux fois. Si besoin, le traiteur fait
+      patienter les invités avec un nouvel atelier plancha ou découpe.
+    </p>
+  </blockquote>
+
+  <h2>Quel conseil donnerais-tu à un couple qui veut profiter de ses invités tout en gardant de beaux souvenirs de sa journée ?</h2>
+  <blockquote>
+    <p>Réponse d'Amélie</p>
+    <p>Déléguez ! Faites confiance à vos prestataires pour la construction du planning de la journée.</p>
+    <p>
+      Pour vos séances photo, faites-les quand il y a des temps calmes : partez les premiers de la
+      cérémonie, et à l'arrivée au domaine, faites une première séance de couple pendant que vos
+      invités se garent et se rassemblent à l'endroit du vin d'honneur. Ensuite, faites une seconde
+      séance photo de couple au coucher du soleil pendant que vos invités s'installent en salle.
+      Évitez au maximum de partir au milieu du vin d'honneur pour faire une séance à deux, sauf si
+      le coucher du soleil l'impose.
+    </p>
+  </blockquote>
+
+  <p>
+    Vous pouvez{" "}
+    <a href="https://ameliedwedding.com/" target="_blank" rel="noopener noreferrer">
+      découvrir le travail d'Amélie D Wedding
+    </a>{" "}
+    sur son site.
+  </p>
+
+  <figure class="interview-photo">
+    <ImageSlot path="src/images/conseils/interview-amelie-d-wedding/Amelie D Wedding_2.jpg" label="Portrait spontané d’Amélie D Wedding avec une tasse, wedding planner à Romans-sur-Isère." sizes="(min-width: 72rem) 48rem, 90vw" />
+    <figcaption>Amélie D Wedding, wedding planner basée à Romans-sur-Isère.</figcaption>
+  </figure>
+
+  <h2>Ce que cette collaboration change pour les mariés</h2>
+  <p>
+    Lorsque le planning est construit avec les bons échanges, les photos prennent leur place dans la
+    journée sans l'interrompre. Pour les mariés, c'est souvent ce qui fait la différence : moins de
+    questions à gérer, des prestataires qui se parlent, et plus d'espace pour vivre réellement leur
+    mariage.
+  </p>
+  <p>
+    C'est aussi cette fluidité que je recherche dans mon travail de{" "}
+    <a href="/mariage/">photographe de mariage</a>. Si vous préparez votre journée dans la Drôme,
+    vous pouvez également lire mes repères sur les{" "}
+    <a href="/conseils/prestataires-mariage-drome/">prestataires de mariage dans la Drôme</a>.
+  </p>
+  <figure class="interview-photo">
+    <ImageSlot path="src/images/conseils/interview-amelie-d-wedding/sunset.jpg" label="Couple de mariés photographié au coucher du soleil dans la Drôme, en illustration des conseils d’Amélie D Wedding." sizes="(min-width: 72rem) 48rem, 90vw" />
+    <figcaption>La séance de couple au coucher du soleil, un moment à prévoir dans le planning du mariage.</figcaption>
+  </figure>
+</ArticleLayout>
+
+<style>
+  .interview-photo { width: 100%; margin: clamp(1.5rem, 4vw, 3rem) 0; }
+  .interview-photo :global(img) { display: block; width: 100%; height: auto; }
+  .interview-photo figcaption { margin-top: 0.55rem; color: var(--color-muted); font-size: var(--text-xs); line-height: 1.5; }
+</style>
