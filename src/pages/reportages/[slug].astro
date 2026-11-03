@@ -38,7 +38,14 @@ const articleSchema = {
           {section.image && <figure class="story-chapter__image"><ImageSlot path={section.image.path} label={section.image.alt} lightboxGroup={story.slug} sizes="(min-width: 72rem) 44vw, 90vw" /><figcaption>{section.image.alt}</figcaption></figure>}
         </section>
       ))}
-      {story.gallery.length > 0 && <section class="story-gallery" aria-label="Galerie du reportage">{story.gallery.map((image) => <figure><ImageSlot path={image.path} label={image.alt} lightboxGroup={story.slug} sizes="(min-width: 72rem) 42vw, 90vw" /><figcaption>{image.alt}</figcaption></figure>)}</section>}
+      {story.gallery.length > 0 && (
+        <section class="story-gallery-section" aria-labelledby="story-gallery-title">
+          <h2 id="story-gallery-title">Le mariage en images <span>{story.gallery.length} photos</span></h2>
+          <div class="story-gallery" aria-label="Galerie photo complète">
+            {story.gallery.map((image) => <figure><ImageSlot path={image.path} label={image.alt} lightboxGroup={story.slug} sizes="(min-width: 72rem) 26vw, (min-width: 40rem) 42vw, 46vw" /></figure>)}
+          </div>
+        </section>
+      )}
       <nav class="story-local-links" aria-label="Pages locales">{story.relatedLocalUrls.map((url) => <a href={url}>Découvrir les mariages dans cette région →</a>)}</nav>
       {story.venueUrl && <p><a href={story.venueUrl} target="_blank" rel="noopener noreferrer">Découvrir le lieu de réception ↗</a></p>}
       <p class="story-vendor"><span>DJ</span> <a href="https://www.mariages.net/musique-mariage/charly-madea--e264177" target="_blank" rel="noopener noreferrer">Charly Madea ↗</a></p>
@@ -55,7 +62,7 @@ const articleSchema = {
   .story-header h1,.story-body h2,.story-cta h2 { font-family:var(--font-editorial); font-weight:400; letter-spacing:0; }
   .story-header h1 { max-width:17ch; font-size:clamp(3rem,1.7rem + 4.2vw,6.4rem); line-height:.98; }
   .story-header > p:last-child { max-width:var(--reading-max); color:var(--color-muted); }
-  .story-cover,.story-gallery figure { margin:0; }
+  .story-cover { margin:0; }
   .story-cover :global(img) { display:block; width:100%; max-height:78vh; object-fit:cover; }
   figcaption { margin-top:.5rem; color:var(--color-muted); font-size:var(--text-xs); }
   .story-body { display:grid; gap:clamp(2rem,5vw,4rem); }
@@ -65,12 +72,18 @@ const articleSchema = {
   .story-chapter__image { min-width:0; margin:0; }
   .story-chapter__image :global(img) { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; }
   .story-vendor span { margin-right:.8rem; color:var(--color-muted); font-size:var(--text-xs); text-transform:uppercase; letter-spacing:.08em; }
-  .story-gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,21rem),1fr)); gap:1.5rem; }
-  .story-gallery :global(img) { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; }
+  .story-gallery-section { display:grid; gap:1.5rem; }
+  .story-gallery-section > h2 { display:flex; flex-wrap:wrap; align-items:baseline; gap:.65rem 1rem; margin:0; }
+  .story-gallery-section > h2 span { color:var(--color-muted); font-family:var(--font-interface); font-size:var(--text-xs); letter-spacing:.08em; text-transform:uppercase; }
+  .story-gallery { columns:2; column-gap:clamp(.75rem,2vw,1.5rem); }
+  .story-gallery figure { break-inside:avoid; margin:0 0 clamp(.75rem,2vw,1.5rem); }
+  .story-gallery :global(picture) { display:block; }
+  .story-gallery :global(img) { display:block; width:100%; height:auto; }
   .story-local-links { display:grid; gap:.75rem; padding-block:1rem; border-block:1px solid var(--color-line); }
   .story-cta { display:grid; gap:1rem; padding-top:2rem; border-top:1px solid var(--color-line); }
   .story-cta h2 { margin:0; font-size:clamp(2.4rem,1.5rem + 3vw,4.7rem); }
   @media(min-width:64rem) {
+    .story-gallery { columns:3; }
     .story-chapter--with-image { grid-template-columns:minmax(0, .9fr) minmax(0, 1.1fr); gap:clamp(2rem,5vw,5rem); }
     .story-chapter--reverse { grid-template-columns:minmax(0, 1.1fr) minmax(0, .9fr); }
     .story-chapter--reverse .story-chapter__text { grid-column:2; grid-row:1; }
