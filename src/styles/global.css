@@ -984,7 +984,7 @@ a:active {
 
   .site-footer__inner {
     grid-template-columns: minmax(14rem, 0.7fr) minmax(0, 1fr);
-    align-items: start;
+    align-items: center;
   }
 
   .site-footer__content {
