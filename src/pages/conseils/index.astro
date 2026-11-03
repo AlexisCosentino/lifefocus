@@ -55,6 +55,9 @@ const pageDescription =
             </button>
           ))
         }
+        <a class="advice-filter advice-filter--reportages" href="/reportages/">
+          Reportages <span aria-hidden="true">↗</span>
+        </a>
       </div>
     </div>
 
@@ -303,6 +306,22 @@ const pageDescription =
     text-transform: uppercase;
   }
 
+  .advice-filter--reportages {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    margin-left: auto;
+    padding-left: clamp(1rem, 2vw, 1.5rem);
+    border-left: 1px solid var(--color-line);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .advice-filter--reportages span {
+    color: var(--color-muted);
+    font-size: .9em;
+  }
+
   .advice-filter:hover,
   .advice-filter.is-active {
     border-bottom-color: currentColor;
@@ -440,6 +459,17 @@ const pageDescription =
     .advice-contact h2,
     .advice-contact a {
       grid-column: 2;
+    }
+  }
+
+  @media (max-width: 47.99rem) {
+    .advice-filter--reportages {
+      flex-basis: 100%;
+      width: fit-content;
+      align-self: flex-start;
+      margin-left: 0;
+      padding-left: 0;
+      border-left: 0;
     }
   }
 </style>

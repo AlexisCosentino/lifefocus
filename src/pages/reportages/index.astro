@@ -1,0 +1,99 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ImageSlot from "../../components/ImageSlot.astro";
+import { publishedWeddingStories } from "../../data/weddingStories";
+
+const pageTitle = "Reportages de mariage dans la Drôme | Life Focus";
+const pageDescription =
+  "Découvrez de vrais reportages de mariage photographiés par Life Focus dans la Drôme et en Ardèche. Des histoires, des émotions et des lieux à découvrir.";
+const collectionSchema = {
+      "@type": "CollectionPage",
+      name: pageTitle,
+      description: pageDescription,
+      url: "https://www.lifefocus.fr/reportages/",
+      mainEntity: {
+        "@type": "ItemList",
+        itemListElement: publishedWeddingStories.map((story, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          url: `https://www.lifefocus.fr/reportages/${story.slug}/`,
+          name: story.title,
+        })),
+      },
+    };
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl="https://www.lifefocus.fr/reportages/"
+  structuredData={collectionSchema}
+>
+  <section class="stories-page page-shell" aria-labelledby="stories-title">
+    <nav class="stories-breadcrumb" aria-label="Fil d’Ariane">
+      <ol>
+        <li><a href="/">Accueil</a></li>
+        <li aria-current="page">Reportages de mariage</li>
+      </ol>
+    </nav>
+
+    <header class="stories-hero">
+      <p class="editorial-label">DES HISTOIRES VÉCUES</p>
+      <h1 id="stories-title">Reportages de mariage dans la Drôme</h1>
+      <p>
+        Chaque mariage a son rythme, ses lieux et ses liens. Je photographie ces journées
+        telles qu’elles se vivent, autour de Romans-sur-Isère, Valence et jusque dans
+        l’Ardèche.
+      </p>
+    </header>
+
+    <div class="stories-grid">
+        {publishedWeddingStories.map((story) => (
+          <article class="story-card">
+            <a class="story-card__image" href={`/reportages/${story.slug}/`} aria-label={`Découvrir ${story.title}`}>
+              <ImageSlot path={story.cover.path} label={story.cover.alt} lightbox={false} sizes="(min-width: 72rem) 42vw, 90vw" />
+            </a>
+            <p class="editorial-label">{story.venue} · {story.venueTown}</p>
+            <h2><a href={`/reportages/${story.slug}/`}>{story.title}</a></h2>
+            <p>{story.excerpt}</p>
+            <a class="editorial-link" href={`/reportages/${story.slug}/`}>DÉCOUVRIR L’HISTOIRE →</a>
+          </article>
+        ))}
+    </div>
+
+    <nav class="stories-related" aria-label="En savoir plus">
+      <a href="/mariage/">Découvrir mon approche du reportage de mariage <span aria-hidden="true">→</span></a>
+      <a href="/conseils/">Lire les conseils pratiques pour préparer votre mariage <span aria-hidden="true">→</span></a>
+    </nav>
+
+    <footer class="stories-contact">
+      <p>Vous préparez votre journée dans la Drôme ou en Ardèche ?</p>
+      <a class="editorial-link" href="/contact/">PARLONS DE VOTRE MARIAGE →</a>
+    </footer>
+  </section>
+</BaseLayout>
+
+<style>
+  .stories-page { display:grid; gap:clamp(3rem, 8vw, 7rem); max-width:84rem; padding-block:1rem var(--space-lg); }
+  .stories-breadcrumb ol { display:flex; flex-wrap:wrap; gap:.6rem; margin:0; padding:0; list-style:none; color:var(--color-muted); font-size:var(--text-xs); }
+  .stories-breadcrumb li + li::before { content:"/"; margin-right:.6rem; color:var(--color-line); }
+  .stories-breadcrumb a { text-decoration:none; }
+  .stories-hero { display:grid; gap:var(--space-sm); max-width:59rem; }
+  .stories-hero h1,.story-card h2 { font-family:var(--font-editorial); font-weight:400; letter-spacing:0; }
+  .stories-hero h1 { max-width:15ch; font-size:clamp(3.1rem, 1.7rem + 4.5vw, 6.7rem); line-height:.96; text-wrap:balance; }
+  .stories-hero > p:last-child,.story-card > p:not(.editorial-label) { max-width:var(--reading-max); color:var(--color-muted); }
+  .stories-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,21rem),1fr)); gap:clamp(2.5rem,5vw,5rem) clamp(1.5rem,3vw,3rem); }
+  .story-card { display:grid; align-content:start; gap:1rem; }
+  .story-card__image { display:block; overflow:hidden; background:var(--color-line); }
+  .story-card__image :global(img) { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; transition:transform .5s ease; }
+  .story-card__image:hover :global(img) { transform:scale(1.025); }
+  .story-card .editorial-label { margin:0; }
+  .story-card h2 { max-width:18ch; margin:0; font-size:clamp(2rem,1.5rem + 1.4vw,3.2rem); line-height:1; }
+  .story-card h2 a { text-decoration:none; }
+  .stories-related { display:grid; border-top:1px solid var(--color-line); }
+  .stories-related a { display:flex; justify-content:space-between; gap:1rem; padding:1.2rem 0; border-bottom:1px solid var(--color-line); text-decoration:none; }
+  .stories-related a span { color:var(--color-muted); }
+  .stories-contact { display:grid; gap:1rem; padding-top:var(--space-md); border-top:1px solid var(--color-line); }
+  .stories-contact p { margin:0; color:var(--color-muted); }
+  @media(prefers-reduced-motion:reduce) { .story-card__image :global(img) { transition:none; } }
+</style>

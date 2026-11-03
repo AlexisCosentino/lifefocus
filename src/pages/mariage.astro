@@ -9,6 +9,7 @@ import WeddingTrust from "../components/WeddingTrust.astro";
 import { homeImages } from "../data/homeImages";
 import { weddingGalleryAlts } from "../data/galleryAlts";
 import { weddingFaq } from "../data/weddingFaq";
+import { publishedWeddingStories } from "../data/weddingStories";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const pageTitle = "Photographe mariage Drôme, Valence & Provence | Life Focus";
@@ -211,6 +212,18 @@ const structuredData = {
       ))
     }
 
+    <section class="wedding-stories page-shell" aria-labelledby="wedding-stories-title">
+        <div>
+          <p class="editorial-label">HISTOIRES VÉCUES</p>
+          <h2 id="wedding-stories-title">De vrais mariages, de vraies histoires.</h2>
+          <p>Quelques journées photographiées dans la Drôme et en Ardèche, racontées en images.</p>
+          <a class="editorial-link" href="/reportages/">DÉCOUVRIR TOUS LES REPORTAGES →</a>
+        </div>
+        <a class="wedding-stories__image" href={`/reportages/${publishedWeddingStories[0].slug}/`}>
+          <ImageSlot path={publishedWeddingStories[0].cover.path} label={publishedWeddingStories[0].cover.alt} lightbox={false} />
+        </a>
+    </section>
+
     <section class="wedding-support" aria-labelledby="support-title">
       <div class="wedding-support__inner page-shell decorative-section-number-frame">
         <DecorativeSectionNumber value="07" placement="center" tone="dark" scale="quiet" />
@@ -330,6 +343,12 @@ const structuredData = {
     letter-spacing: 0;
     line-height: 0.98;
   }
+
+  .wedding-stories { display:grid; grid-template-columns:minmax(0,.8fr) minmax(18rem,1fr); gap:clamp(2rem,6vw,6rem); align-items:center; padding-block:var(--space-md); border-block:1px solid var(--color-line); }
+  .wedding-stories h2 { max-width:14ch; font-family:var(--font-editorial); font-size:clamp(2.3rem,1.4rem + 3vw,4.5rem); font-weight:400; line-height:1; }
+  .wedding-stories p:not(.editorial-label) { max-width:var(--reading-max); color:var(--color-muted); }
+  .wedding-stories__image { display:block; }
+  .wedding-stories__image :global(img) { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; }
 
   .wedding-hero h1 {
     max-width: 12ch;
@@ -748,6 +767,7 @@ const structuredData = {
   }
 
   @media (max-width: 48rem) {
+    .wedding-stories { grid-template-columns:1fr; }
     .wedding-useful-links { grid-template-columns: minmax(0, 1fr); }
     .wedding-useful-links__groups { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }

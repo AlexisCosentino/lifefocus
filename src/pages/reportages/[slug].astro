@@ -1,0 +1,79 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ImageSlot from "../../components/ImageSlot.astro";
+import { getImage } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import { publishedWeddingStories } from "../../data/weddingStories";
+
+export function getStaticPaths() {
+  return publishedWeddingStories.map((story) => ({ params: { slug: story.slug }, props: { story } }));
+}
+
+const { story } = Astro.props;
+const storyImages = import.meta.glob<{ default: ImageMetadata }>("/src/images/**/*.{jpg,jpeg,png,webp,avif,JPG,JPEG,PNG,WEBP,AVIF}", { eager: true });
+const coverSource = storyImages[`/${story.cover.path}`]?.default;
+const coverImage = coverSource
+  ? await getImage({ src: coverSource, width: 1600, format: "webp", quality: 82 })
+  : undefined;
+const articleSchema = {
+  "@type": "BlogPosting",
+  headline: story.title,
+  description: story.description,
+  datePublished: story.publishedAt,
+  image: coverImage ? new URL(coverImage.src, Astro.site).href : undefined,
+  mainEntityOfPage: `https://www.lifefocus.fr/reportages/${story.slug}/`,
+  publisher: { "@id": "https://www.lifefocus.fr/#life-focus" },
+};
+---
+
+<BaseLayout title={story.seoTitle} description={story.description} canonicalUrl={`https://www.lifefocus.fr/reportages/${story.slug}/`} ogType="article" structuredData={articleSchema}>
+  <article class="story-page page-shell">
+    <nav aria-label="Fil d’Ariane" class="story-breadcrumb"><ol><li><a href="/">Accueil</a></li><li><a href="/reportages/">Reportages</a></li><li aria-current="page">{story.title}</li></ol></nav>
+    <header class="story-header"><p class="editorial-label">{story.venue} · {story.venueTown}</p><h1>{story.title}</h1><p>{story.excerpt}</p></header>
+    <figure class="story-cover"><ImageSlot path={story.cover.path} label={story.cover.alt} loading="eager" quality={92} sizes="100vw" lightbox={false} /><figcaption>{story.cover.alt}</figcaption></figure>
+    <div class="story-body">
+      {story.sections.map((section, index) => (
+        <section class:list={["story-chapter", section.image && "story-chapter--with-image", index % 2 === 1 && "story-chapter--reverse"]}>
+          <div class="story-chapter__text"><h2>{section.heading}</h2>{section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}</div>
+          {section.image && <figure class="story-chapter__image"><ImageSlot path={section.image.path} label={section.image.alt} lightboxGroup={story.slug} sizes="(min-width: 72rem) 44vw, 90vw" /><figcaption>{section.image.alt}</figcaption></figure>}
+        </section>
+      ))}
+      {story.gallery.length > 0 && <section class="story-gallery" aria-label="Galerie du reportage">{story.gallery.map((image) => <figure><ImageSlot path={image.path} label={image.alt} lightboxGroup={story.slug} sizes="(min-width: 72rem) 42vw, 90vw" /><figcaption>{image.alt}</figcaption></figure>)}</section>}
+      <nav class="story-local-links" aria-label="Pages locales">{story.relatedLocalUrls.map((url) => <a href={url}>Découvrir les mariages dans cette région →</a>)}</nav>
+      {story.venueUrl && <p><a href={story.venueUrl} target="_blank" rel="noopener noreferrer">Découvrir le lieu de réception ↗</a></p>}
+      <p class="story-vendor"><span>DJ</span> <a href="https://www.mariages.net/musique-mariage/charly-madea--e264177" target="_blank" rel="noopener noreferrer">Charly Madea ↗</a></p>
+    </div>
+    <footer class="story-cta"><h2>Vous préparez votre mariage ?</h2><a class="editorial-link" href="/mariage/">DÉCOUVRIR LES PRESTATIONS MARIAGE →</a><a href="/contact/">Parler de votre projet</a></footer>
+  </article>
+</BaseLayout>
+
+<style>
+  .story-page { display:grid; gap:clamp(2rem,6vw,5rem); max-width:84rem; padding-block:1rem var(--space-lg); }
+  .story-breadcrumb ol { display:flex; flex-wrap:wrap; gap:.55rem; margin:0; padding:0; list-style:none; color:var(--color-muted); font-size:var(--text-xs); }
+  .story-breadcrumb li + li::before { content:"/"; margin-right:.55rem; }
+  .story-header { display:grid; gap:1rem; max-width:58rem; }
+  .story-header h1,.story-body h2,.story-cta h2 { font-family:var(--font-editorial); font-weight:400; letter-spacing:0; }
+  .story-header h1 { max-width:17ch; font-size:clamp(3rem,1.7rem + 4.2vw,6.4rem); line-height:.98; }
+  .story-header > p:last-child { max-width:var(--reading-max); color:var(--color-muted); }
+  .story-cover,.story-gallery figure { margin:0; }
+  .story-cover :global(img) { display:block; width:100%; max-height:78vh; object-fit:cover; }
+  figcaption { margin-top:.5rem; color:var(--color-muted); font-size:var(--text-xs); }
+  .story-body { display:grid; gap:clamp(2rem,5vw,4rem); }
+  .story-body h2 { margin-bottom:.7rem; color:var(--color-text); font-size:clamp(2rem,1.5rem + 2vw,3.5rem); line-height:1; }
+  .story-chapter { display:grid; gap:1.5rem; align-items:center; }
+  .story-chapter__text { max-width:var(--reading-max); color:var(--color-muted); }
+  .story-chapter__image { min-width:0; margin:0; }
+  .story-chapter__image :global(img) { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; }
+  .story-vendor span { margin-right:.8rem; color:var(--color-muted); font-size:var(--text-xs); text-transform:uppercase; letter-spacing:.08em; }
+  .story-gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,21rem),1fr)); gap:1.5rem; }
+  .story-gallery :global(img) { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; }
+  .story-local-links { display:grid; gap:.75rem; padding-block:1rem; border-block:1px solid var(--color-line); }
+  .story-cta { display:grid; gap:1rem; padding-top:2rem; border-top:1px solid var(--color-line); }
+  .story-cta h2 { margin:0; font-size:clamp(2.4rem,1.5rem + 3vw,4.7rem); }
+  @media(min-width:64rem) {
+    .story-chapter--with-image { grid-template-columns:minmax(0, .9fr) minmax(0, 1.1fr); gap:clamp(2rem,5vw,5rem); }
+    .story-chapter--reverse { grid-template-columns:minmax(0, 1.1fr) minmax(0, .9fr); }
+    .story-chapter--reverse .story-chapter__text { grid-column:2; grid-row:1; }
+    .story-chapter--reverse .story-chapter__image { grid-column:1; grid-row:1; }
+  }
+</style>
