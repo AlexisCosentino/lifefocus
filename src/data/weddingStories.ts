@@ -35,7 +35,7 @@ export const weddingStories: WeddingStory[] = [
     seoTitle:
       "Mariage au Château Le Gâtelet à Peyrins | Océane & Greg près de Romans-sur-Isère",
     description:
-      "Le 6 septembre 2025, Océane et Greg se sont mariés au Château Le Gâtelet à Peyrins, près de Romans-sur-Isère : cérémonie laïque émouvante et arrivée à cheval.",
+      "Le 6 septembre 2025, Océane et Greg se sont mariés au Château Le Gâtelet à Peyrins, près de Romans-sur-Isère : cérémonie laïque émouvante et arrivée d’Océane à cheval.",
     excerpt:
       "Le 6 septembre 2025, Océane et Greg ont réuni leurs proches au Château Le Gâtelet, à Peyrins, pour une cérémonie laïque pleine d’émotion, à quelques minutes de Romans-sur-Isère.",
     publishedAt: "2026-11-03",
@@ -115,9 +115,9 @@ export const weddingStories: WeddingStory[] = [
         },
       },
       {
-        heading: "L’arrivée de Greg à cheval",
+        heading: "L’arrivée d’Océane à cheval",
         paragraphs: [
-          "Pour rejoindre la cérémonie, Greg est arrivé à cheval. Une entrée remarquée, qui a donné le ton d’une journée personnelle et pleine de surprises. Au milieu des arbres et des vieilles pierres du domaine, les invités ont pu prendre place avant l’arrivée d’Océane.",
+          "Alors que tout le monde était prêt et que Greg était déjà assis, Océane est arrivée à cheval pour rejoindre la cérémonie. Une entrée remarquée au milieu des arbres et des vieilles pierres du Château Le Gâtelet, sous le regard de leurs proches.",
         ],
         image: {
           path: "src/images/reportages/Océane & Greg/Océane & Greg_562.jpg",
